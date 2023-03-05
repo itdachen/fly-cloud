@@ -32,12 +32,14 @@ git clone https://gitee.com/itdachen/fly-framework.git
 * 进入依赖管理模块安装
 ```lua 
 cd /fly-framework/fly-dependencies
-mvn clean && mvn install
+mvn clean
+mvn install
 ```
-* 返回跟目录安装基础依赖
+* 返回根目录安装基础依赖
 ```lua 
 cd ..
-mvn clean && mvn install
+mvn clean 
+mvn install
 ```
 
 ### 🏭 模块说明
