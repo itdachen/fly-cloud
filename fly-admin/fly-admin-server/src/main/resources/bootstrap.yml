@@ -12,6 +12,13 @@ spring:
   profiles:
     active: dev
 
+# 认证中心配置
+auth:
+  serviceId: auth
+  client:
+    id: ${spring.application.name}
+    secret: 123456
+
 # 暴露端点
 management:
   endpoints:

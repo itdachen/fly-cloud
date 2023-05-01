@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * Created by 王大宸 on 2023/04/30 15:16
  * Created with IntelliJ IDEA.
  */
-@ConfigurationProperties(prefix = "jwts")
+@ConfigurationProperties(prefix = "auth")
 public class JwtsProperties {
 
     /**
@@ -34,7 +34,7 @@ public class JwtsProperties {
     /**
      * 认证中心名称
      */
-    private String auth = "auth";
+    private String serviceId = "auth";
 
     public JwtTokenEnumType getType() {
         return type;
@@ -68,11 +68,12 @@ public class JwtsProperties {
         this.secretKey = secretKey;
     }
 
-    public String getAuth() {
-        return auth;
+    public String getServiceId() {
+        return serviceId;
     }
 
-    public void setAuth(String auth) {
-        this.auth = auth;
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
+
 }
