@@ -9,10 +9,16 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fly-gateway</artifactId>
-    <name>fly-gateway</name>
-    <packaging>jar</packaging>
-    <description>网关</description>
+    <artifactId>fly-dict</artifactId>
+    <name>fly-dict</name>
+    <packaging>pom</packaging>
+    <description>数据字典</description>
 
+
+    <modules>
+        <module>fly-dict-server</module>
+        <module>fly-dict-sdk</module>
+        <module>fly-dict-client</module>
+    </modules>
 
 </project>

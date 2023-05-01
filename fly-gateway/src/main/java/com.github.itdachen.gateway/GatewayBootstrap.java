@@ -1,4 +1,4 @@
-package com.iidachen.gateway;
+package com.github.itdachen.gateway;
 
 /**
  * Description: 网关启动入口类

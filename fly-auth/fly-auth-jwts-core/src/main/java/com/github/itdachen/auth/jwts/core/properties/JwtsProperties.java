@@ -1,0 +1,78 @@
+package com.github.itdachen.auth.jwts.core.properties;
+
+import com.github.itdachen.auth.jwts.core.enums.JwtTokenEnumType;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+/**
+ * Description: 认证配置
+ * Created by 王大宸 on 2023/04/30 15:16
+ * Created with IntelliJ IDEA.
+ */
+@ConfigurationProperties(prefix = "jwts")
+public class JwtsProperties {
+
+    /**
+     * 生成 token 方式, 默认使用 RSA, 私钥加密, 公钥解密
+     */
+    private JwtTokenEnumType type = JwtTokenEnumType.HMAC;
+
+    /**
+     * 签发者
+     */
+    private String issuer = "com.github.itdachen";
+
+    /**
+     * 有效时间, 定义默认有效期为 300 分钟 单位：分钟
+     */
+    private long expires = 18000;
+
+    /**
+     * 加解密秘钥
+     */
+    private String secretKey = "tNTaMC1B0Kzdl1q0LKJy7MooRbuwaebzfcS3nGOsPAoSvt3w==";
+
+    /**
+     * 认证中心名称
+     */
+    private String auth = "auth";
+
+    public JwtTokenEnumType getType() {
+        return type;
+    }
+
+    public void setType(JwtTokenEnumType type) {
+        this.type = type;
+    }
+
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
+    }
+
+    public long getExpires() {
+        return expires * 1000;
+    }
+
+    public void setExpires(long expires) {
+        this.expires = expires;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+}

@@ -1,0 +1,37 @@
+server:
+  port: 8004
+  servlet:
+    context-path: /${spring.application.name}
+
+spring:
+  application:
+    name: sba
+  profiles:
+    active: dev
+  boot:
+    admin:
+      ui:
+        title: FLY-CLOUD 微服务应用实例监控
+        brand: <img src="assets/img/icon-spring-boot-admin.svg"><span>FLY-CLOUD 微服务应用实例监控</span>
+      client:
+        instance:
+          metadata:
+            tags:
+              environment: local
+#      probed-endpoints: health,env,metrics,httptrace:trace,threaddump:dump,jolokia,info,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents
+#      monitor: # 监控发送请求的超时时间
+#        default-timeout: 20000
+
+
+# 服务端点详细监控信息
+management:
+  #  trace:
+  #    http:
+  #      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

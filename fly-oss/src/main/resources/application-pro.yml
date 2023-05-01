@@ -1,0 +1,12 @@
+# 端口配置
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 18000
+
+# 日志配置
+logging:
+  config: classpath:fly-cloud.xml
+  level:
+    cn.jay.repository: trace

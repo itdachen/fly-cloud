@@ -1,0 +1,23 @@
+# 端口配置
+server:
+  port: 8001
+  servlet:
+    context-path: /${spring.application.name}
+    session:
+      timeout: 18000
+
+spring:
+  application:
+    name: auth
+  profiles:
+    active: dev
+
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS

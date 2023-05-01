@@ -9,10 +9,13 @@
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fly-gateway</artifactId>
-    <name>fly-gateway</name>
-    <packaging>jar</packaging>
-    <description>网关</description>
+    <artifactId>fly-admin</artifactId>
+    <packaging>pom</packaging>
 
+    <modules>
+        <module>fly-admin-server</module>
+        <module>fly-admin-client</module>
+        <module>fly-admin-sdk</module>
+    </modules>
 
 </project>

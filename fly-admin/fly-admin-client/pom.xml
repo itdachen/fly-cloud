@@ -5,14 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.itdachen</groupId>
-        <artifactId>fly-cloud</artifactId>
+        <artifactId>fly-admin</artifactId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fly-gateway</artifactId>
-    <name>fly-gateway</name>
+    <artifactId>fly-admin-client</artifactId>
+    <name>fly-admin-client</name>
     <packaging>jar</packaging>
-    <description>网关</description>
+    <description>服务客户端</description>
 
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 </project>

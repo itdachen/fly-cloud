@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.itdachen</groupId>
+        <artifactId>fly-auth</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>fly-auth-crypto</artifactId>
+    <name>fly-auth-crypto</name>
+    <packaging>jar</packaging>
+    <version>0.0.1</version>
+    <description>安全认证账号密码加密模块</description>
+
+    <dependencies>
+        <!-- spring-security 加密模块 -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>
