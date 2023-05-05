@@ -23,9 +23,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.itdachen.cloud</groupId>
+            <groupId>com.github.itdachen.framework.cloud</groupId>
             <artifactId>fly-cloud-openfeign</artifactId>
-            <version>0.0.1</version>
         </dependency>
 
         <dependency>

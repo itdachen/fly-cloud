@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gateway",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/api/actuator/**"
+        }
+      }
+    ],
+    "uri": "lb://gateway",
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "auth",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/api/auth/**"
+        }
+      }
+    ],
+    "uri": "lb://auth",
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sba",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/api/sba/**"
+        }
+      }
+    ],
+    "uri": "lb://sba",
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "admin",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/api/admin/**"
+        }
+      }
+    ],
+    "uri": "lb://admin",
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "oss",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/api/oss/**"
+        }
+      }
+    ],
+    "uri": "lb://oss",
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      }
+    ]
+  },
+  {
+    "id": "dict",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/api/dict/**"
+        }
+      }
+    ],
+    "uri": "lb://dict",
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "parts": "1"
+        }
+      }
+    ]
+  }
+]
