@@ -1,10 +1,12 @@
 package com.github.itdachen.auth.jwts.parse.helper;
 
 import com.github.itdachen.auth.jwts.core.IJwtsInfo;
-import com.github.itdachen.auth.jwts.core.SecretKeyConfiguration;
 import com.github.itdachen.auth.jwts.parse.IVerifyTicketTokenHelper;
 import com.github.itdachen.auth.jwts.parse.key.AuthClientTokenSecretKey;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.itdachen.framework.context.exception.BizException;
+import io.jsonwebtoken.ExpiredJwtException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class VerifyTicketTokenHelperImpl implements IVerifyTicketTokenHelper {
-
+    private static final Logger logger = LoggerFactory.getLogger(VerifyTicketTokenHelperImpl.class);
     private final AuthClientTokenSecretKey authClientTokenSecretKey;
     private final ParseTokenHelper parseTokenHelper;
 
@@ -26,8 +28,13 @@ public class VerifyTicketTokenHelperImpl implements IVerifyTicketTokenHelper {
 
     @Override
     public IJwtsInfo verifyTicketToken(String token) throws Exception {
-        IJwtsInfo iJwtsInfo = parseTokenHelper.parseToken(token, authClientTokenSecretKey.getTokenPublicKey());
-        return iJwtsInfo;
+        try {
+            return parseTokenHelper.parseToken(token, authClientTokenSecretKey.getTokenPublicKey());
+        } catch (ExpiredJwtException e) {
+            throw new BizException("认证令牌已过期！");
+        } catch (IllegalArgumentException e) {
+            throw new BizException("秘钥错误！");
+        }
     }
 
 

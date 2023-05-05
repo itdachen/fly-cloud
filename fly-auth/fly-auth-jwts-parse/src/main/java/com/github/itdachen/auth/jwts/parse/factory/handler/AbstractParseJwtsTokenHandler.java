@@ -73,7 +73,8 @@ public abstract class AbstractParseJwtsTokenHandler {
     protected IJwtsInfo parseIJWTInfoToken(String token, PublicKey publicKey) {
         Claims body = Jwts.parserBuilder()  // 获取jwts的解析器
                 .setSigningKey(publicKey)    // 设置加密后的密钥进行比对
-                .build().parseClaimsJws(token) // 解析传入的jwt字符串
+                .build()
+                .parseClaimsJws(token) // 解析传入的jwt字符串
                 .getBody();  // 拿到claims对象返回
 
         return parseJWTInfo(body);
