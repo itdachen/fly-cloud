@@ -29,7 +29,8 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
     private final IVerifyTicketTokenHelper verifyTicketTokenService;
     private final JwtsProperties jwtsProperties;
 
-    public AuthBootstrapWebMvcConfig(IVerifyTicketTokenHelper verifyTicketTokenService, JwtsProperties jwtsProperties) {
+    public AuthBootstrapWebMvcConfig(IVerifyTicketTokenHelper verifyTicketTokenService,
+                                     JwtsProperties jwtsProperties) {
         this.verifyTicketTokenService = verifyTicketTokenService;
         this.jwtsProperties = jwtsProperties;
     }
@@ -37,6 +38,7 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
     }
 
     @Bean
