@@ -4,17 +4,6 @@ logging:
   level:
     cn.jay.repository: trace
 
-# 客户端配置
-client:
-  id: ${spring.application.name}
-
-## 数据库加密配置, 如果不配置, 默认不加密, 只有 AES 时生效, 加密方式: NONE, AES
-#config:
-#  datasource:
-#    encoder: AES
-
-
-
 spring:
   main:
     allow-circular-references: true
@@ -41,7 +30,7 @@ spring:
     nacos:
       discovery:
         enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
-        server-addr: 192.168.7.28:8848
+        server-addr: 127.0.0.1:8848
         namespace: 07656b3c-bb69-470a-a942-6ae27b5287cb
         group: DEFAULT_GROUP
         metadata:
@@ -58,11 +47,11 @@ spring:
 
   datasource:
     name: oracle
-    driver-class-name: oracle.jdbc.OracleDriver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:oracle:thin:@192.168.7.28:1521:orcl
-    username: HUBU1024
-    password: Hubu1024
+    url: jdbc:mysql://127.0.0.1:3306/fly-next?useUnicode=true&characterEncoding=UTF8&createDatabaseIfNotExist=true&useUnicode=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&allowMultiQueries=true
+    username: root
+    password: root
     druid:
       maxActive: 20
       initialSize: 1
@@ -120,25 +109,10 @@ spring:
     cache: false
     encoding: utf-8
 
-  session:
-    store-type: REDIS
-
-  # 安全认证配置
-  security:
-    browser:
-      signInPage: http://127.0.0.1:7080/home/login
-      signOutUrl: http://127.0.0.1:7080/home/login
-      successForwardUrl: /index
-      session:
-        sessionInvalidUrl: http://127.0.0.1:7080/home/login
-      matchers:
-        - /admin/login
-        - /dashboard/admin/open/**
-        - /verify/ticket/**
-
-  redis:
-    host: 127.0.0.1
-    database: 3
+  data:
+    redis:
+      database: 5
+      host: 127.0.0.1
 
 
 ### zipkin 链路追踪

@@ -20,6 +20,9 @@ auth:
   app:
     appId: ${spring.application.name}
     appSecret: 123456
+  matchers:
+    - /oauth/jwt/**
+
 
 # 暴露端点
 management:
