@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface AuthClientSecretKeyFeign {
 
     @RequestMapping(value = "/auth/client/user/secret/key", method = RequestMethod.GET)
-    ServerResponse<String> getSecretPublicKey(@RequestParam("clientId") String clientId,
-                                            @RequestParam("secret") String secret) throws Exception;
+    ServerResponse<String> getSecretPublicKey(@RequestParam("appId") String appId,
+                                              @RequestParam("appSecret") String appSecret) throws Exception;
 
 
 }

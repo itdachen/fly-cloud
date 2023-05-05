@@ -23,11 +23,11 @@ public class ParseTokenFactory {
     }
 
     public AbstractParseJwtsTokenHandler build() {
-        if (JwtTokenEnumType.ECDSA.equals(jwtProperties.getType())) {
+        if (JwtTokenEnumType.ECDSA.equals(jwtProperties.getToken().getType())) {
             return new EcdsaParseJwtsTokenHandler();
-        } else if (JwtTokenEnumType.HMAC.equals(jwtProperties.getType())) {
+        } else if (JwtTokenEnumType.HMAC.equals(jwtProperties.getToken().getType())) {
             return new HmacParseJwtsTokenHandler();
-        } else if (JwtTokenEnumType.RSA.equals(jwtProperties.getType())) {
+        } else if (JwtTokenEnumType.RSA.equals(jwtProperties.getToken().getType())) {
             return new RsaParseJwtsTokenHandler();
         }
         return new HmacParseJwtsTokenHandler();

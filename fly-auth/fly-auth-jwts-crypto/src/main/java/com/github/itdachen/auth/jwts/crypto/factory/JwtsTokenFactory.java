@@ -25,11 +25,11 @@ public class JwtsTokenFactory {
 
 
     public AbstractJwtTokenHandler build() {
-        if (JwtTokenEnumType.ECDSA.equals(jwtProperties.getType())) {
+        if (JwtTokenEnumType.ECDSA.equals(jwtProperties.getToken().getType())) {
             return new EcdsaJwtTokenHandler(jwtProperties);
-        } else if (JwtTokenEnumType.HMAC.equals(jwtProperties.getType())) {
+        } else if (JwtTokenEnumType.HMAC.equals(jwtProperties.getToken().getType())) {
             return new HmacJwtTokenHandler(jwtProperties);
-        } else if (JwtTokenEnumType.RSA.equals(jwtProperties.getType())) {
+        } else if (JwtTokenEnumType.RSA.equals(jwtProperties.getToken().getType())) {
             return new RsaJwtTokenHandler(jwtProperties);
         }
         return new HmacJwtTokenHandler(jwtProperties);

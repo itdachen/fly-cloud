@@ -15,9 +15,11 @@ spring:
 # 认证中心配置
 auth:
   serviceId: auth
-  client:
-    id: ${spring.application.name}
-    secret: 123456
+  token:
+    type: RSA
+  app:
+    appId: ${spring.application.name}
+    appSecret: 123456
 
 # 暴露端点
 management:

@@ -50,7 +50,7 @@ public class HmacJwtTokenHandler extends AbstractJwtTokenHandler {
                 .setClaims(claimsMap)
                 .setId(UUID.randomUUID().toString())
                 .setSubject(jwtInfo.getSubject()) //主题，可以是json数据
-                .setIssuer(properties.getIssuer())   //签发者
+                .setIssuer(properties.getToken().getIssuer())   //签发者
                 .setIssuedAt(now)   //签发时间
                 .signWith(secretKey, signatureAlgorithm) //使用ES256对称加密算法签名
                 .setExpiration(date);   //设置过期时间

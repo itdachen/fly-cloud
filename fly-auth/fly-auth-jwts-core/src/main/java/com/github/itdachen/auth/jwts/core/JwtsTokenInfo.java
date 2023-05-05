@@ -119,47 +119,47 @@ public class JwtsTokenInfo implements IJwtsInfo{
 
     @Override
     public String getUniqueName() {
-        return null;
+        return username;
     }
 
     @Override
     public String getId() {
-        return null;
+        return userId;
     }
 
     @Override
     public String getNickName() {
-        return null;
+        return nickName;
     }
 
     @Override
     public String getTenantId() {
-        return null;
+        return tenantId;
     }
 
     @Override
     public String getSubject() {
-        return null;
+        return subject;
     }
 
     @Override
     public String getTokenId() {
-        return null;
+        return tokenId;
     }
 
     @Override
     public String getToken() {
-        return null;
+        return token;
     }
 
     @Override
     public Date getExpireTime() {
-        return null;
+        return expireTime;
     }
 
     @Override
     public Map<String, String> getOtherInfo() {
-        return null;
+        return otherInfo;
     }
 
     @Override

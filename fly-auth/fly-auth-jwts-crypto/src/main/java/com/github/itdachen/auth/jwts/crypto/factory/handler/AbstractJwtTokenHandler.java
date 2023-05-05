@@ -129,14 +129,14 @@ public abstract class AbstractJwtTokenHandler {
         long nowMillis = System.currentTimeMillis();
         //签发时间
         Date now = new Date(nowMillis);
-        if (expires == null) {
+        if (null == expires) {
             expires = JWT_Default_Expires;
         }
         long expiresTime = nowMillis + expires;
         Date date = new Date(expiresTime);
 
         JwtBuilder builder = Jwts.builder().setHeaderParam(JWTHeader.TYPE, "JWT")    //一下两行就是Header
-                .setHeaderParam(JWTHeader.ALGORITHM, signatureAlgorithm.getValue()).setClaims(createClaimsMap(jwtInfo)).setIssuer(properties.getIssuer())   //签发者
+                .setHeaderParam(JWTHeader.ALGORITHM, signatureAlgorithm.getValue()).setClaims(createClaimsMap(jwtInfo)).setIssuer(properties.getToken().getIssuer())   //签发者
                 .setIssuedAt(now)   //签发时间
                 .signWith(privateKey, signatureAlgorithm) //使用ES256对称加密算法签名
                 .setExpiration(date);   //设置过期时间
@@ -159,7 +159,10 @@ public abstract class AbstractJwtTokenHandler {
         claimsMap.put(UserInfoConstant.NICK_NAME, jwtInfo.getNickName());
         claimsMap.put(UserInfoConstant.ACCOUNT, jwtInfo.getUniqueName());
         claimsMap.put(UserInfoConstant.TENANT_ID, jwtInfo.getTenantId());
-        claimsMap.put(UserInfoConstant.USER_TYPE, jwtInfo.getOtherInfo().get("userType"));
+
+        Map<String, String> otherInfo = jwtInfo.getOtherInfo();
+
+        claimsMap.put(UserInfoConstant.USER_TYPE, otherInfo.get(UserInfoConstant.USER_TYPE));
 
         claimsMap.putAll(jwtInfo.getOtherInfo());
         return claimsMap;

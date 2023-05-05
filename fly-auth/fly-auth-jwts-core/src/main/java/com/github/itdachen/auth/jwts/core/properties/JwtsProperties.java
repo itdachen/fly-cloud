@@ -1,7 +1,13 @@
 package com.github.itdachen.auth.jwts.core.properties;
 
-import com.github.itdachen.auth.jwts.core.enums.JwtTokenEnumType;
+import com.github.itdachen.auth.jwts.core.properties.app.FlyAuthAppClientProperties;
+import com.github.itdachen.auth.jwts.core.properties.token.JwtsTokenProperties;
+import com.github.itdachen.framework.context.constants.UserInfoConstant;
+import com.github.itdachen.framework.context.constants.UserTypeConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Description: 认证配置
@@ -12,19 +18,20 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class JwtsProperties {
 
     /**
-     * 生成 token 方式, 默认使用 RSA, 私钥加密, 公钥解密
+     * token 配置
      */
-    private JwtTokenEnumType type = JwtTokenEnumType.HMAC;
+    private JwtsTokenProperties token = new JwtsTokenProperties();
 
     /**
-     * 签发者
+     * 客户端配置
      */
-    private String issuer = "com.github.itdachen";
+    private FlyAuthAppClientProperties app = new FlyAuthAppClientProperties();
+
 
     /**
-     * 有效时间, 定义默认有效期为 300 分钟 单位：分钟
+     * 不需要认证的复制
      */
-    private long expires = 18000;
+    private List<String> matchers = new ArrayList<>();
 
     /**
      * 加解密秘钥
@@ -36,28 +43,39 @@ public class JwtsProperties {
      */
     private String serviceId = "auth";
 
-    public JwtTokenEnumType getType() {
-        return type;
+    /**
+     * 权限校验标识
+     */
+    private String verifiedTicket = UserInfoConstant.VERIFIED_TICKET_VALUE;
+
+    /**
+     * 内网请求标识
+     */
+    private String nalFeign = UserInfoConstant.NAL_FEIGN_VALUE;
+
+
+    public JwtsTokenProperties getToken() {
+        return token;
     }
 
-    public void setType(JwtTokenEnumType type) {
-        this.type = type;
+    public void setToken(JwtsTokenProperties token) {
+        this.token = token;
     }
 
-    public String getIssuer() {
-        return issuer;
+    public FlyAuthAppClientProperties getApp() {
+        return app;
     }
 
-    public void setIssuer(String issuer) {
-        this.issuer = issuer;
+    public void setApp(FlyAuthAppClientProperties app) {
+        this.app = app;
     }
 
-    public long getExpires() {
-        return expires * 1000;
+    public List<String> getMatchers() {
+        return matchers;
     }
 
-    public void setExpires(long expires) {
-        this.expires = expires;
+    public void setMatchers(List<String> matchers) {
+        this.matchers = matchers;
     }
 
     public String getSecretKey() {
@@ -76,4 +94,19 @@ public class JwtsProperties {
         this.serviceId = serviceId;
     }
 
+    public String getVerifiedTicket() {
+        return verifiedTicket;
+    }
+
+    public void setVerifiedTicket(String verifiedTicket) {
+        this.verifiedTicket = verifiedTicket;
+    }
+
+    public String getNalFeign() {
+        return nalFeign;
+    }
+
+    public void setNalFeign(String nalFeign) {
+        this.nalFeign = nalFeign;
+    }
 }

@@ -11,14 +11,88 @@
 
     <artifactId>fly-dict</artifactId>
     <name>fly-dict</name>
-    <packaging>pom</packaging>
-    <description>数据字典</description>
+    <packaging>jar</packaging>
+    <description>数据字典开放模块</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-runner</artifactId>
+        </dependency>
+        <!-- 項目启动容器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-body-advice</artifactId>
+        </dependency>
 
 
-    <modules>
-        <module>fly-dict-server</module>
-        <module>fly-dict-sdk</module>
-        <module>fly-dict-client</module>
-    </modules>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <!-- nacos discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- nacos 配置中心, 从配置中心获取项目配置信息 -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+        <!--        </dependency>-->
+        <!-- 新版本的微服务默认不加载 bootstrap.yml 文件, 需要添加 bootstrap 依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!-- 健康检查 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+
+        <!-- 配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

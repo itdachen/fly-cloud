@@ -1,0 +1,58 @@
+{
+  "projectName": "认证中心",
+  "serverUrl": "http://127.0.0.1:7770",
+  "pathPrefix": "/smart-doc",
+  "outPath": "E:/api/smart-doc",
+  "packageFilters": "com.github.itdachen.auth.*",
+  "groups": [
+    {
+      "name": "登录认证",
+      "apis": "com.github.itdachen.auth.oauth.*"
+    },
+    {
+      "name": "权限校验",
+      "apis": "com.github.itdachen.auth.verify.*"
+    }
+  ],
+  "revisionLogs": [
+    {
+      "version": "1.0",
+      "revisionTime": "2020-12-31 10:30",
+      "status": "新建",
+      "author": "王大宸",
+      "remarks": "认证中心"
+    }
+  ],
+  "isStrict": false,
+  "allInOne": true,
+  "coverOld": true,
+  "createDebugPage": false,
+  "style": "xt256",
+  "showAuthor": true,
+  "allInOneDocFileName": "index.html",
+  "inlineEnum": true,
+  "responseBodyAdvice": {
+    "className": "com.github.itdachen.framework.core.response.ServerResponse"
+  },
+  "errorCodeDictionaries": [
+    {
+      "title": "title",
+      "enumClassName": "com.github.itdachen.framework.core.enums.ResultCode",
+      "codeField": "status",
+      "descField": "message"
+    }
+  ],
+  "ignoreRequestParams": [
+    "org.springframework.ui.ModelMap"
+  ],
+  "requestHeaders": [
+    {
+      "name": "token",
+      "type": "string",
+      "desc": "携带用户 token 信息",
+      "value": "Authorization: Bearer token",
+      "required": true,
+      "since": "1.0"
+    }
+  ]
+}

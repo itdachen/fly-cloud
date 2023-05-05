@@ -71,9 +71,9 @@ public abstract class AbstractParseJwtsTokenHandler {
      * @return com.github.itdachen.framework.jjwt.core.IJWTInfo
      */
     protected IJwtsInfo parseIJWTInfoToken(String token, PublicKey publicKey) {
-        Claims body = Jwts.parserBuilder()  //获取jwts的解析器
-                .setSigningKey(publicKey)    //设置加密后的密钥进行比对
-                .build().parseClaimsJws(token) //解析传入的jwt字符串
+        Claims body = Jwts.parserBuilder()  // 获取jwts的解析器
+                .setSigningKey(publicKey)    // 设置加密后的密钥进行比对
+                .build().parseClaimsJws(token) // 解析传入的jwt字符串
                 .getBody();  // 拿到claims对象返回
 
         return parseJWTInfo(body);
@@ -90,7 +90,10 @@ public abstract class AbstractParseJwtsTokenHandler {
     protected IJwtsInfo parseJWTInfo(Claims body) {
         Map<String, String> otherInfo = new HashMap<String, String>();
         for (Map.Entry<String, Object> entry : body.entrySet()) {
-            if (Claims.SUBJECT.equals(entry.getKey()) || UserInfoConstant.USER_ID.equals(entry.getKey()) || UserInfoConstant.NICK_NAME.equals(entry.getKey()) || UserInfoConstant.ACCOUNT.equals(entry.getKey())) {
+            if (Claims.SUBJECT.equals(entry.getKey())
+                    || UserInfoConstant.USER_ID.equals(entry.getKey())
+                    || UserInfoConstant.NICK_NAME.equals(entry.getKey())
+                    || UserInfoConstant.ACCOUNT.equals(entry.getKey())) {
                 continue;
             }
             otherInfo.put(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()));
@@ -98,7 +101,12 @@ public abstract class AbstractParseJwtsTokenHandler {
 
         otherInfo.put(UserInfoConstant.TOKEN_ID, body.getId());
 
-        return new JwtsTokenInfo(getObjectValue(body.get(UserInfoConstant.ACCOUNT)), getObjectValue(body.get(UserInfoConstant.USER_ID)), getObjectValue(body.get(UserInfoConstant.NICK_NAME)), body.getSubject(), body.getExpiration(), otherInfo);
+        return new JwtsTokenInfo(getObjectValue(body.get(UserInfoConstant.ACCOUNT)),
+                getObjectValue(body.get(UserInfoConstant.USER_ID)),
+                getObjectValue(body.get(UserInfoConstant.NICK_NAME)),
+                body.getSubject(),
+                body.getExpiration(),
+                otherInfo);
     }
 
 
