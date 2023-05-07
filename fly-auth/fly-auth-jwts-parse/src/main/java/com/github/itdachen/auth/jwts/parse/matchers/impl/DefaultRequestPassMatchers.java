@@ -2,9 +2,7 @@ package com.github.itdachen.auth.jwts.parse.matchers.impl;
 
 import com.github.itdachen.auth.jwts.core.properties.JwtsProperties;
 import com.github.itdachen.auth.jwts.parse.matchers.IRequestPassMatchers;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,12 +10,11 @@ import java.util.List;
  * Created by 王大宸 on 2023/05/05 22:14
  * Created with IntelliJ IDEA.
  */
-@Service
-public class RequestPassMatchersImpl implements IRequestPassMatchers {
+public class DefaultRequestPassMatchers implements IRequestPassMatchers {
 
     private final JwtsProperties jwtsProperties;
 
-    public RequestPassMatchersImpl(JwtsProperties jwtsProperties) {
+    public DefaultRequestPassMatchers(JwtsProperties jwtsProperties) {
         this.jwtsProperties = jwtsProperties;
     }
 
@@ -29,4 +26,5 @@ public class RequestPassMatchersImpl implements IRequestPassMatchers {
         }
         return matchers.toArray(new String[0]);
     }
+
 }

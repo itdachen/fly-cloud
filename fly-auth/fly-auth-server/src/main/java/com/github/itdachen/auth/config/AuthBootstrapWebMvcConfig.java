@@ -3,6 +3,7 @@ package com.github.itdachen.auth.config;
 import com.github.itdachen.auth.jwts.core.properties.JwtsProperties;
 import com.github.itdachen.auth.jwts.parse.IVerifyTicketTokenHelper;
 import com.github.itdachen.auth.jwts.parse.interceptor.UserAuthRestInterceptor;
+import com.github.itdachen.auth.jwts.parse.matchers.IRequestPassMatchers;
 import com.github.itdachen.auth.jwts.parse.resolver.UserAuthRestMethodArgumentResolver;
 import com.github.itdachen.framework.body.advice.handler.GlobalExceptionHandler;
 import org.slf4j.Logger;
@@ -28,11 +29,14 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
     private static final Logger logger = LoggerFactory.getLogger(AuthBootstrapWebMvcConfig.class);
     private final IVerifyTicketTokenHelper verifyTicketTokenService;
     private final JwtsProperties jwtsProperties;
+    private final IRequestPassMatchers requestPassMatchers;
 
     public AuthBootstrapWebMvcConfig(IVerifyTicketTokenHelper verifyTicketTokenService,
-                                     JwtsProperties jwtsProperties) {
+                                     JwtsProperties jwtsProperties,
+                                     IRequestPassMatchers requestPassMatchers) {
         this.verifyTicketTokenService = verifyTicketTokenService;
         this.jwtsProperties = jwtsProperties;
+        this.requestPassMatchers = requestPassMatchers;
     }
 
     @Override
@@ -60,7 +64,7 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns(passMatchers());
+                .excludePathPatterns(requestPassMatchers.passMatchers());
     }
 
     @Override
@@ -89,20 +93,6 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    /***
-     * 自定义不拦截路径
-     *
-     * @author 王大宸
-     * @date 2023/4/15 16:59
-     * @return java.lang.String[]
-     */
-    private String[] passMatchers() {
-        return new String[]{
-                "/oauth/jwt/token",
-                "/oauth/jwt/**"
-        };
     }
 
 }
