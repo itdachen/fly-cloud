@@ -26,7 +26,7 @@ public class RequestBodyUtils {
      * @param body body
      * @return java.lang.String
      */
-    public static String resolveBodyFromRequest(Flux<DataBuffer> body) {
+    public static String resolveBody(Flux<DataBuffer> body) {
         AtomicReference<String> bodyRef = new AtomicReference<>();
         /* 缓存读取的request body信息 */
         body.subscribe(dataBuffer -> {
