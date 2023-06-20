@@ -3,11 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.itdachen</groupId>
-    <artifactId>fly-cloud</artifactId>
-    <version>0.0.1</version>
+    <groupId>com.github.itdachen.cloud</groupId>
+    <artifactId>fly-cloud-dependencies</artifactId>
+    <name>fly-cloud-dependencies</name>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
-    <description>微服务项目</description>
+    <description>项目依赖统一管理</description>
 
     <properties>
         <java.version>17</java.version>
@@ -16,9 +17,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- 内部模块依赖版本 -->
+        <!-- 主框架依赖 -->
         <fly.dependencies.version>1.0.0</fly.dependencies.version>
-        <fly.cloud.version>0.0.1</fly.cloud.version>
 
     </properties>
 
@@ -33,18 +33,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
-    <modules>
-        <module>fly-gateway</module>
-        <module>fly-admin</module>
-        <module>fly-auth</module>
-        <module>fly-dict</module>
-        <module>fly-oss</module>
-        <module>fly-sba</module>
-        <module>fly-cloud-dependencies</module>
-    </modules>
-
-
 
 </project>
