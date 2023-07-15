@@ -4,13 +4,6 @@ logging:
   level:
     cn.jay.repository: trace
 
-# 认证中心配置
-auth:
-  serviceId: auth
-  client:
-    id: ${spring.application.name}
-    secret: 123456
-
 spring:
   main:
     allow-circular-references: true
@@ -47,6 +40,10 @@ spring:
         pool:
           max-connections: 500
           max-idle-time: 10000
+      discovery:
+        locator:
+          #服务名小写
+          lower-case-service-id: true
     ## 向 nacos 发起注册
     nacos:
       discovery:
@@ -67,6 +64,12 @@ spring:
                 timeout: 3000
             ip:
               delete:
+      config:
+        enabled: true
+        username: nacos
+        password: nacos
+        server-addr: 127.0.0.1:8848
+        namespace: b6783835-a27f-4ec3-b9ee-05bfa917e812
 
 feign:
   httpclient:
@@ -90,6 +93,8 @@ fly:
     gateway:
       ### 动态获取 nacos 中的路由配置
       routes:
+        username: nacos
+        password: nacos
         serverAddr: 127.0.0.1:8848
         namespace: b6783835-a27f-4ec3-b9ee-05bfa917e812
         dataId: GATEWAY_ROUTES
