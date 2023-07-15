@@ -16,18 +16,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+        <!-- 微服务统一版本号 -->
+        <fly.cloud.version>0.0.1</fly.cloud.version>
+
         <!-- 内部模块依赖版本 -->
         <fly.dependencies.version>1.0.0</fly.dependencies.version>
-        <fly.cloud.version>0.0.1</fly.cloud.version>
+        <fly.cloud.dependencies.version>0.0.1</fly.cloud.dependencies.version>
 
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.github.itdachen.framework</groupId>
-                <artifactId>fly-dependencies</artifactId>
-                <version>${fly.dependencies.version}</version>
+                <groupId>com.github.itdachen.cloud</groupId>
+                <artifactId>fly-cloud-dependencies</artifactId>
+                <version>${fly.cloud.dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -36,15 +39,33 @@
 
 
     <modules>
+        <module>fly-cloud-dependencies</module>
         <module>fly-gateway</module>
         <module>fly-admin</module>
         <module>fly-auth</module>
         <module>fly-dict</module>
         <module>fly-oss</module>
         <module>fly-sba</module>
-        <module>fly-cloud-dependencies</module>
     </modules>
 
+    <build>
+        <plugins>
+            <!-- 解决打包之后没有注释的问题 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

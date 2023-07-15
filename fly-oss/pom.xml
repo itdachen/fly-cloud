@@ -10,6 +10,10 @@
     </parent>
 
     <artifactId>fly-oss</artifactId>
+    <name>fly-oss</name>
+    <packaging>jar</packaging>
+    <version>${fly.cloud.version}</version>
+    <description>文件上传模块</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

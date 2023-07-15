@@ -12,6 +12,7 @@
     <artifactId>fly-admin-server</artifactId>
     <name>fly-admin-server</name>
     <packaging>jar</packaging>
+    <version>${fly.cloud.version}</version>
     <description>基础服务客户端</description>
 
 
@@ -19,7 +20,6 @@
         <dependency>
             <groupId>com.github.itdachen</groupId>
             <artifactId>fly-auth-client</artifactId>
-            <version>0.0.1</version>
         </dependency>
 
         <dependency>

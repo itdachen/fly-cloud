@@ -12,6 +12,7 @@
     <artifactId>fly-admin-sdk</artifactId>
     <name>fly-admin-sdk</name>
     <packaging>jar</packaging>
+    <version>${fly.cloud.version}</version>
     <description>基础服务SDK</description>
 
     <properties>

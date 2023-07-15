@@ -6,7 +6,7 @@
     <groupId>com.github.itdachen.cloud</groupId>
     <artifactId>fly-cloud-dependencies</artifactId>
     <name>fly-cloud-dependencies</name>
-    <version>1.0.0</version>
+    <version>0.0.1</version>
     <packaging>pom</packaging>
     <description>项目依赖统一管理</description>
 
@@ -19,6 +19,7 @@
 
         <!-- 主框架依赖 -->
         <fly.dependencies.version>1.0.0</fly.dependencies.version>
+        <fly.cloud.dependencies.version>0.0.1</fly.cloud.dependencies.version>
 
     </properties>
 
@@ -31,6 +32,24 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- fly cloud 依赖 -->
+            <dependency>
+                <groupId>com.github.itdachen</groupId>
+                <artifactId>fly-auth-client</artifactId>
+                <version>${fly.cloud.dependencies.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.itdachen</groupId>
+                <artifactId>fly-auth-core</artifactId>
+                <version>${fly.cloud.dependencies.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.itdachen</groupId>
+                <artifactId>fly-auth-crypto</artifactId>
+                <version>${fly.cloud.dependencies.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

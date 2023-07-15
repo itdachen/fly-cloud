@@ -12,6 +12,7 @@
     <artifactId>fly-gateway</artifactId>
     <name>fly-gateway</name>
     <packaging>jar</packaging>
+    <version>${fly.cloud.version}</version>
     <description>网关</description>
 
     <properties>
@@ -31,7 +32,6 @@
         <dependency>
             <groupId>com.github.itdachen</groupId>
             <artifactId>fly-auth-client</artifactId>
-            <version>0.0.1</version>
         </dependency>
 
         <dependency>
