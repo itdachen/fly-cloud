@@ -22,7 +22,7 @@ public class VerifyClientSecretKeyServiceImpl implements IVerifyClientSecretKeyS
      */
     @Override
     public void verifyClient(String appId, String appSecret) throws Exception {
-
+        // TODO 校验客户端信息
     }
 
 

@@ -50,6 +50,8 @@ spring:
     ## 向 nacos 发起注册
     nacos:
       discovery:
+        username: nacos
+        password: nacos
         enabled: true
         server-addr: 127.0.0.1:8848
         namespace: 07656b3c-bb69-470a-a942-6ae27b5287cb
@@ -72,24 +74,35 @@ feign:
     max-connections: 200
     max-connections-per-route: 50
 
-
-## 网关配置
-gateway:
-  ### 动态获取 nacos 中的路由配置
-  routes:
-    serverAddr: 127.0.0.1:8848
-    namespace: b6783835-a27f-4ec3-b9ee-05bfa917e812
-    dataId: GATEWAY_ROUTES
-    group: GATEWAY_ROUTES
-  ### 配置网关不拦截路径前缀, 不需要权限认证等
-  ignore:
-    startWith:
-      - /auth/oauth/access_token
-      - /auth/oauth/token
-      - /api/actuator
-      - /actuator
-      - /admin/open/dict
-      - /oss
-      - /oss/upload
-      - /flexible/login
-      - /flexible/authentication/form
+# 认证中心配置
+fly:
+  cloud:
+    auth:
+      token:
+        type: RSA
+      app:
+        service-id: auth
+        app-id: ${spring.application.name}
+        app-secret: 123456
+        matchers:
+          - /oauth/jwt/**
+    ## 网关配置
+    gateway:
+      ### 动态获取 nacos 中的路由配置
+      routes:
+        serverAddr: 127.0.0.1:8848
+        namespace: b6783835-a27f-4ec3-b9ee-05bfa917e812
+        dataId: GATEWAY_ROUTES
+        group: GATEWAY_ROUTES
+      ### 配置网关不拦截路径前缀, 不需要权限认证等
+      ignore:
+        matchers:
+          - /auth/oauth/access_token
+          - /auth/oauth/token
+          - /api/actuator
+          - /actuator
+          - /admin/open/dict
+          - /oss
+          - /oss/upload
+          - /flexible/login
+          - /flexible/authentication/form

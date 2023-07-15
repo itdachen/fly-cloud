@@ -1,11 +1,10 @@
 package com.github.itdachen.auth.config;
 
-import com.github.itdachen.auth.jwts.core.properties.JwtsProperties;
-import com.github.itdachen.auth.jwts.parse.IVerifyTicketTokenHelper;
-import com.github.itdachen.auth.jwts.parse.interceptor.UserAuthRestInterceptor;
-import com.github.itdachen.auth.jwts.parse.matchers.IRequestPassMatchers;
-import com.github.itdachen.auth.jwts.parse.resolver.UserAuthRestMethodArgumentResolver;
 import com.github.itdachen.framework.body.advice.handler.GlobalExceptionHandler;
+import com.github.itdachen.framework.cloud.jwt.parse.IVerifyTicketTokenHelper;
+import com.github.itdachen.framework.cloud.jwt.parse.interceptor.UserAuthRestInterceptor;
+import com.github.itdachen.framework.cloud.jwt.parse.matchers.IRequestPassMatchers;
+import com.github.itdachen.framework.cloud.jwt.parse.resolver.UserAuthRestMethodArgumentResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -28,14 +27,11 @@ import java.util.List;
 public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
     private static final Logger logger = LoggerFactory.getLogger(AuthBootstrapWebMvcConfig.class);
     private final IVerifyTicketTokenHelper verifyTicketTokenService;
-    private final JwtsProperties jwtsProperties;
     private final IRequestPassMatchers requestPassMatchers;
 
     public AuthBootstrapWebMvcConfig(IVerifyTicketTokenHelper verifyTicketTokenService,
-                                     JwtsProperties jwtsProperties,
                                      IRequestPassMatchers requestPassMatchers) {
         this.verifyTicketTokenService = verifyTicketTokenService;
-        this.jwtsProperties = jwtsProperties;
         this.requestPassMatchers = requestPassMatchers;
     }
 
@@ -79,7 +75,7 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
 
     @Bean
     public UserAuthRestInterceptor authInterceptor() {
-        return new UserAuthRestInterceptor(verifyTicketTokenService, jwtsProperties);
+        return new UserAuthRestInterceptor(verifyTicketTokenService);
     }
 
 

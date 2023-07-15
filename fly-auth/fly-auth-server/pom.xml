@@ -39,14 +39,12 @@
 
         <!-- token 加解密 -->
         <dependency>
-            <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-auth-jwts-crypto</artifactId>
-            <version>0.0.1</version>
+            <groupId>com.github.itdachen.framework.cloud</groupId>
+            <artifactId>fly-cloud-jwt-crypto</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-auth-jwts-parse</artifactId>
-            <version>0.0.1</version>
+            <groupId>com.github.itdachen.framework.cloud</groupId>
+            <artifactId>fly-cloud-jwt-parse</artifactId>
         </dependency>
 
         <dependency>

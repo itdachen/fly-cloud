@@ -10,15 +10,6 @@ spring:
   profiles:
     active: dev
 
-# 认证中心配置
-auth:
-  serviceId: auth
-  token:
-    type: RSA
-  app:
-    appId: ${spring.application.name}
-    appSecret: 123456
-
 # 暴露 SpringBoot Actuator Endpoint
 management:
   endpoints:

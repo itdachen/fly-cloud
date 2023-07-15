@@ -19,15 +19,6 @@
         <module>fly-auth-client</module>
         <module>fly-auth-core</module>
         <module>fly-auth-crypto</module>
-        <module>fly-auth-jwts-core</module>
-        <module>fly-auth-jwts-crypto</module>
-        <module>fly-auth-jwts-parse</module>
     </modules>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
 </project>

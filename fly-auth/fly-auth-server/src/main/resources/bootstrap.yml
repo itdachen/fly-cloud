@@ -13,15 +13,17 @@ spring:
     active: dev
 
 # 认证中心配置
-auth:
-  serviceId: auth
-  token:
-    type: RSA
-  app:
-    appId: ${spring.application.name}
-    appSecret: 123456
-  matchers:
-    - /oauth/jwt/**
+fly:
+  cloud:
+    auth:
+      token:
+        type: rsa
+      app:
+        service-id: auth
+        app-id: ${spring.application.name}
+        app-secret: 123456
+        matchers:
+          - /oauth/jwt/**
 
 
 # 暴露端点

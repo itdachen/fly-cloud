@@ -1,10 +1,10 @@
-package com.github.itdachen.auth.config;
+package com.github.itdachen.auth.runner;
 
-import com.github.itdachen.auth.jwts.core.SecretKeyConfiguration;
-import com.github.itdachen.auth.jwts.crypto.SecretKeyHelper;
-import com.github.itdachen.auth.jwts.crypto.constants.JwtRedisKeyConstants;
-import com.github.itdachen.auth.jwts.crypto.key.JwtSecretKey;
-import com.github.itdachen.auth.jwts.parse.key.AuthClientTokenSecretKey;
+import com.github.itdachen.framework.cloud.jwt.crypto.AuthTokenSecretKey;
+import com.github.itdachen.framework.cloud.jwt.crypto.SecretKeyHelper;
+import com.github.itdachen.framework.cloud.jwt.crypto.constants.JwtRedisKeyConstants;
+import com.github.itdachen.framework.cloud.jwt.crypto.key.JwtSecretKey;
+import com.github.itdachen.framework.cloud.jwt.parse.key.AuthClientTokenSecretKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 /**
- * Description: 鉴权中心私钥/公钥初始化
+ * Description: 鉴权中心 私钥/公钥 初始化
  * Created by 王大宸 on 2023/04/30 15:50
  * Created with IntelliJ IDEA.
  */
@@ -22,7 +22,7 @@ public class AuthorizedServerSecretKeyRunner implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(AuthorizedServerSecretKeyRunner.class);
 
     @Autowired
-    private SecretKeyConfiguration secretKeyConfiguration;
+    private AuthTokenSecretKey authTokenSecretKey;
     @Autowired
     private AuthClientTokenSecretKey authClientTokenSecretKey;
 
@@ -45,19 +45,21 @@ public class AuthorizedServerSecretKeyRunner implements CommandLineRunner {
             final String privateKey = redisTemplate.opsForValue().get(JwtRedisKeyConstants.USER_PRI_KEY);
             publicKey = redisTemplate.opsForValue().get(JwtRedisKeyConstants.USER_PUB_KEY);
 
-            secretKeyConfiguration.setUserPriKey(privateKey);
-            secretKeyConfiguration.setUserPubKey(publicKey);
+            authTokenSecretKey.setUserPriKey(privateKey);
+            authTokenSecretKey.setUserPubKey(publicKey);
         } else {
             final JwtSecretKey jwtSecretKey = secretKeyHelper.secretKey();
 
             redisTemplate.opsForValue().set(JwtRedisKeyConstants.USER_PRI_KEY, jwtSecretKey.getPrivateKey());
             redisTemplate.opsForValue().set(JwtRedisKeyConstants.USER_PUB_KEY, jwtSecretKey.getPublicKey());
 
-            secretKeyConfiguration.setUserPriKey(jwtSecretKey.getPrivateKey());
-            secretKeyConfiguration.setUserPubKey(jwtSecretKey.getPublicKey());
+            authTokenSecretKey.setUserPriKey(jwtSecretKey.getPrivateKey());
+            authTokenSecretKey.setUserPubKey(jwtSecretKey.getPublicKey());
 
             publicKey = jwtSecretKey.getPublicKey();
         }
+
+        /* 客户 token 解析秘钥 */
         authClientTokenSecretKey.setTokenPublicKey(publicKey);
         logger.info("用户 secret key 初始化完成 ...");
     }

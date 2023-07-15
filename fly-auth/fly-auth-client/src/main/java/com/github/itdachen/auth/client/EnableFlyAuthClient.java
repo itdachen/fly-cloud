@@ -1,6 +1,6 @@
 package com.github.itdachen.auth.client;
 
-import com.github.itdachen.auth.jwts.parse.key.FlyAutoConfiguration;
+import com.github.itdachen.framework.cloud.jwt.parse.key.FlyAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

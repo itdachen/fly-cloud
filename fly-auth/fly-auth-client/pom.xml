@@ -17,9 +17,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-auth-jwts-parse</artifactId>
-            <version>0.0.1</version>
+            <groupId>com.github.itdachen.framework.cloud</groupId>
+            <artifactId>fly-cloud-jwt-parse</artifactId>
         </dependency>
 
         <dependency>
@@ -39,6 +38,10 @@
             <groupId>com.github.itdachen.framework</groupId>
             <artifactId>fly-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-body-advice</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>io.github.openfeign</groupId>
@@ -49,8 +52,8 @@
             <artifactId>spring-cloud-openfeign-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
-            <artifactId>fly-body-advice</artifactId>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
         </dependency>
 
     </dependencies>

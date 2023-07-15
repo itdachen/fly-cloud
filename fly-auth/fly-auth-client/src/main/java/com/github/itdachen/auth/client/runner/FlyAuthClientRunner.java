@@ -1,8 +1,8 @@
 package com.github.itdachen.auth.client.runner;
 
-import com.github.itdachen.auth.jwts.parse.key.AuthClientTokenSecretKey;
 import com.github.itdachen.auth.client.feign.AuthClientSecretKeyFeign;
-import com.github.itdachen.auth.jwts.core.properties.JwtsProperties;
+import com.github.itdachen.framework.autoconfigure.cloud.jwt.properties.FlyCloudAppClientProperties;
+import com.github.itdachen.framework.cloud.jwt.parse.key.AuthClientTokenSecretKey;
 import com.github.itdachen.framework.core.response.ServerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,23 +24,23 @@ public class FlyAuthClientRunner implements CommandLineRunner {
     private AuthClientTokenSecretKey authClientTokenSecretKey;
 
     private final AuthClientSecretKeyFeign serviceAuthFeign;
-    private final JwtsProperties authProperties;
+    private final FlyCloudAppClientProperties appClientProperties;
 
     public FlyAuthClientRunner(AuthClientSecretKeyFeign serviceAuthFeign,
-                               JwtsProperties authProperties) {
+                               FlyCloudAppClientProperties appClientProperties) {
         this.serviceAuthFeign = serviceAuthFeign;
-        this.authProperties = authProperties;
+        this.appClientProperties = appClientProperties;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        logger.info("正在初始化加载用户pubKey失败");
+        logger.info("正在初始化加载用户 pubKey 失败");
         try {
             refreshUserSecretKey();
         } catch (Exception e) {
-            logger.error("初始化加载用户pubKey失败,1分钟后自动重试!", e);
+            logger.error("初始化加载用户 pubKey 失败,1分钟后自动重试!", e);
         }
-        logger.info("初始化加载用户pubKey完成");
+        logger.info("初始化加载用户 pubKey 完成");
     }
 
     /***
@@ -52,7 +52,10 @@ public class FlyAuthClientRunner implements CommandLineRunner {
      */
     @Scheduled(cron = "0 0/1 * * * ?")
     public void refreshUserSecretKey() throws Exception {
-        ServerResponse<String> response = serviceAuthFeign.getSecretPublicKey(authProperties.getApp().getAppId(), authProperties.getApp().getAppSecret());
+        ServerResponse<String> response = serviceAuthFeign.getSecretPublicKey(
+                appClientProperties.getAppId(),
+                appClientProperties.getAppSecret()
+        );
         if (response.getSuccess()) {
             this.authClientTokenSecretKey.setTokenPublicKey(response.getData());
         }

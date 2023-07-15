@@ -86,7 +86,7 @@
             <AppenderRef ref="Console"/>
         </Logger>
         <!-- 系统日志 -->
-        <Logger name="com.home" level="info" additivity="false">
+        <Logger name="com.github.itdachen" level="info" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
 

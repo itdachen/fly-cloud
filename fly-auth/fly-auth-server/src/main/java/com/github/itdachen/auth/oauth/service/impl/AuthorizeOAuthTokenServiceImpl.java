@@ -1,12 +1,11 @@
 package com.github.itdachen.auth.oauth.service.impl;
 
-import com.github.itdachen.auth.jwts.core.AccessTokenInfo;
-import com.github.itdachen.auth.jwts.core.IJwtsInfo;
-import com.github.itdachen.auth.jwts.core.JwtsTokenInfo;
-import com.github.itdachen.auth.jwts.crypto.JwtsTokenHelper;
 import com.github.itdachen.auth.oauth.entity.AuthorizeOAuthToken;
 import com.github.itdachen.auth.oauth.mapper.IAuthorizeOAuthTokenMapper;
 import com.github.itdachen.auth.oauth.service.IAuthorizeOAuthTokenService;
+import com.github.itdachen.framework.cloud.jwt.core.JwtTokenInfo;
+import com.github.itdachen.framework.cloud.jwt.crypto.AccessTokenInfo;
+import com.github.itdachen.framework.cloud.jwt.crypto.JwtsTokenHelper;
 import com.github.itdachen.framework.context.constants.UserInfoConstant;
 import com.github.itdachen.framework.context.constants.UserTypeConstant;
 import com.github.itdachen.framework.context.exception.BizException;
@@ -80,7 +79,7 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         otherInfo.put(UserInfoConstant.TENANT_ID, currentUserDetails.getTenantId());
         otherInfo.put(UserInfoConstant.GRADE, currentUserDetails.getGrade());
 
-        String access_token = jwtsTokenHelper.createToken(new JwtsTokenInfo.Builder()
+        String access_token = jwtsTokenHelper.createToken(new JwtTokenInfo.Builder()
                 .username(currentUserDetails.getAccount())
                 .nickName(currentUserDetails.getNickName())
                 .userId(currentUserDetails.getId())

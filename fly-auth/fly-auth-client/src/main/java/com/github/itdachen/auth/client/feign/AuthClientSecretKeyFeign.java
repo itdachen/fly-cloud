@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Created by 王大宸 on 2023/05/01 15:07
  * Created with IntelliJ IDEA.
  */
-@FeignClient(value = "${auth.serviceId}", configuration = {})
+@FeignClient(value = "${fly.cloud.auth.app.service-id}", configuration = {})
 public interface AuthClientSecretKeyFeign {
 
     @RequestMapping(value = "/auth/client/user/secret/key", method = RequestMethod.GET)

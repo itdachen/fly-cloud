@@ -1,7 +1,7 @@
 package com.github.itdachen.auth.oauth.controller;
 
-import com.github.itdachen.auth.jwts.core.SecretKeyConfiguration;
 import com.github.itdachen.auth.oauth.service.IVerifyClientSecretKeyService;
+import com.github.itdachen.framework.cloud.jwt.crypto.AuthTokenSecretKey;
 import com.github.itdachen.framework.context.annotation.IgnoreUserToken;
 import com.github.itdachen.framework.core.response.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthAppClientUserKeyController {
 
     @Autowired
-    private SecretKeyConfiguration secretKeyConfiguration;
+    private AuthTokenSecretKey secretKeyConfiguration;
     @Autowired
     private IVerifyClientSecretKeyService verifyClientSecretKeyService;
 
