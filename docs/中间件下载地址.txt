@@ -1,2 +1,5 @@
 Nacos 下载地址
 https://github.com/alibaba/nacos/releases
+
+Windows Redis 下载地址
+https://github.com/tporadowski/redis/releases
