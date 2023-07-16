@@ -49,6 +49,16 @@
                 <artifactId>fly-auth-crypto</artifactId>
                 <version>${fly.cloud.dependencies.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.itdachen</groupId>
+                <artifactId>fly-admin-sdk</artifactId>
+                <version>${fly.cloud.dependencies.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.itdachen</groupId>
+                <artifactId>fly-admin-client</artifactId>
+                <version>${fly.cloud.dependencies.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
