@@ -42,21 +42,20 @@ public class AuthorizedServerSecretKeyRunner implements CommandLineRunner {
         if (Boolean.TRUE.equals(redisTemplate.hasKey(JwtRedisKeyConstants.USER_PRI_KEY))
                 && Boolean.TRUE.equals(redisTemplate.hasKey(JwtRedisKeyConstants.USER_PUB_KEY))) {
 
-            final String privateKey = redisTemplate.opsForValue().get(JwtRedisKeyConstants.USER_PRI_KEY);
+            String privateKey = redisTemplate.opsForValue().get(JwtRedisKeyConstants.USER_PRI_KEY);
             publicKey = redisTemplate.opsForValue().get(JwtRedisKeyConstants.USER_PUB_KEY);
 
             authTokenSecretKey.setUserPriKey(privateKey);
             authTokenSecretKey.setUserPubKey(publicKey);
         } else {
-            final JwtSecretKey jwtSecretKey = secretKeyHelper.secretKey();
+            JwtSecretKey jwtSecretKey = secretKeyHelper.secretKey();
+            publicKey = jwtSecretKey.getPublicKey();
 
             redisTemplate.opsForValue().set(JwtRedisKeyConstants.USER_PRI_KEY, jwtSecretKey.getPrivateKey());
             redisTemplate.opsForValue().set(JwtRedisKeyConstants.USER_PUB_KEY, jwtSecretKey.getPublicKey());
 
             authTokenSecretKey.setUserPriKey(jwtSecretKey.getPrivateKey());
             authTokenSecretKey.setUserPubKey(jwtSecretKey.getPublicKey());
-
-            publicKey = jwtSecretKey.getPublicKey();
         }
 
         /* 客户 token 解析秘钥 */

@@ -2,7 +2,7 @@ package com.github.itdachen.auth.oauth.controller;
 
 import com.github.itdachen.auth.oauth.entity.AuthorizeOAuthToken;
 import com.github.itdachen.auth.oauth.service.IAuthorizeOAuthTokenService;
-import com.github.itdachen.framework.cloud.jwt.crypto.AccessTokenInfo;
+import com.github.itdachen.framework.cloud.jwt.core.AccessTokenInfo;
 import com.github.itdachen.framework.core.response.ServerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

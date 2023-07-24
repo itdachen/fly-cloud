@@ -1,7 +1,7 @@
 package com.github.itdachen.auth.oauth.service;
 
 import com.github.itdachen.auth.oauth.entity.AuthorizeOAuthToken;
-import com.github.itdachen.framework.cloud.jwt.crypto.AccessTokenInfo;
+import com.github.itdachen.framework.cloud.jwt.core.AccessTokenInfo;
 
 /**
  * Description:
