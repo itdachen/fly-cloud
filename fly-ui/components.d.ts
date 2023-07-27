@@ -35,6 +35,7 @@ declare module '@vue/runtime-core' {
     LayLogo: typeof import('@layui/layui-vue')['LayLogo']
     LayMenu: typeof import('@layui/layui-vue')['LayMenu']
     LayMenuItem: typeof import('@layui/layui-vue')['LayMenuItem']
+    LayPage: typeof import('@layui/layui-vue')['LayPage']
     LayProgress: typeof import('@layui/layui-vue')['LayProgress']
     LayRadio: typeof import('@layui/layui-vue')['LayRadio']
     LayRow: typeof import('@layui/layui-vue')['LayRow']
@@ -50,6 +51,7 @@ declare module '@vue/runtime-core' {
     LayTextarea: typeof import('@layui/layui-vue')['LayTextarea']
     LayTimeline: typeof import('@layui/layui-vue')['LayTimeline']
     LayTimelineItem: typeof import('@layui/layui-vue')['LayTimelineItem']
+    LayTreeSelect: typeof import('@layui/layui-vue')['LayTreeSelect']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
