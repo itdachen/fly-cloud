@@ -15,5 +15,5 @@ import java.lang.annotation.*;
 @Import(FlyAutoConfiguration.class)
 @Documented
 @Inherited
-public @interface EnableFlyAuthClient {
+public @interface EnableAuthClient {
 }

@@ -3,14 +3,12 @@
     <lay-row space="10">
       <lay-col span="24">
         <lay-card>
-          <lay-table :columns="columns"
-                     id="id"
+          <lay-table :columns="columns" id="id"  skin="line"
                      :dataSource="dataSource"
                      v-model:selectedKeys="selectedKeys"
                      :checkbox="checkbox"
-                     skin="line"
-                     :default-toolbar="defaultToolbar"
-                     @row="rowClick">
+                     :default-toolbar="defaultToolbar">
+            <!--  @row="rowClick" -->
             <template v-slot:toolbar>
               <div class="fly-tool-head">
                 <div class="fly-head-search">
@@ -30,18 +28,11 @@
                   </lay-button>
                 </div>
               </div>
-              <!--              <lay-button size="sm" prefix-icon="layui-icon-search" class="fly-search-button">查询</lay-button>-->
-              <!--              <lay-button size="sm" prefix-icon="layui-icon-addition" class="fly-add-button">新增</lay-button>-->
             </template>
-            <template v-slot:username="{ data }">
-              {{ data.username }}
-            </template>
-            <template v-slot:password="{ data }">
-              {{ data.password }}
-            </template>
-            <template v-slot:operator="{ }">
+            <template v-slot:operator="{data}">
               <lay-button size="sm" type="normal" prefix-icon="layui-icon-list"
-                          class="fly-tool-button fly-view-button">查看
+                          class="fly-tool-button fly-view-button"
+                          @click="viewHandler(data)">查看
               </lay-button>
               <lay-button size="sm" type="warm" prefix-icon="layui-icon-edit"
                           class="fly-tool-button fly-edit-button">编辑
@@ -62,7 +53,8 @@
   </lay-container>
 
   <!--  :area="['800px', '500px']" -->
-  <lay-layer v-model="visible11" :shade="false" :isHtmlFragment="true" :btn="action11">
+  <lay-layer title="编辑" v-model="visible11" :maxmin="true"
+             :shade="true" :btn="action11">
     <div style="padding: 20px;">
       <lay-form :model="model11" ref="layFormRef11" required>
         <lay-form-item label="账户" prop="username">
@@ -123,7 +115,6 @@ const columns = [
   {
     title: "账户",
     width: "200px",
-    customSlot: "username",
     key: "username",
     align: 'center',
     ellipsisTooltip: true
@@ -131,7 +122,6 @@ const columns = [
   {
     title: "密码",
     width: "180px",
-    customSlot: "password",
     key: "password",
     align: 'center',
   },
@@ -162,13 +152,18 @@ const dataSource = [
   {id: "4", username: "woow3", password: "woow", age: "20"},
 ];
 
-const rowClick = function (data: any) {
-  console.log(JSON.stringify(data));
-};
+// const rowClick = function (data: any) {
+//   console.log(JSON.stringify(data));
+// };
 
-const rowDoubleClick = function (data: any) {
-  console.log(JSON.stringify(data));
-};
+// const rowDoubleClick = function (data: any) {
+//   console.log(JSON.stringify(data));
+// };
+
+
+const viewHandler = (data: any) => {
+  console.log('viewHandler data', data.id)
+}
 
 
 /** 弹窗 *****/

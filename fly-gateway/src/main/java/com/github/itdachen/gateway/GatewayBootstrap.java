@@ -1,6 +1,6 @@
 package com.github.itdachen.gateway;
 
-import com.github.itdachen.auth.client.EnableFlyAuthClient;
+import com.github.itdachen.auth.client.EnableAuthClient;
 import com.github.itdachen.framework.boot.runner.SpringBootBootstrap;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -18,7 +18,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 @RefreshScope
 @EnableScheduling
-@EnableFlyAuthClient
+@EnableAuthClient
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableFeignClients({"com.github.itdachen"})

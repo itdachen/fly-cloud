@@ -1,6 +1,6 @@
 package com.github.itdachen.admin;
 
-import com.github.itdachen.auth.client.EnableFlyAuthClient;
+import com.github.itdachen.auth.client.EnableAuthClient;
 import com.github.itdachen.framework.boot.runner.SpringBootBootstrap;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -17,7 +17,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @RefreshScope // 动态刷新配置
 @EnableScheduling // 定时任务
-@EnableFlyAuthClient
+@EnableAuthClient
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients({"com.github.itdachen"})
