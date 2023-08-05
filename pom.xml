@@ -46,6 +46,7 @@
         <module>fly-dict</module>
         <module>fly-oss</module>
         <module>fly-sba</module>
+        <module>fly-nacos-client</module>
     </modules>
 
     <build>

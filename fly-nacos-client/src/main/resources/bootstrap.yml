@@ -1,0 +1,23 @@
+# 端口配置
+server:
+  port: 8079
+  servlet:
+    context-path: /${spring.application.name}
+    session:
+      timeout: 18000
+
+spring:
+  application:
+    name: nacos-client
+  profiles:
+    active: dev
+
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
