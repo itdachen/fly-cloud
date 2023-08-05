@@ -1,6 +1,6 @@
 # 端口配置
 server:
-  port: 8079
+  port: 8000
   servlet:
     context-path: /${spring.application.name}
     session:
@@ -9,8 +9,35 @@ server:
 spring:
   application:
     name: nacos-client
-  profiles:
-    active: dev
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  cloud:
+    ## 向 nacos 发起注册
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
+        server-addr: 127.0.0.1:8848
+        namespace: 07656b3c-bb69-470a-a942-6ae27b5287cb
+        group: DEFAULT_GROUP
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+      # 配置管理
+#      config:
+#        prefix: nacos-cliean
+#        file-extension: yaml  # 配置内容的数据格式, 默认为 properties
+#        enabled: true     # 如果不想使用 Nacos 进行配置管理, 设置为 false 即可
+#        group: DEFAULT_GROUP  # 组, 默认为 DEFAULT_GROUP
+#        namespace: 1bc13fd5-843b-4ac0-aa55-695c25bc0ac6
+#        server-addr: 127.0.0.1:8848
 
 # 暴露端点
 management:
