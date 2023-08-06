@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>fly-admin-server</artifactId>
-    <name>fly-admin-server</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <version>${fly.cloud.version}</version>
     <description>基础服务客户端</description>

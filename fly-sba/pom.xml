@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>fly-sba</artifactId>
-    <name>fly-sba</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <version>${fly.cloud.version}</version>
     <description>SpringBoot Admin服务监控模块</description>

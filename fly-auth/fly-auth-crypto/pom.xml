@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>fly-auth-crypto</artifactId>
-    <name>fly-auth-crypto</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <version>${fly.cloud.version}</version>
     <description>安全认证账号密码加密模块</description>

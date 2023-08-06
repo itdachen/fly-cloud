@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.itdachen.cloud</groupId>
     <artifactId>fly-cloud-dependencies</artifactId>
-    <name>fly-cloud-dependencies</name>
+    <name>${project.artifactId}</name>
     <version>0.0.1</version>
     <packaging>pom</packaging>
     <description>项目依赖统一管理</description>
@@ -18,8 +18,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- 主框架依赖 -->
-        <fly.dependencies.version>1.0.0</fly.dependencies.version>
-        <fly.cloud.dependencies.version>0.0.1</fly.cloud.dependencies.version>
+        <fly.dependencies.version>1.0.1</fly.dependencies.version>
+
+        <!-- 微服务各模块版本号, 微服务版本号变更时, 修改此处 -->
+        <fly.cloud.dependencies.version>${project.version}</fly.cloud.dependencies.version>
 
     </properties>
 

@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>fly-oss</artifactId>
-    <name>fly-oss</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <version>${fly.cloud.version}</version>
     <description>文件上传模块</description>

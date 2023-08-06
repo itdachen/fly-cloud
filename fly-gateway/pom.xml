@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>fly-gateway</artifactId>
-    <name>fly-gateway</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <version>${fly.cloud.version}</version>
     <description>网关</description>

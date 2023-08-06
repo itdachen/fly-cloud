@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>fly-auth-core</artifactId>
-    <name>fly-auth-core</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <version>${fly.cloud.version}</version>
     <description>微服务鉴权中心核心模块</description>

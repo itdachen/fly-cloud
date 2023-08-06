@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>fly-dict</artifactId>
-    <name>fly-dict</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <version>${fly.cloud.version}</version>
     <description>数据字典开放模块</description>

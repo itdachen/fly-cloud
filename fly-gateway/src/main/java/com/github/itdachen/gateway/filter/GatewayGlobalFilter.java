@@ -11,7 +11,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 /**
- * Description:
+ * Description: 全局过滤器
  * Created by 王大宸 on 2023/05/05 21:41
  * Created with IntelliJ IDEA.
  */

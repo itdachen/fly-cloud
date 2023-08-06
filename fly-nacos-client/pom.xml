@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>fly-nacos-client</artifactId>
-    <name>fly-nacos-client</name>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <version>${fly.cloud.version}</version>
     <description>服务注册及发现</description>
