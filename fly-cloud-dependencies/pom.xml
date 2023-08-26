@@ -35,7 +35,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- fly cloud 依赖 -->
+            <!-- 认证中心 START -->
             <dependency>
                 <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-auth-client</artifactId>
@@ -51,6 +51,9 @@
                 <artifactId>fly-auth-crypto</artifactId>
                 <version>${fly.cloud.dependencies.version}</version>
             </dependency>
+            <!-- 认证中心 END -->
+
+            <!-- 基础应用服务 START -->
             <dependency>
                 <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-admin-sdk</artifactId>
@@ -61,6 +64,7 @@
                 <artifactId>fly-admin-client</artifactId>
                 <version>${fly.cloud.dependencies.version}</version>
             </dependency>
+            <!-- 基础应用服务 END -->
 
         </dependencies>
     </dependencyManagement>

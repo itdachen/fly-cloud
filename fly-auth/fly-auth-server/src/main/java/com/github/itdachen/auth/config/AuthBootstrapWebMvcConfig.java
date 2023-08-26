@@ -1,6 +1,5 @@
 package com.github.itdachen.auth.config;
 
-import com.github.itdachen.framework.body.advice.handler.GlobalExceptionHandler;
 import com.github.itdachen.framework.cloud.jwt.parse.IVerifyTicketTokenHelper;
 import com.github.itdachen.framework.cloud.jwt.parse.interceptor.UserAuthRestInterceptor;
 import com.github.itdachen.framework.cloud.jwt.parse.matchers.IRequestPassMatchers;
@@ -41,11 +40,11 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
     }
 
-    @Bean
-    public GlobalExceptionHandler getGlobalExceptionHandler() {
-        logger.info("正在配置全局异常处理 ...");
-        return new GlobalExceptionHandler();
-    }
+//    @Bean
+//    public GlobalExceptionHandler getGlobalExceptionHandler() {
+//        logger.info("正在配置全局异常处理 ...");
+//        return new GlobalExceptionHandler();
+//    }
 
 
     /***
