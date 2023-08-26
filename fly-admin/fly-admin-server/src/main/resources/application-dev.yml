@@ -1,10 +1,35 @@
+# 端口配置
+server:
+  port: 8002
+  servlet:
+    context-path: /${spring.application.name}
+    session:
+      timeout: 18000
+
 # 日志配置
 logging:
   config: classpath:fly-cloud.xml
   level:
     cn.jay.repository: trace
 
+
+# 认证中心配置
+fly:
+  cloud:
+    auth:
+      token:
+        type: rsa
+      app:
+        service-id: auth
+        app-id: ${spring.application.name}
+        app-secret: 123456
+        matchers:
+          - /oauth/jwt/**
+
+
 spring:
+  application:
+    name: admin
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
@@ -34,7 +59,7 @@ spring:
         enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
         server-addr: 127.0.0.1:8848
         namespace: 07656b3c-bb69-470a-a942-6ae27b5287cb
-        group: DEFAULT_GROUP
+        group: FLY_GROUP
         metadata:
           management:
             context-path: ${server.servlet.context-path}/actuator

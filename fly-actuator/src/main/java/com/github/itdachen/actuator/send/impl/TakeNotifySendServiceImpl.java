@@ -1,14 +1,13 @@
-package com.github.itdachen.dashboard.send.impl;
+package com.github.itdachen.actuator.send.impl;
 
-import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.github.itdachen.dashboard.send.ITakeNotifySendService;
+import com.github.itdachen.actuator.send.ITakeNotifySendService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Description:
+ * Description: 记录消息
  * Created by 王大宸 on 2023-07-16 1:32
  * Created with IntelliJ IDEA.
  */

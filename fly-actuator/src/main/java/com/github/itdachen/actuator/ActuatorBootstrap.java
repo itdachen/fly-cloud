@@ -1,4 +1,4 @@
-package com.github.itdachen.dashboard;
+package com.github.itdachen.actuator;
 
 import com.github.itdachen.framework.boot.runner.SpringBootBootstrap;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
@@ -9,7 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- * Description:
+ * Description: 微服务应用监控 启动入口类
+ * 访问入口: http://127.0.0.1:8005/actuator
  * Created by 王大宸 on 2023/04/30 13:58
  * Created with IntelliJ IDEA.
  */
@@ -19,10 +20,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.github.itdachen"})
-public class AdminDashboardBootstrap {
+public class ActuatorBootstrap {
 
     public static void main(String[] args) {
-        SpringBootBootstrap.run(AdminDashboardBootstrap.class);
+        SpringBootBootstrap.run(ActuatorBootstrap.class);
     }
 
 }

@@ -1,29 +1,8 @@
-# 端口配置
-server:
-  port: 8001
-  servlet:
-    context-path: /${spring.application.name}
-    session:
-      timeout: 18000
 
 spring:
-  application:
-    name: auth
   profiles:
     active: dev
 
-# 认证中心配置
-fly:
-  cloud:
-    auth:
-      token:
-        type: rsa
-      app:
-        service-id: auth
-        app-id: ${spring.application.name}
-        app-secret: 123456
-        matchers:
-          - /oauth/jwt/**
 
 
 # 暴露端点

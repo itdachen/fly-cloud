@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+
+# 服务端点详细监控信息
+management:
+  #  trace:
+  #    http:
+  #      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

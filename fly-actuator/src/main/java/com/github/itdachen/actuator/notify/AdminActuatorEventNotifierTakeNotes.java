@@ -1,7 +1,7 @@
-package com.github.itdachen.dashboard.notify;
+package com.github.itdachen.actuator.notify;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.itdachen.dashboard.send.ITakeNotifySendService;
+import com.github.itdachen.actuator.send.ITakeNotifySendService;
 import de.codecentric.boot.admin.server.domain.entities.Instance;
 import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
 import de.codecentric.boot.admin.server.domain.events.InstanceEvent;
@@ -15,13 +15,13 @@ import reactor.core.publisher.Mono;
 import java.util.Arrays;
 
 /**
- * Description:
+ * Description: 服务状态变更通知
  * Created by 王大宸 on 2023-07-16 1:29
  * Created with IntelliJ IDEA.
  */
 @Component
-public class DashboardAdminEventNotifierTakeNotes  extends AbstractStatusChangeNotifier {
-    private static final Logger logger = LoggerFactory.getLogger(DashboardAdminEventNotifierTakeNotes.class);
+public class AdminActuatorEventNotifierTakeNotes extends AbstractStatusChangeNotifier {
+    private static final Logger logger = LoggerFactory.getLogger(AdminActuatorEventNotifierTakeNotes.class);
 
     /**
      * 消息模板
@@ -45,8 +45,8 @@ public class DashboardAdminEventNotifierTakeNotes  extends AbstractStatusChangeN
 
     private final ITakeNotifySendService takeNotesSendNotify;
 
-    public DashboardAdminEventNotifierTakeNotes(InstanceRepository repository,
-                                                ITakeNotifySendService takeNotesSendNotify) {
+    public AdminActuatorEventNotifierTakeNotes(InstanceRepository repository,
+                                               ITakeNotifySendService takeNotesSendNotify) {
         super(repository);
         this.takeNotesSendNotify = takeNotesSendNotify;
     }

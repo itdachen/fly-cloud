@@ -1,0 +1,69 @@
+server:
+  port: 8005
+  servlet:
+    context-path: /${spring.application.name}
+
+# 日志配置
+logging:
+  config: classpath:fly-cloud.xml
+  level:
+    cn.jay.repository: trace
+
+spring:
+  application:
+    name: actuator
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  boot:
+    admin:
+      ui:
+        title: FLY-CLOUD 微服务应用实例监控
+        brand: <img src="assets/img/icon-spring-boot-admin.svg"><span>FLY-CLOUD 微服务应用实例监控</span>
+      client:
+        instance:
+          metadata:
+            tags:
+              environment: local
+  #      probed-endpoints: health,env,metrics,httptrace:trace,threaddump:dump,jolokia,info,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents
+  #      monitor: # 监控发送请求的超时时间
+  #        default-timeout: 20000
+
+
+  # 登录账号和密码配置
+  security:
+    user:
+      name: admin
+      password: 123456
+
+  cloud:
+    nacos:
+      username: admin
+      password: 123456
+      discovery:
+        enabled: true
+        username: nacos
+        password: nacos
+        server-addr: 127.0.0.1:8848
+        namespace: 07656b3c-bb69-470a-a942-6ae27b5287cb
+        group: FLY_GROUP
+        watch-delay: 3000
+        watch:
+          enabled: true
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+          user.name: ${spring.security.user.name}
+          user.password: ${spring.security.user.password}
+
+  ## thymeleaf 邮件发送模板设置
+  thymeleaf:
+    mode: HTML5
+    cache: false
+    encoding: utf-8
+    check-template: false
+    check-template-location: false

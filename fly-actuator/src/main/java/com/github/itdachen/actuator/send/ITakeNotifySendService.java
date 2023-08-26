@@ -1,4 +1,4 @@
-package com.github.itdachen.dashboard.send;
+package com.github.itdachen.actuator.send;
 
 import com.alibaba.fastjson.JSONObject;
 

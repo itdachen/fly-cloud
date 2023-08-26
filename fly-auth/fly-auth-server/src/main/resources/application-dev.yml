@@ -1,3 +1,25 @@
+# 端口配置
+server:
+  port: 8001
+  servlet:
+    context-path: /${spring.application.name}
+    session:
+      timeout: 18000
+
+
+# 认证中心配置
+fly:
+  cloud:
+    auth:
+      token:
+        type: rsa
+      app:
+        service-id: auth
+        app-id: ${spring.application.name}
+        app-secret: 123456
+        matchers:
+          - /oauth/jwt/**
+
 # 日志配置
 logging:
   config: classpath:fly-cloud.xml
@@ -5,6 +27,8 @@ logging:
     cn.jay.repository: trace
 
 spring:
+  application:
+    name: auth
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
@@ -28,13 +52,13 @@ spring:
     #      preferred-networks: 127.0.0.1
     ## 向 nacos 发起注册
     nacos:
-      username: nacos
-      password: nacos
       discovery:
         enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
+        username: nacos
+        password: nacos
         server-addr: 127.0.0.1:8848
         namespace: 07656b3c-bb69-470a-a942-6ae27b5287cb
-        group: DEFAULT_GROUP
+        group: FLY_GROUP
         metadata:
           management:
             context-path: ${server.servlet.context-path}/actuator
@@ -71,45 +95,6 @@ spring:
       connectionProperties: druid:stat:mergeSql=true;druid:stat:slowSqlMillis=5000
       ########### 启用内置过滤器（第一个 stat必须，否则监控不到SQL）##########
       filters: stat,wall,log4j2
-      # 自己配置监控统计拦截的filter
-      filter:
-        # 开启druiddatasource的状态监控
-        stat:
-          enabled: true
-          db-type: oracle
-          # 开启慢sql监控，超过2s 就认为是慢sql，记录到日志中
-          log-slow-sql: true
-          slow-sql-millis: 2000
-        # 日志监控，使用slf4j 进行日志输出
-        slf4j:
-          enabled: true
-          statement-log-error-enabled: true
-          statement-create-after-log-enabled: false
-          statement-close-after-log-enabled: false
-          result-set-open-after-log-enabled: false
-          result-set-close-after-log-enabled: false
-      ########## 配置WebStatFilter，用于采集web关联监控的数据 ##########
-      web-stat-filter:
-        enabled: true                   # 启动 StatFilter
-        url-pattern: /*                 # 过滤所有url
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" # 排除一些不必要的url
-        session-stat-enable: true       # 开启session统计功能
-        session-stat-max-count: 1000    # session的最大个数,默认100
-      ########## 配置StatViewServlet（监控页面），用于展示Druid的统计信息 ##########
-      stat-view-servlet:
-        enabled: true                   # 启用StatViewServlet
-        url-pattern: /biz/druid/*           # 访问内置监控页面的路径，内置监控页面的首页是/druid/index.html
-        reset-enable: false              # 不允许清空统计数据,重新计算
-        login-username: root            # 配置监控页面访问密码
-        login-password: 123
-        allow: 127.0.0.1           # 允许访问的地址，如果allow没有配置或者为空，则允许所有访问
-        # deny:                      # 拒绝访问的地址，deny优先于allow，如果在deny列表中，就算在allow列表中，也会被拒绝
-
-
-  thymeleaf:
-    mode: HTML5
-    cache: false
-    encoding: utf-8
 
   data:
     redis:

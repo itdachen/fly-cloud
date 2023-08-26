@@ -1,4 +1,4 @@
-package com.github.itdachen.dashboard.config;
+package com.github.itdachen.actuator.config;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -6,10 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 /**
- * Description:
+ * Description: SpringSecurity 认证
  * Created by 王大宸 on 2023-07-16 1:35
  * Created with IntelliJ IDEA.
  */
@@ -43,13 +42,15 @@ public class SecuritySecureConfig {
                         adminContextPath + "/instances/**"
                 )
                 .permitAll()
-                .anyRequest().authenticated());
+                .anyRequest().authenticated()
+        );
 
 
         http.formLogin(login -> login
                 .loginPage(adminContextPath + "/login")
                 .successHandler(successHandler)
         );
+
         http.logout(logout -> logout
                 .logoutUrl(adminContextPath + "/logout")
         );

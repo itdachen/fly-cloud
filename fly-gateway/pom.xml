@@ -21,17 +21,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
-            <artifactId>fly-runner</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
-            <artifactId>fly-context</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-auth-client</artifactId>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-runner</artifactId>
         </dependency>
 
         <dependency>
@@ -40,76 +36,85 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-autoconfigure-processor</artifactId>
+        </dependency>
+
+        <!-- 动态网关 -->
+        <dependency>
             <groupId>com.github.itdachen.framework.cloud</groupId>
             <artifactId>fly-cloud-gateway-dynamic-routes</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.alibaba.nacos</groupId>
-                    <artifactId>nacos-client</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- 这里对应新版本的 nacos, 后面总框架升级账号去除掉 -->
-        <dependency>
-            <groupId>com.alibaba.nacos</groupId>
-            <artifactId>nacos-client</artifactId>
-            <version>2.2.4</version>
         </dependency>
 
-
+        <!-- 服务注册与发现 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-            <exclusions>
-                <!-- 将ribbon排除 -->
-                <exclusion>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.alibaba.nacos</groupId>
-                    <artifactId>nacos-client</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
-        <!-- nacos 配置中心, 从配置中心获取项目配置信息 -->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
-<!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
-        <!-- 网关基于 Redis 限流 -->
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+            <groupId>com.github.itdachen.framework.cloud</groupId>
+            <artifactId>fly-cloud-openfeign</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-        </dependency>
+
         <!-- 健康检查 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-configuration-processor</artifactId>-->
+<!--        </dependency>-->
+
+
+        <!--        <dependency>-->
+<!--            <groupId>com.github.itdachen</groupId>-->
+<!--            <artifactId>fly-auth-client</artifactId>-->
+<!--        </dependency>-->
+
+
+
+
+
+
+        <!-- nacos 配置中心, 从配置中心获取项目配置信息 -->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+<!--        </dependency>-->
+
+
+        <!-- 网关基于 Redis 限流 -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.session</groupId>-->
+<!--            <artifactId>spring-session-data-redis</artifactId>-->
+<!--        </dependency>-->
+
+
+
         <!-- openfeign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!-- LB 扩展 openfeign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; LB 扩展 openfeign &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-loadbalancer</artifactId>-->
+<!--        </dependency>-->
 
         <!-- feign 替换 JDK 默认的 URLConnection 为 okhttp -->
         <dependency>
@@ -143,6 +148,7 @@
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
         </dependency>
+
 
 
     </dependencies>
