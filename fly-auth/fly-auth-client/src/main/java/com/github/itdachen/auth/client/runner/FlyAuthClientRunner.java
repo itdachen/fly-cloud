@@ -34,13 +34,13 @@ public class FlyAuthClientRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        logger.info("正在初始化加载用户 pubKey 失败");
+        logger.info("正在初始化用户 pubKey");
         try {
             refreshUserSecretKey();
+            logger.info("初始化用户 pubKey 完成");
         } catch (Exception e) {
-            logger.error("初始化加载用户 pubKey 失败,1分钟后自动重试!", e);
+            logger.error("初始化用户 pubKey 失败, 1 分钟后自动重试!", e);
         }
-        logger.info("初始化加载用户 pubKey 完成");
     }
 
     /***
