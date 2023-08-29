@@ -18,7 +18,6 @@
     <modules>
         <module>fly-auth-server</module>
         <module>fly-auth-client</module>
-        <module>fly-auth-core</module>
         <module>fly-auth-crypto</module>
     </modules>
 
