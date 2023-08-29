@@ -48,6 +48,7 @@
         <module>fly-oss</module>
         <module>fly-actuator</module>
         <module>fly-nacos-client</module>
+        <module>fly-code-fast</module>
     </modules>
 
     <build>

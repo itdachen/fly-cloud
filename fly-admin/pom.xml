@@ -10,7 +10,10 @@
     </parent>
 
     <artifactId>fly-admin</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>pom</packaging>
+    <version>${fly.cloud.version}</version>
+    <description>基础服务</description>
 
     <modules>
         <module>fly-admin-server</module>

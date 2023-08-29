@@ -10,8 +10,9 @@
     </parent>
 
     <artifactId>fly-auth</artifactId>
-    <name>fly-auth</name>
+    <name>${project.artifactId}</name>
     <packaging>pom</packaging>
+    <version>${fly.cloud.version}</version>
     <description>微服务安全认证中心</description>
 
     <modules>

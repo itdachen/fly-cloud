@@ -20,9 +20,6 @@
         <!-- 主框架依赖 -->
         <fly.dependencies.version>1.0.1</fly.dependencies.version>
 
-        <!-- 微服务各模块版本号, 微服务版本号变更时, 修改此处 -->
-        <fly.cloud.dependencies.version>${project.version}</fly.cloud.dependencies.version>
-
     </properties>
 
     <dependencyManagement>
@@ -39,17 +36,17 @@
             <dependency>
                 <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-auth-client</artifactId>
-                <version>${fly.cloud.dependencies.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-auth-core</artifactId>
-                <version>${fly.cloud.dependencies.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-auth-crypto</artifactId>
-                <version>${fly.cloud.dependencies.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <!-- 认证中心 END -->
 
@@ -57,12 +54,12 @@
             <dependency>
                 <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-admin-sdk</artifactId>
-                <version>${fly.cloud.dependencies.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-admin-client</artifactId>
-                <version>${fly.cloud.dependencies.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <!-- 基础应用服务 END -->
 
