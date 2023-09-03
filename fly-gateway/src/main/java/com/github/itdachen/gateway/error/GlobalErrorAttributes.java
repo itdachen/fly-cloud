@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -26,7 +27,13 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
 
         logger.error("网关处理异常", error);
 
-        return MsgBodyUtils.resMsg(HttpStatus.BAD_REQUEST.value(), error.getMessage());
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", false);
+        map.put("status", HttpStatus.BAD_REQUEST.value());
+        map.put("msg", error.getMessage());
+        map.put("data", null);
+
+        return map;
 
     }
 
