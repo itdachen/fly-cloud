@@ -26,7 +26,7 @@
             <artifactId>fly-body-advice</artifactId>
         </dependency>
 
-        <!-- openfeign 远程服务调用模块 -->
+        <!-- openfeign 远程服务调用模块, openfeign 封装, RestTemplate 封装 -->
         <dependency>
             <groupId>com.github.itdachen.framework.cloud</groupId>
             <artifactId>fly-cloud-openfeign</artifactId>
@@ -50,11 +50,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-openfeign-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.httpcomponents.client5</groupId>
-            <artifactId>httpclient5</artifactId>
         </dependency>
 
     </dependencies>

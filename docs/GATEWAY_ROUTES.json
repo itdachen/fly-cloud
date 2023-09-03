@@ -40,16 +40,16 @@
     ]
   },
   {
-    "id": "sba",
+    "id": "auth-client-demo",
     "predicates": [
       {
         "name": "Path",
         "args": {
-          "pattern": "/api/sba/**"
+          "pattern": "/api/auth-client-demo/**"
         }
       }
     ],
-    "uri": "lb://sba",
+    "uri": "lb://auth-client-demo",
     "filters": [
       {
         "name": "StripPrefix",
