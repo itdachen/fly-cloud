@@ -21,6 +21,12 @@
             <groupId>com.github.itdachen.framework</groupId>
             <artifactId>fly-runner</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-auth-crypto</artifactId>
+        </dependency>
+
         <!-- 項目启动容器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -37,11 +43,12 @@
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
 
-        <!-- token 加解密 -->
+        <!-- token 加密 -->
         <dependency>
             <groupId>com.github.itdachen.framework.cloud</groupId>
             <artifactId>fly-cloud-jwt-crypto</artifactId>
         </dependency>
+        <!-- token 解密 -->
         <dependency>
             <groupId>com.github.itdachen.framework.cloud</groupId>
             <artifactId>fly-cloud-jwt-parse</artifactId>

@@ -4,7 +4,7 @@ import com.github.itdachen.framework.cloud.jwt.crypto.AuthTokenSecretKey;
 import com.github.itdachen.framework.cloud.jwt.crypto.SecretKeyHelper;
 import com.github.itdachen.framework.cloud.jwt.crypto.constants.JwtRedisKeyConstants;
 import com.github.itdachen.framework.cloud.jwt.crypto.key.JwtSecretKey;
-import com.github.itdachen.framework.cloud.jwt.parse.key.AuthClientTokenSecretKey;
+import com.github.itdachen.framework.cloud.jwt.parse.AuthClientTokenSecretKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

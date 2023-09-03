@@ -40,13 +40,6 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
     }
 
-//    @Bean
-//    public GlobalExceptionHandler getGlobalExceptionHandler() {
-//        logger.info("正在配置全局异常处理 ...");
-//        return new GlobalExceptionHandler();
-//    }
-
-
     /***
      * 拦截器配置
      *
@@ -75,19 +68,6 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
     @Bean
     public UserAuthRestInterceptor authInterceptor() {
         return new UserAuthRestInterceptor(verifyTicketTokenService);
-    }
-
-
-    /***
-     * 指定项目账号加密策略
-     *
-     * @author 王大宸
-     * @date 2022/10/16 13:55
-     * @return org.springframework.security.crypto.password.PasswordEncoder
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 }

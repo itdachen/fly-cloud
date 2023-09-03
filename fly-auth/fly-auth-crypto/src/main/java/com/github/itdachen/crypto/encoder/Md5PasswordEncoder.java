@@ -6,10 +6,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Description:
+ * Description: MD5 加密
  * Created by 王大宸 on 2023/04/30 14:31
  * Created with IntelliJ IDEA.
  */
+@Deprecated
 public class Md5PasswordEncoder implements PasswordEncoder {
 
     private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',

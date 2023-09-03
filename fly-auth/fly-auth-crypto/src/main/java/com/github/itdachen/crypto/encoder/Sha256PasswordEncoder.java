@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 /**
- * Description:
+ * Description: Sha256 加密
  * Created by 王大宸 on 2023/04/30 14:32
  * Created with IntelliJ IDEA.
  */

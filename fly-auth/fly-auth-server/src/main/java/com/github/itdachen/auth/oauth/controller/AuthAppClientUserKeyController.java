@@ -1,13 +1,10 @@
 package com.github.itdachen.auth.oauth.controller;
 
-import com.github.itdachen.auth.oauth.service.IVerifyClientSecretKeyService;
-import com.github.itdachen.framework.cloud.jwt.crypto.AuthTokenSecretKey;
-import com.github.itdachen.framework.cloud.jwt.parse.key.AuthClientTokenSecretKey;
+import com.github.itdachen.framework.cloud.jwt.parse.AuthClientTokenSecretKey;
 import com.github.itdachen.framework.context.annotation.IgnoreUserToken;
 import com.github.itdachen.framework.core.response.ServerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
