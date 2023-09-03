@@ -7,9 +7,6 @@ import com.github.itdachen.framework.cloud.jwt.parse.resolver.UserAuthRestMethod
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -18,18 +15,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 /**
- * Description:
+ * Description: 默认拦截器配置
  * Created by 王大宸 on 2023/05/05 22:11
  * Created with IntelliJ IDEA.
  */
-@Configuration
-public class FlyCloudBootstrapWebMvcConfig implements WebMvcConfigurer {
-    private static final Logger logger = LoggerFactory.getLogger(FlyCloudBootstrapWebMvcConfig.class);
+public class DefaultBootstrapWebMvcConfigurer implements WebMvcConfigurer {
+    private static final Logger logger = LoggerFactory.getLogger(DefaultBootstrapWebMvcConfigurer.class);
     private final IVerifyTicketTokenHelper verifyTicketTokenService;
     private final IRequestPassMatchers requestPassMatchers;
 
-    public FlyCloudBootstrapWebMvcConfig(IVerifyTicketTokenHelper verifyTicketTokenService,
-                                         IRequestPassMatchers requestPassMatchers) {
+    public DefaultBootstrapWebMvcConfigurer(IVerifyTicketTokenHelper verifyTicketTokenService,
+                                            IRequestPassMatchers requestPassMatchers) {
         this.verifyTicketTokenService = verifyTicketTokenService;
         this.requestPassMatchers = requestPassMatchers;
     }
@@ -64,6 +60,13 @@ public class FlyCloudBootstrapWebMvcConfig implements WebMvcConfigurer {
         return new UserAuthRestMethodArgumentResolver();
     }
 
+    /***
+     * token 解析拦截器
+     *
+     * @author 王大宸
+     * @date 2023/9/3 17:30
+     * @return com.github.itdachen.framework.cloud.jwt.parse.interceptor.UserAuthRestInterceptor
+     */
     @Bean
     public UserAuthRestInterceptor authInterceptor() {
         return new UserAuthRestInterceptor(verifyTicketTokenService);

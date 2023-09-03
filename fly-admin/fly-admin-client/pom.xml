@@ -12,7 +12,7 @@
     <artifactId>fly-admin-client</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-    <version>${fly.cloud.version}</version>
+    <version>${fly.cloud.dependencies.version}</version>
     <description>服务客户端</description>
 
 </project>

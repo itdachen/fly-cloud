@@ -12,15 +12,27 @@
     <artifactId>fly-auth-client</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-    <version>${fly.cloud.version}</version>
+    <version>${fly.cloud.dependencies.version}</version>
     <description>微服务鉴权中心客户端</description>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.itdachen.framework</groupId>
+            <artifactId>fly-body-advice</artifactId>
+        </dependency>
+
+        <!-- openfeign 远程服务调用模块 -->
         <dependency>
             <groupId>com.github.itdachen.framework.cloud</groupId>
             <artifactId>fly-cloud-openfeign</artifactId>
         </dependency>
 
+        <!-- token 解析模块 -->
         <dependency>
             <groupId>com.github.itdachen.framework.cloud</groupId>
             <artifactId>fly-cloud-jwt-parse</artifactId>
@@ -33,19 +45,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
-            <artifactId>fly-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
-            <artifactId>fly-body-advice</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-okhttp</artifactId>
         </dependency>
 
         <dependency>

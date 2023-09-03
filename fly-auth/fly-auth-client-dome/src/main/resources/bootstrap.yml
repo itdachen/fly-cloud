@@ -1,0 +1,62 @@
+# 端口配置
+server:
+  port: 8002
+  servlet:
+    context-path: /${spring.application.name}
+
+# 认证中心配置
+fly:
+  cloud:
+    auth:
+      token:
+        type: rsa
+      app:
+        service-id: auth # 认证中心服务名称
+        app-id: ${spring.application.name}
+        app-secret: 123456
+
+
+spring:
+  application:
+    name: auth-client-demo
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  cloud:
+    loadbalancer:
+      # 重试策略
+      retry:
+        maxRetriesOnSameServiceInstance: 0
+        maxRetriesOnNextServiceInstance: 0
+      clients:
+        service-product:
+          retry:
+            maxRetriesOnSameServiceInstance: 0
+            maxRetriesOnNextServiceInstance: 0
+    ## 向 nacos 发起注册
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
+        server-addr: 127.0.0.1:8848
+        namespace: 07656b3c-bb69-470a-a942-6ae27b5287cb
+        group: FLY_GROUP
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS

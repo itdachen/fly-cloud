@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Created with IntelliJ IDEA.
  */
 @FeignClient(value = "${fly.cloud.auth.app.service-id}", configuration = {})
-public interface AuthClientSecretKeyFeign {
+public interface IAuthorizedClientTokenSecretFeign {
 
     @RequestMapping(value = "/auth/client/user/secret/key", method = RequestMethod.GET)
     ServerResponse<String> getSecretPublicKey(@RequestParam("appId") String appId,
                                               @RequestParam("appSecret") String appSecret) throws Exception;
-
 
 }

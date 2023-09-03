@@ -40,11 +40,6 @@
             </dependency>
             <dependency>
                 <groupId>com.github.itdachen</groupId>
-                <artifactId>fly-auth-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-auth-crypto</artifactId>
                 <version>${project.version}</version>
             </dependency>

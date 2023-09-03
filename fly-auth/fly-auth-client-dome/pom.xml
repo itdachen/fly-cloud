@@ -5,20 +5,26 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.itdachen</groupId>
-        <artifactId>fly-cloud</artifactId>
+        <artifactId>fly-auth</artifactId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fly-nacos-client</artifactId>
+    <artifactId>fly-auth-client-dome</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
     <version>${fly.cloud.dependencies.version}</version>
-    <description>服务注册及发现</description>
+    <description>微服务认证客户端 demo</description>
 
     <dependencies>
         <dependency>
             <groupId>com.github.itdachen.framework</groupId>
             <artifactId>fly-runner</artifactId>
+        </dependency>
+
+        <!-- 认证中心客户端 -->
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-auth-client</artifactId>
         </dependency>
 
         <!-- 項目启动容器 -->
@@ -42,22 +48,18 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+
         <!-- 新版本的微服务默认不加载 bootstrap.yml 文件, 需要添加 bootstrap 依赖 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
+
         <!-- 健康检查 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-
 
     </dependencies>
 

@@ -16,14 +16,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- 内部模块 [ fly-framework ] 依赖版本 -->
-        <fly.dependencies.version>1.0.1</fly.dependencies.version>
-
         <!-- 微服务项目依赖统一管理, 与 fly-cloud-dependencies 模块版本号保持一致 -->
         <fly.cloud.dependencies.version>0.0.1</fly.cloud.dependencies.version>
 
-        <!-- 微服务各模块版本号, 微服务版本号变更时, 修改此处 -->
-        <fly.cloud.version>${fly.cloud.dependencies.version}</fly.cloud.version>
     </properties>
 
     <dependencyManagement>

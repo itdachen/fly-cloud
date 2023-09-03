@@ -12,7 +12,7 @@
     <artifactId>fly-auth-crypto</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-    <version>${fly.cloud.version}</version>
+    <version>${fly.cloud.dependencies.version}</version>
     <description>安全认证账号密码加密模块</description>
 
     <dependencies>

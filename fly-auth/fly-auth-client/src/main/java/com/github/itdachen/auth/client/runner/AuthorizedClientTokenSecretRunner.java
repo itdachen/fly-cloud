@@ -1,6 +1,6 @@
 package com.github.itdachen.auth.client.runner;
 
-import com.github.itdachen.auth.client.feign.AuthClientSecretKeyFeign;
+import com.github.itdachen.auth.client.feign.IAuthorizedClientTokenSecretFeign;
 import com.github.itdachen.framework.autoconfigure.cloud.jwt.properties.FlyCloudAppClientProperties;
 import com.github.itdachen.framework.cloud.jwt.parse.key.AuthClientTokenSecretKey;
 import com.github.itdachen.framework.core.response.ServerResponse;
@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 
 /**
@@ -16,19 +15,18 @@ import org.springframework.scheduling.annotation.Scheduled;
  * Created by 王大宸 on 2023/05/01 15:18
  * Created with IntelliJ IDEA.
  */
-@Configuration
-public class FlyAuthClientRunner implements CommandLineRunner {
-    private static final Logger logger = LoggerFactory.getLogger(FlyAuthClientRunner.class);
+public class AuthorizedClientTokenSecretRunner implements CommandLineRunner {
+    private static final Logger logger = LoggerFactory.getLogger(AuthorizedClientTokenSecretRunner.class);
 
     @Autowired
     private AuthClientTokenSecretKey authClientTokenSecretKey;
 
-    private final AuthClientSecretKeyFeign serviceAuthFeign;
+    private final IAuthorizedClientTokenSecretFeign clientTokenSecretFeign;
     private final FlyCloudAppClientProperties appClientProperties;
 
-    public FlyAuthClientRunner(AuthClientSecretKeyFeign serviceAuthFeign,
-                               FlyCloudAppClientProperties appClientProperties) {
-        this.serviceAuthFeign = serviceAuthFeign;
+    public AuthorizedClientTokenSecretRunner(IAuthorizedClientTokenSecretFeign clientTokenSecretFeign,
+                                             FlyCloudAppClientProperties appClientProperties) {
+        this.clientTokenSecretFeign = clientTokenSecretFeign;
         this.appClientProperties = appClientProperties;
     }
 
@@ -52,14 +50,13 @@ public class FlyAuthClientRunner implements CommandLineRunner {
      */
     @Scheduled(cron = "0 0/1 * * * ?")
     public void refreshUserSecretKey() throws Exception {
-        ServerResponse<String> response = serviceAuthFeign.getSecretPublicKey(
+        ServerResponse<String> res = clientTokenSecretFeign.getSecretPublicKey(
                 appClientProperties.getAppId(),
                 appClientProperties.getAppSecret()
         );
-        if (response.getSuccess()) {
-            this.authClientTokenSecretKey.setTokenPublicKey(response.getData());
+        if (res.getSuccess()) {
+            this.authClientTokenSecretKey.setTokenPublicKey(res.getData());
         }
     }
-
 
 }
