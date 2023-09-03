@@ -1,0 +1,33 @@
+package com.github.itdachen.gateway.error;
+
+import com.github.itdachen.gateway.utils.MsgBodyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
+import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.server.ServerRequest;
+
+import java.util.Map;
+
+/**
+ * Description: 全局异常
+ * Created by 王大宸 on 2023-09-03 22:12
+ * Created with IntelliJ IDEA.
+ */
+@Component
+public class GlobalErrorAttributes extends DefaultErrorAttributes {
+    private static final Logger logger = LoggerFactory.getLogger(GlobalErrorAttributes.class);
+
+    @Override
+    public Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
+        Throwable error = super.getError(request);
+
+        logger.error("网关处理异常", error);
+
+        return MsgBodyUtils.resMsg(HttpStatus.BAD_REQUEST.value(), error.getMessage());
+
+    }
+
+}
