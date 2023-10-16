@@ -1,98 +1,95 @@
 <template>
   <lay-container fluid="true" style="padding: 10px">
-    <lay-row space="10">
-      <lay-col span="24">
+    <lay-row :space="10">
+
+      <lay-col :md="24">
         <lay-card>
-          <lay-table :columns="columns" id="id"  skin="line"
-                     :dataSource="dataSource"
-                     v-model:selectedKeys="selectedKeys"
-                     :checkbox="checkbox"
-                     :default-toolbar="defaultToolbar">
-            <!--  @row="rowClick" -->
-            <template v-slot:toolbar>
-              <div class="fly-tool-head">
-                <div class="fly-head-search">
-                  <lay-form-item mode="inline" class="fly-head-form-item">
-                    <lay-select v-model="value" placeholder="请选择">
-                      <lay-select-option :value="1" label="学习"></lay-select-option>
-                      <lay-select-option :value="2" label="编码"></lay-select-option>
-                      <lay-select-option :value="3" label="运动"></lay-select-option>
-                    </lay-select>
-                  </lay-form-item>
-                  <lay-form-item mode="inline" class="fly-head-form-item">
-                    <lay-input placeholder="请输入姓名"></lay-input>
-                  </lay-form-item>
-                  <lay-button size="sm" prefix-icon="layui-icon-search" class="fly-search-button">查询</lay-button>
-                  <lay-button size="sm" prefix-icon="layui-icon-addition" class="fly-add-button" @click="saveButton">
-                    新增
+          <lay-form size="sm" style="margin-top: 20px">
+            <lay-row>
+              <lay-col :md="3">
+                <lay-form-item label="账号：" label-width="50">
+                  <lay-input></lay-input>
+                </lay-form-item>
+              </lay-col>
+              <lay-col :md="3">
+                <lay-form-item label="邮箱：" label-width="50">
+                  <lay-input></lay-input>
+                </lay-form-item>
+              </lay-col>
+              <lay-col :md="6" style="margin-left: 20px">
+                <lay-form-item label-width="0">
+                  <lay-button type="normal" size="sm"
+                              prefix-icon="layui-icon-search">查询
                   </lay-button>
-                </div>
-              </div>
+                  <lay-button type="normal" size="sm"
+                              prefix-icon="layui-icon-refresh">重置
+                  </lay-button>
+                  <lay-button type="normal" size="sm"
+                              prefix-icon="layui-icon-export">导出
+                  </lay-button>
+                </lay-form-item>
+              </lay-col>
+            </lay-row>
+          </lay-form>
+        </lay-card>
+      </lay-col>
+
+
+      <lay-col :md="24">
+        <lay-card>
+          <!--    @row="rowClick" -->
+          <lay-table :columns="columns" skin="line"
+                     :dataSource="dataSource"
+                     :default-toolbar="defaultToolbar"
+                     v-model:selectedKeys="selectedKeys"
+                     @change="change">
+            <template v-slot:toolbar>
+              <lay-button size="sm" type="primary" class="fly-button fly-toolbar-add" prefix-icon="layui-icon-addition">
+                新增
+              </lay-button>
+              <lay-button size="sm" type="danger" class="fly-button fly-remove-button" prefix-icon="layui-icon-delete">
+                删除
+              </lay-button>
             </template>
             <template v-slot:operator="{data}">
               <lay-button size="sm" type="normal" prefix-icon="layui-icon-list"
-                          class="fly-tool-button fly-view-button"
+                          class="fly-button fly-tool-button fly-view-button"
                           @click="viewHandler(data)">查看
               </lay-button>
               <lay-button size="sm" type="warm" prefix-icon="layui-icon-edit"
-                          class="fly-tool-button fly-edit-button">编辑
+                          class="fly-button fly-tool-button fly-edit-button">编辑
               </lay-button>
               <lay-button size="sm" type="danger" prefix-icon="layui-icon-delete"
-                          class="fly-tool-button  fly-remove-button">删除
+                          class="fly-button fly-tool-button  fly-remove-button">删除
               </lay-button>
             </template>
           </lay-table>
-          <lay-page v-model="current5" v-model:limit="limit5" :pages="pages5" :total="total5"
+
+          <lay-page v-model="current5"
+                    v-model:limit="limit5"
+                    :pages="pages5"
+                    :total="total5"
                     :show-count="true" :show-page="true"
                     :show-limit="true" :show-refresh="true"
                     :limits="limits3"
-                    :showSkip="true" @change="change5" theme="blue"></lay-page>
+                    :showSkip="true"
+                    @change="change5" theme="blue"></lay-page>
+
         </lay-card>
       </lay-col>
     </lay-row>
   </lay-container>
-
-  <!--  :area="['800px', '500px']" -->
-  <lay-layer title="编辑" v-model="visible11" :maxmin="true"
-             :shade="true" :btn="action11">
-    <div style="padding: 20px;">
-      <lay-form :model="model11" ref="layFormRef11" required>
-        <lay-form-item label="账户" prop="username">
-          <lay-input v-model="model11.username"></lay-input>
-        </lay-form-item>
-        <lay-form-item label="密码" prop="password">
-          <lay-input v-model="model11.password" type="password">></lay-input>
-        </lay-form-item>
-        <lay-form-item label="爱好" prop="hobby">
-          <lay-select v-model="model11.hobby" multiple style="width:100%;">
-            <lay-select-option value="1" label="学习"></lay-select-option>
-            <lay-select-option value="2" label="编码"></lay-select-option>
-            <lay-select-option value="3" label="运动"></lay-select-option>
-          </lay-select>
-        </lay-form-item>
-        <lay-form-item label="特长" prop="specialty">
-          <lay-radio v-model="model11.specialty" name="specialty" value="1">写作</lay-radio>
-          <lay-radio v-model="model11.specialty" name="specialty" value="2">画画</lay-radio>
-          <lay-radio v-model="model11.specialty" name="specialty" value="3">编码</lay-radio>
-        </lay-form-item>
-        <lay-form-item label="描述" prop="desc">
-          <lay-textarea placeholder="请输入描述" v-model="model11.desc"></lay-textarea>
-        </lay-form-item>
-      </lay-form>
-    </div>
-  </lay-layer>
-
 </template>
 
 <script lang="ts" setup>
-import {ref, reactive} from 'vue'
-import {layer} from '@layui/layui-vue'
+import {ref, watch} from "vue";
+import {layer} from "@layui/layer-vue";
 
-const value = ref(null);
 
 const selectedKeys = ref(["1"]);
 const checkbox = ref(true);
 const defaultToolbar = ref(true);
+// const page = ref({total: 100, limit: 10, current: 2});
 
 
 const limit5 = ref(10)
@@ -113,15 +110,22 @@ const change5 = ({current, limit}) => {
 
 const columns = [
   {
+    title: "复选",
+    width: "50px",
+    type: "checkbox",
+    fixed: "left",
+  },
+  {
     title: "账户",
     width: "200px",
+    // customSlot: "username",
     key: "username",
     align: 'center',
-    ellipsisTooltip: true
   },
   {
     title: "密码",
     width: "180px",
+    // customSlot: "password",
     key: "password",
     align: 'center',
   },
@@ -129,80 +133,140 @@ const columns = [
     title: "年龄",
     width: "180px",
     key: "age",
+  },
+  {
+    title: "描述",
+    key: "remark",
     align: 'center',
+    ellipsisTooltip: true,
   },
   {
     title: "操作",
-    width: "180px",
+    width: "300px",
     customSlot: "operator",
     key: "operator",
     align: 'center',
+    fixed: "right",
   },
 ];
 
 const dataSource = [
   {
     id: "1",
-    username: "rootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootrootroot",
-    password: "root",
-    age: "18"
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
   },
-  {id: "2", username: "woow", password: "woow", age: "20"},
-  {id: "3", username: "woow2", password: "woow", age: "20"},
-  {id: "4", username: "woow3", password: "woow", age: "20"},
+  {
+    id: "2",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
+  {
+    id: "3",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
+  {
+    id: "4",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
+  {
+    id: "5",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
+  {
+    id: "6",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
+  {
+    id: "7",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
+  {
+    id: "8",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
+  {
+    id: "9",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
+  {
+    id: "10",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
+  {
+    id: "11",
+    username: "shana",
+    password: "夏娜",
+    remark: "花开堪折直须折,莫待无花空折枝",
+    age: "22",
+  },
 ];
 
-// const rowClick = function (data: any) {
-//   console.log(JSON.stringify(data));
-// };
+const rowClick = function (data: any) {
+  console.log(JSON.stringify(data));
+};
 
-// const rowDoubleClick = function (data: any) {
-//   console.log(JSON.stringify(data));
-// };
+const rowDoubleClick = function (data: any) {
+  console.log(JSON.stringify(data));
+};
+
+const change = function ({current, limit}: any) {
+  layer.msg("current:" + current + " limit:" + limit);
+};
 
 
 const viewHandler = (data: any) => {
-  console.log('viewHandler data', data.id)
+  console.log('viewHandler data', data)
 }
-
-
-/** 弹窗 *****/
-
-const saveButton = () => {
-  visible11.value = !visible11.value;
-}
-
-const model11 = reactive({
-  username: "admin"
-})
-
-const layFormRef11 = ref();
-
-const visible11 = ref(false);
-
-const changeVisible11 = () => {
-  visible11.value = !visible11.value;
-}
-
-const action11 = ref([
-  {
-    text: "确认",
-    callback: () => {
-      layer.confirm("确认操作", {shade: false});
-    }
-  },
-  {
-    text: "取消",
-    callback: () => {
-      layer.confirm("取消操作", {shade: false});
-    }
-  }
-])
 
 
 </script>
 
+
 <style>
+
+
+.fly-button {
+  height: 30px;
+  width: auto;
+  border-radius: 3px;
+  margin-top: 5px;
+  font-weight: 400;
+  line-height: 30px;
+  color: #ffffff;
+  padding: 0 12px 0 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
 
 .fly-tool-head {
   display: flex;
@@ -211,6 +275,15 @@ const action11 = ref([
 
 .fly-head-left {
   float: left !important;
+}
+
+.fly-toolbar-add {
+  background-color: #1E9FFF;
+  border-color: #31BDEC;
+}
+
+.fly-toolbar-add:hover {
+  background-color: #31BDEC;
 }
 
 .fly-head-form-item {
@@ -234,21 +307,6 @@ const action11 = ref([
   white-space: normal;
 }
 
-.fly-add-button {
-  color: #ffffff;
-  border-radius: 3px;
-  background-color: #1E9FFF;
-  border-color: #31BDEC;
-  margin-top: 5px;
-  width: 75px;
-  height: 36px !important;
-  line-height: 36px !important;
-}
-
-.fly-add-button:hover {
-  background-color: #31BDEC;
-}
-
 .fly-search-button {
   margin-top: 5px;
   border-radius: 3px;
@@ -267,14 +325,7 @@ const action11 = ref([
 }
 
 .fly-tool-button {
-  height: 30px;
-  width: auto;
   display: inline-block;
-  padding: 2px 12px 2px 10px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.42857143;
-  text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   -ms-touch-action: manipulation;
@@ -285,8 +336,6 @@ const action11 = ref([
   -ms-user-select: none;
   user-select: none;
   background-image: none;
-  border-radius: 3px;
-  color: #ffffff !important;
   background-color: #1E9FFF;
   border: 1px solid #1E9FFF;
   background-repeat: no-repeat;

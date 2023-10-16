@@ -7,7 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    LayBadge: typeof import('@layui/layui-vue')['LayBadge']
     LayBody: typeof import('@layui/layui-vue')['LayBody']
     LayBreadcrumb: typeof import('@layui/layui-vue')['LayBreadcrumb']
     LayBreadcrumbItem: typeof import('@layui/layui-vue')['LayBreadcrumbItem']
@@ -17,8 +16,6 @@ declare module '@vue/runtime-core' {
     LayCol: typeof import('@layui/layui-vue')['LayCol']
     LayConfigProvider: typeof import('@layui/layui-vue')['LayConfigProvider']
     LayContainer: typeof import('@layui/layui-vue')['LayContainer']
-    LayCountUp: typeof import('@layui/layui-vue')['LayCountUp']
-    LayDatePicker: typeof import('@layui/layui-vue')['LayDatePicker']
     LayDropdown: typeof import('@layui/layui-vue')['LayDropdown']
     LayDropdownMenu: typeof import('@layui/layui-vue')['LayDropdownMenu']
     LayDropdownMenuItem: typeof import('@layui/layui-vue')['LayDropdownMenuItem']
@@ -36,8 +33,8 @@ declare module '@vue/runtime-core' {
     LayMenu: typeof import('@layui/layui-vue')['LayMenu']
     LayMenuItem: typeof import('@layui/layui-vue')['LayMenuItem']
     LayPage: typeof import('@layui/layui-vue')['LayPage']
-    LayProgress: typeof import('@layui/layui-vue')['LayProgress']
     LayRadio: typeof import('@layui/layui-vue')['LayRadio']
+    LayResult: typeof import('@layui/layui-vue')['LayResult']
     LayRow: typeof import('@layui/layui-vue')['LayRow']
     LayScroll: typeof import('@layui/layui-vue')['LayScroll']
     LaySelect: typeof import('@layui/layui-vue')['LaySelect']
@@ -49,9 +46,6 @@ declare module '@vue/runtime-core' {
     LayTabItem: typeof import('@layui/layui-vue')['LayTabItem']
     LayTable: typeof import('@layui/layui-vue')['LayTable']
     LayTextarea: typeof import('@layui/layui-vue')['LayTextarea']
-    LayTimeline: typeof import('@layui/layui-vue')['LayTimeline']
-    LayTimelineItem: typeof import('@layui/layui-vue')['LayTimelineItem']
-    LayTreeSelect: typeof import('@layui/layui-vue')['LayTreeSelect']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
