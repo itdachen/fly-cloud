@@ -16,10 +16,6 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!-- 主框架依赖 -->
-        <fly.dependencies.version>1.0.1</fly.dependencies.version>
-
     </properties>
 
     <dependencyManagement>
@@ -27,7 +23,7 @@
             <dependency>
                 <groupId>com.github.itdachen.framework</groupId>
                 <artifactId>fly-dependencies</artifactId>
-                <version>${fly.dependencies.version}</version>
+                <version>1.0.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -41,6 +37,11 @@
             <dependency>
                 <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-auth-crypto</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.itdachen</groupId>
+                <artifactId>fly-auth-interface</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- 认证中心 END -->

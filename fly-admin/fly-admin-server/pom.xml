@@ -17,15 +17,13 @@
 
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-auth-client</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.github.itdachen.framework</groupId>
             <artifactId>fly-runner</artifactId>
         </dependency>
+
+
         <!-- 項目启动容器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,10 +40,14 @@
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
 
-        <!-- token 加解密 -->
         <dependency>
-            <groupId>com.github.itdachen.framework.cloud</groupId>
-            <artifactId>fly-cloud-jwt-parse</artifactId>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-auth-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
@@ -129,10 +131,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-openfeign-core</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-openfeign-core</artifactId>-->
+<!--        </dependency>-->
 
     </dependencies>
 

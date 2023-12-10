@@ -15,10 +15,6 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!-- 微服务项目依赖统一管理, 与 fly-cloud-dependencies 模块版本号保持一致 -->
-        <fly.cloud.dependencies.version>0.0.1</fly.cloud.dependencies.version>
-
     </properties>
 
     <dependencyManagement>
@@ -26,7 +22,7 @@
             <dependency>
                 <groupId>com.github.itdachen.cloud</groupId>
                 <artifactId>fly-cloud-dependencies</artifactId>
-                <version>${fly.cloud.dependencies.version}</version>
+                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

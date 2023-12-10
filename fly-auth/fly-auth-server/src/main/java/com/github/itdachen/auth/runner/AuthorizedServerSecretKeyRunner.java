@@ -5,11 +5,13 @@ import com.github.itdachen.framework.cloud.jwt.crypto.SecretKeyHelper;
 import com.github.itdachen.framework.cloud.jwt.crypto.constants.JwtRedisKeyConstants;
 import com.github.itdachen.framework.cloud.jwt.crypto.key.JwtSecretKey;
 import com.github.itdachen.framework.cloud.jwt.parse.AuthClientTokenSecretKey;
+import com.github.itdachen.framework.core.response.ServerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -37,6 +39,18 @@ public class AuthorizedServerSecretKeyRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        refreshUserSecretKey();
+    }
+
+    /***
+    * 每一分钟同步一次, 防止其他认证中心初始化加解密信息
+    *
+    * @author 王大宸
+    * @date 2023/12/10 21:00
+    * @return void
+    */
+    @Scheduled(cron = "0 0/1 * * * ?")
+    public void refreshUserSecretKey() throws Exception {
         logger.info("初始化加载用户 secret key ...");
         String publicKey = "";
         if (Boolean.TRUE.equals(redisTemplate.hasKey(JwtRedisKeyConstants.USER_PRI_KEY))

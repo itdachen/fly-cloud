@@ -1,6 +1,7 @@
 package com.github.itdachen.auth;
 
 import com.github.itdachen.framework.boot.runner.SpringBootBootstrap;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -13,6 +14,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * Created by 王大宸 on 2023/04/30 13:06
  * Created with IntelliJ IDEA.
  */
+@EnableDubbo
 @RefreshScope // 动态刷新配置
 @EnableScheduling // 定时任务
 @SpringBootApplication

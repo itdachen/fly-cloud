@@ -26,12 +26,6 @@
             <artifactId>fly-body-advice</artifactId>
         </dependency>
 
-        <!-- openfeign 远程服务调用模块, openfeign 封装, RestTemplate 封装 -->
-        <dependency>
-            <groupId>com.github.itdachen.framework.cloud</groupId>
-            <artifactId>fly-cloud-openfeign</artifactId>
-        </dependency>
-
         <!-- token 解析模块 -->
         <dependency>
             <groupId>com.github.itdachen.framework.cloud</groupId>
@@ -50,6 +44,15 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-openfeign-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-auth-interface</artifactId>
         </dependency>
 
     </dependencies>

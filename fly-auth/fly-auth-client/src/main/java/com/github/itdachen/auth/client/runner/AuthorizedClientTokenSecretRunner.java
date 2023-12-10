@@ -1,9 +1,10 @@
 package com.github.itdachen.auth.client.runner;
 
-import com.github.itdachen.auth.client.feign.IAuthorizedClientTokenSecretFeign;
+import com.github.itdachen.auth.interfaces.client.IAuthClientTokenSecretRpc;
 import com.github.itdachen.framework.autoconfigure.cloud.jwt.properties.FlyCloudAppClientProperties;
 import com.github.itdachen.framework.cloud.jwt.parse.AuthClientTokenSecretKey;
 import com.github.itdachen.framework.core.response.ServerResponse;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ public class AuthorizedClientTokenSecretRunner implements CommandLineRunner {
     @Autowired
     private AuthClientTokenSecretKey authClientTokenSecretKey;
 
-    private final IAuthorizedClientTokenSecretFeign clientTokenSecretFeign;
+    @DubboReference // 远程调用
+    private IAuthClientTokenSecretRpc clientTokenSecretRpc;
+
     private final FlyCloudAppClientProperties appClientProperties;
 
-    public AuthorizedClientTokenSecretRunner(IAuthorizedClientTokenSecretFeign clientTokenSecretFeign,
-                                             FlyCloudAppClientProperties appClientProperties) {
-        this.clientTokenSecretFeign = clientTokenSecretFeign;
+    public AuthorizedClientTokenSecretRunner(FlyCloudAppClientProperties appClientProperties) {
         this.appClientProperties = appClientProperties;
     }
 
@@ -50,12 +51,14 @@ public class AuthorizedClientTokenSecretRunner implements CommandLineRunner {
      */
     @Scheduled(cron = "0 0/1 * * * ?")
     public void refreshUserSecretKey() throws Exception {
-        ServerResponse<String> res = clientTokenSecretFeign.getSecretPublicKey(
-                appClientProperties.getAppId(),
-                appClientProperties.getAppSecret()
-        );
-        if (res.getSuccess()) {
-            this.authClientTokenSecretKey.setTokenPublicKey(res.getData());
+        try {
+            ServerResponse<String> secretPublicKey = clientTokenSecretRpc.getSecretPublicKey(
+                    appClientProperties.getAppId(),
+                    appClientProperties.getAppSecret()
+            );
+            this.authClientTokenSecretKey.setTokenPublicKey(secretPublicKey.getData());
+        } catch (Exception e) {
+            logger.error("初始化 public key 失败, 1 分钟后自动重试!", e);
         }
     }
 

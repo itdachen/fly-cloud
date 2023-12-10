@@ -149,7 +149,7 @@ hystrix:
 
 # mybatis
 mybatis:
-  type-aliases-package: cn.edu.hubu.**.vo
+  type-aliases-package: com.github.itdachen.**.vo
   mapperLocations: classpath*:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true

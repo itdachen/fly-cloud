@@ -52,17 +52,17 @@ spring:
     #    inetutils:
     #      preferred-networks: 127.0.0.1
     ## 向 nacos 发起注册
-    nacos:
-      discovery:
-        username: nacos
-        password: nacos
-        enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
-        server-addr: 127.0.0.1:8848
-        namespace: 07656b3c-bb69-470a-a942-6ae27b5287cb
-        group: FLY_GROUP
-        metadata:
-          management:
-            context-path: ${server.servlet.context-path}/actuator
+#    nacos:
+#      discovery:
+#        username: nacos
+#        password: nacos
+#        enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
+#        server-addr: 127.0.0.1:8848
+#        namespace: 07656b3c-bb69-470a-a942-6ae27b5287cb
+#        group: FLY_GROUP
+#        metadata:
+#          management:
+#            context-path: ${server.servlet.context-path}/actuator
   #          preserved:
   #            heart:
   #              beat:
@@ -96,39 +96,6 @@ spring:
       connectionProperties: druid:stat:mergeSql=true;druid:stat:slowSqlMillis=5000
       ########### 启用内置过滤器（第一个 stat必须，否则监控不到SQL）##########
       filters: stat,wall,log4j2
-      # 自己配置监控统计拦截的filter
-      filter:
-        # 开启druiddatasource的状态监控
-        stat:
-          enabled: true
-          db-type: oracle
-          # 开启慢sql监控，超过2s 就认为是慢sql，记录到日志中
-          log-slow-sql: true
-          slow-sql-millis: 2000
-        # 日志监控，使用slf4j 进行日志输出
-        slf4j:
-          enabled: true
-          statement-log-error-enabled: true
-          statement-create-after-log-enabled: false
-          statement-close-after-log-enabled: false
-          result-set-open-after-log-enabled: false
-          result-set-close-after-log-enabled: false
-      ########## 配置WebStatFilter，用于采集web关联监控的数据 ##########
-      web-stat-filter:
-        enabled: true                   # 启动 StatFilter
-        url-pattern: /*                 # 过滤所有url
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" # 排除一些不必要的url
-        session-stat-enable: true       # 开启session统计功能
-        session-stat-max-count: 1000    # session的最大个数,默认100
-      ########## 配置StatViewServlet（监控页面），用于展示Druid的统计信息 ##########
-      stat-view-servlet:
-        enabled: true                   # 启用StatViewServlet
-        url-pattern: /biz/druid/*           # 访问内置监控页面的路径，内置监控页面的首页是/druid/index.html
-        reset-enable: false              # 不允许清空统计数据,重新计算
-        login-username: root            # 配置监控页面访问密码
-        login-password: 123
-        allow: 127.0.0.1           # 允许访问的地址，如果allow没有配置或者为空，则允许所有访问
-        # deny:                      # 拒绝访问的地址，deny优先于allow，如果在deny列表中，就算在allow列表中，也会被拒绝
 
 
   thymeleaf:
@@ -189,7 +156,7 @@ hystrix:
 
 # mybatis
 mybatis:
-  type-aliases-package: cn.edu.hubu.**.vo
+  type-aliases-package: com.github.itdachen.**.vo
   mapperLocations: classpath*:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
@@ -232,3 +199,8 @@ seata:
       dataId: seataServer.properties # #配置自己的 dataId,由于搭建服务端时把客户端的配置也写在了seataServer.properties,所以这里用了和服务端一样的配置文件,实际客户端和服务端的配置文件分离出来更好
       namespace: 33c3c9ef-0158-4b06-a4db-fbdb49c8f8cf #改为自己的 nacos 的 namespace,这里填写的是刚才创建seata命名空间的id
 
+dubbo:
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: nacos://127.0.0.1:8848?namespace=07656b3c-bb69-470a-a942-6ae27b5287cb&&username=nacos&&password=nacos&&group=FLY_GROUP

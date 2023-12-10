@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @IgnoreUserToken // 不需要 token 校验
 @RequestMapping(value = "/client")
+@Deprecated
 public class AuthAppClientUserKeyController {
     private static final Logger logger = LoggerFactory.getLogger(AuthAppClientUserKeyController.class);
 

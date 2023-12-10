@@ -20,7 +20,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableAuthClient
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients({"com.github.itdachen"})
+//@EnableFeignClients({"com.github.itdachen"})
 @ComponentScan(basePackages = {"com.github.itdachen"})
 @MapperScan(basePackages = "com.github.itdachen.admin.**.mapper")
 public class AdminBootstrap {
