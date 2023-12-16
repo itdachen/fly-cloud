@@ -12,7 +12,6 @@
     <artifactId>fly-auth-server</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-    <version>${fly.cloud.dependencies.version}</version>
     <description>微服务鉴权中心服务端</description>
 
 

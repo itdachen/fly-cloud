@@ -6,9 +6,11 @@ server:
 # 日志配置
 logging:
   config: classpath:fly-cloud.xml
- # level:
-   # com.github.itdachen: info
-   # cn.jay.repository: trace
+  # 日志级别 trace < debug < info < warn < error < fatal
+  level:
+    com.github.itdachen: INFO
+    cn.jay.repository: trace
+    org.springframework.web: error
 
 spring:
   application:

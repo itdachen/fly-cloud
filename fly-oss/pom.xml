@@ -12,7 +12,6 @@
     <artifactId>fly-oss</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-    <version>${fly.cloud.dependencies.version}</version>
     <description>文件上传模块</description>
 
     <properties>

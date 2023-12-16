@@ -196,8 +196,9 @@ seata:
 dubbo:
   application:
     name: ${spring.application.name}
+    qos-enable: false
   registry:
-    address: nacos://127.0.0.1:8848?namespace=07656b3c-bb69-470a-a942-6ae27b5287cb&&username=nacos&&password=nacos&&group=FLY_GROUP
+    address: nacos://127.0.0.1:8848?namespace=07656b3c-bb69-470a-a942-6ae27b5287cb&&username=nacos&&password=nacos&&group=FLY_RPC
   protocol:
     name: dubbo
-    port: 9091
+    port: -1

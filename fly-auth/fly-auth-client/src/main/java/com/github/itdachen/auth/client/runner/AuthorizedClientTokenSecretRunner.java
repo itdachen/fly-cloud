@@ -51,15 +51,11 @@ public class AuthorizedClientTokenSecretRunner implements CommandLineRunner {
      */
     @Scheduled(cron = "0 0/1 * * * ?")
     public void refreshUserSecretKey() throws Exception {
-        try {
-            ServerResponse<String> secretPublicKey = clientTokenSecretRpc.getSecretPublicKey(
-                    appClientProperties.getAppId(),
-                    appClientProperties.getAppSecret()
-            );
-            this.authClientTokenSecretKey.setTokenPublicKey(secretPublicKey.getData());
-        } catch (Exception e) {
-            logger.error("初始化 public key 失败, 1 分钟后自动重试!", e);
-        }
+        ServerResponse<String> secretPublicKey = clientTokenSecretRpc.getSecretPublicKey(
+                appClientProperties.getAppId(),
+                appClientProperties.getAppSecret()
+        );
+        this.authClientTokenSecretKey.setTokenPublicKey(secretPublicKey.getData());
     }
 
 }

@@ -199,8 +199,18 @@ seata:
       dataId: seataServer.properties # #配置自己的 dataId,由于搭建服务端时把客户端的配置也写在了seataServer.properties,所以这里用了和服务端一样的配置文件,实际客户端和服务端的配置文件分离出来更好
       namespace: 33c3c9ef-0158-4b06-a4db-fbdb49c8f8cf #改为自己的 nacos 的 namespace,这里填写的是刚才创建seata命名空间的id
 
+#表示要订阅服务的服务名，可以配置'*'代表订阅所有服务（不推荐使用）。若需订阅多应用，使用","分割。
+
+
+
 dubbo:
   application:
     name: ${spring.application.name}
+    qos-enable: false
+  #Dubbo服务暴露的协议配置，其中子属性 name 为协议名称，port为协议端口（-1 表示自增端口，从 20880 开始, 65535 结束）
+  #因为项目中存在多个服务提供端比如商品服务、会员服务等，这里为了方便设置为了-1
+  protocol:
+    name: dubbo
+    port: -1
   registry:
-    address: nacos://127.0.0.1:8848?namespace=07656b3c-bb69-470a-a942-6ae27b5287cb&&username=nacos&&password=nacos&&group=FLY_GROUP
+    address: nacos://127.0.0.1:8848?namespace=07656b3c-bb69-470a-a942-6ae27b5287cb&&username=nacos&&password=nacos&&group=FLY_RPC

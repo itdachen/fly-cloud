@@ -12,7 +12,6 @@
     <artifactId>fly-nacos-client</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-    <version>${fly.cloud.dependencies.version}</version>
     <description>服务注册及发现</description>
 
     <dependencies>
