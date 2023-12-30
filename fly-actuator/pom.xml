@@ -16,11 +16,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-runner</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-context</artifactId>
         </dependency>
 

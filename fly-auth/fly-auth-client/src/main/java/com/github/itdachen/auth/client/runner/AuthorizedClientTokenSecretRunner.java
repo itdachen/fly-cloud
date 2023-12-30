@@ -1,8 +1,10 @@
 package com.github.itdachen.auth.client.runner;
 
+import com.github.itdachen.auth.interfaces.TokenUserPubKey;
 import com.github.itdachen.auth.interfaces.client.IAuthClientTokenSecretRpc;
-import com.github.itdachen.framework.autoconfigure.cloud.jwt.properties.FlyCloudAppClientProperties;
-import com.github.itdachen.framework.cloud.jwt.parse.AuthClientTokenSecretKey;
+import com.github.itdachen.boot.autoconfigure.cloud.jwt.properties.CloudAppClientProperties;
+import com.github.itdachen.cloud.jwt.IVerifyTicketPublicKeyHelper;
+import com.github.itdachen.cloud.jwt.parse.TokenPublicKey;
 import com.github.itdachen.framework.core.response.ServerResponse;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.slf4j.Logger;
@@ -10,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.Scheduled;
+
+import java.security.PublicKey;
 
 /**
  * Description: 同步 token 解析公钥
@@ -20,14 +24,16 @@ public class AuthorizedClientTokenSecretRunner implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(AuthorizedClientTokenSecretRunner.class);
 
     @Autowired
-    private AuthClientTokenSecretKey authClientTokenSecretKey;
+    private TokenPublicKey tokenPublicKey;
+    @Autowired
+    private IVerifyTicketPublicKeyHelper verifyTicketPublicKeyHelper;
 
     @DubboReference // 远程调用
     private IAuthClientTokenSecretRpc clientTokenSecretRpc;
 
-    private final FlyCloudAppClientProperties appClientProperties;
+    private final CloudAppClientProperties appClientProperties;
 
-    public AuthorizedClientTokenSecretRunner(FlyCloudAppClientProperties appClientProperties) {
+    public AuthorizedClientTokenSecretRunner(CloudAppClientProperties appClientProperties) {
         this.appClientProperties = appClientProperties;
     }
 
@@ -51,11 +57,16 @@ public class AuthorizedClientTokenSecretRunner implements CommandLineRunner {
      */
     @Scheduled(cron = "0 0/1 * * * ?")
     public void refreshUserSecretKey() throws Exception {
-        ServerResponse<String> secretPublicKey = clientTokenSecretRpc.getSecretPublicKey(
+        ServerResponse<TokenUserPubKey> secretPublicKey = clientTokenSecretRpc.getSecretPublicKey(
                 appClientProperties.getAppId(),
                 appClientProperties.getAppSecret()
         );
-        this.authClientTokenSecretKey.setTokenPublicKey(secretPublicKey.getData());
+
+        TokenUserPubKey pubKey = secretPublicKey.getData();
+
+        PublicKey publicKey = verifyTicketPublicKeyHelper.publicKey(pubKey.getUserPubKey(), pubKey.getAlgorithm());
+
+        this.tokenPublicKey.setPublicKey(publicKey);
     }
 
 }

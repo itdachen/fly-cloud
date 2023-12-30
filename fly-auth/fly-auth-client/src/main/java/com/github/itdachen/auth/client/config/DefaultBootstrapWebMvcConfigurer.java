@@ -1,9 +1,9 @@
 package com.github.itdachen.auth.client.config;
 
-import com.github.itdachen.framework.cloud.jwt.parse.IVerifyTicketTokenHelper;
-import com.github.itdachen.framework.cloud.jwt.parse.interceptor.UserAuthRestInterceptor;
-import com.github.itdachen.framework.cloud.jwt.parse.matchers.IRequestPassMatchers;
-import com.github.itdachen.framework.cloud.jwt.parse.resolver.UserAuthRestMethodArgumentResolver;
+import com.github.itdachen.cloud.jwt.IVerifyTicketTokenHelper;
+import com.github.itdachen.cloud.jwt.parse.interceptor.UserAuthRestInterceptor;
+import com.github.itdachen.cloud.jwt.parse.matchers.IRequestPassMatchers;
+import com.github.itdachen.cloud.jwt.parse.resolver.UserAuthRestMethodArgumentResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;

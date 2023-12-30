@@ -1,7 +1,7 @@
 package com.github.itdachen.auth.verify.service.impl;
 
+import com.github.itdachen.boot.rbac.jdbc.AbstractPermissionJdbcService;
 import com.github.itdachen.framework.context.permission.PermissionInfo;
-import com.github.itdachen.framework.rbac.jdbc.AbstractPermissionJdbcService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

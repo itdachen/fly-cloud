@@ -1,5 +1,6 @@
 package com.github.itdachen.auth.interfaces.client;
 
+import com.github.itdachen.auth.interfaces.TokenUserPubKey;
 import com.github.itdachen.framework.core.response.ServerResponse;
 
 /**
@@ -10,6 +11,6 @@ import com.github.itdachen.framework.core.response.ServerResponse;
  */
 public interface IAuthClientTokenSecretRpc {
 
-    ServerResponse<String> getSecretPublicKey(String appId, String appSecret) throws Exception;
+    ServerResponse<TokenUserPubKey> getSecretPublicKey(String appId, String appSecret) throws Exception;
 
 }

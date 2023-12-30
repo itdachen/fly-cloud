@@ -25,7 +25,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-runner</artifactId>
         </dependency>
 
@@ -37,15 +37,18 @@
 
         <!-- 动态网关 -->
         <dependency>
-            <groupId>com.github.itdachen.framework.cloud</groupId>
-            <artifactId>fly-cloud-gateway-dynamic-routes</artifactId>
+<!--            <groupId>com.github.itdachen.framework.cloud</groupId>-->
+<!--            <artifactId>fly-cloud-gateway-dynamic-routes</artifactId>-->
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>spring-cloud-gateway-dynamic-routes</artifactId>
+            <version>1.0.3</version>
         </dependency>
 
         <!-- openfeign 封装, RestTemplate 封装 -->
-        <dependency>
-            <groupId>com.github.itdachen.framework.cloud</groupId>
-            <artifactId>fly-cloud-openfeign</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.itdachen.framework.cloud</groupId>-->
+<!--            <artifactId>fly-cloud-openfeign</artifactId>-->
+<!--        </dependency>-->
 
         <!-- 服务注册与发现 -->
         <dependency>

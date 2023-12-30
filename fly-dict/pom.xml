@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-runner</artifactId>
         </dependency>
         <!-- 項目启动容器 -->
@@ -36,19 +36,19 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-webmvc</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-tools</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-body-advice</artifactId>
         </dependency>
 

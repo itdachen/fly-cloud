@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-core</artifactId>
         </dependency>
     </dependencies>

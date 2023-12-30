@@ -16,19 +16,24 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.github.itdachen.framework</groupId>
+            <groupId>com.github.itdachen</groupId>
             <artifactId>fly-body-advice</artifactId>
         </dependency>
 
         <!-- token 解析模块 -->
+<!--        <dependency>-->
+<!--            <groupId>com.github.itdachen.framework.cloud</groupId>-->
+<!--            <artifactId>fly-cloud-jwt-parse</artifactId>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>com.github.itdachen.framework.cloud</groupId>
-            <artifactId>fly-cloud-jwt-parse</artifactId>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>spring-cloud-starter-jwt-parse</artifactId>
         </dependency>
 
         <dependency>

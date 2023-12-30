@@ -2,8 +2,8 @@ package com.github.itdachen.auth.verify.service.impl;
 
 import com.github.itdachen.auth.verify.mapper.IVerifyTicketPermissionMapper;
 import com.github.itdachen.auth.verify.service.IVerifyTicketPermissionService;
+import com.github.itdachen.boot.rbac.IRbacPermissionService;
 import com.github.itdachen.framework.context.permission.CheckPermissionInfo;
-import com.github.itdachen.framework.rbac.IRbacPermissionService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

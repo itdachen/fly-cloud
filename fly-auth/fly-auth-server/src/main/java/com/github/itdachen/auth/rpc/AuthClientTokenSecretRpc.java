@@ -1,7 +1,8 @@
 package com.github.itdachen.auth.rpc;
 
-import com.github.itdachen.framework.cloud.jwt.parse.AuthClientTokenSecretKey;
+import com.github.itdachen.auth.interfaces.TokenUserPubKey;
 import com.github.itdachen.auth.interfaces.client.IAuthClientTokenSecretRpc;
+import com.github.itdachen.cloud.jwt.crypto.AuthTokenSecretKey;
 import com.github.itdachen.framework.core.response.ServerResponse;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.slf4j.Logger;
@@ -17,19 +18,24 @@ import org.slf4j.LoggerFactory;
 public class AuthClientTokenSecretRpc implements IAuthClientTokenSecretRpc {
     private static final Logger logger = LoggerFactory.getLogger(AuthClientTokenSecretRpc.class);
 
-    private final AuthClientTokenSecretKey authClientTokenSecretKey;
+    private final AuthTokenSecretKey authClientTokenSecretKey;
 
-    public AuthClientTokenSecretRpc(AuthClientTokenSecretKey authClientTokenSecretKey) {
+    public AuthClientTokenSecretRpc(AuthTokenSecretKey authClientTokenSecretKey) {
         this.authClientTokenSecretKey = authClientTokenSecretKey;
     }
 
     @Override
-    public ServerResponse<String> getSecretPublicKey(String appId, String appSecret) throws Exception {
+    public ServerResponse<TokenUserPubKey> getSecretPublicKey(String appId, String appSecret) throws Exception {
         logger.info("获取客户端 token 公钥, appId: {}, appSecret: {}", appId, appSecret);
 
         // TODO 自行根据 appId 和 appSecret 校验是否能获取 token 公钥
 
-        return ServerResponse.okData(authClientTokenSecretKey.getTokenPublicKey());
+        return ServerResponse.okData(
+                new TokenUserPubKey(
+                        authClientTokenSecretKey.getUserPubKey(),
+                        authClientTokenSecretKey.getAlgorithm()
+                )
+        );
     }
 
 

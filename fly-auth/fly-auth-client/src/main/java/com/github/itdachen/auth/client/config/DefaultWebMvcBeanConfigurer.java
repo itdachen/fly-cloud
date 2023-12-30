@@ -1,7 +1,7 @@
 package com.github.itdachen.auth.client.config;
 
-import com.github.itdachen.framework.cloud.jwt.parse.IVerifyTicketTokenHelper;
-import com.github.itdachen.framework.cloud.jwt.parse.matchers.IRequestPassMatchers;
+import com.github.itdachen.cloud.jwt.IVerifyTicketTokenHelper;
+import com.github.itdachen.cloud.jwt.parse.matchers.IRequestPassMatchers;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

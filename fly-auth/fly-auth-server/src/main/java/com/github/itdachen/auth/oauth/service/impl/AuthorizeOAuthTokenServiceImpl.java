@@ -3,12 +3,12 @@ package com.github.itdachen.auth.oauth.service.impl;
 import com.github.itdachen.auth.oauth.entity.AuthorizeOAuthToken;
 import com.github.itdachen.auth.oauth.mapper.IAuthorizeOAuthTokenMapper;
 import com.github.itdachen.auth.oauth.service.IAuthorizeOAuthTokenService;
-import com.github.itdachen.framework.cloud.jwt.core.AccessTokenInfo;
-import com.github.itdachen.framework.cloud.jwt.core.JwtTokenInfo;
-import com.github.itdachen.framework.cloud.jwt.crypto.JwtsTokenHelper;
+import com.github.itdachen.cloud.jwt.ICryptoTokenHandler;
 import com.github.itdachen.framework.context.constants.UserInfoConstant;
 import com.github.itdachen.framework.context.constants.UserTypeConstant;
 import com.github.itdachen.framework.context.exception.BizException;
+import com.github.itdachen.framework.context.jwt.AccessTokenInfo;
+import com.github.itdachen.framework.context.jwt.JwtTokenInfo;
 import com.github.itdachen.framework.context.userdetails.CurrentUserDetails;
 import com.github.itdachen.framework.core.utils.StringUtils;
 import org.slf4j.Logger;
@@ -28,11 +28,11 @@ import java.util.Map;
 public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenService {
     private static final Logger logger = LoggerFactory.getLogger(AuthorizeOAuthTokenServiceImpl.class);
     private final IAuthorizeOAuthTokenMapper authorizeOAuthTokenMapper;
-    private final JwtsTokenHelper jwtsTokenHelper;
+    private final ICryptoTokenHandler jwtsTokenHelper;
     private final PasswordEncoder passwordEncoder;
 
     public AuthorizeOAuthTokenServiceImpl(IAuthorizeOAuthTokenMapper authorizeOAuthTokenMapper,
-                                          JwtsTokenHelper jwtsTokenHelper,
+                                          ICryptoTokenHandler jwtsTokenHelper,
                                           PasswordEncoder passwordEncoder) {
         this.authorizeOAuthTokenMapper = authorizeOAuthTokenMapper;
         this.jwtsTokenHelper = jwtsTokenHelper;
@@ -77,14 +77,15 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         otherInfo.put(UserInfoConstant.TELEPHONE, currentUserDetails.getTelephone());
         otherInfo.put(UserInfoConstant.USER_TYPE, UserTypeConstant.MEMBER);
         otherInfo.put(UserInfoConstant.TENANT_ID, currentUserDetails.getTenantId());
-        otherInfo.put(UserInfoConstant.GRADE, currentUserDetails.getGrade());
+        otherInfo.put(UserInfoConstant.GRADE, currentUserDetails.getDeptLevel());
 
-        String access_token = jwtsTokenHelper.createToken(new JwtTokenInfo.Builder()
+        String access_token = jwtsTokenHelper.token(new JwtTokenInfo.Builder()
                 .username(currentUserDetails.getAccount())
                 .nickName(currentUserDetails.getNickName())
                 .userId(currentUserDetails.getId())
                 .otherInfo(otherInfo)
-                .build());
+                .build()
+        );
 
 
         Map<String, Object> infoMap = new HashMap<>(8);
@@ -93,7 +94,7 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         infoMap.put(UserInfoConstant.AVATAR, currentUserDetails.getAvatar());
         infoMap.put(UserInfoConstant.NICK_NAME, currentUserDetails.getNickName());
         infoMap.put(UserInfoConstant.TELEPHONE, currentUserDetails.getTelephone());
-        infoMap.put(UserInfoConstant.GRADE, currentUserDetails.getGrade());
+        infoMap.put(UserInfoConstant.GRADE, currentUserDetails.getDeptLevel());
 
         return new AccessTokenInfo.Builder()
                 .access_token(access_token)

@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.itdachen.actuator.send.ITakeNotifySendService;
 import de.codecentric.boot.admin.server.domain.entities.Instance;
 import de.codecentric.boot.admin.server.domain.entities.InstanceRepository;
+import de.codecentric.boot.admin.server.domain.events.InstanceDeregisteredEvent;
+import de.codecentric.boot.admin.server.domain.events.InstanceEndpointsDetectedEvent;
 import de.codecentric.boot.admin.server.domain.events.InstanceEvent;
 import de.codecentric.boot.admin.server.domain.events.InstanceStatusChangedEvent;
 import de.codecentric.boot.admin.server.notify.AbstractStatusChangeNotifier;
@@ -17,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description: 服务状态变更通知
@@ -79,7 +82,6 @@ public class AdminActuatorEventNotifierTakeNotes extends AbstractStatusChangeNot
         final String type = event.getType();
 
 
-
 //        if (IGNORE_CHANGES_ARR.contains(status)){
 //            return true;
 //        }
@@ -139,187 +141,141 @@ public class AdminActuatorEventNotifierTakeNotes extends AbstractStatusChangeNot
     @Override
     protected Mono<Void> doNotify(InstanceEvent event, Instance instance) {
         return Mono.fromRunnable(() -> {
-            String messageText = "";
-          //  final String status = instance.getStatusInfo().getStatus();
-
-            String status = event.getType();
-
-            JSONObject body = new JSONObject();
-            body.put("instanceId", event.getInstance().getValue());
-            body.put("appName", instance.getRegistration().getName());
-            body.put("appStatus", status);
-            body.put("notifyEvent", status);
-            body.put("notifyDetails", JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-            body.put("serverUri", instance.getRegistration().getServiceUrl());
-
-            if ("OFFLINE".equals(status)) {
-                messageText = String.format(TEMPLATE_INFO,
-                        TITLE_ALARM,
-                        getNowTime(),
+            if (event instanceof InstanceStatusChangedEvent) {
+                logger.info("Instance Status Change: [{}], [{}], [{}], [{}]",
                         instance.getRegistration().getName(),
-                        status,
-                        "服务离线告警",
+                        event.getInstance().getValue(),
+                        ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),
+                        instance.getRegistration().getServiceUrl());
+
+                String serverStatus = ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus();
+
+                doNotifyMsg(instance.getRegistration().getName(),
                         instance.getRegistration().getServiceUrl(),
-                        JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-                logger.info("【服务离线告警】：{}", messageText);
-                body.put("notifyEvent", TITLE_ALARM);
-                body.put("appStatusDes", "服务离线告警");
-            } else if ("DEREGISTERED".equals(status)) {
-                messageText = String.format(TEMPLATE_INFO,
-                        TITLE_ALARM,
-                        getNowTime(),
-                        instance.getRegistration().getName(),
-                        status,
-                        "服务注销告警",
+                        serverStatus,
+                        instance.getStatusInfo().getDetails());
+
+                // takeNotesSendNotify.sendNotify(body);
+            } else if (event instanceof InstanceDeregisteredEvent) {
+                String serverStatus = ((InstanceDeregisteredEvent) event).getType();
+
+                doNotifyMsg(instance.getRegistration().getName(),
                         instance.getRegistration().getServiceUrl(),
-                        JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-                logger.info("【服务注销告警】：{}", messageText);
-                body.put("notifyEvent", TITLE_NOTICE);
-                body.put("appStatusDes", "服务注销告警");
-            } else if ("UP".equals(status)) {
-                messageText = String.format(TEMPLATE_INFO,
-                        TITLE_NOTICE,
-                        getNowTime(),
-                        instance.getRegistration().getName(),
-                        status,
-                        "服务上线通知",
-                        instance.getRegistration().getServiceUrl(),
-                        JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-                logger.info("【服务上线通知】：{}", messageText);
-                body.put("notifyEvent", TITLE_NOTICE);
-                body.put("appStatusDes", "服务上线通知");
+                        serverStatus,
+                        instance.getStatusInfo().getDetails());
+            } else if(event instanceof InstanceEndpointsDetectedEvent){
+                String serverStatus = ((InstanceEndpointsDetectedEvent) event).getType();
+
+//                doNotifyMsg(instance.getRegistration().getName(),
+//                        instance.getRegistration().getServiceUrl(),
+//                        serverStatus,
+//                        instance.getStatusInfo().getDetails());
             } else {
-                messageText = String.format(TEMPLATE_INFO,
-                        TITLE_NOTICE,
-                        getNowTime(),
+                logger.info("Instance Info: [{}], [{}], [{}], [{}]",
                         instance.getRegistration().getName(),
-                        status,
-                        "服务其他通知",
-                        instance.getRegistration().getServiceUrl(),
-                        JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-                body.put("appStatusDes", "服务其他通知");
-                body.put("notifyEvent", TITLE_NOTICE);
-                logger.info("【服务其他通知】：{}", messageText);
+                        event.getInstance().getValue(),
+                        event.getType(),
+                        instance.getRegistration().getServiceUrl());
+
+//                doNotifyMsg(instance.getRegistration().getName(),
+//                        instance.getRegistration().getServiceUrl(),
+//                        event.getType(),
+//                        instance.getStatusInfo().getDetails());
             }
 
-
-            body.put("notifyMsg", messageText);
-            body.put("notifyEventTitle", status + "【" + body.get("appStatusDes") + "】");
-            takeNotesSendNotify.sendNotify(body);
-
-
-//            if (event instanceof InstanceStatusChangedEvent) {
-//                logger.info("Instance Status Change: [{}], [{}], [{}], [{}]",
-//                        instance.getRegistration().getName(),
-//                        event.getInstance().getValue(),
-//                        ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),
-//                        instance.getRegistration().getServiceUrl());
-//
-//                String serverStatus = ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus();
-//                System.err.println("serverStatus: " + serverStatus);
-//
-//                JSONObject body = new JSONObject();
-//                body.put("instanceId", event.getInstance().getValue());
-//                body.put("appName", instance.getRegistration().getName());
-//                body.put("appStatus", serverStatus);
-//                body.put("notifyEvent", serverStatus);
-//                body.put("notifyDetails", JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-//                body.put("serverUri", instance.getRegistration().getServiceUrl());
-//
-//                switch (serverStatus) {
-//                    // 健康检查没通过
-//                    case "DOWN" -> {
-//                        messageText = String.format(TEMPLATE_INFO,
-//                                TITLE_ALARM,
-//                                instance.getRegistration().getName(),
-//                                event.getInstance(),
-//                                ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),
-//                                "健康检查没通过告警",
-//                                instance.getRegistration().getServiceUrl(),
-//                                JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-//                        logger.info("【健康检查没通过告警】：{}", messageText);
-//                        body.put("notifyEvent", TITLE_ALARM);
-//                        body.put("appStatusDes", "健康检查没通过告警");
-//
-//                    }
-//                    // 服务离线
-//                    case "OFFLINE" -> {
-//                        messageText = String.format(TEMPLATE_INFO,
-//                                TITLE_ALARM,
-//                                instance.getRegistration().getName(),
-//                                event.getInstance(),
-//                                ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),
-//                                "服务离线告警",
-//                                instance.getRegistration().getServiceUrl(),
-//                                JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-//                        logger.info("【服务离线告警】：{}", messageText);
-//                        body.put("notifyEvent", TITLE_ALARM);
-//                        body.put("appStatusDes", "服务离线告警");
-//                    }
-//                    //服务上线
-//                    case "UP" -> {
-//                        messageText = String.format(TEMPLATE_INFO,
-//                                TITLE_NOTICE,
-//                                instance.getRegistration().getName(),
-//                                event.getInstance(),
-//                                ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),
-//                                "服务上线通知", instance.getRegistration().getServiceUrl(),
-//                                JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-//                        logger.info("【服务上线通知】：{}", messageText);
-//                        body.put("notifyEvent", TITLE_NOTICE);
-//                        body.put("appStatusDes", "服务上线通知");
-//                    }
-//                    // 服务未知异常
-//                    case "UNKNOWN" -> {
-//                        messageText = String.format(TEMPLATE_INFO,
-//                                TITLE_ALARM,
-//                                instance.getRegistration().getName(),
-//                                event.getInstance(),
-//                                ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),
-//                                "服务未知异常告警", instance.getRegistration().getServiceUrl(),
-//                                JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-//                        body.put("appStatusDes", "服务未知异常告警");
-//                        body.put("notifyEvent", TITLE_ALARM);
-//                        logger.info("【服务未知异常告警】：{}", messageText);
-//                    }
-//                    case "REGISTERED" -> {
-//                        messageText = String.format(TEMPLATE_INFO,
-//                                TITLE_NOTICE,
-//                                instance.getRegistration().getName(),
-//                                event.getInstance(),
-//                                ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),
-//                                "服务注册通知", instance.getRegistration().getServiceUrl(),
-//                                JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-//                        body.put("appStatusDes", "服务注册通知");
-//                        body.put("notifyEvent", TITLE_NOTICE);
-//                        logger.info("【服务注册通知】：{}", messageText);
-//                    }
-//                    default -> {
-//                        messageText = String.format(TEMPLATE_INFO,
-//                                TITLE_NOTICE,
-//                                instance.getRegistration().getName(),
-//                                event.getInstance(),
-//                                ((InstanceStatusChangedEvent) event).getStatusInfo().getStatus(),
-//                                "服务其他通知",
-//                                instance.getRegistration().getServiceUrl(),
-//                                JSONObject.toJSONString(instance.getStatusInfo().getDetails()));
-//                        body.put("appStatusDes", "服务其他通知");
-//                        body.put("notifyEvent", TITLE_NOTICE);
-//                        logger.info("【服务其他通知】：{}", messageText);
-//                    }
-//                }
-//                body.put("notifyMsg", messageText);
-//                body.put("notifyEventTitle", serverStatus + "【" + body.get("appStatusDes") + "】");
-//                takeNotesSendNotify.sendNotify(body);
-//            } else {
-//                logger.info("Instance Info: [{}], [{}], [{}], [{}]",
-//                        instance.getRegistration().getName(),
-//                        event.getInstance().getValue(),
-//                        event.getType(),
-//                        instance.getRegistration().getServiceUrl());
-//            }
-
         });
+    }
+
+    /***
+     * 消息通知日志
+     *
+     * @author 王大宸
+     * @date 2023/12/17 0:46
+     * @param appName appName
+     * @param ServiceUrl ServiceUrl
+     * @param status status
+     * @param details details
+     * @return void
+     */
+    private void doNotifyMsg(String appName, String ServiceUrl, String status, Map<String, Object> details) {
+        String messageText = "";
+        switch (status) {
+            // 健康检查没通过
+            case "DOWN" -> {
+                messageText = String.format(TEMPLATE_INFO,
+                        TITLE_ALARM,
+                        getNowTime(),
+                        appName,
+                        status, "健康检查未通过",
+                        ServiceUrl,
+                        JSONObject.toJSONString(details));
+                logger.info("【健康检查没通过告警】：{}", messageText);
+            }
+            // 服务离线
+            case "OFFLINE" -> {
+                messageText = String.format(TEMPLATE_INFO,
+                        TITLE_ALARM,
+                        getNowTime(),
+                        appName,
+                        status, "离线",
+                        ServiceUrl,
+                        JSONObject.toJSONString(details));
+                logger.info("【服务离线告警】：{}", messageText);
+            }
+            //服务上线
+            case "UP" -> {
+                messageText = String.format(TEMPLATE_INFO,
+                        TITLE_NOTICE,
+                        getNowTime(),
+                        appName,
+                        status, "在线",
+                        ServiceUrl,
+                        JSONObject.toJSONString(details));
+                logger.info("【服务上线通知】：{}", messageText);
+            }
+            case "DEREGISTERED" -> {
+                messageText = String.format(TEMPLATE_INFO,
+                        TITLE_ALARM,
+                        getNowTime(),
+                        appName,
+                        status, "已注销",
+                        ServiceUrl,
+                        JSONObject.toJSONString(details));
+                logger.info("【服务注销告警】：{}", messageText);
+            }
+            // 服务未知异常
+            case "UNKNOWN" -> {
+                messageText = String.format(TEMPLATE_INFO,
+                        TITLE_ALARM,
+                        getNowTime(),
+                        appName,
+                        status, "服务未知异常",
+                        ServiceUrl,
+                        JSONObject.toJSONString(details));
+                logger.info("【服务未知异常告警】：{}", messageText);
+            }
+            case "REGISTERED" -> {
+                messageText = String.format(TEMPLATE_INFO,
+                        TITLE_NOTICE,
+                        getNowTime(),
+                        appName,
+                        status, "已注册",
+                        ServiceUrl,
+                        JSONObject.toJSONString(details));
+                logger.info("【服务注册通知】：{}", messageText);
+            }
+            default -> {
+                messageText = String.format(TEMPLATE_INFO,
+                        TITLE_NOTICE,
+                        getNowTime(),
+                        appName,
+                        status, "其他",
+                        ServiceUrl,
+                        JSONObject.toJSONString(details));
+                logger.info("【服务其他通知】：{}", messageText);
+            }
+        }
+
     }
 
 

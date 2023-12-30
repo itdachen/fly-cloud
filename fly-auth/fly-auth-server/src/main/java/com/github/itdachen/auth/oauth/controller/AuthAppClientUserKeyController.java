@@ -1,6 +1,6 @@
 package com.github.itdachen.auth.oauth.controller;
 
-import com.github.itdachen.framework.cloud.jwt.parse.AuthClientTokenSecretKey;
+import com.github.itdachen.cloud.jwt.crypto.AuthTokenSecretKey;
 import com.github.itdachen.framework.context.annotation.IgnoreUserToken;
 import com.github.itdachen.framework.core.response.ServerResponse;
 import org.slf4j.Logger;
@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthAppClientUserKeyController {
     private static final Logger logger = LoggerFactory.getLogger(AuthAppClientUserKeyController.class);
 
-    private final AuthClientTokenSecretKey authClientTokenSecretKey;
+    private final AuthTokenSecretKey authClientTokenSecretKey;
 
-    public AuthAppClientUserKeyController(AuthClientTokenSecretKey authClientTokenSecretKey) {
+    public AuthAppClientUserKeyController(AuthTokenSecretKey authClientTokenSecretKey) {
         this.authClientTokenSecretKey = authClientTokenSecretKey;
     }
 
@@ -46,7 +46,7 @@ public class AuthAppClientUserKeyController {
 
         // TODO 自行根据 appId 和 appSecret 校验是否能获取 token 公钥
 
-        return ServerResponse.okData(authClientTokenSecretKey.getTokenPublicKey());
+        return ServerResponse.okData(authClientTokenSecretKey.getUserPubKey());
     }
 
 }
