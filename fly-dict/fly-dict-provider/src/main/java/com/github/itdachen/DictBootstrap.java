@@ -6,7 +6,7 @@ package com.github.itdachen;
  * @author 王大宸
  * @date 2024-05-31 15:07
  */
-public class Main {
+public class DictBootstrap {
     public static void main(String[] args) {
         System.out.println("Hello world!");
     }
