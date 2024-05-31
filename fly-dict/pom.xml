@@ -11,8 +11,15 @@
 
     <artifactId>fly-dict</artifactId>
     <name>${project.artifactId}</name>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <description>数据字典开放模块</description>
+
+
+    <modules>
+        <module>fly-dict-provider</module>
+        <module>fly-dict-interface</module>
+    </modules>
+
 
     <dependencies>
         <dependency>
