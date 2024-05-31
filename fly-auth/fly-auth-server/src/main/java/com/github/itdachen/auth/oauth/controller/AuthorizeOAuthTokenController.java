@@ -37,7 +37,7 @@ public class AuthorizeOAuthTokenController {
      */
     @PostMapping(value = "/token")
     public ServerResponse<AccessTokenInfo> oauthJwtToken(@RequestBody AuthorizeOAuthToken authToken) throws Exception {
-        return ServerResponse.okMsgData("登录成功!", oAuthTokenService.oauthJwtToken(authToken));
+        return ServerResponse.ok("登录成功!", oAuthTokenService.oauthJwtToken(authToken));
     }
 
 }

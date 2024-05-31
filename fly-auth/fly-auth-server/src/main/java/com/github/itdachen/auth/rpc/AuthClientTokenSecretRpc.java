@@ -30,7 +30,7 @@ public class AuthClientTokenSecretRpc implements IAuthClientTokenSecretRpc {
 
         // TODO 自行根据 appId 和 appSecret 校验是否能获取 token 公钥
 
-        return ServerResponse.okData(
+        return ServerResponse.ok(
                 new TokenUserPubKey(
                         authClientTokenSecretKey.getUserPubKey(),
                         authClientTokenSecretKey.getAlgorithm()

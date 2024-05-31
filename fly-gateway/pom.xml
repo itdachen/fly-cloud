@@ -66,8 +66,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-context</artifactId>
+        </dependency>
 
-<!--        <dependency>-->
+        <!--        <dependency>-->
 <!--            <groupId>org.jetbrains.kotlin</groupId>-->
 <!--            <artifactId>kotlin-stdlib</artifactId>-->
 <!--            <version>${kotlin.version}</version>-->

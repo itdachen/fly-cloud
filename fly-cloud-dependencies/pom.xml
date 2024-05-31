@@ -16,6 +16,8 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <fly.dependencies.version>1.0.5</fly.dependencies.version>
     </properties>
 
     <dependencyManagement>
@@ -23,7 +25,7 @@
             <dependency>
                 <groupId>com.github.itdachen</groupId>
                 <artifactId>fly-dependencies</artifactId>
-                <version>1.0.4</version>
+                <version>${fly.dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

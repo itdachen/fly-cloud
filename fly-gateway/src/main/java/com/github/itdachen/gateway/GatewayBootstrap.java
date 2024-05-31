@@ -4,7 +4,6 @@ import com.github.itdachen.framework.boot.runner.SpringBootBootstrap;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -17,7 +16,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @RefreshScope
 @EnableDiscoveryClient
 @SpringBootApplication
-@EnableFeignClients({"com.github.itdachen"})
 @ComponentScan(basePackages = {"com.github.itdachen"})
 public class GatewayBootstrap {
 

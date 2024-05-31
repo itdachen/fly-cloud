@@ -46,7 +46,7 @@ public class AuthAppClientUserKeyController {
 
         // TODO 自行根据 appId 和 appSecret 校验是否能获取 token 公钥
 
-        return ServerResponse.okData(authClientTokenSecretKey.getUserPubKey());
+        return ServerResponse.ok(authClientTokenSecretKey.getUserPubKey());
     }
 
 }
