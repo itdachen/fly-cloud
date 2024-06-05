@@ -23,7 +23,7 @@
             <dependency>
                 <groupId>com.github.itdachen.cloud</groupId>
                 <artifactId>fly-cloud-dependencies</artifactId>
-                <version>${project.version}</version>
+                <version>0.0.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

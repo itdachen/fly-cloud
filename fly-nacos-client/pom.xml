@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-runner</artifactId>
+            <artifactId>runner-spring-boot-starter</artifactId>
         </dependency>
 
         <!-- 項目启动容器 -->

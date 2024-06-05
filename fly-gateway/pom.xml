@@ -26,7 +26,7 @@
 
         <dependency>
             <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-runner</artifactId>
+            <artifactId>runner-spring-boot-starter</artifactId>
         </dependency>
 
         <!-- 网关 -->
@@ -37,11 +37,8 @@
 
         <!-- 动态网关 -->
         <dependency>
-<!--            <groupId>com.github.itdachen.framework.cloud</groupId>-->
-<!--            <artifactId>fly-cloud-gateway-dynamic-routes</artifactId>-->
             <groupId>com.github.itdachen</groupId>
-            <artifactId>spring-cloud-gateway-dynamic-routes</artifactId>
-            <version>1.0.3</version>
+            <artifactId>spring-cloud-starter-gateway-dynamic-routes</artifactId>
         </dependency>
 
         <!-- openfeign 封装, RestTemplate 封装 -->

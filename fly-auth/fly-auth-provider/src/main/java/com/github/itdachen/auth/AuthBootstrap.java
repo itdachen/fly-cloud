@@ -1,7 +1,7 @@
 package com.github.itdachen.auth;
 
-import com.github.itdachen.framework.boot.runner.SpringBootBootstrap;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -24,7 +24,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 public class AuthBootstrap {
 
     public static void main(String[] args) {
-        SpringBootBootstrap.run(AuthBootstrap.class);
+        SpringApplication.run(AuthBootstrap.class, args);
     }
 
 }

@@ -44,6 +44,16 @@ export default [
                 path: '/admin/role',
                 component: () => import('../../views/admin/role/index.vue'),
                 meta: {title: '角色信息', requireAuth: true},
+            },
+            {
+                path: '/admin/dept',
+                component: () => import('../../views/admin/dept/index.vue'),
+                meta: {title: '角色信息', requireAuth: true},
+            },
+            {
+                path: '/admin/user',
+                component: () => import('../../views/admin/user/index.vue'),
+                meta: {title: '角色信息',  requireAuth: true},
             }
         ]
     }, {

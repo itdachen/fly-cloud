@@ -1,7 +1,7 @@
 package com.github.itdachen.admin;
 
 import com.github.itdachen.auth.client.EnableAuthClient;
-import com.github.itdachen.framework.boot.runner.SpringBootBootstrap;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -24,7 +24,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 public class AdminBootstrap {
 
     public static void main(String[] args) {
-        SpringBootBootstrap.run(AdminBootstrap.class);
+        SpringApplication.run(AdminBootstrap.class, args);
     }
 
 }
