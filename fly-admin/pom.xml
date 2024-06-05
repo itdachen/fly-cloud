@@ -15,8 +15,8 @@
     <description>基础服务</description>
 
     <modules>
-        <module>fly-admin-server</module>
-        <module>fly-admin-client</module>
+        <module>fly-admin-interface</module>
+        <module>fly-admin-provider</module>
         <module>fly-admin-sdk</module>
     </modules>
 

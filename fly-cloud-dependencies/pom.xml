@@ -54,11 +54,6 @@
                 <artifactId>fly-admin-sdk</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.github.itdachen</groupId>
-                <artifactId>fly-admin-client</artifactId>
-                <version>${project.version}</version>
-            </dependency>
             <!-- 基础应用服务 END -->
 
         </dependencies>

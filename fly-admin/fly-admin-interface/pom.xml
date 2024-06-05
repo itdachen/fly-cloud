@@ -5,20 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.itdachen</groupId>
-        <artifactId>fly-cloud</artifactId>
+        <artifactId>fly-admin</artifactId>
         <version>0.0.1</version>
     </parent>
 
-    <artifactId>fly-auth</artifactId>
-    <name>${project.artifactId}</name>
-    <packaging>pom</packaging>
-    <description>微服务安全认证中心</description>
-
-    <modules>
-        <module>fly-auth-provider</module>
-        <module>fly-auth-client</module>
-        <module>fly-auth-crypto</module>
-        <module>fly-auth-interface</module>
-    </modules>
+    <artifactId>fly-admin-interface</artifactId>
 
 </project>

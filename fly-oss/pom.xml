@@ -11,13 +11,13 @@
 
     <artifactId>fly-oss</artifactId>
     <name>${project.artifactId}</name>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <description>文件上传模块</description>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <modules>
+        <module>fly-oss-provider</module>
+        <module>fly-oss-interface</module>
+    </modules>
+
 
 </project>

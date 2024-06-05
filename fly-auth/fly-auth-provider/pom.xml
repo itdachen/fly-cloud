@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.github.itdachen</groupId>
+        <artifactId>fly-auth</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>fly-auth-provider</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <description>微服务鉴权中心服务端</description>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-runner</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-auth-crypto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-auth-interface</artifactId>
+        </dependency>
+
+        <!-- 項目启动容器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+
+        <!-- token 加密 -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.github.itdachen.framework.cloud</groupId>-->
+        <!--            <artifactId>fly-cloud-jwt-crypto</artifactId>-->
+        <!--        </dependency>-->
+        <!--  -->
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>spring-cloud-starter-jwt-crypto</artifactId>
+        </dependency>
+
+        <!-- token 解密 -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.github.itdachen.framework.cloud</groupId>-->
+        <!--            <artifactId>fly-cloud-jwt-parse</artifactId>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>spring-cloud-starter-jwt-parse</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>fly-body-advice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>rbac-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <!-- nacos discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- nacos 配置中心, 从配置中心获取项目配置信息 -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+        <!--        </dependency>-->
+        <!-- 新版本的微服务默认不加载 bootstrap.yml 文件, 需要添加 bootstrap 依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!-- 健康检查 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- 数据库 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- 配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+
+    <build>
+        <finalName>fly-auth</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>com.github.shalousun</groupId>
+                <artifactId>smart-doc-maven-plugin</artifactId>
+                <version>2.6.4</version>
+                <configuration>
+                    <!--指定生成文档的使用的配置文件,配置文件放在自己的项目中-->
+                    <configFile>./src/main/resources/smart-doc.json</configFile>
+                    <!--指定项目名称-->
+                    <projectName>hubu-doc</projectName>
+                    <!--smart-doc实现自动分析依赖树加载第三方依赖的源码，如果一些框架依赖库加载不到导致报错，这时请使用excludes排除掉-->
+                    <!--                    <excludes>-->
+                    <!--                        &lt;!&ndash;格式为：groupId:artifactId;参考如下&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;1.0.7版本开始你还可以用正则匹配排除,如：poi.* &ndash;&gt;-->
+                    <!--                        <exclude>com.alibaba:fastjson</exclude>-->
+                    <!--                    </excludes>-->
+                    <!--自1.0.8版本开始，插件提供includes支持,配置了includes后插件会按照用户配置加载而不是自动加载，因此使用时需要注意-->
+                    <!--smart-doc能自动分析依赖树加载所有依赖源码，原则上会影响文档构建效率，因此你可以使用includes来让插件加载你配置的组件-->
+                    <!--                    <includes>-->
+                    <!--                        &lt;!&ndash;格式为：groupId:artifactId;参考如下&ndash;&gt;-->
+                    <!--                        <include>com.alibaba:fastjson</include>-->
+                    <!--                        &lt;!&ndash; 如果配置了includes的情况下， 使用了mybatis-plus的分页需要include所使用的源码包 &ndash;&gt;-->
+                    <!--                        <include>com.baomidou:mybatis-plus-extension</include>-->
+                    <!--                        &lt;!&ndash; 如果配置了includes的情况下， 使用了jpa的分页需要include所使用的源码包 &ndash;&gt;-->
+                    <!--                        <include>org.springframework.data:spring-data-commons</include>-->
+                    <!--                    </includes>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <!--如果不需要在执行编译时启动smart-doc，则将phase注释掉-->
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>html</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+
+    </build>
+
+
+</project>
