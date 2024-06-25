@@ -1,6 +1,7 @@
 package com.github.itdachen.auth.oauth.controller;
 
 import com.github.itdachen.cloud.jwt.crypto.AuthTokenSecretKey;
+import com.github.itdachen.framework.context.annotation.ApiDeprecated;
 import com.github.itdachen.framework.context.annotation.IgnoreUserToken;
 import com.github.itdachen.framework.core.response.ServerResponse;
 import org.slf4j.Logger;
@@ -38,6 +39,7 @@ public class AuthAppClientUserKeyController {
      * @param appSecret   客户端秘钥
      * @return com.github.itdachen.framework.core.response.ServerResponse<java.lang.String>
      */
+    @ApiDeprecated
     @GetMapping("/user/secret/key")
     public ServerResponse<String> userSecretKey(@RequestParam(value = "appId") String appId,
                                                 @RequestParam(value = "appSecret") String appSecret) throws Exception {

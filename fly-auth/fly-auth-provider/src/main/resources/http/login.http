@@ -7,6 +7,15 @@ Content-Type: application/json
   "password": "123456"
 }
 
+### 测试登录
+POST http://localhost:8001/auth/oauth/jwt/token3
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
+
 
 ### 测试登录用户(auth)
 GET http://localhost:8001/auth/current/user/details

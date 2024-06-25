@@ -1,10 +1,4 @@
-# 端口配置
-server:
-  port: 8002
-  servlet:
-    context-path: /${spring.application.name}
-    session:
-      timeout: 18000
+
 
 # 日志配置
 logging:
@@ -26,17 +20,7 @@ fly:
         matchers:
           - /oauth/jwt/**
 
-
 spring:
-  application:
-    name: admin
-  main:
-    allow-circular-references: true
-    allow-bean-definition-overriding: true
-
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT+8
 
   cloud:
     loadbalancer:
@@ -96,12 +80,6 @@ spring:
       connectionProperties: druid:stat:mergeSql=true;druid:stat:slowSqlMillis=5000
       ########### 启用内置过滤器（第一个 stat必须，否则监控不到SQL）##########
       filters: stat,wall,log4j2
-
-
-  thymeleaf:
-    mode: HTML5
-    cache: false
-    encoding: utf-8
 
   data:
     redis:
