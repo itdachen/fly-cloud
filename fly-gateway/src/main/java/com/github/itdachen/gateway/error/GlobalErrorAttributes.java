@@ -1,6 +1,5 @@
 package com.github.itdachen.gateway.error;
 
-import com.github.itdachen.gateway.utils.MsgBodyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.error.ErrorAttributeOptions;

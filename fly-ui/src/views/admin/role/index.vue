@@ -1,5 +1,6 @@
 <template>
-  <lay-container fluid="true" style="padding: 10px">
+
+  <lay-container fluid="true" class="fly-container">
     <lay-row :space="10">
 
       <lay-col :md="24">
@@ -16,38 +17,33 @@
                   <lay-input></lay-input>
                 </lay-form-item>
               </lay-col>
-              <lay-col :md="6" style="margin-left: 20px">
-                <lay-form-item label-width="0">
-                  <lay-button type="normal" size="sm"
-                              prefix-icon="layui-icon-search">查询
-                  </lay-button>
-                  <lay-button type="normal" size="sm"
-                              prefix-icon="layui-icon-refresh">重置
-                  </lay-button>
-                  <lay-button type="normal" size="sm"
-                              prefix-icon="layui-icon-export">导出
-                  </lay-button>
+              <lay-col :md="6" class="fly-search" style="margin-left: 20px">
+                <lay-form-item label-width="5">
+                  <lay-button type="normal" size="sm" prefix-icon="layui-icon-search">查询</lay-button>
+                  <lay-button type="normal" size="sm" prefix-icon="layui-icon-refresh">重置</lay-button>
+                  <lay-button type="normal" size="sm" prefix-icon="layui-icon-export">导出</lay-button>
                 </lay-form-item>
               </lay-col>
             </lay-row>
           </lay-form>
-        </lay-card>
-      </lay-col>
+          <!--      </lay-col>-->
 
 
-      <lay-col :md="24">
-        <lay-card>
+          <!--      <lay-col :md="24">-->
+
           <!--    @row="rowClick" -->
           <lay-table :columns="columns" skin="line"
                      :dataSource="dataSource"
                      :default-toolbar="defaultToolbar"
                      v-model:selectedKeys="selectedKeys"
                      @change="change">
-            <template v-slot:toolbar>
-              <lay-button size="sm" type="primary" class="fly-button fly-toolbar-add" prefix-icon="layui-icon-addition">
+            <template class="fly-table-toolbar" v-slot:toolbar>
+              <lay-button size="sm" type="primary" class="fly-button fly-toolbar-add"
+                          prefix-icon="layui-icon-addition">
                 新增
               </lay-button>
-              <lay-button size="sm" type="danger" class="fly-button fly-remove-button" prefix-icon="layui-icon-delete">
+              <lay-button size="sm" type="danger" class="fly-button fly-remove-button"
+                          prefix-icon="layui-icon-delete">
                 删除
               </lay-button>
             </template>
@@ -76,7 +72,9 @@
                     @change="change5" theme="blue"></lay-page>
 
         </lay-card>
+
       </lay-col>
+
     </lay-row>
   </lay-container>
 </template>
@@ -339,11 +337,11 @@ const viewHandler = (data: any) => {
   background-color: #1E9FFF;
   border: 1px solid #1E9FFF;
   background-repeat: no-repeat;
+  letter-spacing: 5px !important;
 }
 
 .fly-tool-button:first-child {
   margin-left: 0 !important;
-
 }
 
 .fly-tool-button:focus {
@@ -355,7 +353,9 @@ const viewHandler = (data: any) => {
 }
 
 .fly-tool-button i {
-  margin-right: 3px;
+  //margin-right: 3px;
+  //margin-bottom: 3px;
+  font-size: 14px;
 }
 
 .fly-view-button {
@@ -374,10 +374,27 @@ const viewHandler = (data: any) => {
 }
 
 .fly-remove-button {
+  background-repeat: no-repeat;
   background-position: 10px center;
-  background-color: #ff7652;
+  color: #ffffff !important;
+  background-color: #ff4d36;
   border-color: #ff7652;
 }
 
+.fly-container {
+  padding: 10px;
+}
+
+.fly-search .layui-btn {
+  letter-spacing: 5px !important;
+}
+
+.letter-spacing-5 {
+  letter-spacing: 5px !important;
+}
+
+.layui-table-tool .fly-button {
+  letter-spacing: 5px !important;
+}
 
 </style>

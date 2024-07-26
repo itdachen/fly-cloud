@@ -1,6 +1,6 @@
 package com.github.itdachen;
 
-import com.github.itdachen.framework.boot.runner.SpringBootBootstrap;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
@@ -14,7 +14,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class NacosClientBootstrap {
 
     public static void main(String[] args) {
-        SpringBootBootstrap.run(NacosClientBootstrap.class);
+        SpringApplication.run(NacosClientBootstrap.class, args);
     }
 
 }

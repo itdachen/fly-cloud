@@ -1,6 +1,5 @@
 package com.github.itdachen.gateway.filter.handler;
 
-import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,8 +25,8 @@ import java.util.function.Predicate;
  * Created by 王大宸 on 2023-09-03 23:17
  * Created with IntelliJ IDEA.
  */
-//@Component
-//@Order(1)
+@Component
+@Order(1)
 public class RequestBodyRoutePredicateFactory extends AbstractRoutePredicateFactory<RequestBodyRoutePredicateFactory.Config> {
     protected static final Log LOGGER = LogFactory.getLog(RequestBodyRoutePredicateFactory.class);
     private final List<HttpMessageReader<?>> messageReaders;
@@ -67,7 +66,7 @@ public class RequestBodyRoutePredicateFactory extends AbstractRoutePredicateFact
             } else {
                 return ServerWebExchangeUtils.cacheRequestBodyAndRequest(exchange, (serverHttpRequest) -> ServerRequest.create(exchange.mutate().request(serverHttpRequest).build(), this.messageReaders).bodyToMono(String.class).defaultIfEmpty("").doOnNext((objectValue) -> {
                     if (StringUtils.isBlank(objectValue)) {
-                        exchange.getAttributes().put(REQUEST_BODY_ATTR, JSON.toJSONString(exchange.getRequest().getQueryParams()));
+                      //  exchange.getAttributes().put(REQUEST_BODY_ATTR, JSON.toJSONString(exchange.getRequest().getQueryParams()));
                     } else {
                         exchange.getAttributes().put(REQUEST_BODY_ATTR, objectValue);
                     }

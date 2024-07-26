@@ -25,11 +25,11 @@ public class AuthorizationPermissionFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
 
-        String token = exchange.getRequest().getHeaders().getFirst(UserInfoConstant.HEADER_AUTHORIZATION);
-        if (StringUtils.isBlank(token)) {
-            logger.error("网关请求认证失败");
-            throw new RuntimeException("非法请求");
-        }
+//        String token = exchange.getRequest().getHeaders().getFirst(UserInfoConstant.HEADER_AUTHORIZATION);
+//        if (StringUtils.isBlank(token)) {
+//            logger.error("网关请求认证失败");
+//            throw new RuntimeException("非法请求");
+//        }
 
         // TODO 权限校验
 

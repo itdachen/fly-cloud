@@ -11,7 +11,7 @@ spring:
     active: dev
 
   application:
-    name: fly-admin
+    name: admin
 
   main:
     allow-circular-references: true

@@ -22,7 +22,7 @@ import java.util.Map;
  * Created with IntelliJ IDEA.
  */
 @Component
-@Order(-2)
+@Order(2)
 public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHandler {
 
     public GlobalErrorWebExceptionHandler(GlobalErrorAttributes gea,

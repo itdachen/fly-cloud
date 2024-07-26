@@ -2,7 +2,7 @@ package com.github.itdachen.auth.client.runner;
 
 import com.github.itdachen.auth.interfaces.TokenUserPubKey;
 import com.github.itdachen.auth.interfaces.client.IAuthClientTokenSecretRpc;
-import com.github.itdachen.boot.autoconfigure.cloud.jwt.properties.CloudAppClientProperties;
+import com.github.itdachen.boot.autoconfigure.cloud.auth.properties.CloudAppClientProperties;
 import com.github.itdachen.cloud.jwt.IVerifyTicketPublicKeyHelper;
 import com.github.itdachen.cloud.jwt.parse.TokenPublicKey;
 import com.github.itdachen.framework.core.response.ServerResponse;

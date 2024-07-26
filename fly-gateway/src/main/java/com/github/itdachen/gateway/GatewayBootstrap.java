@@ -1,6 +1,6 @@
 package com.github.itdachen.gateway;
 
-import com.github.itdachen.framework.boot.runner.SpringBootBootstrap;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * Description: 网关启动入口类
- * Created by 王大宸 on 2023/02/11 14:20
+ * Created by 王大宸 on 2024/02/11 14:20
  * Created with IntelliJ IDEA.
  */
 @EnableAsync
@@ -20,7 +20,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class GatewayBootstrap {
 
     public static void main(String[] args) {
-        SpringBootBootstrap.run(GatewayBootstrap.class);
+        SpringApplication.run(GatewayBootstrap.class, args);
     }
 
 }

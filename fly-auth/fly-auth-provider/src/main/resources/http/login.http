@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### 测试登录
-POST http://localhost:8001/auth/oauth/jwt/token3
+POST http://localhost:8001/auth/oauth/jwt/token
 Content-Type: application/json
 
 {

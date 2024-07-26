@@ -7,6 +7,9 @@ server:
 # 日志配置
 logging:
   config: classpath:fly-gateway.xml
+  org:
+    apache:
+      dubbo: WARN
   level:
     cn.jay.repository: trace
 
@@ -26,9 +29,9 @@ spring:
 
   cloud:
     nacos:
-      username: nacos
-      password: nacos
-      server-addr: 127.0.0.1:8848
+      #      username: nacos
+      #      password: nacos
+      #      server-addr: 127.0.0.1:8848
       discovery:
         enabled: true # 如果不想使用 Nacos 进行服务注册和发现, 设置为 false 即可
         username: nacos
@@ -56,15 +59,15 @@ spring:
     #        namespace: b6783835-a27f-4ec3-b9ee-05bfa917e812
 
     # sentinel 限流配置
-    #    sentinel:
-    #      transport:
-    #        port: ${server.port}
-    #        dashboard: localhost:8888
-    #      scg:
-    #        fallback:
-    #          mode: response
-    #          response-status: 500
-    #          response-body: '{"status": 500,"success": false, "msg": "网关流量超量！", data: null}'
+#    sentinel:
+#      transport:
+#        port: ${server.port}
+#        dashboard: localhost:8888
+#      scg:
+#        fallback:
+#          mode: response
+#          response-status: 500
+#          response-body: '{"status": 429,"success": false, "msg": "网关流量超量！", data: null}'
 
     loadbalancer:
       cache:
@@ -85,18 +88,18 @@ spring:
           enabled: true
           #服务名小写
           lower-case-service-id: true
-      globalcors:
-        cors-configurations: # 跨域配置
-          '[/**]': # 匹配所有路径
-            allowed-origins: # 允许的域名
-              - "http://localhost:7080"
-            allowed-headers: "*" # 允许的请求头
-            allowed-methods: "*" # 允许的方法
-            allow-credentials: true # 是否携带cookie
-      httpclient:
-        pool:
-          max-connections: 500
-          max-idle-time: 10000
+#      globalcors:
+#        cors-configurations: # 跨域配置
+#          '[/**]': # 匹配所有路径
+#            allowed-origins: # 允许的域名
+#              - "http://localhost:7080"
+#            allowed-headers: "*" # 允许的请求头
+#            allowed-methods: "*" # 允许的方法
+#            allow-credentials: true # 是否携带cookie
+#      httpclient:
+#        pool:
+#          max-connections: 500
+#          max-idle-time: 10000
 
 
 feign:
@@ -129,6 +132,7 @@ fly:
       ignore:
         matchers:
           - /auth/oauth/access_token
+          - /auth/oauth/jwt/**
           - /auth/oauth/token
           - /api/actuator
           - /actuator
