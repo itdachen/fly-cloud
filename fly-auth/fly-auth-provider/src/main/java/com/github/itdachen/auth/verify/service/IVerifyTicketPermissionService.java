@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 public interface IVerifyTicketPermissionService {
 
 
-    Mono<CheckPermissionInfo> verifyTicketPermission(HttpServletRequest request,
+    CheckPermissionInfo verifyTicketPermission(HttpServletRequest request,
                                                      String userId,
                                                      String requestUri,
                                                      String requestMethod) throws Exception;

@@ -25,12 +25,11 @@ public class VerifyTicketPermissionServiceImpl implements IVerifyTicketPermissio
     }
 
     @Override
-    public Mono<CheckPermissionInfo> verifyTicketPermission(HttpServletRequest request,
+    public CheckPermissionInfo verifyTicketPermission(HttpServletRequest request,
                                                             final String userId,
                                                             final String requestUri,
                                                             final String requestMethod) throws Exception {
-        final CheckPermissionInfo checkPermissionInfo = rbacPermissionService.checkUserPermission(userId, requestUri, requestMethod);
-        return Mono.just(checkPermissionInfo);
+        return rbacPermissionService.checkUserPermission(userId, requestUri, requestMethod);
     }
 
 }

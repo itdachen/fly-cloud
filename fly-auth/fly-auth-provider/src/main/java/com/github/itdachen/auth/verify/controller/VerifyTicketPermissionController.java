@@ -2,9 +2,7 @@ package com.github.itdachen.auth.verify.controller;
 
 
 import com.github.itdachen.auth.verify.service.IVerifyTicketPermissionService;
-import com.github.itdachen.framework.context.BizContextHandler;
 import com.github.itdachen.framework.context.annotation.IgnoreResponseAdvice;
-import com.github.itdachen.framework.context.exception.BizException;
 import com.github.itdachen.framework.context.permission.CheckPermissionInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -28,17 +26,29 @@ public class VerifyTicketPermissionController {
         this.verifyTicketPermissionService = verifyTicketPermissionService;
     }
 
-    @RequestMapping(value = "/{userId}/check/permission", method = RequestMethod.GET)
+
+    /***
+     * 根据用户身份校验权限
+     *
+     * @author 王大宸
+     * @date 2024/7/31 9:46
+     * @param request 请求信息
+     * @param roleId   身份ID
+     * @param requestUri 访问地址
+     * @param requestMethod 访问方式
+     * @return reactor.core.publisher.Mono<com.github.itdachen.framework.context.permission.CheckPermissionInfo>
+     */
+    @RequestMapping(value = "/{roleId}/check/permission", method = RequestMethod.GET)
     @IgnoreResponseAdvice
     public Mono<CheckPermissionInfo> verifyTicketPermission(HttpServletRequest request,
-                                                            @PathVariable("userId") String userId,
+                                                            @PathVariable("roleId") String roleId,
                                                             @RequestParam String requestUri,
                                                             @RequestParam String requestMethod) throws Exception {
-        final String userId1 = BizContextHandler.getUserId();
-        return verifyTicketPermissionService.verifyTicketPermission(request,
-                userId,
+        final CheckPermissionInfo checkPermissionInfo = verifyTicketPermissionService.verifyTicketPermission(request,
+                roleId,
                 requestUri,
                 requestMethod);
+        return Mono.just(checkPermissionInfo);
     }
 
 }

@@ -17,6 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/current/user")
 public class CurrentUserController {
 
+    /***
+     * 获取用户信息
+     *
+     * @author 王大宸
+     * @date 2024/7/30 9:40
+     * @param userDetails userDetails
+     * @return com.github.itdachen.framework.core.response.ServerResponse<com.github.itdachen.framework.context.userdetails.UserInfoDetails>
+     */
     @GetMapping("/details")
     public ServerResponse<UserInfoDetails> userDetails(@CurrentUser UserInfoDetails userDetails) {
         return ServerResponse.ok(userDetails);

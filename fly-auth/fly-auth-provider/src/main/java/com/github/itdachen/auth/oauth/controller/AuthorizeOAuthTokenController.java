@@ -26,7 +26,7 @@ public class AuthorizeOAuthTokenController {
     public AuthorizeOAuthTokenController(IAuthorizeOAuthTokenService oAuthTokenService) {
         this.oAuthTokenService = oAuthTokenService;
     }
-    
+
     /***
      * 账号密码登录
      *
@@ -40,9 +40,17 @@ public class AuthorizeOAuthTokenController {
         return ServerResponse.ok("登录成功!", oAuthTokenService.oauthJwtToken(authToken));
     }
 
+    /***
+     * 账号密码登录
+     *
+     * @author 王大宸
+     * @date 2024/7/30 9:40
+     * @param authToken authToken
+     * @return com.github.itdachen.framework.core.response.ServerResponse<com.github.itdachen.framework.context.jwt.AccessTokenInfo>
+     */
     @PostMapping(value = "/token2")
     public ServerResponse<AccessTokenInfo> oauthJwtToken2(@RequestBody AuthorizeOAuthToken authToken) throws Exception {
-        return ServerResponse.ok("登录成功!",null);
+        return ServerResponse.ok("登录成功!", null);
     }
 
 }

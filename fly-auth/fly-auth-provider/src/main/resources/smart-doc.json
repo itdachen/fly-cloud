@@ -1,8 +1,8 @@
 {
   "projectName": "认证中心",
   "serverUrl": "http://127.0.0.1:7770",
-  "pathPrefix": "/smart-doc",
-  "outPath": "E:/api/smart-doc",
+  "pathPrefix": "/auth",
+  "outPath": "E:/api/fly-auth",
   "packageFilters": "com.github.itdachen.auth.*",
   "groups": [
     {
@@ -37,7 +37,7 @@
   "errorCodeDictionaries": [
     {
       "title": "title",
-      "enumClassName": "com.github.itdachen.framework.core.enums.ResultCode",
+      "enumClassName": "com.github.itdachen.framework.core.enums.ReturnCode",
       "codeField": "status",
       "descField": "message"
     }

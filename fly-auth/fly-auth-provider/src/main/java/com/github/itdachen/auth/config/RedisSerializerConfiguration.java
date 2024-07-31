@@ -10,11 +10,12 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
-/**
- * Description: Redis 序列化
- * Created by 王大宸 on 2023-01-09 22:06
- * Created with IntelliJ IDEA.
- */
+/***
+* Redis 序列化
+*
+* @author 王大宸
+* @date 2024/7/30 10:00
+*/
 @Configuration
 @EnableAutoConfiguration
 public class RedisSerializerConfiguration {
