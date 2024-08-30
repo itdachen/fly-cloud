@@ -2,11 +2,34 @@
 <br/>
 
   <h1 align="center">
-    Fly UI
+    layui vue admin
   </h1>
 
-[UI 来源](https://gitee.com/layui-vue/layui-vue-admin) 
+  <h4 align="center">
+     开 箱 即 用 的 layui vue 企 业 级 前 端 模 板
+  </h4> 
 
+  [官 网](http://www.layui-vue.com/) |   [预 览](http://admin.layui-vue.com/) 
+
+</div>
+
+<p align="center">
+    <a href="#">
+        <img src="https://img.shields.io/badge/layui vue admin-1.0.0-green.svg" alt="Pear Admin Pro Version">
+    </a>
+    <a href="#">
+        <img src="https://img.shields.io/badge/vue-3.0.0+-green.svg" alt="Vue Version">
+    </a>
+    <a href="#">
+        <img src="https://img.shields.io/badge/layui vue-2.6.3-green.svg" alt="Ant Design Vue Version">
+    </a>
+    <a href="#">
+        <img src="https://img.shields.io/badge/node-16.0.0-red.svg" alt="Node Version">
+    </a>
+</p>
+
+<div align="center">
+  <img  width="92%" style="border-radius:2px;margin-top:20px;margin-bottom:20px;box-shadow: 2px 0 6px gray;" src="resources/1.jpg" />
 </div>
 
 

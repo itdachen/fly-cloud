@@ -7,52 +7,86 @@
         <img class="login-two-ball"
           src="https://assets.codehub.cn/micro-frontend/login/4bcf705dad662b33a4fc24aaa67f6234.png" />
         <div class="login-container">
-          <lay-tab type="brief" v-model="method">
-            <lay-tab-item title="用户名" id="1">
-              <lay-form-item :label-width="0">
-                <lay-input placeholder="用户名" v-model="loginForm.account"></lay-input>
-              </lay-form-item>
-              <lay-form-item :label-width="0">
-                <lay-input placeholder="密码" password type="password" v-model="loginForm.password"></lay-input>
-              </lay-form-item>
-              <lay-form-item :label-width="0">
-                <lay-checkbox value="" name="like" v-model="remember" skin="primary" label="1">记住密码</lay-checkbox>
-              </lay-form-item>
-              <lay-form-item :label-width="0">
-                <lay-button type="primary" :fluid="true" @click="loginSubmit">登录</lay-button>
-              </lay-form-item>
-            </lay-tab-item>
-            <lay-tab-item title="二维码" id="2">
-              <div>选项二</div>
-            </lay-tab-item>
-          </lay-tab>
-          <lay-line>Other login methods</lay-line>
-          <ul class="other-ways">
-            <li>
-              <div class="line-container">
-                <img class="icon" src="../../assets/login/w.svg" />
-                <p class="text">微信</p>
-              </div>
-            </li>
-            <li>
-              <div class="line-container">
-                <img class="icon" src="../../assets/login/q.svg" />
-                <p class="text">钉钉</p>
-              </div>
-            </li>
-            <li>
-              <div class="line-container">
-                <img class="icon" src="../../assets/login/a.svg" />
-                <p class="text">Gitee</p>
-              </div>
-            </li>
-            <li>
-              <div class="line-container">
-                <img class="icon" src="../../assets/login/f.svg" />
-                <p class="text">Github</p>
-              </div>
-            </li>
-          </ul>
+          <div class="login-side">
+            <div class="login-bg-title">
+              <h1>layui vue admin</h1>
+
+              <h3 style="margin: 20px auto">
+                开 箱 即 用 的 layui vue 企 业 级 前 端 模 板
+              </h3>
+            </div>
+          </div>
+          <div class="login-ID">
+            <div style="font-size: 22px; margin-bottom: 15px; margin-top: 5px">
+              🎯 Sign in
+            </div>
+            <lay-tab type="brief" v-model="method">
+              <lay-tab-item title="用户名" id="1">
+                <div style="height: 250px">
+                  <lay-form-item :label-width="0">
+                    <lay-input :allow-clear="true" prefix-icon="layui-icon-username" placeholder="用户名"
+                      v-model="loginForm.account"></lay-input>
+                  </lay-form-item>
+                  <lay-form-item :label-width="0">
+                    <lay-input :allow-clear="true" prefix-icon="layui-icon-password" placeholder="密码" password
+                      type="password" v-model="loginForm.password"></lay-input>
+                  </lay-form-item>
+                  <lay-form-item :label-width="0">
+                    <div style="width: 264px; display: inline-block">
+                      <lay-input :allow-clear="true" prefix-icon="layui-icon-vercode" placeholder="验证码"
+                        v-model="loginForm.vercode"></lay-input>
+                    </div>
+
+                    <div class="login-captach" @click="toRefreshImg">
+                      <img style="width: 100%" src="../../assets/login/login-yzm.jpg" alt="获取验证码" />
+                    </div>
+                  </lay-form-item>
+                  <lay-checkbox value="" name="like" v-model="remember" skin="primary" label="1">记住密码</lay-checkbox>
+                  <lay-form-item :label-width="0">
+                    <lay-button style="margin-top: 20px" type="primary" :loading="loging" :fluid="true"
+                      loadingIcon="layui-icon-loading" @click="loginSubmit">登录</lay-button>
+                  </lay-form-item>
+                </div>
+              </lay-tab-item>
+              <lay-tab-item title="二维码" id="2">
+                <div style="width: 200px; height: 250px; margin: 0 auto">
+                  <lay-qrcode text="http://www.layui-vue.com" :width="200" color="#000"
+                    style="margin: 10px 0 20px"></lay-qrcode>
+                  <div style="text-align: center; cursor: pointer" @click="toRefreshQrcode">
+                    <lay-icon type="layui-icon-refresh-three"> </lay-icon>
+                    刷新二维码
+                  </div>
+                </div>
+              </lay-tab-item>
+            </lay-tab>
+            <lay-line style="margin: 34px 0px;">Other login methods</lay-line>
+            <ul class="other-ways">
+              <li>
+                <div class="line-container">
+                  <img class="icon" src="../../assets/login/w.svg" />
+                  <p class="text">微信</p>
+                </div>
+              </li>
+              <li>
+                <div class="line-container">
+                  <img class="icon" src="../../assets/login/q.svg" />
+                  <p class="text">钉钉</p>
+                </div>
+              </li>
+              <li>
+                <div class="line-container">
+                  <img class="icon" src="../../assets/login/a.svg" />
+                  <p class="text">Gitee</p>
+                </div>
+              </li>
+              <li>
+                <div class="line-container">
+                  <img class="icon" src="../../assets/login/f.svg" />
+                  <p class="text">Github</p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -60,44 +94,94 @@
 </template>
 
 <script lang="ts">
-import { login } from '../../api/module/user';
-import { defineComponent, reactive, ref } from "vue";
-import { useRouter } from "vue-router";
-import { useUserStore } from '../../store/user';
-import { layer } from "@layui/layer-vue";
+import { login } from '../../api/module/user'
+import { verificationImg, loginQrcode } from '../../api/module/commone'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '../../store/user'
+import { layer } from '@layui/layer-vue'
 
 export default defineComponent({
   setup() {
-    const router = useRouter();
-    const userStore = useUserStore();
-    const method = ref("1");
-    const remember = ref(false);
-    const loginForm = reactive({account:"admin",password:"123456"})
+    const router = useRouter()
+    const userStore = useUserStore()
+    const method = ref('1')
+    const verificationImgUrl = ref('')
+    const loging = ref(false);
+    const loginQrcodeText = ref('')
+    const remember = ref(false)
+    const loginForm = reactive({
+      account: 'admin',
+      password: '123456',
+      vercode: 'DqJFN'
+    })
 
     const loginSubmit = async () => {
-      let { data, code, msg } = await login(loginForm);
+      loging.value = true;
+      login(loginForm).then(({ data, code, msg }) => {
+        setTimeout(() => {
+          loging.value = false;
+          if (code == 200) {
+            layer.msg(msg, { icon: 1 }, async () => {
+              userStore.token = data.token
+              await userStore.loadMenus()
+              await userStore.loadPermissions()
+              router.push('/')
+            })
+          } else {
+            layer.msg(msg, { icon: 2 })
+          }
+        }, 1000)
+      })
+    }
+
+    const toRefreshImg = async () => {
+      let { data, code, msg } = await verificationImg()
       if (code == 200) {
-        layer.msg(msg, { icon: 1 }, async () => {
-          userStore.token = data.token;
-          await userStore.loadMenus();
-          await userStore.loadPermissions();
-          router.push('/');
-        })
+        verificationImgUrl.value = data.data
       } else {
         layer.msg(msg, { icon: 2 })
       }
     }
+    const toRefreshQrcode = async () => {
+      let { data, code, msg } = await loginQrcode()
+      if (code == 200) {
+        loginQrcodeText.value = data.data
+      } else {
+        layer.msg(msg, { icon: 2 })
+      }
+    }
+
     return {
+      toRefreshQrcode,
+      toRefreshImg,
       loginSubmit,
       loginForm,
       remember,
       method,
+      loging
     }
-  },
-});
+  }
+})
 </script>
 
 <style scoped>
+.login-captach {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 108px;
+  height: 40px;
+  color: var(--global-primary-color);
+  margin-left: 8px;
+  border-radius: 4px;
+  border: 1px solid hsla(0, 0%, 60%, 0.46);
+  transition: border 0.2s;
+  box-sizing: border-box;
+  background: #fff;
+  overflow: hidden;
+  cursor: pointer;
+}
+
 .login-one-ball {
   opacity: 0.4;
   position: absolute;
@@ -121,6 +205,7 @@ export default defineComponent({
   bottom: 0;
   right: 0;
   overflow: auto;
+  min-width: 600px;
   z-index: 9;
   background-image: url(https://assets.codehub.cn/micro-frontend/login/f7eeecbeccefe963298c23b54741d473.png);
   background-repeat: no-repeat;
@@ -129,7 +214,7 @@ export default defineComponent({
 }
 
 .login-wrap :deep(.layui-input-block) {
-  margin-left: 0!important;
+  margin-left: 0 !important;
 }
 
 .login-root {
@@ -168,15 +253,41 @@ export default defineComponent({
 }
 
 .login-container {
-  padding: 30px;
   position: relative;
   overflow: hidden;
-  width: 400px;
+  width: 940px;
+  height: 540px;
   max-width: calc(100vw - 28px);
-  border: 1.5px solid #fff;
-  border-radius: 8px;
+  border-radius: 4px;
   background: hsla(0, 0%, 100%, 0.5);
   backdrop-filter: blur(30px);
+  display: flex;
+  box-shadow: 6px 6px 12px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-side {
+  padding: 40px 20px 20px;
+  background-color: var(--global-primary-color);
+  flex: 1;
+  height: 100%;
+}
+
+.login-bg-title {
+  flex: 1;
+  height: 84%;
+  color: #fff;
+  text-align: center;
+  background-image: url('../../assets/login/login-bg.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  text-align: center;
+  min-width: 200px;
+}
+
+.login-ID {
+  padding: 20px 30px;
+  min-width: 420px;
 }
 
 .login-container .layui-tab-head {
@@ -205,7 +316,7 @@ export default defineComponent({
   height: 40px;
 }
 
-.login-container .layui-line-horizontal { 
+.login-container .layui-line-horizontal {
   letter-spacing: 2px;
   margin-bottom: 34px;
   margin-top: 24px;
@@ -239,7 +350,8 @@ export default defineComponent({
   vertical-align: middle;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 1px 2px 0 rgb(9 30 66 / 4%), 0 1px 4px 0 rgb(9 30 66 / 10%), 0 0 1px 0 rgb(9 30 66 / 10%);
+  box-shadow: 0 1px 2px 0 rgb(9 30 66 / 4%), 0 1px 4px 0 rgb(9 30 66 / 10%),
+    0 0 1px 0 rgb(9 30 66 / 10%);
 }
 
 .line-container .text {
