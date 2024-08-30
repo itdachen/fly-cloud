@@ -19,6 +19,7 @@ fly:
         app-secret: 123456
         matchers:
           - /oauth/jwt/**
+          - /captcha
 
 # 日志配置
 logging:
