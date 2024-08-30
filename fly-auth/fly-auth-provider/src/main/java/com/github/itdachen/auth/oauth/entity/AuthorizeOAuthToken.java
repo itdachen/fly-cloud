@@ -21,7 +21,7 @@ public class AuthorizeOAuthToken {
     /**
      * 验证码
      */
-    private String code;
+    private String vercode;
 
     public String getUsername() {
         return username;
@@ -39,11 +39,11 @@ public class AuthorizeOAuthToken {
         this.password = password;
     }
 
-    public String getCode() {
-        return code;
+    public String getVercode() {
+        return vercode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setVercode(String vercode) {
+        this.vercode = vercode;
     }
 }

@@ -1,7 +1,8 @@
 import Http from '../http';
 
 export const login = function(loginForm: any) {
-    return Http.post('/user/login', loginForm)
+    console.log('loginForm', loginForm)
+    return Http.post('/auth/oauth/jwt/token', loginForm)
 }
 
 export const menu = function() {

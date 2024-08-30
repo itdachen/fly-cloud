@@ -37,14 +37,14 @@ export default ({mode}) => defineConfig({
         host: '0.0.0.0',
         port: Number(loadEnv(mode, process.cwd()).VITE_PORT),
         open: true,
-        //     proxy: {
-        //         // 如果是 /api 打头，则访问地址如下
-        //         '/api': {
-        //             target: loadEnv(mode, process.cwd()).VITE_PROXY_URL,
-        //             changeOrigin: true,
-        //             rewrite: (path) => path.replace(/^\/api/, '')
-        //         }
-        //     }
+        proxy: {
+            // 如果是 /api 打头，则访问地址如下
+            '/api': {
+                target: loadEnv(mode, process.cwd()).VITE_PROXY_URL,
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, '')
+            }
+        }
     },
 
     plugins: [

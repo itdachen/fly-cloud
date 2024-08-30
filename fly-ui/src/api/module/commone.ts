@@ -2,7 +2,7 @@ import Http from '../http';
 
 //登录验证码
 export const verificationImg = function () {
-  return Http.get('/login/verificationImg')
+  return Http.get('/auth/captcha')
 }
 
 //登录二维码

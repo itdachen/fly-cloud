@@ -8,10 +8,8 @@ import com.github.itdachen.framework.context.jwt.AccessTokenInfo;
 import com.github.itdachen.framework.core.response.ServerResponse;
 import com.github.itdachen.framework.core.utils.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,13 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/oauth/jwt")
 public class AuthorizeOAuthTokenController {
     private static final Logger logger = LoggerFactory.getLogger(AuthorizeOAuthTokenController.class);
+
     private final IAuthorizeOAuthTokenService oAuthTokenService;
+    private final StringRedisTemplate redisTemplate;
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
-
-    public AuthorizeOAuthTokenController(IAuthorizeOAuthTokenService oAuthTokenService) {
+    public AuthorizeOAuthTokenController(IAuthorizeOAuthTokenService oAuthTokenService,
+                                         StringRedisTemplate redisTemplate) {
         this.oAuthTokenService = oAuthTokenService;
+        this.redisTemplate = redisTemplate;
     }
 
     /***
@@ -47,7 +46,7 @@ public class AuthorizeOAuthTokenController {
      */
     @PostMapping(value = "/token")
     public ServerResponse<AccessTokenInfo> oauthJwtToken(HttpServletRequest request, @RequestBody AuthorizeOAuthToken authToken) throws Exception {
-        verifyCaptcha(request, authToken);  // 校验验证码
+        // verifyCaptcha(request, authToken);  // 校验验证码
         AccessTokenInfo accessTokenInfo = oAuthTokenService.oauthJwtToken(authToken);
         return ServerResponse.ok("登录成功!", accessTokenInfo);
     }
@@ -76,7 +75,7 @@ public class AuthorizeOAuthTokenController {
      * @return void
      */
     private void verifyCaptcha(HttpServletRequest request, AuthorizeOAuthToken authToken) throws BizException {
-        if (StringUtils.isEmpty(authToken.getCode())) {
+        if (StringUtils.isEmpty(authToken.getVercode())) {
             throw new BizException("验证码不能为空！");
         }
         final String key = CaptchaUtils.getCaptchaKey(request);
@@ -84,7 +83,7 @@ public class AuthorizeOAuthTokenController {
         if (null == cacheCaptcha) {
             throw new BizException("验证码已失效！");
         }
-        if (!authToken.getCode().equalsIgnoreCase(cacheCaptcha)) {
+        if (!authToken.getVercode().equalsIgnoreCase(cacheCaptcha)) {
             throw new BizException("验证码错误！");
         }
         redisTemplate.delete(key);
