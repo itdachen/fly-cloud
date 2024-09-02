@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -33,6 +34,11 @@ public class AuthorizationPermissionFilter implements GlobalFilter, Ordered {
 
         // TODO 权限校验
 
+
+        /* 添加认证成功的请求头 */
+        exchange.mutate().request((r ->
+                r.header(UserInfoConstant.VERIFIED_TICKET, UserInfoConstant.VERIFIED_TICKET_VALUE))
+        ).build();
 
         return chain.filter(exchange);
     }

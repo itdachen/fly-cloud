@@ -19,6 +19,12 @@ class LoginApi {
         })
     }
 
+
+    captcha() {
+
+    }
+
+
 }
 
 

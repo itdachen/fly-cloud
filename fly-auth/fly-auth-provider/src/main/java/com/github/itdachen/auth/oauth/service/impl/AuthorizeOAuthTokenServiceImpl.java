@@ -49,9 +49,7 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
      */
     @Override
     public AccessTokenInfo oauthJwtToken(AuthorizeOAuthToken authToken) throws Exception {
-        if (null == authToken
-                || StringUtils.isEmpty(authToken.getUsername())
-                || StringUtils.isEmpty(authToken.getPassword())) {
+        if (null == authToken || StringUtils.isEmpty(authToken.getUsername()) || StringUtils.isEmpty(authToken.getPassword())) {
             throw new BizException("登录认证信息不全!!!");
         }
 //        CurrentUserDetails currentUserDetails = authorizedMapper.loadUserByUsername(authToken.getUsername());
@@ -67,8 +65,9 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         UserInfoDetails currentUserDetails = new UserInfoDetails();
         currentUserDetails.setUsername("admin");
         currentUserDetails.setNickName("王大宸");
-        currentUserDetails.setId("1");
-        currentUserDetails.setUserType("1");
+        currentUserDetails.setId("1541230113952239617");
+        currentUserDetails.setUserType(UserTypeConstant.MEMBER);
+        currentUserDetails.setTenantId("520115100000001");
 
 
         /* 存放在 token 中的信息 */
@@ -98,7 +97,7 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
 
         return new AccessTokenInfo.Builder()
                 .access_token(access_token)
-             //   .expires_in(Integer.parseInt(String.valueOf(jwtProperties.getExpires())))
+                //   .expires_in(Integer.parseInt(String.valueOf(jwtProperties.getExpires())))
                 .info(infoMap)
                 .build();
     }

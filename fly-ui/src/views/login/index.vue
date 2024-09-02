@@ -34,11 +34,12 @@
                   <lay-form-item :label-width="0">
                     <div style="width: 264px; display: inline-block">
                       <lay-input :allow-clear="true" prefix-icon="layui-icon-vercode" placeholder="验证码"
-                                 v-model="loginForm.code"></lay-input>
+                                 v-model="loginForm.vercode"></lay-input>
                     </div>
 
                     <div class="login-captach" @click="toRefreshImg">
-                      <img style="width: 100%" src="../../assets/login/login-yzm.jpg" alt="获取验证码"/>
+                      <!-- verificationImgUrl src="../../assets/login/login-yzm.jpg" -->
+                      <img id="refresVerCode" style="width: 100%" :src="verificationImgUrl" alt="获取验证码"/>
                     </div>
                   </lay-form-item>
                   <lay-checkbox value="" name="like" v-model="remember" skin="primary" label="1">记住密码</lay-checkbox>
@@ -109,7 +110,7 @@ export default defineComponent({
     const router = useRouter()
     const userStore = useUserStore()
     const method = ref('1')
-    const verificationImgUrl = ref('')
+    const verificationImgUrl = ref('../../assets/login/login-yzm.jpg')
     const loging = ref(false);
     const loginQrcodeText = ref('')
     const remember = ref(false)
@@ -146,12 +147,18 @@ export default defineComponent({
     }
 
     const toRefreshImg = async () => {
-      let {data, code, msg} = await verificationImg()
-      if (code == 200) {
-        verificationImgUrl.value = data.data
-      } else {
-        layer.msg(msg, {icon: 2})
-      }
+   //   verificationImgUrl.value = "http://localhost:8080/api/auth/captcha?" + new Date().getTime();
+
+      verificationImgUrl.value = "../../assets/login/login-yzm.jpg";
+
+      //  $("#codes").attr("src", 'http://localhost:6066/api//code/image?time=' + $.now());
+
+      // let {data, code, msg} = await verificationImg()
+      // if (code == 200) {
+      //   verificationImgUrl.value = data.data
+      // } else {
+      //   layer.msg(msg, {icon: 2})
+      // }
     }
     const toRefreshQrcode = async () => {
       let {data, code, msg} = await loginQrcode()
