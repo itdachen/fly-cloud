@@ -94,6 +94,18 @@ public class UserInfo implements Serializable {
     private String remarks;
 
     /**
+     * 删除标志
+     */
+    @Column(name = "del_flag")
+    private String delFlag;
+
+    /**
+     * 删除时间
+     */
+    @Column(name = "del_time")
+    private LocalDateTime delTime;
+
+    /**
      * 创建时间
      */
     @Column(name = "create_time")
@@ -134,7 +146,7 @@ public class UserInfo implements Serializable {
     }
 
 
-    public UserInfo(String id, String tenantId, String tenantTitle, String nickName, String idCard, String sex, String telephone, String avatar, String eMailBox, String userType, String validFlag, String remarks, LocalDateTime createTime, String createUser, String createUserId, LocalDateTime updateTime, String updateUser, String updateUserId) {
+    public UserInfo(String id, String tenantId, String tenantTitle, String nickName, String idCard, String sex, String telephone, String avatar, String eMailBox, String userType, String validFlag, String remarks, String delFlag, LocalDateTime delTime, LocalDateTime createTime, String createUser, String createUserId, LocalDateTime updateTime, String updateUser, String updateUserId) {
         this.id = id;
         this.tenantId = tenantId;
         this.tenantTitle = tenantTitle;
@@ -147,6 +159,8 @@ public class UserInfo implements Serializable {
         this.userType = userType;
         this.validFlag = validFlag;
         this.remarks = remarks;
+        this.delFlag = delFlag;
+        this.delTime = delTime;
         this.createTime = createTime;
         this.createUser = createUser;
         this.createUserId = createUserId;
@@ -172,6 +186,8 @@ public class UserInfo implements Serializable {
         private String userType;
         private String validFlag;
         private String remarks;
+        private String delFlag;
+        private LocalDateTime delTime;
         private LocalDateTime createTime;
         private String createUser;
         private String createUserId;
@@ -254,6 +270,18 @@ public class UserInfo implements Serializable {
             return this;
         }
 
+        /* 删除标志 */
+        public UserInfoBuilder delFlag(String delFlag) {
+            this.delFlag = delFlag;
+            return this;
+        }
+
+        /* 删除时间 */
+        public UserInfoBuilder delTime(LocalDateTime delTime) {
+            this.delTime = delTime;
+            return this;
+        }
+
         /* 创建时间 */
         public UserInfoBuilder createTime(LocalDateTime createTime) {
             this.createTime = createTime;
@@ -303,6 +331,8 @@ public class UserInfo implements Serializable {
                     userType,
                     validFlag,
                     remarks,
+                    delFlag,
+                    delTime,
                     createTime,
                     createUser,
                     createUserId,
@@ -410,6 +440,22 @@ public class UserInfo implements Serializable {
         return remarks;
     }
 
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelTime(LocalDateTime delTime) {
+        this.delTime = delTime;
+    }
+
+    public LocalDateTime getDelTime() {
+        return delTime;
+    }
+
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
@@ -474,6 +520,8 @@ public class UserInfo implements Serializable {
                 .append("userType", getUserType())
                 .append("validFlag", getValidFlag())
                 .append("remarks", getRemarks())
+                .append("delFlag", getDelFlag())
+                .append("delTime", getDelTime())
                 .append("createTime", getCreateTime())
                 .append("createUser", getCreateUser())
                 .append("createUserId", getCreateUserId())
@@ -482,6 +530,5 @@ public class UserInfo implements Serializable {
                 .append("updateUserId", getUpdateUserId())
                 .toString();
     }
-
 
 }

@@ -1,6 +1,10 @@
 package com.github.itdachen.admin.service.impl;
 
+import com.github.itdachen.admin.entity.LoginInfo;
+import com.github.itdachen.admin.mapper.ILoginInfoMapper;
 import com.github.itdachen.framework.context.BizContextHandler;
+import com.github.itdachen.framework.context.constants.YesOrNotConstant;
+import com.github.itdachen.framework.context.exception.BizException;
 import com.github.itdachen.framework.core.response.TableData;
 import com.github.itdachen.framework.webmvc.entity.EntityUtils;
 import com.github.itdachen.framework.webmvc.service.impl.BizServiceImpl;
@@ -17,8 +21,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,7 +42,10 @@ public class UserInfoServiceImpl extends BizServiceImpl<IUserInfoMapper, UserInf
     private static final UserInfoConvert bizConvert = new UserInfoConvert();
     private final List<String> EXP_FIELDS = new ArrayList<>();
 
-    public UserInfoServiceImpl() {
+
+    private final ILoginInfoMapper loginInfoMapper;
+
+    public UserInfoServiceImpl(ILoginInfoMapper loginInfoMapper) {
         super(bizConvert);
 
         EXP_FIELDS.add("昵称");
@@ -43,6 +53,7 @@ public class UserInfoServiceImpl extends BizServiceImpl<IUserInfoMapper, UserInf
         EXP_FIELDS.add("性别");
         EXP_FIELDS.add("电话号码");
         EXP_FIELDS.add("电子邮箱");
+        this.loginInfoMapper = loginInfoMapper;
     }
 
     /***
@@ -60,13 +71,70 @@ public class UserInfoServiceImpl extends BizServiceImpl<IUserInfoMapper, UserInf
         return new TableData<UserInfoVO>(page.getTotal(), list);
     }
 
+    /***
+     * 新增
+     *
+     * @author 王大宸
+     * @date 2024/9/2 16:21
+     * @param userInfoDTO userInfoDTO
+     * @return com.github.itdachen.admin.sdk.vo.UserInfoVO
+     */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public UserInfoVO saveInfo(UserInfoDTO userInfoDTO) throws Exception {
-        UserInfo javaObject = bizConvert.toJavaObject(userInfoDTO);
-        EntityUtils.setCreateInfo(javaObject);
-        System.out.println(BizContextHandler.getTenantId());
-        int i = bizMapper.insertSelective(javaObject);
-        return bizConvert.toJavaObjectVO(javaObject);
+        Integer hasUsername = loginInfoMapper.findLoginInfoByUsername(userInfoDTO.getTelephone());
+        if (null != hasUsername) {
+            throw new BizException("电话号码【" + userInfoDTO.getTelephone() + "】已经存在");
+        }
+
+        UserInfo userInfo = bizConvert.toJavaObject(userInfoDTO);
+        EntityUtils.setCreateInfo(userInfo);
+        userInfo.setDelFlag(YesOrNotConstant.N);
+        bizMapper.insertSelective(userInfo);
+
+        LoginInfo loginInfo = LoginInfo.builder()
+                .id(userInfo.getId())
+                .username(userInfo.getTelephone())
+                .password("")
+                .lastPassword("")
+                .validFlag(userInfo.getValidFlag())
+                .delFlag(userInfo.getDelFlag())
+                .expTime(LocalDateTime.now())
+                .lastTime(LocalDateTime.now())
+                .createTime(LocalDateTime.now())
+                .updateTime(LocalDateTime.now())
+                .build();
+        loginInfoMapper.insertSelective(loginInfo);
+        return bizConvert.toJavaObjectVO(userInfo);
+    }
+
+    /***
+     * 更新
+     *
+     * @author 王大宸
+     * @date 2024/9/2 16:30
+     * @param userInfoDTO userInfoDTO
+     * @return com.github.itdachen.admin.sdk.vo.UserInfoVO
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public UserInfoVO updateInfo(UserInfoDTO userInfoDTO) throws Exception {
+        return super.updateInfo(userInfoDTO);
+    }
+
+
+    /***
+     * 删除
+     *
+     * @author 王大宸
+     * @date 2024/9/2 16:30
+     * @param id id
+     * @return int
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int deleteByPrimaryKey(String id) throws Exception {
+        return super.deleteByPrimaryKey(id);
     }
 
     /***
