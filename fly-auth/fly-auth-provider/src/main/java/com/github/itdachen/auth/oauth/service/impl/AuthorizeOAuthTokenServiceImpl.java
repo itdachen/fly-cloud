@@ -3,19 +3,28 @@ package com.github.itdachen.auth.oauth.service.impl;
 import com.github.itdachen.auth.oauth.entity.AuthorizeOAuthToken;
 import com.github.itdachen.auth.oauth.mapper.IAuthorizeOAuthTokenMapper;
 import com.github.itdachen.auth.oauth.service.IAuthorizeOAuthTokenService;
+import com.github.itdachen.boot.autoconfigure.app.AppInfoProperties;
+import com.github.itdachen.boot.autoconfigure.app.PlatformInfoProperties;
+import com.github.itdachen.boot.autoconfigure.cloud.auth.properties.CloudTokenProperties;
 import com.github.itdachen.cloud.jwt.ICryptoTokenHandler;
+import com.github.itdachen.cloud.jwt.handler.TokenUserDetailsHandler;
+import com.github.itdachen.framework.context.constants.LoginMethodConstant;
+import com.github.itdachen.framework.context.constants.TokenTicketConstant;
 import com.github.itdachen.framework.context.constants.UserInfoConstant;
 import com.github.itdachen.framework.context.constants.UserTypeConstant;
 import com.github.itdachen.framework.context.exception.BizException;
 import com.github.itdachen.framework.context.jwt.AccessTokenInfo;
 import com.github.itdachen.framework.context.jwt.JwtTokenInfo;
 import com.github.itdachen.framework.context.userdetails.UserInfoDetails;
+import com.github.itdachen.framework.core.utils.LocalDateUtils;
 import com.github.itdachen.framework.core.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,13 +39,22 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
     private final IAuthorizeOAuthTokenMapper authorizeOAuthTokenMapper;
     private final ICryptoTokenHandler jwtsTokenHelper;
     private final PasswordEncoder passwordEncoder;
+    private final CloudTokenProperties cloudTokenProperties;
+
+    @Autowired
+    private PlatformInfoProperties platformInfoProperties;
+    @Autowired
+    private AppInfoProperties appInfoProperties;
+
 
     public AuthorizeOAuthTokenServiceImpl(IAuthorizeOAuthTokenMapper authorizeOAuthTokenMapper,
                                           ICryptoTokenHandler jwtsTokenHelper,
-                                          PasswordEncoder passwordEncoder) {
+                                          PasswordEncoder passwordEncoder,
+                                          CloudTokenProperties cloudTokenProperties) {
         this.authorizeOAuthTokenMapper = authorizeOAuthTokenMapper;
         this.jwtsTokenHelper = jwtsTokenHelper;
         this.passwordEncoder = passwordEncoder;
+        this.cloudTokenProperties = cloudTokenProperties;
     }
 
     /***
@@ -68,36 +86,48 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         currentUserDetails.setId("1541230113952239617");
         currentUserDetails.setUserType(UserTypeConstant.MEMBER);
         currentUserDetails.setTenantId("520115100000001");
+        currentUserDetails.setTenantTitle("太虚十境");
+        currentUserDetails.setExpTime(LocalDateTime.now());
+        currentUserDetails.setLastTime(LocalDateTime.now());
+
+        /* 密码设置为空 */
+        currentUserDetails.setLoginMethod(LoginMethodConstant.USERNAME_PASSWORD);
+        currentUserDetails.setPassword("");
+        /* 平台/应用信息 */
+        currentUserDetails.setPlatId(platformInfoProperties.getId());
+        currentUserDetails.setPlatName(platformInfoProperties.getTitle());
+        currentUserDetails.setAppId(appInfoProperties.getAppId());
+        currentUserDetails.setAppName(appInfoProperties.getAppName());
+        currentUserDetails.setAppVersion(appInfoProperties.getVersion());
+        currentUserDetails.setAppContextPath(appInfoProperties.getContextPath());
 
 
-        /* 存放在 token 中的信息 */
-        Map<String, String> otherInfo = new HashMap<>(16);
-        otherInfo.put(UserInfoConstant.AVATAR, currentUserDetails.getAvatar());
-        otherInfo.put(UserInfoConstant.TELEPHONE, currentUserDetails.getTelephone());
-        otherInfo.put(UserInfoConstant.USER_TYPE, UserTypeConstant.MEMBER);
-        otherInfo.put(UserInfoConstant.TENANT_ID, currentUserDetails.getTenantId());
-        otherInfo.put(UserInfoConstant.DEPT_LEVEL, currentUserDetails.getDeptLevel());
-
+        Map<String, String> userDetailMap = TokenUserDetailsHandler.setUserDetailMap(currentUserDetails, TokenTicketConstant.ACCESS_TOKEN);
         String access_token = jwtsTokenHelper.token(new JwtTokenInfo.Builder()
                 .username(currentUserDetails.getUsername())
                 .nickName(currentUserDetails.getNickName())
                 .userId(currentUserDetails.getId())
-                .otherInfo(otherInfo)
+                .otherInfo(userDetailMap)
+                .build()
+        );
+
+        Map<String, String> refreshTokenMap = TokenUserDetailsHandler.setUserDetailMap(currentUserDetails, TokenTicketConstant.REFRESH_TOKEN);
+        String refreshToken = jwtsTokenHelper.token(new JwtTokenInfo.Builder()
+                .username(currentUserDetails.getUsername())
+                .nickName(currentUserDetails.getNickName())
+                .userId(currentUserDetails.getId())
+                .otherInfo(refreshTokenMap)
                 .build()
         );
 
 
-        Map<String, Object> infoMap = new HashMap<>(8);
-        infoMap.put(UserInfoConstant.USER_TYPE, UserTypeConstant.MEMBER);
-        infoMap.put(UserInfoConstant.TENANT_ID, currentUserDetails.getTenantId());
-        infoMap.put(UserInfoConstant.AVATAR, currentUserDetails.getAvatar());
-        infoMap.put(UserInfoConstant.NICK_NAME, currentUserDetails.getNickName());
-        infoMap.put(UserInfoConstant.TELEPHONE, currentUserDetails.getTelephone());
-        infoMap.put(UserInfoConstant.DEPT_LEVEL, currentUserDetails.getDeptLevel());
+        Map<String, Object> infoMap = TokenUserDetailsHandler.toFrontEndInfo(currentUserDetails);
 
         return new AccessTokenInfo.Builder()
                 .access_token(access_token)
-                //   .expires_in(Integer.parseInt(String.valueOf(jwtProperties.getExpires())))
+                .refresh_token(refreshToken)
+                .token_type(UserInfoConstant.TOKEN_TYPE)
+                .expires_in(Integer.parseInt(String.valueOf(cloudTokenProperties.getExpires())))
                 .info(infoMap)
                 .build();
     }

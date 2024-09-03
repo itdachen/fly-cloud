@@ -3,6 +3,7 @@ package com.github.itdachen.admin.service.impl;
 import com.github.itdachen.admin.entity.LoginInfo;
 import com.github.itdachen.admin.mapper.ILoginInfoMapper;
 import com.github.itdachen.framework.context.BizContextHandler;
+import com.github.itdachen.framework.context.constants.UserTypeConstant;
 import com.github.itdachen.framework.context.constants.YesOrNotConstant;
 import com.github.itdachen.framework.context.exception.BizException;
 import com.github.itdachen.framework.core.response.TableData;
@@ -22,6 +23,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,10 +44,11 @@ public class UserInfoServiceImpl extends BizServiceImpl<IUserInfoMapper, UserInf
     private static final UserInfoConvert bizConvert = new UserInfoConvert();
     private final List<String> EXP_FIELDS = new ArrayList<>();
 
-
+    private final PasswordEncoder passwordEncoder;
     private final ILoginInfoMapper loginInfoMapper;
 
-    public UserInfoServiceImpl(ILoginInfoMapper loginInfoMapper) {
+    public UserInfoServiceImpl(ILoginInfoMapper loginInfoMapper,
+                               PasswordEncoder passwordEncoder) {
         super(bizConvert);
 
         EXP_FIELDS.add("昵称");
@@ -54,6 +57,7 @@ public class UserInfoServiceImpl extends BizServiceImpl<IUserInfoMapper, UserInf
         EXP_FIELDS.add("电话号码");
         EXP_FIELDS.add("电子邮箱");
         this.loginInfoMapper = loginInfoMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /***
@@ -89,14 +93,19 @@ public class UserInfoServiceImpl extends BizServiceImpl<IUserInfoMapper, UserInf
 
         UserInfo userInfo = bizConvert.toJavaObject(userInfoDTO);
         EntityUtils.setCreateInfo(userInfo);
+        userInfo.setValidFlag(YesOrNotConstant.Y);
         userInfo.setDelFlag(YesOrNotConstant.N);
+        userInfo.setUserType(UserTypeConstant.INSIDE_USER);
         bizMapper.insertSelective(userInfo);
+
+        /* 密码加密 */
+        String password = passwordEncoder.encode(userInfo.getTelephone());
 
         LoginInfo loginInfo = LoginInfo.builder()
                 .id(userInfo.getId())
                 .username(userInfo.getTelephone())
-                .password("")
-                .lastPassword("")
+                .password(password)
+                .lastPassword(password)
                 .validFlag(userInfo.getValidFlag())
                 .delFlag(userInfo.getDelFlag())
                 .expTime(LocalDateTime.now())
