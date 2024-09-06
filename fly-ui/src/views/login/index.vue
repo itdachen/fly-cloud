@@ -100,7 +100,7 @@ import {login} from '../../api/module/user'
 import {verificationImg, loginQrcode} from '../../api/module/commone'
 import {defineComponent, onMounted, reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
-import {useUserStore} from '../../store/user'
+import {useUserStore} from '@/store/user';
 import {layer} from '@layui/layer-vue'
 import LoginApi from "@/api/login/LoginApi";
 
@@ -129,6 +129,8 @@ export default defineComponent({
           loging.value = false;
           if (res.status == 200) {
             layer.msg(res.msg, {icon: 1}, async () => {
+              // 将 token 存入本地缓存
+              localStorage.setItem('token', res.data.access_token)
               userStore.token = res.data.access_token
               await userStore.loadMenus()
               await userStore.loadPermissions()

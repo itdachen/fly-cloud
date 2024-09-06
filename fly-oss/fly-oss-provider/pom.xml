@@ -10,6 +10,9 @@
     </parent>
 
     <artifactId>fly-oss-provider</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <description>文件上传服务提供者</description>
 
 
 </project>

@@ -1,9 +1,8 @@
 import {ServerResponse, TableData} from "axios";
-import {BizQuery} from "../../hooks/biz/BizModel";
+import {BizQuery} from "@/hooks/biz/BizModel";
 
-const {isEmpty} = useStringComposable();
-import httpAxios from "axios";
-import useStringComposable from "../../utils/StringUtils";
+import httpAxios from "@/http/index";
+import {StringUtils} from "@/fly/utils/StringUtils";
 
 /**
  * 基于 Restful Api 接口规范, 封装常用请求
@@ -22,7 +21,7 @@ export class HttpRequest<T, Q extends BizQuery, PK> {
      * @param path 后端 controller 类上路径
      */
     constructor(path: string) {
-        if (isEmpty(path)) {
+        if (StringUtils.isEmpty(path)) {
             console.warn("请检查 path 是否为空")
             path = '';
         }

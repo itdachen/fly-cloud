@@ -1,12 +1,13 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse, ServerResponse} from "axios";
 import {BASIC, TOKEN_TYPE, TIME_OUT, OPEN_URL, CONTENT_TYPE} from "@/http/conf/config";
-// import {ElMessage} from "element-plus";
-import useStringComposable from '@/utils/StringUtils'
-import {ResultStatusCode} from "@/http/enums/ResultStatusCode";
-import {useRouter} from 'vue-router'
 
-const {isEmpty, split} = useStringComposable();
-const router = useRouter()
+import {StringUtils} from '@/fly/utils/StringUtils';
+import {ResultStatusCode} from "@/http/enums/ResultStatusCode";
+import {useRouter} from 'vue-router';
+// import {useUserStore} from '@/store/user';
+
+// const userStore = useUserStore();
+const router = useRouter();
 
 class ApiRequest {
     private instance: AxiosInstance;
@@ -31,8 +32,13 @@ class ApiRequest {
                     console.warn('请求路径不能为空');
                     url = '/404'
                 }
+                // console.log('token ==>', userStore.token);
+                // let access_token = userStore.token;
                 config.headers = basicHeaders();
-                let strings = split(OPEN_URL, ',');
+                // if (StringUtils.isEmpty(access_token)) {
+                //     config.headers.Authorization = TOKEN_TYPE + 'access_token';
+                // }
+                let strings = StringUtils.split(OPEN_URL, ',');
                 let isOpen = false; // false 需要拦截, true 的时候, 是不需要拦截的
                 for (let i = 0; i < strings.length; i++) {
                     if (url.indexOf(strings[i]) !== -1) {
@@ -41,15 +47,16 @@ class ApiRequest {
                     }
                 }
                 const token = this.getToken();
+            //   let token = userStore.token;
                 // 需要认证 但是没有token的存在
-                if (!isOpen && isEmpty(token)) {
+                if (!isOpen && StringUtils.isEmpty(token)) {
                     //  ElMessage.error('请先登录')
                     // 清空本地缓存
                     localStorage.clear();
                     // 路由跳转
                     router.push('/Login');
                 }
-                if (!isEmpty(token)) {
+                if (!StringUtils.isEmpty(token)) {
                     config.headers = {
                         'content-type': CONTENT_TYPE,
                         'Authorization': TOKEN_TYPE + token

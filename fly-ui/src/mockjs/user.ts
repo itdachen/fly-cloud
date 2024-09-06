@@ -256,7 +256,23 @@ const menus = [
 
     ]
   },
-
+  {
+    id: '/admin',
+    icon: "layui-icon-set",
+    title: '系统管理_ADMIN',
+    children: [
+      {
+        id: '/admin/app',
+        icon: "layui-icon-user",
+        title: '应用管理',
+      },
+      {
+        id: '/admin/user',
+        icon: "layui-icon-user",
+        title: '用户管理',
+      },
+    ]
+  },
 ]
 
 const getInfo = (req: any, res: any) => {

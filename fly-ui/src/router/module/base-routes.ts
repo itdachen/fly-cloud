@@ -231,6 +231,23 @@ export default [
       },
 
     ]
+  },{
+    path: '/admin',
+    component: BasicLayout,
+    meta: { title: '系统管理' },
+    children: [
+      {
+        path: '/admin/app',
+        component: () => import('../../views/admin/app/index.vue'),
+        meta: { title: '应用管理', requireAuth: true },
+      },
+      {
+        path: '/admin/user',
+        component: () => import('../../views/admin/user/index.vue'),
+        meta: { title: '用户管理', requireAuth: true },
+      },
+
+    ]
   },
 
 

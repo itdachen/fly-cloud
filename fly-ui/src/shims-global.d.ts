@@ -22,7 +22,13 @@ declare module 'axios' {
      * table 表格返回数据
      */
     interface TableData<T> {
+        loading: boolean, // 是否加载
         total: number,
+        page: number,
+        limit: number,
+        limits: number[],
+        layout: string[],
+        pages: number,
         rows: T[]
     }
 

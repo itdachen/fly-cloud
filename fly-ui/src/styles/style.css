@@ -1,0 +1,197 @@
+
+.fly-button {
+    height: 33px;
+    line-height: 33px;
+    width: auto;
+    border-radius: 3px;
+    /*margin-top: 5px; font-weight: 400; //color: #ffffff; padding: 0 12px 0 10px; font-size: 16px; text-align: center; //transition: transform 0.3s ease; !* 平滑变化 *!*/
+}
+
+.fly-button:hover {
+    /*transform: scale(1.1); !* 放大10% *!*/
+}
+
+.fly-button i {
+    font-size: 18px !important;
+    /*margin-right: 2px;*/
+}
+
+.layui-table-tool .layui-btn {
+    letter-spacing: 2px !important;
+}
+
+.layui-table-cell-content .layui-btn {
+    letter-spacing: 2px !important;
+}
+
+.fly-toolbar-addition {
+    background-color: #1E9FFF !important;
+    border-color: #31BDEC !important;
+}
+
+.fly-toolbar-addition:hover {
+    background-color: #31BDEC !important;
+}
+
+
+.fly-edit-button {
+    background-color: #6572ff !important;
+    border-color: #6c87ff !important;
+}
+
+.fly-edit-button:hover {
+    background-color: rgba(101, 114, 255, 0.64);
+    border-color: rgba(101, 114, 255, 0.13);
+}
+
+.fly-remove-button {
+    background-repeat: no-repeat !important;
+    background-position: 10px center !important;
+    color: #ffffff !important;
+    background-color: #ff7652 !important;
+    border-color: #fc8160 !important;
+}
+
+.fly-view-button {
+    background-color: #1E9FFF !important;
+    border-color: #31BDEC !important;
+}
+
+.fly-ok-button {
+    display: inline-block;
+    white-space: nowrap !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    background: #438de3 !important;
+    border: #8dc5f5 1px solid !important;
+    color: #FFFFFF !important;
+    margin-right: 2px;
+    /*padding: 0 15px !important;*/
+    letter-spacing: 2px;
+}
+
+.fly-ok-button:hover {
+    background-color: #8dc5f5 !important;
+}
+
+.fly-form-footer {
+    width: 100%;
+    text-align: right;
+    border-top: 1px solid #f0f0f0;
+    padding: 10px 30px 10px 14px;
+    border-top: #f3f3f3 1px solid;
+    left: 0;
+}
+
+.fly-close-button {
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    cursor: pointer;
+    /*padding: 0 15px !important;*/
+    border: 1px solid #C9C9C9;
+    background-color: #fff;
+    color: #555;
+    letter-spacing: 2px;
+}
+
+.fly-close-button:hover {
+    background-color: #e8f7f6;
+    border-color: #b9e8e3;
+    color: #79ada7;
+}
+
+.fly-container {
+    height: calc(100vh - 110px);
+    margin-top: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+.fly-button-search {
+    background-color: #e8f7f6 !important;
+    border-color: #b9e8e3 !important;
+    color: #17B3A3 !important;
+    letter-spacing: 3px;
+}
+
+.fly-button-search:hover {
+    background-color: #e8f7f6 !important;
+    border-color: #b9e8e3 !important;
+    color: #17B3A3 !important;
+    letter-spacing: 4px;
+}
+
+
+.fly-button-reset {
+    background-color: #1e9fff !important;
+    border-color: #1e9fff !important;
+    color: #FFFFFF !important;
+    letter-spacing: 3px !important;
+}
+
+.fly-button-reset:hover {
+    letter-spacing: 4px;
+}
+
+.fly-button-exp {
+    border-radius: 3px;
+    background-color: #16baaa !important;
+    border-color: #16baaa !important;
+    color: #FFFFFF !important;
+    height: 30px !important;
+    line-height: 30px !important;
+    letter-spacing: 3px !important;
+}
+
+.fly-button-exp:hover {
+    letter-spacing: 4px;
+}
+
+.fly-search-card {
+    margin-bottom: 0 !important;
+    padding-top: 30px;
+}
+
+
+/**************************************************************************************************************************/
+
+
+.user-box {
+    height: calc(100vh - 110px);
+    margin-top: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.top-search {
+    margin-top: 10px;
+    padding: 10px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.table-box {
+    /*margin-top: 10px;*/
+    padding: 10px;
+    height: 700px;
+    width: 100%;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.search-input {
+    display: inline-block;
+    width: 98%;
+    margin-right: 10px;
+}
+
+.isChecked {
+    display: inline-block;
+    background-color: #e8f1ff;
+    color: red;
+}
+

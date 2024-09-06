@@ -143,7 +143,8 @@ mybatis:
 
 # 分页工具
 pagehelper:
-  helperDialect: oracle
+  helperDialect: mysql
+  auto-runtime-dialect: true
   # 超过总页数是否返回最后一页数据
   reasonable: false
   supportMethodsArguments: true
