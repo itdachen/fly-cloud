@@ -47,7 +47,7 @@ class ApiRequest {
                     }
                 }
                 const token = this.getToken();
-            //   let token = userStore.token;
+                //   let token = userStore.token;
                 // 需要认证 但是没有token的存在
                 if (!isOpen && StringUtils.isEmpty(token)) {
                     //  ElMessage.error('请先登录')
@@ -71,13 +71,14 @@ class ApiRequest {
          */
         this.instance.interceptors.response.use((response: AxiosResponse<ServerResponse<any>>) => {
                 removePending(response.config)
-                const res = response.data
+                const res = response.data;
+                console.log('res', res)
                 if (ResultStatusCode.SUCCESS === res.status) {
                     return res
                 }
                 //  ElMessage.error(res.msg)
                 /* 登录 token 异常, 这里加入路由前置守卫, 跳转到登录页面 */
-                if (res.status === ResultStatusCode.CLIENT_TOKEN_EXCEPTION) {
+                if (res.status == ResultStatusCode.CLIENT_TOKEN_EXCEPTION) {
                     // 清空本地缓存
                     localStorage.clear();
                     // 路由跳转

@@ -31,6 +31,7 @@ export default function useAppInfoComposable() {
      * @param params
      */
     const loadTableAppInfoData = (params: AppInfoQuery) => {
+        console.log('page', params)
         tableAppInfoData.loading = true;
         appInfoApi.page(params).then(res => {
             tableAppInfoData.total = res.data.total;
@@ -118,6 +119,12 @@ export default function useAppInfoComposable() {
         })
     }
 
+    /**
+     * 页面初始化, 加载数据
+     */
+    onMounted(() => {
+        reloadAppInfoDate();
+    })
 
 
     return {

@@ -14,7 +14,7 @@ export const enum ResultStatusCode {
     /* token 令牌异常 */
     EX_USER_INVALID_CODE = 40101,
     /* 用户认证异常 */
-    CLIENT_TOKEN_EXCEPTION = 401100,
+    CLIENT_TOKEN_EXCEPTION = 401,
     /* 用户不存在 */
     NO_LOGIN_USER_INFO = 401404,
     /* 账号已被冻结 */

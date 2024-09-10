@@ -1,6 +1,11 @@
 <template>
-  <lay-layer :title="layerRef.title" :area="layerRef.area" v-model="layerRef.open">
-    <div style="padding: 20px">
+
+  <lay-layer :title="layerRef.title"
+             :area="layerRef.area"
+             :maxmin="true"
+             v-model="layerRef.open"
+             :btn="refAppInfoAction">
+    <div style="padding: 20px; ">
       <lay-form :model="appInfo" ref="layAppInfoForm" labelWidth="120px">
 
         <lay-form-item label="平台ID" prop="platId" required="true">
@@ -51,18 +56,6 @@
           <lay-input v-model="appInfo.iconIco"></lay-input>
         </lay-form-item>
 
-        <lay-form-item label="职能代码" prop="funcCode">
-          <lay-input v-model="appInfo.funcCode"></lay-input>
-        </lay-form-item>
-
-        <lay-form-item label="职能名称" prop="funcTitle">
-          <lay-input v-model="appInfo.funcTitle"></lay-input>
-        </lay-form-item>
-
-        <lay-form-item label="是否可删除" prop="validDel">
-          <lay-input v-model="appInfo.validDel"></lay-input>
-        </lay-form-item>
-
         <lay-form-item label="有效标志" prop="validFlag">
           <lay-input v-model="appInfo.validFlag"></lay-input>
         </lay-form-item>
@@ -73,39 +66,67 @@
       </lay-form>
 
     </div>
-    <div class="fly-form-footer">
-      <lay-button v-if="showToSubmit" class="fly-button fly-ok-button " @click="toSubmit">
-        <lay-icon class="layui-icon-ok"></lay-icon>
-        保存
-      </lay-button>
-      <lay-button class="fly-button fly-close-button" @click="onTapClose">
-        <lay-icon class="layui-icon-close"></lay-icon>
-        取消
-      </lay-button>
-    </div>
+    <!--    <div class="fly-form-footer">-->
+    <!--      <lay-button v-if="showToSubmit" class="fly-button fly-ok-button " @click="toSubmit">-->
+    <!--        <lay-icon class="layui-icon-ok"></lay-icon>-->
+    <!--        保存-->
+    <!--      </lay-button>-->
+    <!--      <lay-button class="fly-button fly-close-button" @click="onTapClose">-->
+    <!--        <lay-icon class="layui-icon-close"></lay-icon>-->
+    <!--        取消-->
+    <!--      </lay-button>-->
+    <!--    </div>-->
   </lay-layer>
 
 </template>
 
 
-<script setup lang="ts">
+<script setup lang="ts" name="refAppInfo">
 import {reactive, ref} from "vue";
-import {layer} from "@layui/layui-vue";
 import {FormTypeEnum} from "@/hooks/biz/BizModel";
+
+import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
+
+let {
+  appInfo,
+  appInfoDataHandler
+} = useAppInfoComposable();
 
 const showToSubmit = ref<boolean>(true);
 
-/* 弹窗 */
+/* 弹窗  '1200px', '800px' */
 const layerRef = reactive<any>({
   open: false,
   title: '',
-  area: ['1200px', '800px'],
+  area: ['90%', '60%'],
   disabled: false
 })
 
 const layAppInfoForm = ref<any>();
 
-const appInfo = ref<any>({});
+
+/**
+ * 操作按钮
+ */
+const refAppInfoAction = ref([
+  {
+    text: "确认",
+    class: 'fly-button fly-ok-button',
+    callback: () => {
+      appInfoDataHandler(appInfo);
+      layerRef.open = false;
+      emit('click', appInfo);
+    }
+  },
+  {
+    text: "取消",
+    class: 'fly-button fly-close-button',
+    callback: () => {
+      layerRef.open = false;
+    }
+  }
+])
+
 
 /**
  * 关闭按钮
@@ -119,23 +140,29 @@ const onTapClose = () => {
  * 提交
  */
 function toSubmit() {
-  console.log('数据保存', appInfo.value);
+  appInfoDataHandler(appInfo);
+  layerRef.open = false;
   emit('click', appInfo)
 }
 
 
 //显示弹框
 const open = (type: FormTypeEnum, title: string, row?: any) => {
-  console.log('type: ', type);
-  console.log('row: ', row);
-
   layAppInfoForm.value?.resetFields();
 
-  if (null != row) {
-    appInfo.value = JSON.parse(JSON.stringify(row))
-  }
+  /* 清空表单内容 */
+  resetForm(layAppInfoForm.value, row);
 
-  if (FormTypeEnum.ADD === type || FormTypeEnum.EDIT === type){
+  objCopy(row,appInfo )
+  // if (null != row) {
+  //   objCopy(appInfo,row )
+  //
+  // //  appInfo = JSON.parse(JSON.stringify(row))
+  // } else {
+  //   appInfo = {};
+  // }
+
+  if (FormTypeEnum.ADD === type || FormTypeEnum.EDIT === type) {
     showToSubmit.value = true;
   }
 
@@ -157,12 +184,44 @@ defineExpose({
 //注册事件
 const emit = defineEmits(['click']);
 
+
+/**
+ * 对象快速复制：var1 复制到 var2
+ * @param var1
+ * @param var2
+ */
+const objCopy = (var1: any, var2: any) => {
+  debugger
+  if (null == var1) {
+    var2 = null;
+    return;
+  }
+  Object.keys(var2).forEach(key => {
+    var2[key] = var1[key]
+  })
+}
+
+/**
+ * 重置表单
+ */
+const resetForm = (fromRef: any, obj: any) => {
+  //清空数据
+  Object.keys(obj).forEach(key => {
+    obj[key] = ''
+  })
+  //清除表单的验证
+  if (fromRef) {
+    fromRef.resetFields();
+    fromRef.clearValidate();
+  }
+}
+
 /**************************************************************************************************************/
 
 const items4 = ref([
   {label: '选项1', value: 1},
   {label: '选项2', value: 2},
-  {label: '选项3', value: 3, disabled: true},
+  {label: '选项3', value: 3},
 ])
 
 const visible11 = ref(true);

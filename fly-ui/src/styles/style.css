@@ -78,9 +78,11 @@
     width: 100%;
     text-align: right;
     border-top: 1px solid #f0f0f0;
-    padding: 10px 30px 10px 14px;
+    padding: 10px 30px 10px 30px;
     border-top: #f3f3f3 1px solid;
-    left: 0;
+    position: absolute; /* 设置为绝对定位 */
+    /*postion:fixed;*/
+    bottom: 0; /* 定位到div的底部 */
 }
 
 .fly-close-button {
@@ -154,6 +156,9 @@
     padding-top: 30px;
 }
 
+.layui-layer-btn .layui-layer-btn-r {
+    border-top: 1px solid #E0E0E0 !important;
+}
 
 /**************************************************************************************************************************/
 

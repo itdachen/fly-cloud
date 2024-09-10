@@ -18,7 +18,7 @@
 
         <lay-form-item mode="inline">
           <lay-button class="fly-button fly-button-search" style="margin-left: 20px" type="primary" size="sm"
-                      @click=" reloadAppInfoDate ">
+                      @click=" refreshData ">
             <lay-icon class="layui-icon-search"></lay-icon>
             查询
           </lay-button>
@@ -35,10 +35,9 @@
 
     </lay-card>
 
-
-    <!-- table   :default-toolbar="true"  :height="'100%'" line row nob -->
+<!-- :skin="'nob'" -->
     <div class="table-box">
-      <lay-table :page="false" :skin="'nob'"
+      <lay-table :page="false"
                  :height="'90%'"
                  :columns=" appInfoColumns "
                  :loading=" tableAppInfoData.loading "
@@ -63,7 +62,7 @@
           </lay-button>
 
           <lay-button size="sm" type="danger" class="fly-button fly-remove-button"
-                      @click=" removeAppInfoHandler(row.id) ">
+                      @click=" removeAppInfoHandler(row.id, row.appTitle) ">
             <lay-icon class="layui-icon-delete"></lay-icon>
             删除
           </lay-button>
@@ -91,15 +90,12 @@
 
 
 <script setup lang="ts">
-import {ref, reactive, onMounted} from 'vue';
-import {layer} from '@layui/layui-vue';
 import AddAndEdit from './ref.vue';
 
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
 
 const {
   refAppInfo,
-  appInfo,
   tableAppInfoData,
   appInfoColumns,
   queryAppInfoParams,
@@ -114,16 +110,9 @@ const {
   onTapAppInfoView,
 
   /* 接口 */
-  removeAppInfoHandler,
-  appInfoDataHandler
+  removeAppInfoHandler
 } = useAppInfoComposable();
 
-/**
- * 页面初始化, 加载数据
- */
-onMounted(() => {
-  reloadAppInfoDate();
-})
 
 /**
  * 上一页, 下一页
@@ -148,5 +137,15 @@ const refreshData = () => {
 
 
 <style scoped>
-
+.layui-table-cell,
+.layui-table-tool-panel li {
+  text-overflow: unset !important;
+  white-space: unset !important;
+  word-wrap: break-word !important;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
 </style>
