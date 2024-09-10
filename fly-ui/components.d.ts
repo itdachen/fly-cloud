@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Flyer: typeof import('./src/components/flyer/index.vue')['default']
     LayAvatar: typeof import('@layui/layui-vue')['LayAvatar']
     LayAvatarList: typeof import('@layui/layui-vue')['LayAvatarList']
     LayBadge: typeof import('@layui/layui-vue')['LayBadge']

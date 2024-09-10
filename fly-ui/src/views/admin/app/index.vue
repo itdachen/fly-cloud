@@ -70,7 +70,6 @@
         </template>
       </lay-table>
 
-
       <lay-page v-model="tableAppInfoData.page"
                 :layout="tableAppInfoData.layout"
                 v-model:limit="tableAppInfoData.limit"
@@ -79,12 +78,11 @@
                 :limits="tableAppInfoData.limits"
                 theme="blue"
                 @change="previousNextPage" style="margin-top: 15px"></lay-page>
-
     </div>
   </lay-container>
 
 
-  <AddAndEdit ref="refAppInfo" @click="refreshData"/>
+ <AddAndEdit ref="refAppInfo" @click="refreshData"/>
 
 </template>
 
@@ -95,6 +93,7 @@ import AddAndEdit from './ref.vue';
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
 
 const {
+  appInfo,
   refAppInfo,
   tableAppInfoData,
   appInfoColumns,

@@ -3,9 +3,9 @@
   <lay-layer :title="layerRef.title"
              :area="layerRef.area"
              :maxmin="true"
-             v-model="layerRef.open"
-             :btn="refAppInfoAction">
+             v-model="layerRef.open">
     <div style="padding: 20px; ">
+
       <lay-form :model="appInfo" ref="layAppInfoForm" labelWidth="120px">
 
         <lay-form-item label="平台ID" prop="platId" required="true">
@@ -61,21 +61,26 @@
         </lay-form-item>
 
         <lay-form-item label="备注" prop="remarks">
-          <lay-input v-model="appInfo.remarks"></lay-input>
+          <lay-textarea placeholder="请输入备注" v-model="appInfo.remarks"></lay-textarea>
         </lay-form-item>
       </lay-form>
 
     </div>
-    <!--    <div class="fly-form-footer">-->
-    <!--      <lay-button v-if="showToSubmit" class="fly-button fly-ok-button " @click="toSubmit">-->
-    <!--        <lay-icon class="layui-icon-ok"></lay-icon>-->
-    <!--        保存-->
-    <!--      </lay-button>-->
-    <!--      <lay-button class="fly-button fly-close-button" @click="onTapClose">-->
-    <!--        <lay-icon class="layui-icon-close"></lay-icon>-->
-    <!--        取消-->
-    <!--      </lay-button>-->
-    <!--    </div>-->
+
+
+    <template v-slot:footer>
+      <div class="fly-form-footer">
+        <lay-button v-if="showToSubmit" class="fly-button fly-ok-button " @click="toSubmit">
+          <lay-icon class="layui-icon-ok"></lay-icon>
+          保存
+        </lay-button>
+        <lay-button class="fly-button fly-close-button" @click="onTapClose">
+          <lay-icon class="layui-icon-close"></lay-icon>
+          取消
+        </lay-button>
+      </div>
+    </template>
+
   </lay-layer>
 
 </template>
@@ -83,9 +88,11 @@
 
 <script setup lang="ts" name="refAppInfo">
 import {reactive, ref} from "vue";
+import {layer} from '@layui/layer-vue';
 import {FormTypeEnum} from "@/hooks/biz/BizModel";
 
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
+import {AppInfo} from "@/api/admin/model/AppInfoModel";
 
 let {
   appInfo,
@@ -102,31 +109,7 @@ const layerRef = reactive<any>({
   disabled: false
 })
 
-const layAppInfoForm = ref<any>();
-
-
-/**
- * 操作按钮
- */
-const refAppInfoAction = ref([
-  {
-    text: "确认",
-    class: 'fly-button fly-ok-button',
-    callback: () => {
-      appInfoDataHandler(appInfo);
-      layerRef.open = false;
-      emit('click', appInfo);
-    }
-  },
-  {
-    text: "取消",
-    class: 'fly-button fly-close-button',
-    callback: () => {
-      layerRef.open = false;
-    }
-  }
-])
-
+const layAppInfoForm = ref();
 
 /**
  * 关闭按钮
@@ -140,30 +123,27 @@ const onTapClose = () => {
  * 提交
  */
 function toSubmit() {
-  appInfoDataHandler(appInfo);
-  layerRef.open = false;
-  emit('click', appInfo)
+  layAppInfoForm.value.validate((isValidate: boolean, model: any, errors: any[]) => {
+    if (!isValidate) {
+      return;
+    }
+    appInfoDataHandler(appInfo);
+    layerRef.open = false;
+    emit('click', appInfo);
+  })
 }
 
 
 //显示弹框
-const open = (type: FormTypeEnum, title: string, row?: any) => {
+const open = (type: FormTypeEnum, title: string, row?: AppInfo) => {
   layAppInfoForm.value?.resetFields();
+  showToSubmit.value = true;
+  // layAppInfoForm.value.reset();
 
-  /* 清空表单内容 */
-  resetForm(layAppInfoForm.value, row);
-
-  objCopy(row,appInfo )
-  // if (null != row) {
-  //   objCopy(appInfo,row )
-  //
-  // //  appInfo = JSON.parse(JSON.stringify(row))
-  // } else {
-  //   appInfo = {};
-  // }
-
-  if (FormTypeEnum.ADD === type || FormTypeEnum.EDIT === type) {
-    showToSubmit.value = true;
+  if (null !== row) {
+    objCopy(row, appInfo);
+  } else {
+    appInfo = {};
   }
 
   if (FormTypeEnum.VIEW === type) {
@@ -191,20 +171,30 @@ const emit = defineEmits(['click']);
  * @param var2
  */
 const objCopy = (var1: any, var2: any) => {
-  debugger
   if (null == var1) {
-    var2 = null;
+    var2 = {};
     return;
   }
-  Object.keys(var2).forEach(key => {
+  // for (let key in var1) {
+  //   if (var1.hasOwnProperty(key)) {
+  //     var2[key] = var1[key];
+  //   }
+  // }
+
+  Object.keys(var1).forEach(key => {
     var2[key] = var1[key]
   })
+  console.log('var1', var1);
+  console.log('var2', var2);
 }
 
 /**
  * 重置表单
  */
 const resetForm = (fromRef: any, obj: any) => {
+  if (null === obj || undefined === obj) {
+    return;
+  }
   //清空数据
   Object.keys(obj).forEach(key => {
     obj[key] = ''

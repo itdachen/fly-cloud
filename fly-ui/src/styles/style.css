@@ -80,9 +80,7 @@
     border-top: 1px solid #f0f0f0;
     padding: 10px 30px 10px 30px;
     border-top: #f3f3f3 1px solid;
-    position: absolute; /* 设置为绝对定位 */
-    /*postion:fixed;*/
-    bottom: 0; /* 定位到div的底部 */
+    background-color: #FFFFFF;
 }
 
 .fly-close-button {
@@ -90,7 +88,6 @@
     white-space: nowrap;
     text-align: center;
     cursor: pointer;
-    /*padding: 0 15px !important;*/
     border: 1px solid #C9C9C9;
     background-color: #fff;
     color: #555;
