@@ -5,6 +5,7 @@ import useAppInfoBuilder, {AppInfo, AppInfoQuery} from "@/api/admin/model/AppInf
 import AppInfoApi from '@/api/admin/AppInfoApi';
 import {FormTypeEnum} from "@/hooks/biz/BizModel";
 import {LayTableUtils} from "@/fly/utils/LayTableUtils";
+import useLayTableComposable from '@/components/table/index';
 import {onMounted} from "vue";
 
 const appInfoApi = new AppInfoApi();
@@ -16,6 +17,7 @@ const {
     refAppInfo
 } = useAppInfoBuilder();
 
+const {layPage} = useLayTableComposable();
 
 /**
  * 应用信息 处理
@@ -31,7 +33,6 @@ export default function useAppInfoComposable() {
      * @param params
      */
     const loadTableAppInfoData = (params: AppInfoQuery) => {
-        console.log('page', params)
         tableAppInfoData.loading = true;
         appInfoApi.page(params).then(res => {
             tableAppInfoData.total = res.data.total;
@@ -130,6 +131,7 @@ export default function useAppInfoComposable() {
     return {
         refAppInfo,
         appInfo,
+        layPage,
         tableAppInfoData,
         appInfoColumns,
         queryAppInfoParams,

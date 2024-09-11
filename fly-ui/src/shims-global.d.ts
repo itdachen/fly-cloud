@@ -24,12 +24,12 @@ declare module 'axios' {
     interface TableData<T> {
         loading: boolean, // 是否加载
         total: number,
+        rows: T[],
         page: number,
         limit: number,
         limits: number[],
         layout: string[],
-        pages: number,
-        rows: T[]
+        pages: number
     }
 
     /**

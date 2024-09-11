@@ -26,7 +26,7 @@ class ApiRequest {
          */
         this.instance.interceptors.request.use((config) => {
                 removePending(config)
-                addPending(config)
+            //    addPending(config)
                 let url: string | undefined = config.url;
                 if (undefined == url) {
                     console.warn('请求路径不能为空');
@@ -72,7 +72,6 @@ class ApiRequest {
         this.instance.interceptors.response.use((response: AxiosResponse<ServerResponse<any>>) => {
                 removePending(response.config)
                 const res = response.data;
-                console.log('res', res)
                 if (ResultStatusCode.SUCCESS === res.status) {
                     return res
                 }

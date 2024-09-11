@@ -9,6 +9,19 @@ export interface BizQuery {
     // endTime?: string // 查询结束时间
 }
 
+/**
+ * 分页
+ */
+export interface LayPage {
+    /* 默认分页页面 */
+    page: number,
+    /* 每页查询条数 */
+    limit: number,
+    /* 可选择的查询额页面条数 */
+    limits: number[],
+    layout: string[],
+    pages: number
+}
 
 /**
  * 查询时间类型

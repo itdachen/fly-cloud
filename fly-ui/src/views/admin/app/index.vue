@@ -70,14 +70,29 @@
         </template>
       </lay-table>
 
-      <lay-page v-model="tableAppInfoData.page"
-                :layout="tableAppInfoData.layout"
-                v-model:limit="tableAppInfoData.limit"
-                :pages="tableAppInfoData.pages"
-                :total="tableAppInfoData.total"
-                :limits="tableAppInfoData.limits"
-                theme="blue"
-                @change="previousNextPage" style="margin-top: 15px"></lay-page>
+
+      <lay-page v-model="current5"  :layout="layout5" v-model:limit="limit5" :pages="pages5" :total="total5"  @change="change5"></lay-page>
+
+
+<!--      <lay-page v-model="tableAppInfoData.page"-->
+<!--                :layout="tableAppInfoData.layout"-->
+<!--                v-model:limit="tableAppInfoData.limit"-->
+<!--                :pages="tableAppInfoData.pages"-->
+<!--                :total="tableAppInfoData.total"-->
+<!--                :limits="tableAppInfoData.limits"-->
+<!--                theme="blue"-->
+<!--                @change="previousNextPage" style="margin-top: 15px"></lay-page>-->
+
+<!--      <lay-page v-model="layPage.page"-->
+<!--                :layout="layPage.layout"-->
+<!--                :pages="layPage.pages"-->
+<!--                :limits="layPage.limits"-->
+<!--                v-model:limit="layPage.limit"-->
+<!--                theme="blue"-->
+<!--                :total="tableAppInfoData.total"-->
+<!--                @change="previousNextPage" style="margin-top: 15px"></lay-page>-->
+
+
     </div>
   </lay-container>
 
@@ -91,9 +106,11 @@
 import AddAndEdit from './ref.vue';
 
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
+import {ref} from "vue";
 
 const {
   appInfo,
+  layPage,
   refAppInfo,
   tableAppInfoData,
   appInfoColumns,
@@ -131,6 +148,14 @@ const refreshData = () => {
   queryAppInfoParams.page = 1;
   loadTableAppInfoData(queryAppInfoParams);
 }
+
+
+
+const limit5 = ref(10)
+const total5 = ref(99)
+const pages5 = ref(7);
+const current5 = ref(1);
+const layout5 = ref(['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'])
 
 </script>
 
