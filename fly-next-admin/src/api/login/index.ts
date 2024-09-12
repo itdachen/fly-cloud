@@ -11,7 +11,7 @@ export function useLoginApi() {
 	return {
 		signIn: (data: object) => {
 			return request({
-				url: '/user/signIn',
+				url: '/auth/oauth/jwt/token',
 				method: 'post',
 				data,
 			});
