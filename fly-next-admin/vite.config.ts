@@ -15,6 +15,7 @@ const alias: Record<string, string> = {
 };
 
 const viteConfig = defineConfig((mode: ConfigEnv) => {
+
 	const env = loadEnv(mode.mode, process.cwd());
 	return {
 		plugins: [vue(), vueSetupExtend(), viteCompression(), JSON.parse(env.VITE_OPEN_CDN) ? buildConfig.cdn() : null],

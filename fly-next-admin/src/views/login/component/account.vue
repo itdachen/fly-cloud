@@ -70,6 +70,9 @@ import {Session} from '/@/utils/storage';
 import {formatAxis} from '/@/utils/formatTime';
 import {NextLoading} from '/@/utils/loading';
 import {useLoginApi} from "/@/api/login";
+import useAuthApi from "/@/api/auth/AuthApi";
+
+const {login} = useAuthApi();
 
 // 定义变量内容
 const {t} = useI18n();
@@ -104,10 +107,11 @@ const onSignIn = async () => {
     vercode: state.ruleForm.code,
   };
 
+
   useLoginApi().signIn(loginData).then(res => {
     // 存储 token 到浏览器缓存
     // Session.set('token', Math.random().toString(36).substr(0));
-    Session.set('token',res.data.access_token);
+    Session.set('token', res.data.access_token);
   })
 
 
