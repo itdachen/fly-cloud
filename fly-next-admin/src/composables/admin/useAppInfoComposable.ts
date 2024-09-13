@@ -1,11 +1,11 @@
-import StringUtils from '/@/fly/utils/StringUtils';
-import useCustomTableComposable from '/@/hooks/table/TableComposables';
-import {DialogTypeEnum} from '/@/components/dialog/DialogModel';
+import {StringUtils} from '/@/fly/utils/StringUtils';
+import useTable from '/@/hooks/table/TableComposables';
+import {DialogTypeEnum} from "/@/components/dialog/DialogModel";
 import useAppInfoBuilder, {AppInfo, AppInfoQuery} from "/@/api/admin/models/AppInfoModel";
 import AppInfoApi from '/@/api/admin/AppInfoApi'
 
 const appInfoApi = new AppInfoApi();
-const {successMsg, confirmMsgBox} = useCustomTableComposable();
+const {successMsg, confirmMsgBox} = useTable();
 const {
     appInfo,
     columns,
@@ -19,7 +19,7 @@ const {
  * 应用信息 处理
  *
  * @author 王大宸
- * @date 2024-09-13 11:13:39
+ * @date 2024-09-13 15:21:08
  */
 export default function useAppInfoComposable() {
 
@@ -30,6 +30,7 @@ export default function useAppInfoComposable() {
      */
     const loadTableData = (params: AppInfoQuery) => {
         appInfoApi.page(params).then(res => {
+            console.log('table res', res)
             tableData.total = res.data.total;
             tableData.rows = res.data.rows;
         });
@@ -86,7 +87,7 @@ export default function useAppInfoComposable() {
      * @param title 标题
      */
     const tapRemoveHandler = (id: string, title: string) => {
-        confirmMsgBox('数据删除后将无法恢复，确定要删除 ' + title + ' 吗?').then(res => {
+        confirmMsgBox('数据删除后将无法恢复，确定要删除 ' + title + ' 吗?').then(() => {
             appInfoApi.remove(id).then(res => {
                 successMsg(res.msg);
                 loadTableData(queryAppInfoParams);
@@ -100,7 +101,7 @@ export default function useAppInfoComposable() {
      * @author 王大宸
      */
     const tapSaveHandler = () => {
-        refAppInfo.value?.show(DialogTypeEnum.SAVE, null);
+        refAppInfo.value?.show(DialogTypeEnum.ADD, null);
     };
 
     /**
@@ -109,7 +110,7 @@ export default function useAppInfoComposable() {
      * @param data
      */
     const tapUpdateHandler = (data: AppInfo) => {
-        refAppInfo.value?.show(DialogTypeEnum.UPDATE, data);
+        refAppInfo.value?.show(DialogTypeEnum.EDIT, data);
     };
 
     /**

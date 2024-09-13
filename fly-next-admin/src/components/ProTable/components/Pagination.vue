@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts" name="Pagination">
-import { useGlobalStore } from "@/stores/models/global";
-const globalStore = useGlobalStore();
+// import { useGlobalStore } from "@/stores/models/global";
+// const globalStore = useGlobalStore();
 
 interface Pageable {
   pageNum: number;

@@ -91,7 +91,7 @@
     </slot>
   </div>
   <!-- 列设置 -->
-  <ColSetting v-if="toolButton" ref="colRef" v-model:col-setting="colSetting"/>
+  <ColSetting v-if="toolButton" ref="colRef" v-model:col-setting="colSetting"></ColSetting>
 </template>
 
 <script setup lang="ts" name="ProTable">
@@ -103,7 +103,7 @@ import {BreakPoint} from "/@/components/Grid/interface";
 import {ColumnProps, TypeProps} from "/@/components/ProTable/interface";
 import {Refresh, Operation, Search} from "@element-plus/icons-vue";
 import {generateUUID, handleProp} from "/@/utils";
-import SearchForm from "@/components/SearchForm/index.vue";
+import SearchForm from "/@/components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";

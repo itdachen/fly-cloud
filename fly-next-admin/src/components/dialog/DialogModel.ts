@@ -15,6 +15,6 @@ export type DialogModel = {
 export enum DialogTypeEnum {
     ADD = '新增',
     EDIT = '编辑',
-    SEE = '查看'
+    VIEW = '查看'
 }
 

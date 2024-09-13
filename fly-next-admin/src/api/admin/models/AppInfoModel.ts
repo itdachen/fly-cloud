@@ -149,7 +149,7 @@ export default function useAppInfoBuilder() {
     /**
      * 分页列表展示项
      */
-    const columns: Partial<any>[] = [
+    const columns: Partial<ColumnProps>[] = [
         {
             prop: "platTitle",
             label: "平台名称",
