@@ -24,7 +24,7 @@ const element: any = { en: enLocale, 'zh-cn': zhcnLocale, 'zh-tw': zhtwLocale };
 const itemize: any = { en: [], 'zh-cn': [], 'zh-tw': [] };
 const modules: Record<string, any> = import.meta.glob('./**/*.ts', { eager: true });
 
-// 对自动引入的 modules 进行分类 en、zh-cn、zh-tw
+// 对自动引入的 models 进行分类 en、zh-cn、zh-tw
 // https://vitejs.cn/vite3-cn/guide/features.html#glob-import
 for (const path in modules) {
 	const key = path.match(/(\S+)\/(\S+).ts/);

@@ -63,6 +63,39 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 				},
 			},
 			{
+				path: '/admin',
+				name: 'admin',
+				component: () => import('/@/layout/routerView/parent.vue'),
+				redirect: '/admin/menu',
+				meta: {
+					title: 'message.router.system',
+					isLink: '',
+					isHide: false,
+					isKeepAlive: true,
+					isAffix: false,
+					isIframe: false,
+					roles: ['admin'],
+					icon: 'iconfont icon-xitongshezhi',
+				},
+				children:[
+					{
+						path: '/admin/app',
+						name: 'adminApp',
+						component: () => import('/@/views/admin/app/index.vue'),
+						meta: {
+							title: '应用管理',
+							isLink: '',
+							isHide: false,
+							isKeepAlive: true,
+							isAffix: false,
+							isIframe: false,
+							roles: ['admin'],
+							icon: 'iconfont icon-caidan',
+						},
+					},
+				]
+			},
+			{
 				path: '/system',
 				name: 'system',
 				component: () => import('/@/layout/routerView/parent.vue'),

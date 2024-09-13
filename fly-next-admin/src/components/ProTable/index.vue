@@ -76,7 +76,7 @@
       <template #empty>
         <div class="table-empty">
           <slot name="empty">
-            <img src="@/assets/images/notData.png" alt="notData"/>
+            <img src="/@/assets/images/notData.png" alt="notData"/>
             <div>暂无数据</div>
           </slot>
         </div>
@@ -171,8 +171,7 @@ const {
   reset,
   handleSizeChange,
   handleCurrentChange
-} =
-    useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback, props.requestError);
+} = useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback, props.requestError);
 
 // 清空选中数据列表
 const clearSelection = () => tableRef.value!.clearSelection();
@@ -189,8 +188,7 @@ const processTableData = computed(() => {
   if (!props.data) return tableData.value;
   if (!props.pagination) return props.data;
   return props.data.slice(
-      (pageable.value.pageNum - 1) * pageable.value.pageSize,
-      pageable.value.pageSize * pageable.value.pageNum
+      (pageable.value.page - 1) * pageable.value.limit, pageable.value.limit * pageable.value.page
   );
 });
 
