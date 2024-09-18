@@ -170,7 +170,7 @@ export default function useAppInfoBuilder() {
         {title: '访问地址', key: 'askUri', ellipsisTooltip: true, align: 'center'},
         {title: '图标', key: 'iconIco', ellipsisTooltip: true, align: 'center'},
         {title: '有效标志', key: 'validFlag', ellipsisTooltip: true, align: 'center'},
-        {title: '操作', width: '280px', customSlot: 'operator', key: 'operator', align: 'center', fixed: 'right'}
+        {title: '操作', width: '280px', customSlot: 'operator', key: 'operator', align: 'center', fixed: 'right', ignoreExport: true}
     ];
 
     /**

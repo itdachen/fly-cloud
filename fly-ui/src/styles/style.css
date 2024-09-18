@@ -157,6 +157,19 @@
     border-top: 1px solid #E0E0E0 !important;
 }
 
+.layui-table-fixed-right {
+    border-left: none !important;
+}
+
+.layui-table  thead tr th {
+    font-size: 18px !important;
+    font-weight: bold;
+}
+
+/*.layui-table-cell {*/
+/*    font-size: 38px !important;*/
+/*}*/
+
 /**************************************************************************************************************************/
 
 

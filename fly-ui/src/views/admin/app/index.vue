@@ -3,9 +3,6 @@
   <lay-container fluid="true" class="fly-container">
     <lay-card class="fly-search-card">
       <lay-form>
-        <lay-form-item label="平台ID" prop="platId" mode="inline">
-          <lay-input v-model="queryAppInfoParams.platId"></lay-input>
-        </lay-form-item>
         <lay-form-item label="应用名称" prop="appTitle" mode="inline">
           <lay-input v-model="queryAppInfoParams.appTitle"></lay-input>
         </lay-form-item>
@@ -35,13 +32,16 @@
 
     </lay-card>
 
-<!-- :skin="'nob'" -->
+<!-- :skin="'nob'"  :height="'90%'" -->
     <div class="table-box">
       <lay-table :page="false"
+                 :defaultToolbar="true"
+                 :skin="'line'"
+                 :even="true"
                  :height="'90%'"
-                 :columns=" appInfoColumns "
-                 :loading=" tableAppInfoData.loading "
-                 :data-source=" tableAppInfoData.rows "
+                 :columns="appInfoColumns"
+                 :loading="tableAppInfoData.loading"
+                 :data-source="tableAppInfoData.rows"
                  @change=" reloadAppInfoDate ">
 
         <template v-slot:toolbar>
@@ -70,10 +70,6 @@
         </template>
       </lay-table>
 
-
-      <lay-page v-model="current5"  :layout="layout5" v-model:limit="limit5" :pages="pages5" :total="total5"  @change="change5"></lay-page>
-
-
 <!--      <lay-page v-model="tableAppInfoData.page"-->
 <!--                :layout="tableAppInfoData.layout"-->
 <!--                v-model:limit="tableAppInfoData.limit"-->
@@ -81,7 +77,7 @@
 <!--                :total="tableAppInfoData.total"-->
 <!--                :limits="tableAppInfoData.limits"-->
 <!--                theme="blue"-->
-<!--                @change="previousNextPage" style="margin-top: 15px"></lay-page>-->
+<!--                @change="previousNextPage" style="margin-top: 50px"></lay-page>-->
 
 <!--      <lay-page v-model="layPage.page"-->
 <!--                :layout="layPage.layout"-->
@@ -92,6 +88,8 @@
 <!--                :total="tableAppInfoData.total"-->
 <!--                @change="previousNextPage" style="margin-top: 15px"></lay-page>-->
 
+
+      <lay-page :limit="limit4" :total="total4" :layout="layout4"></lay-page>
 
     </div>
   </lay-container>
@@ -108,8 +106,12 @@ import AddAndEdit from './ref.vue';
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
 import {ref} from "vue";
 
+
+const limit4 = ref(10)
+const total4 = ref(100)
+const layout4 = ref(["page", "limits", "prev", "refresh", "count", "next",  "skip", ])
+
 const {
-  appInfo,
   layPage,
   refAppInfo,
   tableAppInfoData,
