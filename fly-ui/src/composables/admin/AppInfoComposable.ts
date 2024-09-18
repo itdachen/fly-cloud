@@ -33,12 +33,37 @@ export default function useAppInfoComposable() {
      * @param params
      */
     const loadTableAppInfoData = (params: AppInfoQuery) => {
-        tableAppInfoData.loading = true;
-        appInfoApi.page(params).then(res => {
-            tableAppInfoData.total = res.data.total;
-            tableAppInfoData.rows = res.data.rows;
-            tableAppInfoData.loading = false;
-        });
+        //   tableAppInfoData.loading = true;
+        tableAppInfoData.total = 16
+        tableAppInfoData.rows = [];
+        for (let i = 0; i < 10; i++) {
+            tableAppInfoData.rows.push({
+                appAsTitle: "1NNNNNNNNNNNNNNNNNNNN",
+                appCode: "HGGGGGGG",
+                appSecret: "1RRRRRRRRRRRRRRRRRRRRR",
+                appTitle: "NNNNNNNNNNNNNNNNN",
+                appType: "1",
+                askUri: "1",
+                funcCode: "1",
+                funcTitle: "1",
+                iconIco: "1",
+                id: (i + 1) + '',
+                platId: "12333333333333333222222222222222",
+                platTitle: "112312321331",
+                remarks: "1",
+                typeCode: "1",
+                typeTitle: "1",
+                validDel: "N",
+                validFlag: "Y",
+            })
+        }
+
+
+        // appInfoApi.page(params).then(res => {
+        //     tableAppInfoData.total = res.data.total;
+        //     tableAppInfoData.rows = res.data.rows;
+        //     tableAppInfoData.loading = false;
+        // });
     };
 
     /**

@@ -67,14 +67,25 @@
       </lay-table>
 
 
-      <lay-page v-model="layPage.page"
-                :layout="layPage.layout"
-                :pages="layPage.pages"
-                :limits="layPage.limits"
-                v-model:limit="layPage.limit"
+
+      <lay-page v-model="layPageReactive.page"
+                :layout="layPageReactive.layout"
+                :pages="layPageReactive.pages"
+                :limits="layPageReactive.limits"
+                v-model:limit="layPageReactive.limit"
                 theme="blue"
                 :total="tableAppInfoData.total"
                 @change="previousNextPage" style="margin-top: 15px"></lay-page>
+
+
+<!--      <lay-page v-model="layPagePage"-->
+<!--                :layout="layPageLayout"-->
+<!--                :pages="layPagePages"-->
+<!--                :limits="layPageLimits"-->
+<!--                v-model:limit="layPageLimit"-->
+<!--                theme="blue"-->
+<!--                :total="tableAppInfoData.total"-->
+<!--                @change="previousNextPage" style="margin-top: 15px"></lay-page>-->
 
 
     </div>
@@ -86,7 +97,7 @@
 </template>
 
 
-<script setup lang="ts" name="appInfoComponent">
+<script setup lang="ts">
 import {onMounted, reactive, ref} from "vue";
 
 /**
@@ -196,10 +207,18 @@ const loadTableAppInfoData = (params: AppInfoQuery) => {
 };
 
 
+
+const layPagePage = ref(1);
+
+const layPageLimit = ref(10);
+
+const layPageLimits = [10, 30, 50, 100, 200];
+const layPageLayout = ['prev', 'page', 'next', 'limits', 'count', 'refresh', 'skip'];
+const layPagePages = ref(5);
 /**
  * 分页组件基础参数
  */
-const layPage = reactive<LayPage>({
+const layPageReactive = reactive<LayPage>({
   /* 默认分页页面 */
   page: 1,
   /* 每页查询条数 */
@@ -208,7 +227,7 @@ const layPage = reactive<LayPage>({
   limits: [10, 30, 50, 100, 200],
   /* 导航 */
   layout: ['prev', 'page', 'next', 'limits', 'count', 'refresh', 'skip'],
-  pages: 7
+  pages: 5
 })
 
 

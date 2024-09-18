@@ -25,11 +25,6 @@ declare module 'axios' {
         loading: boolean, // 是否加载
         total: number,
         rows: T[],
-        page: number,
-        limit: number,
-        limits: number[],
-        layout: string[],
-        pages: number
     }
 
     /**
