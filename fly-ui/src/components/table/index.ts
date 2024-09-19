@@ -9,7 +9,7 @@ export default function useLayTableComposable() {
     /**
      * 分页组件基础参数
      */
-    const layPage = reactive<LayPage>({
+    const flyLayPage = reactive<LayPage>({
         /* 默认分页页面 */
         page: 1,
         /* 每页查询条数 */
@@ -18,11 +18,11 @@ export default function useLayTableComposable() {
         limits: [10, 30, 50, 100, 200],
         /* 导航 */
         layout: ['prev', 'page', 'next', 'limits', 'count', 'refresh', 'skip'],
-        pages: 7
+        pages: 5
     })
 
 
     return {
-        layPage
+        flyLayPage
     }
 }

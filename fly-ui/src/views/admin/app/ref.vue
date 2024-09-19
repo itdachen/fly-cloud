@@ -6,13 +6,15 @@
              v-model="layerRef.open">
     <div style="padding: 20px; ">
 
-      <lay-form :model="appInfo" ref="layAppInfoForm" labelWidth="120px">
+      <lay-form :model="appInfo" ref="refFormAppInfo"
+                :label-position="'right'"
+                labelWidth="130px">
 
         <lay-form-item label="平台ID" prop="platId" required="true">
           <lay-input v-model="appInfo.platId"></lay-input>
         </lay-form-item>
 
-        <lay-form-item label="平台名称" prop="platTitle">
+        <lay-form-item label="平台名称" prop="platTitle" required="true">
           <lay-input v-model="appInfo.platTitle"></lay-input>
         </lay-form-item>
 
@@ -88,7 +90,6 @@
 
 <script setup lang="ts" name="refAppInfo">
 import {reactive, ref} from "vue";
-import {layer} from '@layui/layer-vue';
 import {FormTypeEnum} from "@/hooks/biz/BizModel";
 
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
@@ -109,7 +110,7 @@ const layerRef = reactive<any>({
   disabled: false
 })
 
-const layAppInfoForm = ref();
+const refFormAppInfo = ref();
 
 /**
  * 关闭按钮
@@ -123,7 +124,13 @@ const onTapClose = () => {
  * 提交
  */
 function toSubmit() {
-  layAppInfoForm.value.validate((isValidate: boolean, model: any, errors: any[]) => {
+  console.log('appInfo', appInfo);
+
+  refFormAppInfo.value.validate((isValidate: boolean, model: AppInfo, errors: any[]) => {
+    console.log('isValidate', isValidate);
+    console.log('model', model);
+    console.log('errors', errors);
+    debugger;
     if (!isValidate) {
       return;
     }
@@ -136,7 +143,7 @@ function toSubmit() {
 
 //显示弹框
 const open = (type: FormTypeEnum, title: string, row?: AppInfo) => {
-  layAppInfoForm.value?.resetFields();
+  refFormAppInfo.value?.resetFields();
   showToSubmit.value = true;
   // layAppInfoForm.value.reset();
 

@@ -112,11 +112,6 @@ export default function useAppInfoBuilder() {
         loading: false, /* 是否显示加载框 */
         total: 0, /* 数据总条数 */
         rows: [], /* 展示的数据 */
-        pages: 7,  /*  */
-        page: 1,  /* 默认分页页面 */
-        limit: 10, /* 每页查询条数 */
-        limits: [10, 30, 50, 100, 200], /* 可选择的查询额页面条数 */
-        layout: ['prev', 'page', 'next', 'limits', 'count', 'refresh', 'skip'],
     });
 
     /**

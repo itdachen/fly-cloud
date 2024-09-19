@@ -6,7 +6,6 @@ import AppInfoApi from '@/api/admin/AppInfoApi';
 import {FormTypeEnum} from "@/hooks/biz/BizModel";
 import {LayTableUtils} from "@/fly/utils/LayTableUtils";
 import useLayTableComposable from '@/components/table/index';
-import {onMounted} from "vue";
 
 const appInfoApi = new AppInfoApi();
 const {
@@ -17,7 +16,7 @@ const {
     refAppInfo
 } = useAppInfoBuilder();
 
-const {layPage} = useLayTableComposable();
+const {flyLayPage} = useLayTableComposable();
 
 /**
  * 应用信息 处理
@@ -33,37 +32,12 @@ export default function useAppInfoComposable() {
      * @param params
      */
     const loadTableAppInfoData = (params: AppInfoQuery) => {
-        //   tableAppInfoData.loading = true;
-        tableAppInfoData.total = 16
-        tableAppInfoData.rows = [];
-        for (let i = 0; i < 10; i++) {
-            tableAppInfoData.rows.push({
-                appAsTitle: "1NNNNNNNNNNNNNNNNNNNN",
-                appCode: "HGGGGGGG",
-                appSecret: "1RRRRRRRRRRRRRRRRRRRRR",
-                appTitle: "NNNNNNNNNNNNNNNNN",
-                appType: "1",
-                askUri: "1",
-                funcCode: "1",
-                funcTitle: "1",
-                iconIco: "1",
-                id: (i + 1) + '',
-                platId: "12333333333333333222222222222222",
-                platTitle: "112312321331",
-                remarks: "1",
-                typeCode: "1",
-                typeTitle: "1",
-                validDel: "N",
-                validFlag: "Y",
-            })
-        }
-
-
-        // appInfoApi.page(params).then(res => {
-        //     tableAppInfoData.total = res.data.total;
-        //     tableAppInfoData.rows = res.data.rows;
-        //     tableAppInfoData.loading = false;
-        // });
+        tableAppInfoData.loading = true;
+        appInfoApi.page(params).then(res => {
+            tableAppInfoData.total = res.data.total;
+            tableAppInfoData.rows = res.data.rows;
+            tableAppInfoData.loading = false;
+        });
     };
 
     /**
@@ -77,13 +51,6 @@ export default function useAppInfoComposable() {
         queryAppInfoParams.limit = limit;
         loadTableAppInfoData(queryAppInfoParams);
     };
-
-    /**
-     * 查询
-     */
-    const onTapAppInfoSearch = () => {
-        refAppInfo.value?.open('新增', '应用信息', null);
-    }
 
     /**
      * 新增按钮
@@ -145,18 +112,10 @@ export default function useAppInfoComposable() {
         })
     }
 
-    /**
-     * 页面初始化, 加载数据
-     */
-    onMounted(() => {
-        reloadAppInfoDate();
-    })
-
-
     return {
         refAppInfo,
         appInfo,
-        layPage,
+        flyLayPage,
         tableAppInfoData,
         appInfoColumns,
         queryAppInfoParams,
@@ -166,7 +125,6 @@ export default function useAppInfoComposable() {
         loadTableAppInfoData,
 
         /* 搜索,新增, 编辑, 查看按钮 */
-        onTapAppInfoSearch,
         onTapAppInfoAdd,
         onTapAppInfoEdit,
         onTapAppInfoView,
