@@ -1,9 +1,9 @@
 <template>
 
-  <lay-layer :title="layerPropRef.title"
-             :area="layerPropRef.area"
+  <lay-layer :title="layLayerForm.title"
+             :area="layLayerForm.area"
              :maxmin="true"
-             v-model="layerPropRef.open">
+             v-model="layLayerForm.open">
     <div style="padding: 20px; ">
 
       <lay-form :model="appInfo" ref="refFormAppInfo"
@@ -103,7 +103,7 @@ let {
 const showToSubmit = ref<boolean>(true);
 
 /* 弹窗  '1200px', '800px' */
-const layerPropRef = reactive<any>({
+const layLayerForm = reactive<any>({
   open: false,
   title: '',
   area: ['90%', '60%'],
@@ -116,7 +116,7 @@ const refFormAppInfo = ref();
  * 关闭按钮
  */
 const onTapClose = () => {
-  layerPropRef.open = false;
+  layLayerForm.open = false;
 }
 
 
@@ -146,9 +146,8 @@ function toSubmit() {
 const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
   refFormAppInfo.value?.resetFields();
   showToSubmit.value = true;
-  // layAppInfoForm.value.reset();
-  console.log('type', type);
-  console.log('title', title);
+  // refFormAppInfo.value.reset();
+
   if (null !== data && undefined !== data) {
     objCopy(data, appInfo);
   } else {
@@ -156,7 +155,7 @@ const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
   }
 
   if (FormTypeEnum.VIEW === type) {
-    layerPropRef.disabled = true;
+    layLayerForm.disabled = true;
     showToSubmit.value = false;
   }
 
@@ -164,8 +163,8 @@ const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
   console.log('type', type);
   console.log('title', title);
  // layerPropRef.title = type + title;
-  console.log('layerRef', layerPropRef.open);
-  layerPropRef.open = true;
+  console.log('layerRef', layLayerForm.open);
+  layLayerForm.open = true;
 
 };
 

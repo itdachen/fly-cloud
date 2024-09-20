@@ -81,14 +81,14 @@
   </lay-container>
 
 
-  <AddAndEdit ref="refAppInfo" @click="refreshData"/>
+  <RefAppInfo ref="refAppInfo" @click="refreshData"/>
 
 </template>
 
 
 <script setup lang="ts">
 import {onMounted} from "vue";
-import AddAndEdit from './ref.vue';
+import RefAppInfo from './refAppInfo.vue';
 
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
 
