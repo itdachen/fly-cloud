@@ -1,12 +1,13 @@
 <template>
 
-  <lay-layer :title="layLayerForm.title"
-             :area="layLayerForm.area"
-             :maxmin="true"
-             v-model="layLayerForm.open">
+  <lay-layer v-model="popupProps.open"
+             :title="popupProps.title"
+             :area="popupProps.area"
+             :maxmin="popupProps.maxmin">
     <div style="padding: 20px; ">
 
-      <lay-form :model="appInfo" ref="refFormAppInfo"
+      <lay-form :model="appInfo"
+                ref="refFormAppInfo"
                 :label-position="'right'"
                 labelWidth="130px">
 
@@ -94,6 +95,13 @@ import {FormTypeEnum} from "@/hooks/biz/BizModel";
 
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
 import {AppInfo} from "@/api/admin/model/AppInfoModel";
+import flyPopupComposable from "@/components/flyer/index";
+
+const {
+  popupProps,
+  onOpen,
+  onClose
+} = flyPopupComposable();
 
 let {
   appInfo,
@@ -108,7 +116,7 @@ const layLayerForm = reactive<any>({
   title: '',
   area: ['90%', '60%'],
   disabled: false
-})
+});
 
 const refFormAppInfo = ref();
 
@@ -116,7 +124,8 @@ const refFormAppInfo = ref();
  * 关闭按钮
  */
 const onTapClose = () => {
-  layLayerForm.open = false;
+  onClose();
+//  layLayerForm.open = false;
 }
 
 
@@ -144,26 +153,33 @@ function toSubmit() {
 
 //显示弹框
 const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
-  // refFormAppInfo.value?.resetFields();
+  refFormAppInfo.value?.resetFields();
   showToSubmit.value = true;
-  refFormAppInfo.value.reset();
+
+  console.log('AppInfo', data);
+  console.log('type', type);
+  console.log('title', title);
+  console.log('popupProps', popupProps);
+
+  // refFormAppInfo.value.reset();
 
   if (null !== data && undefined !== data) {
-    appInfo = JSON.parse(JSON.stringify(data))
-   // objCopy(data, appInfo);
+    //  appInfo = JSON.parse(JSON.stringify(data))
+    // objCopy(data, appInfo);
+    appInfo = data;
   } else {
     appInfo = {};
   }
 
   if (FormTypeEnum.VIEW === type) {
-    layLayerForm.disabled = true;
-    showToSubmit.value = false;
+    popupProps.disabled = true;
+    popupProps.showSubmit = false;
   }
+  popupProps.title = type + title;
 
-  layLayerForm.title = type + title;
 
- // console.log('layerRef', layLayerForm);
-  layLayerForm.open = true;
+  onOpen();
+
 
 };
 
