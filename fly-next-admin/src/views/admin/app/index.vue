@@ -1,92 +1,101 @@
 <template>
-  <div>
-    <div class="template-container layout-padding">
-      <div class="template-container-padding layout-padding-auto layout-padding-view">
-        <!-- 表格展示 -->
-        <pro-table :data="reloadDate"
-                   :columns="columns"
-                   @reloadDate="reloadDate">
-          <template #tableHeader="scope">
-            <div class="system-user-search mb15">
-              <el-input size="default" placeholder="平台ID" class="ml10" style="max-width: 180px"
-                        v-model='queryAppInfoParams.platId'></el-input>
-              <el-input size="default" placeholder="应用标识" class="ml10" style="max-width: 180px"
-                        v-model='queryAppInfoParams.appCode'></el-input>
-              <el-input size="default" placeholder="应用名称" class="ml10" style="max-width: 180px"
-                        v-model='queryAppInfoParams.appTitle'></el-input>
-              <el-input size="default" placeholder="应用类型: BACK-后端;VIEW-前端" class="ml10" style="max-width: 180px"
-                        v-model='queryAppInfoParams.appType'></el-input>
-              <el-input size="default" placeholder="应用类型" class="ml10" style="max-width: 180px"
-                        v-model='queryAppInfoParams.typeCode'></el-input>
-              <el-input size="default" placeholder="职能代码" class="ml10" style="max-width: 180px"
-                        v-model='queryAppInfoParams.funcCode'></el-input>
-              <el-input size="default" placeholder="有效标志: Y-是;N-否" class="ml10" style="max-width: 180px"
-                        v-model='queryAppInfoParams.validFlag'></el-input>
-              <el-button size="default" type="primary" :icon="Search" class="ml10"
-                         v-permission="['admin:app:info:query']"
-                         @click='tapSearchHandler(queryAppInfoParams)'> 搜索
-              </el-button>
-              <el-button size="default" type="success" :icon="Plus" class="ml10"
-                         v-permission="['admin:app:info:save']"
-                         @click='tapSaveHandler()'> 新增
-              </el-button>
-            </div>
-          </template>
-          <!-- 表格操作 -->
-          <template #operation="scope">
-            <el-button v-permission="['admin:app:info:view']" type="primary" plain :icon="View"
-                       size="small" @click="tapViewHandler(scope.row)">查看
-            </el-button>
-            <el-button v-permission="['admin:app:info:update']" type="primary" plain :icon="Edit"
-                       color="#626aef" size="small"
-                       @click="tapUpdateHandler(scope.row)">编辑
-            </el-button>
-            <el-button v-permission="['admin:app:info:delete']" type="warning" plain :icon="Delete"
-                       size="small" @click="tapRemoveHandler(scope.row.id, scope.row.name)">删除
-            </el-button>
-          </template>
-        </pro-table>
-
-      </div>
-    </div>
-
-    <!-- 新增/修改/查看 弹窗 -->
-    <RefAppInfo ref="refAppInfo" @bindtap="tapSubmitHandler"></RefAppInfo>
-
+  <div class="table-box">
+    <ProTable ref="proTable"
+              :columns="columns"
+              :request-api="getTableList"
+              :init-param="initParam"
+              :data-callback="dataCallback"
+              @drag-sort="sortTable">
+      <!-- 表格 header 按钮 -->
+      <template #tableHeader="scope">
+        <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
+        <el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
+        <el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
+<!--        <el-button type="primary" plain @click="toDetail">To 子集详情页面</el-button>-->
+<!--        <el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected"-->
+<!--                   @click="batchDelete(scope.selectedListIds)">-->
+<!--          批量删除用户-->
+<!--        </el-button>-->
+      </template>
+      <!-- Expand -->
+      <template #expand="scope">
+        {{ scope.row }}
+      </template>
+      <!-- usernameHeader -->
+      <template #usernameHeader="scope">
+        <el-button type="primary" @click="ElMessage.success('我是通过作用域插槽渲染的表头')">
+          {{ scope.column.label }}
+        </el-button>
+      </template>
+      <!-- createTime -->
+      <template #createTime="scope">
+        <el-button type="primary" link @click="ElMessage.success('我是通过作用域插槽渲染的内容')">
+          {{ scope.row.createTime }}
+        </el-button>
+      </template>
+      <!-- 表格操作 -->
+      <template #operation="scope">
+        <el-button type="primary" link :icon="View">查看</el-button>
+        <el-button type="primary" link :icon="EditPen">编辑</el-button>
+        <el-button type="primary" link :icon="Refresh">重置密码</el-button>
+        <el-button type="primary" link :icon="Delete">删除</el-button>
+      </template>
+    </ProTable>
   </div>
 </template>
 
-<script setup lang="ts" name="AppInfoComponent">
-import {defineAsyncComponent, onMounted} from 'vue';
-import {Search, Edit, View, Delete, Plus} from '@element-plus/icons-vue';
-import ProTable from '/@/components/ProTable/index.vue';
-import useAppInfoComposable from "/@/composables/admin/useAppInfoComposable";
-const RefAppInfo = defineAsyncComponent(() => import('./RefAppInfo.vue'));
+<script setup lang="tsx" name="useProTable">
+import {ref, reactive} from "vue";
+import {useRouter} from "vue-router";
+import {ElMessage, ElMessageBox} from "element-plus";
+import ProTable from "/@/components/ProTable/index.vue";
+import {ProTableInstance, ColumnProps} from "/@/components/ProTable/interface";
+import {CirclePlus, Delete, EditPen, Download, Upload, View, Refresh} from "@element-plus/icons-vue";
+// ProTable 实例
+const proTable = ref<ProTableInstance>();
 
-const {
-  refAppInfo,
-  tableData,
-  columns,
-  queryAppInfoParams,
-  tapSearchHandler,
-  tapSaveHandler,
-  tapUpdateHandler,
-  tapViewHandler,
-  tapRemoveHandler,
-  tapSubmitHandler,
-  reloadDate,
-  loadTableData
-} = useAppInfoComposable();
+// 如果表格需要初始化请求参数，直接定义传给 ProTable (之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
+const initParam = reactive({type: 1});
 
-/**
- * 初始化页面时加载
- */
-onMounted(() => {
-  loadTableData(queryAppInfoParams);
-})
+// dataCallback 是对于返回的表格数据做处理，如果你后台返回的数据不是 list && total 这些字段，可以在这里进行处理成这些字段
+// 或者直接去 hooks/useTable.ts 文件中把字段改为你后端对应的就行
+const dataCallback = (data: any) => {
+  return {
+    list: [],
+    total: 0
+  };
+};
+
+// 表格配置项
+const columns = reactive<ColumnProps[]>([
+  {prop: "gender", label: "性别" },
+  {prop: "idCard", label: "身份证号"},
+  {prop: "email", label: "邮箱"},
+  {prop: "address", label: "居住地址"},
+  { prop: "status",label: "用户状态",},
+  {prop: "operation", label: "操作", fixed: "right", width: 330}
+]);
+
+// 表格拖拽排序
+const sortTable = ({newIndex, oldIndex}: { newIndex?: number; oldIndex?: number }) => {
+  console.log(newIndex, oldIndex);
+  console.log(proTable.value?.tableData);
+  ElMessage.success("修改列表排序成功");
+};
+
+// 导出用户列表
+const downloadFile = async () => {
+  ElMessageBox.confirm("确认导出用户数据?", "温馨提示", {type: "warning"}).then(() =>{
+
+      }
+      // useDownload(exportUserInfo, "用户列表", proTable.value?.searchParam)
+  );
+};
+
+
+const getTableList = () => {
+  return [];
+}
 
 </script>
 
-<style lang="scss" scoped>
-
-</style>

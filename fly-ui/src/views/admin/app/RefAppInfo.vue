@@ -144,12 +144,13 @@ function toSubmit() {
 
 //显示弹框
 const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
-  refFormAppInfo.value?.resetFields();
+  // refFormAppInfo.value?.resetFields();
   showToSubmit.value = true;
-  // refFormAppInfo.value.reset();
+  refFormAppInfo.value.reset();
 
   if (null !== data && undefined !== data) {
-    objCopy(data, appInfo);
+    appInfo = JSON.parse(JSON.stringify(data))
+   // objCopy(data, appInfo);
   } else {
     appInfo = {};
   }
@@ -159,11 +160,9 @@ const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
     showToSubmit.value = false;
   }
 
+  layLayerForm.title = type + title;
 
-  console.log('type', type);
-  console.log('title', title);
- // layerPropRef.title = type + title;
-  console.log('layerRef', layLayerForm.open);
+ // console.log('layerRef', layLayerForm);
   layLayerForm.open = true;
 
 };

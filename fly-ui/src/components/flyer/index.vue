@@ -33,7 +33,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['submit', 'onClose'])
+const emits = defineEmits(['submit', 'close'])
 
 /**
  * 提交
@@ -46,7 +46,7 @@ const onTapSubmit = () => {
  * 关闭
  */
 const onTapClose = () => {
-  emits('onClose')
+  emits('close')
 }
 
 
@@ -54,14 +54,14 @@ const onTapClose = () => {
 
 <template>
 
-  <lay-layer v-model="props.open"
-             :title="props.title"
-             :area="props.area"
-             :maxmin="props.maxmin">
+  <lay-layer v-model="open" :title="title" :area="area" :maxmin="maxmin">
+
     <div style="padding: 20px;">
       <slot name="content"></slot>
     </div>
-    <template v-slot:footer>
+
+
+    <template v-if="!showSubmit && !showClose" v-slot:footer>
       <div class="fly-form-footer">
         <lay-button v-if="showSubmit" class="fly-button fly-ok-button " @click="onTapSubmit">
           <lay-icon class="layui-icon-ok"></lay-icon>
