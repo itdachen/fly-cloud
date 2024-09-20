@@ -403,6 +403,8 @@ const model11 = ref<any>({})
 const layFormRef11 = ref()
 const visible11 = ref(false)
 const title = ref('新增')
+
+
 const changeVisible11 = (text: any, row?: any) => {
   title.value = text
   if (row) {
@@ -413,6 +415,8 @@ const changeVisible11 = (text: any, row?: any) => {
   }
   visible11.value = !visible11.value
 }
+
+
 const submit11 = function () {
   layFormRef11.value.validate((isValidate: any, model: any, errors: any) => {
     layer.open({

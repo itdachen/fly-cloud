@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" name="FlyPopup">
 
 /* 组件使用参数 */
 const props = defineProps({
@@ -54,15 +54,13 @@ const onTapClose = () => {
 
 <template>
 
-  <lay-layer :title="title"
-             :area="area"
-             :maxmin="true"
-             v-model="open">
+  <lay-layer v-model="props.open"
+             :title="props.title"
+             :area="props.area"
+             :maxmin="props.maxmin">
     <div style="padding: 20px;">
       <slot name="content"></slot>
     </div>
-
-
     <template v-slot:footer>
       <div class="fly-form-footer">
         <lay-button v-if="showSubmit" class="fly-button fly-ok-button " @click="onTapSubmit">
