@@ -1,9 +1,9 @@
 <template>
 
-  <lay-layer :title="layerRef.title"
-             :area="layerRef.area"
+  <lay-layer :title="layerPropRef.title"
+             :area="layerPropRef.area"
              :maxmin="true"
-             v-model="layerRef.open">
+             v-model="layerPropRef.open">
     <div style="padding: 20px; ">
 
       <lay-form :model="appInfo" ref="refFormAppInfo"
@@ -103,7 +103,7 @@ let {
 const showToSubmit = ref<boolean>(true);
 
 /* 弹窗  '1200px', '800px' */
-const layerRef = reactive<any>({
+const layerPropRef = reactive<any>({
   open: false,
   title: '',
   area: ['90%', '60%'],
@@ -116,7 +116,7 @@ const refFormAppInfo = ref();
  * 关闭按钮
  */
 const onTapClose = () => {
-  layerRef.open = false;
+  layerPropRef.open = false;
 }
 
 
@@ -126,46 +126,53 @@ const onTapClose = () => {
 function toSubmit() {
   console.log('appInfo', appInfo);
 
-  refFormAppInfo.value.validate((isValidate: boolean, model: AppInfo, errors: any[]) => {
-    console.log('isValidate', isValidate);
-    console.log('model', model);
-    console.log('errors', errors);
-    debugger;
-    if (!isValidate) {
-      return;
-    }
-    appInfoDataHandler(appInfo);
-    layerRef.open = false;
-    emit('click', appInfo);
-  })
+
+  appInfoDataHandler(appInfo);
+  onTapClose()
+  emit('click', appInfo);
+
+  // refFormAppInfo.value.validate((isValidate: boolean, model: AppInfo, errors: any[]) => {
+  //   if (!isValidate) {
+  //     return;
+  //   }
+  //   appInfoDataHandler(appInfo);
+  //   layerRef.open = false;
+  //   emit('click', appInfo);
+  // })
 }
 
 
 //显示弹框
-const open = (type: FormTypeEnum, title: string, row?: AppInfo) => {
+const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
   refFormAppInfo.value?.resetFields();
   showToSubmit.value = true;
   // layAppInfoForm.value.reset();
-
-  if (null !== row) {
-    objCopy(row, appInfo);
+  console.log('type', type);
+  console.log('title', title);
+  if (null !== data && undefined !== data) {
+    objCopy(data, appInfo);
   } else {
     appInfo = {};
   }
 
   if (FormTypeEnum.VIEW === type) {
-    layerRef.disabled = true;
+    layerPropRef.disabled = true;
     showToSubmit.value = false;
   }
 
-  layerRef.open = true;
-  layerRef.title = type + title;
+
+  console.log('type', type);
+  console.log('title', title);
+ // layerPropRef.title = type + title;
+  console.log('layerRef', layerPropRef.open);
+  layerPropRef.open = true;
+
 };
 
 //在组件中，属性和方法，只能对当前template,
 //外部需要使用的时候，需要使用 defineExpose 暴露出去给父组件
 defineExpose({
-  open,
+  openPopup,
 });
 
 //注册事件
@@ -182,17 +189,12 @@ const objCopy = (var1: any, var2: any) => {
     var2 = {};
     return;
   }
-  // for (let key in var1) {
-  //   if (var1.hasOwnProperty(key)) {
-  //     var2[key] = var1[key];
-  //   }
-  // }
 
   Object.keys(var1).forEach(key => {
     var2[key] = var1[key]
   })
-  console.log('var1', var1);
-  console.log('var2', var2);
+
+
 }
 
 /**

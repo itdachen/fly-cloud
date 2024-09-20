@@ -56,7 +56,7 @@ export default function useAppInfoComposable() {
      * 新增按钮
      */
     const onTapAppInfoAdd = () => {
-        refAppInfo.value?.open(FormTypeEnum.ADD, '应用信息', null);
+        refAppInfo.value?.openPopup(FormTypeEnum.ADD, '应用信息', null);
     }
 
     /**
@@ -64,7 +64,7 @@ export default function useAppInfoComposable() {
      * @param data 编辑时的数据信息
      */
     const onTapAppInfoEdit = (data: AppInfo) => {
-        refAppInfo.value?.open(FormTypeEnum.EDIT, '应用信息', data);
+        refAppInfo.value?.openPopup(FormTypeEnum.EDIT, '应用信息', data);
     }
 
     /**
@@ -72,7 +72,7 @@ export default function useAppInfoComposable() {
      * @param data 查看时的数据信息
      */
     const onTapAppInfoView = (data: AppInfo) => {
-        refAppInfo.value?.open(FormTypeEnum.VIEW, '应用信息', data);
+        refAppInfo.value?.openPopup(FormTypeEnum.VIEW, '应用信息', data);
     }
 
 
