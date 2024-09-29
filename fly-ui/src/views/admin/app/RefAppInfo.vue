@@ -39,13 +39,13 @@
           <lay-select v-model="appInfo.appType" :items="items4" :options="items4"></lay-select>
         </lay-form-item>
 
-        <lay-form-item label="应用类型" prop="typeCode">
-          <lay-checkbox-group v-model="appInfo.typeCode">
-            <lay-checkbox name="typeCode" skin="primary" value="1">写作</lay-checkbox>
-            <lay-checkbox name="typeCode" skin="primary" value="2">画画</lay-checkbox>
-            <lay-checkbox name="typeCode" skin="primary" value="3">运动</lay-checkbox>
-          </lay-checkbox-group>
-        </lay-form-item>
+        <!--        <lay-form-item label="应用类型" prop="typeCode">-->
+        <!--          <lay-checkbox-group v-model="appInfo.typeCode">-->
+        <!--            <lay-checkbox name="typeCode" skin="primary" value="1">写作</lay-checkbox>-->
+        <!--            <lay-checkbox name="typeCode" skin="primary" value="2">画画</lay-checkbox>-->
+        <!--            <lay-checkbox name="typeCode" skin="primary" value="3">运动</lay-checkbox>-->
+        <!--          </lay-checkbox-group>-->
+        <!--        </lay-form-item>-->
 
         <lay-form-item label="应用类型标题" prop="typeTitle">
           <lay-input v-model="appInfo.typeTitle"></lay-input>
@@ -91,59 +91,6 @@
 
 <script setup lang="ts" name="refAppInfo">
 import {reactive, ref} from "vue";
-import {FormTypeEnum} from "@/hooks/biz/BizModel";
-
-
-/**********************************************************************************************/
-
-import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
-import {AppInfo} from "@/api/admin/model/AppInfoModel";
-import flyPopupComposable from "@/components/flyer/index";
-
-const {
-  popupProps,
-  onOpen,
-  onClose
-} = flyPopupComposable();
-
-let {
-  appInfo,
-  appInfoDataHandler
-} = useAppInfoComposable();
-
-const showToSubmit = ref<boolean>(true);
-
-const refFormAppInfo = ref();
-
-/**
- * 关闭按钮
- */
-const onTapClose = () => {
-  onClose();
-//  layLayerForm.open = false;
-}
-
-
-/**
- * 提交
- */
-function toSubmit() {
-  console.log('appInfo', appInfo);
-
-
-  // appInfoDataHandler(appInfo);
-  // onTapClose()
-  // emit('click', appInfo);
-
-  refFormAppInfo.value.validate((isValidate: boolean, model: AppInfo, errors: any[]) => {
-    if (!isValidate) {
-      return;
-    }
-    appInfoDataHandler(appInfo);
-    popupProps.open = false;
-    emit('click', appInfo);
-  })
-}
 
 
 //显示弹框
@@ -152,11 +99,9 @@ const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
   showToSubmit.value = true;
 
   // refFormAppInfo.value.reset();
-  debugger
   if (null !== data && undefined !== data) {
     appInfo = JSON.parse(JSON.stringify(data))
     // objCopy(data, appInfo);
-  //  appInfo = data;
   } else {
     appInfo = {};
   }
@@ -165,7 +110,8 @@ const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
     popupProps.disabled = true;
     popupProps.showSubmit = false;
   }
- // popupProps.title = type + title;
+
+  popupProps.title = type + title;
 
 
   onOpen();
@@ -178,6 +124,196 @@ const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
 defineExpose({
   openPopup,
 });
+
+
+/**********************************************************************/
+
+
+/**
+ * 实例化对象
+ */
+let appInfo = reactive<AppInfo>({
+  /** appID */
+  id: '',
+  /** 平台ID */
+  platId: '',
+  /** 平台名称 */
+  platTitle: '',
+  /** app秘钥 */
+  appSecret: '',
+  /** 应用标识 */
+  appCode: '',
+  /** 应用名称 */
+  appTitle: '',
+  /** 应用名称简称 */
+  appAsTitle: '',
+  /** 应用类型: BACK-后端;VIEW-前端 */
+  appType: '',
+  /** 应用类型 */
+  typeCode: '',
+  /** 应用类型标题 */
+  typeTitle: '',
+  /** 访问地址 */
+  askUri: '',
+  /** 图标 */
+  iconIco: '',
+  /** 职能代码 */
+  funcCode: '',
+  /** 职能名称 */
+  funcTitle: '',
+  /** 是否可删除: Y-是;N-否 */
+  validDel: '',
+  /** 有效标志: Y-是;N-否 */
+  validFlag: '',
+  /** 备注 */
+  remarks: ''
+});
+
+
+/****************************************************************************/
+
+/**
+ * 弹窗基础参数
+ */
+const popupProps = reactive<FlyPopup>({
+  title: '弹窗',
+  open: false,
+  area: ['90%', '60%'],
+  maxmin: true,
+  disabled: false,
+  showSubmit: true,
+  showClose: true
+})
+
+/**
+ * 打开
+ */
+const onOpen = () => {
+  popupProps.open = true;
+}
+
+/**
+ * 关闭
+ */
+const onClose = () => {
+  popupProps.open = false;
+}
+
+
+/**
+ * 查询参数总类, 所有的都继承他
+ */
+interface BizQuery {
+  page: number,
+  limit: number,
+  // timeType?: QueryTimeType, // 查询时间类型
+  // startTime?: string, // 查询开始时间
+  // endTime?: string // 查询结束时间
+}
+
+/**
+ * 表单标题
+ */
+enum FormTypeEnum {
+  ADD = '新增',
+  EDIT = '编辑',
+  VIEW = '查看'
+}
+
+/**
+ * 弹窗基本参数
+ */
+interface FlyPopup {
+  open: boolean,
+  title: string,
+  area: string[] | number[],
+  maxmin: boolean,
+  disabled: boolean,
+  showSubmit: boolean,
+  showClose: boolean
+}
+
+/**
+ * 应用信息 向后端传值对象
+ *
+ * @author 王大宸
+ * @date 2024-09-05 10:00:59
+ */
+interface AppInfo {
+  /** appID */
+  id?: string,
+  /** 平台ID */
+  platId?: string,
+  /** 平台名称 */
+  platTitle?: string,
+  /** app秘钥 */
+  appSecret?: string,
+  /** 应用标识 */
+  appCode?: string,
+  /** 应用名称 */
+  appTitle?: string,
+  /** 应用名称简称 */
+  appAsTitle?: string,
+  /** 应用类型: BACK-后端;VIEW-前端 */
+  appType?: string,
+  /** 应用类型 */
+  typeCode?: string,
+  /** 应用类型标题 */
+  typeTitle?: string,
+  /** 访问地址 */
+  askUri?: string,
+  /** 图标 */
+  iconIco?: string,
+  /** 职能代码 */
+  funcCode?: string,
+  /** 职能名称 */
+  funcTitle?: string,
+  /** 是否可删除: Y-是;N-否 */
+  validDel?: string,
+  /** 有效标志: Y-是;N-否 */
+  validFlag?: string,
+  /** 备注 */
+  remarks?: string
+}
+
+
+/*********************************************************************************/
+
+
+
+/**********************************************************************************************/
+
+const showToSubmit = ref<boolean>(true);
+
+const refFormAppInfo = ref();
+
+/**
+ * 关闭按钮
+ */
+const onTapClose = () => {
+  onClose();
+}
+
+
+/**
+ * 提交
+ */
+function toSubmit() {
+  refFormAppInfo.value.validate((isValidate: boolean, model: AppInfo, errors: any[]) => {
+    if (!isValidate) {
+      return;
+    }
+    appInfoDataHandler(appInfo);
+    popupProps.open = false;
+    emit('click', appInfo);
+  })
+}
+
+
+const appInfoDataHandler = (appInfo: AppInfo) => {
+  console.log('appInfoDataHandler', appInfo);
+}
+
 
 //注册事件
 const emit = defineEmits(['click']);
