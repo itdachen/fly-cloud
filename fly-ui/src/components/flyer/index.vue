@@ -54,7 +54,10 @@ const onTapClose = () => {
 
 <template>
 
-  <lay-layer v-model="open" :title="title" :area="area" :maxmin="maxmin">
+  <lay-layer v-model="open"
+             :title="title"
+             :area="area"
+             :maxmin="maxmin">
 
     <div style="padding: 20px;">
       <slot name="content"></slot>

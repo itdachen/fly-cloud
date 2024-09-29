@@ -35,22 +35,22 @@ export default function flyPopupComposable() {
     /**
      * 打开
      */
-    const onOpen = () => {
+    const onOpenPopup = () => {
         popupProps.open = true;
     }
 
     /**
      * 关闭
      */
-    const onClose = () => {
+    const onClosePopup = () => {
         popupProps.open = false;
     }
 
 
     return {
         popupProps,
-        onOpen,
-        onClose
+        onOpenPopup,
+        onClosePopup
     }
 
 }
