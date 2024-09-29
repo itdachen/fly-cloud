@@ -93,6 +93,9 @@
 import {reactive, ref} from "vue";
 import {FormTypeEnum} from "@/hooks/biz/BizModel";
 
+
+/**********************************************************************************************/
+
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
 import {AppInfo} from "@/api/admin/model/AppInfoModel";
 import flyPopupComposable from "@/components/flyer/index";
@@ -109,14 +112,6 @@ let {
 } = useAppInfoComposable();
 
 const showToSubmit = ref<boolean>(true);
-
-/* 弹窗  '1200px', '800px' */
-const layLayerForm = reactive<any>({
-  open: false,
-  title: '',
-  area: ['90%', '60%'],
-  disabled: false
-});
 
 const refFormAppInfo = ref();
 
@@ -136,18 +131,18 @@ function toSubmit() {
   console.log('appInfo', appInfo);
 
 
-  appInfoDataHandler(appInfo);
-  onTapClose()
-  emit('click', appInfo);
+  // appInfoDataHandler(appInfo);
+  // onTapClose()
+  // emit('click', appInfo);
 
-  // refFormAppInfo.value.validate((isValidate: boolean, model: AppInfo, errors: any[]) => {
-  //   if (!isValidate) {
-  //     return;
-  //   }
-  //   appInfoDataHandler(appInfo);
-  //   layerRef.open = false;
-  //   emit('click', appInfo);
-  // })
+  refFormAppInfo.value.validate((isValidate: boolean, model: AppInfo, errors: any[]) => {
+    if (!isValidate) {
+      return;
+    }
+    appInfoDataHandler(appInfo);
+    popupProps.open = false;
+    emit('click', appInfo);
+  })
 }
 
 
@@ -156,17 +151,12 @@ const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
   refFormAppInfo.value?.resetFields();
   showToSubmit.value = true;
 
-  console.log('AppInfo', data);
-  console.log('type', type);
-  console.log('title', title);
-  console.log('popupProps', popupProps);
-
   // refFormAppInfo.value.reset();
-
+  debugger
   if (null !== data && undefined !== data) {
-    //  appInfo = JSON.parse(JSON.stringify(data))
+    appInfo = JSON.parse(JSON.stringify(data))
     // objCopy(data, appInfo);
-    appInfo = data;
+  //  appInfo = data;
   } else {
     appInfo = {};
   }
@@ -175,7 +165,7 @@ const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
     popupProps.disabled = true;
     popupProps.showSubmit = false;
   }
-  popupProps.title = type + title;
+ // popupProps.title = type + title;
 
 
   onOpen();
