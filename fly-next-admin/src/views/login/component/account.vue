@@ -111,6 +111,7 @@ const onSignIn = async () => {
   useLoginApi().signIn(loginData).then(res => {
     // 存储 token 到浏览器缓存
     // Session.set('token', Math.random().toString(36).substr(0));
+    console.log(res)
     Session.set('token', res.data.access_token);
   })
 

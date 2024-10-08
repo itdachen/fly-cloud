@@ -10,7 +10,7 @@ const request: AxiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
     timeout: 50000,
     withCredentials: true, // 异步请求携带 cookie
-    //  retry: 2, //请求失败时,Axios 自动重试的次数。
+    // retry: 2, //请求失败时,Axios 自动重试的次数。
     //  retryDelay: 1000,//每次重试之间的延迟时间,单位为毫秒
     headers: { //设置请求头信息
         'Content-Type': 'application/json;charset=UTF-8',

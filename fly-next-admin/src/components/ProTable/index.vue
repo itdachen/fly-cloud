@@ -14,16 +14,22 @@
     <!-- 表格头部 操作按钮 -->
     <div class="table-header">
       <div class="header-button-lf">
-        <slot name="tableHeader" :selected-list="selectedList" :selected-list-ids="selectedListIds"
+        <slot name="tableHeader"
+              :selected-list="selectedList"
+              :selected-list-ids="selectedListIds"
               :is-selected="isSelected"/>
       </div>
       <div v-if="toolButton" class="header-button-ri">
         <slot name="toolButton">
-          <el-button v-if="showToolButton('refresh')" :icon="Refresh" circle @click="getTableList"/>
-          <el-button v-if="showToolButton('setting') && columns.length" :icon="Operation" circle
+          <el-button v-if="showToolButton('refresh')"
+                     :icon="Refresh" circle @click="getTableList"/>
+          <el-button v-if="showToolButton('setting') && columns.length"
+                     :icon="Operation" circle
                      @click="openColSetting"/>
           <el-button v-if="showToolButton('search') && searchColumns?.length"
-                     :icon="Search" circle @click="isShowSearch = !isShowSearch"/>
+                     :icon="Search"
+                     circle
+                     @click="isShowSearch = !isShowSearch"/>
         </slot>
       </div>
     </div>
@@ -91,7 +97,7 @@
     </slot>
   </div>
   <!-- 列设置 -->
-  <ColSetting v-if="toolButton" ref="colRef" v-model:col-setting="colSetting"></ColSetting>
+  <ColSetting v-if="toolButton" ref="colRef" v-model:col-setting="colSetting"/>
 </template>
 
 <script setup lang="ts" name="ProTable">
@@ -162,16 +168,18 @@ const {selectionChange, selectedList, selectedListIds, isSelected} = useSelectio
 
 // 表格操作 Hooks
 const {
-  tableData,
-  pageable,
-  searchParam,
-  searchInitParam,
+  tableData, pageable, searchParam, searchInitParam,
   getTableList,
   search,
   reset,
   handleSizeChange,
   handleCurrentChange
-} = useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback, props.requestError);
+} =
+    useTable(props.requestApi,
+        props.initParam,
+        props.pagination,
+        props.dataCallback,
+        props.requestError);
 
 // 清空选中数据列表
 const clearSelection = () => tableRef.value!.clearSelection();
@@ -188,7 +196,8 @@ const processTableData = computed(() => {
   if (!props.data) return tableData.value;
   if (!props.pagination) return props.data;
   return props.data.slice(
-      (pageable.value.page - 1) * pageable.value.limit, pageable.value.limit * pageable.value.page
+      (pageable.value.page - 1) * pageable.value.limit,
+      pageable.value.limit * pageable.value.page
   );
 });
 
@@ -202,7 +211,9 @@ const tableColumns = reactive<ColumnProps[]>(props.columns);
 const flatColumns = computed(() => flatColumnsFunc(tableColumns));
 
 // 定义 enumMap 存储 enum 值（避免异步请求无法格式化单元格内容 || 无法填充搜索下拉选择）
-const enumMap = ref(new Map<string, { [key: string]: any }[]>());
+const enumMap = ref(new Map<string, {
+  [key: string]: any
+}[]>());
 const setEnumMap = async ({prop, enum: enumValue}: ColumnProps) => {
   if (!enumValue) return;
 
@@ -225,6 +236,8 @@ provide("enumMap", enumMap);
 
 // 扁平化 columns 的方法
 const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) => {
+  console.log('columns', columns);
+  console.log('flatArr', flatArr);
   columns.forEach(async col => {
     if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children));
     flatArr.push(col);
@@ -270,7 +283,10 @@ const openColSetting = () => colRef.value.openColSetting();
 const emit = defineEmits<{
   search: [];
   reset: [];
-  dragSort: [{ newIndex?: number; oldIndex?: number }];
+  dragSort: [{
+    newIndex?: number;
+    oldIndex?: number
+  }];
 }>();
 
 const _search = () => {
