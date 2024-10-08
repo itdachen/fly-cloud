@@ -13,7 +13,7 @@ const {
     appInfoColumns,
     queryAppInfoParams,
     tableAppInfoData,
-    refAppInfo
+    refAppInfoForm
 } = useAppInfoBuilder();
 
 const {flyLayPage} = useLayTableComposable();
@@ -56,7 +56,8 @@ export default function useAppInfoComposable() {
      * 新增按钮
      */
     const onTapAppInfoAdd = () => {
-        refAppInfo.value?.openPopup(FormTypeEnum.ADD, '应用信息', null);
+        console.log('onTapAppInfoAdd')
+        refAppInfoForm.value?.openPopup(FormTypeEnum.ADD, '应用信息', null);
     }
 
     /**
@@ -64,7 +65,7 @@ export default function useAppInfoComposable() {
      * @param data 编辑时的数据信息
      */
     const onTapAppInfoEdit = (data: AppInfo) => {
-        refAppInfo.value?.openPopup(FormTypeEnum.EDIT, '应用信息', data);
+        refAppInfoForm.value?.openPopup(FormTypeEnum.EDIT, '应用信息', data);
     }
 
     /**
@@ -72,7 +73,7 @@ export default function useAppInfoComposable() {
      * @param data 查看时的数据信息
      */
     const onTapAppInfoView = (data: AppInfo) => {
-        refAppInfo.value?.openPopup(FormTypeEnum.VIEW, '应用信息', data);
+        refAppInfoForm.value?.openPopup(FormTypeEnum.VIEW, '应用信息', data);
     }
 
 
@@ -113,7 +114,7 @@ export default function useAppInfoComposable() {
     }
 
     return {
-        refAppInfo,
+        refAppInfoForm,
         appInfo,
         flyLayPage,
         tableAppInfoData,

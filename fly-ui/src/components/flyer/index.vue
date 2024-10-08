@@ -14,7 +14,7 @@ const props = defineProps({
   },
   /* 弹窗大小: 宽度/高度 */
   area: {
-    type: [],
+    type: Array,
     default: ['80%', '60%'],
   },
   /* 是否展示提交按钮 */
@@ -54,7 +54,7 @@ const onTapClose = () => {
 
 <template>
 
-  <lay-layer v-model="open"
+  <lay-layer v-bind="open"
              :title="title"
              :area="area"
              :maxmin="maxmin">

@@ -171,14 +171,14 @@ export default function useAppInfoBuilder() {
     /**
      *  新增/修改/查看 弹窗
      */
-    const refAppInfo = ref();
+    const refAppInfoForm = ref();
 
     return {
         queryAppInfoParams,
         tableAppInfoData,
         appInfo,
         appInfoColumns,
-        refAppInfo
+        refAppInfoForm
     }
 
 }

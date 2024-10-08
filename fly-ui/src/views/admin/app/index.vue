@@ -81,20 +81,20 @@
   </lay-container>
 
 
-  <RefAppInfo ref="refAppInfo" @click="refreshData"/>
+  <RefAppInfo ref="refAppInfoForm" @click="refreshData"/>
 
 </template>
 
 
 <script setup lang="ts">
 import {onMounted} from "vue";
-import RefAppInfo from './refAppInfo.vue';
+import RefAppInfo from './RefAppInfo.vue';
 
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
 
 
 const {
-  refAppInfo,
+  refAppInfoForm,
   flyLayPage,
   tableAppInfoData,
   appInfoColumns,

@@ -6,7 +6,7 @@ import {reactive} from "vue";
 interface FlyPopup {
     open: boolean,
     title: string,
-    area: string[] | number[],
+    area: string[],
     maxmin: boolean,
     disabled: boolean,
     showSubmit: boolean,
