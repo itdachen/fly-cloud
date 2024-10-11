@@ -1,105 +1,164 @@
 <template>
-  <div class="table-box">
-    <ProTable ref="proTable"
-               :columns="columns"
-               :request-api="getTableList"
-               :init-param="initParam"
-               :data-callback="dataCallback"
-               @drag-sort="sortTable">
-      <!-- 表格 header 按钮 -->
-      <template #tableHeader="scope">
-        <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
-        <el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
-        <el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
-        <!--        <el-button type="primary" plain @click="toDetail">To 子集详情页面</el-button>-->
-        <!--        <el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected"-->
-        <!--                   @click="batchDelete(scope.selectedListIds)">-->
-        <!--          批量删除用户-->
-        <!--        </el-button>-->
-      </template>
-      <!-- Expand -->
-      <template #expand="scope">
-        {{ scope.row }}
-      </template>
-      <!-- usernameHeader -->
-      <template #usernameHeader="scope">
-        <el-button type="primary" @click="ElMessage.success('我是通过作用域插槽渲染的表头')">
-          {{ scope.column.label }}
+  <div class="fly-container">
+
+
+    <div class="fly-main-container">
+
+      <div class="fly-query-container">
+
+        <el-form ref="ruleFormRef" label-width="120px">
+          <el-row :gutter="20">
+            <el-col :span="4" style="margin-top: 3px">
+              <el-form-item label="输入框A">
+                <el-input></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4" style="margin-top: 3px">
+              <el-form-item label="输入框B">
+                <el-input></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4" style="margin-top: 3px">
+              <el-form-item label="输入框c">
+                <el-input></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="4" style="margin-top: 8px">
+              <el-button size="default" type="primary" class="ml10">
+                <el-icon>
+                  <ele-Search/>
+                </el-icon>
+                查询
+              </el-button>
+              <el-button size="default" type="primary" class="ml10" @click="resetForm()">
+                <el-icon>
+                  <Refresh/>
+                </el-icon>
+                重置
+              </el-button>
+              <el-button size="default" type="primary" class="ml10">
+                <el-icon>
+                  <ele-FolderOpened/>
+                </el-icon>
+                导出
+              </el-button>
+            </el-col>
+          </el-row>
+        </el-form>
+
+        <!--        <el-form :inline="true" class="demo-form-inline" style="display: flex;">-->
+        <!--          <el-form-item label="角色名称">-->
+        <!--            <el-input size="default" placeholder="请输入角色名称" style="max-width: 180px"></el-input>-->
+        <!--          </el-form-item>-->
+        <!--          <el-form-item label="角色名称">-->
+        <!--            <el-input label="角色名称" size="default" placeholder="请输入角色名称" style="max-width: 180px"></el-input>-->
+        <!--          </el-form-item>-->
+        <!--          <el-form-item label="角色名称">-->
+        <!--            <el-input label="角色名称" size="default" placeholder="请输入角色名称" style="max-width: 180px"></el-input>-->
+        <!--          </el-form-item>-->
+        <!--          <el-form-item label="角色名称">-->
+        <!--            <el-input label="角色名称" size="default" placeholder="请输入角色名称" style="min-width: 180px"></el-input>-->
+        <!--          </el-form-item>-->
+        <!--          <div style="margin-top: 5px;">-->
+        <!--            <el-button size="default" type="primary" class="ml10">-->
+        <!--              <el-icon> <ele-Search/> </el-icon>-->
+        <!--              查询-->
+        <!--            </el-button>-->
+        <!--            <el-button size="default" type="primary" class="ml10">-->
+        <!--              <el-icon><Refresh /></el-icon>-->
+        <!--              重置-->
+        <!--            </el-button>-->
+        <!--            <el-button size="default" type="primary" class="ml10">-->
+        <!--              <el-icon><ele-FolderOpened /></el-icon>-->
+        <!--              导出-->
+        <!--            </el-button>-->
+
+        <!--          </div>-->
+
+        <!--        </el-form>-->
+      </div>
+
+      <div style="    margin-top: 20px;">
+        <el-button size="default" type="success" class="ml10">
+          <el-icon>
+            <ele-FolderAdd/>
+          </el-icon>
+          新增角色
         </el-button>
-      </template>
-      <!-- createTime -->
-      <template #createTime="scope">
-        <el-button type="primary" link @click="ElMessage.success('我是通过作用域插槽渲染的内容')">
-          {{ scope.row.createTime }}
-        </el-button>
-      </template>
-      <!-- 表格操作 -->
-      <template #operation="scope">
-        <el-button type="primary" link :icon="View">查看</el-button>
-        <el-button type="primary" link :icon="EditPen">编辑</el-button>
-        <el-button type="primary" link :icon="Refresh">重置密码</el-button>
-        <el-button type="primary" link :icon="Delete">删除</el-button>
-      </template>
-    </ProTable>
+      </div>
+
+      <div class="fly-table-box">
+        <el-table :data="tableData" style="width: 100%">
+          <el-table-column prop="date" label="Date" align="center"/>
+          <el-table-column prop="name" label="Name" align="center"/>
+          <el-table-column prop="address" label="Address" align="center"/>
+          <el-table-column fixed="right" align="center" label="操作" min-width="40">
+            <template #default>
+              <el-button link type="primary" :icon="Tickets"
+                         class="fly-button fly-view-button" @click="handleClick">
+                查看
+              </el-button>
+              <el-button link type="primary" :icon="Edit"
+                         class="fly-button fly-edit-button" @click="handleClick">
+                编辑
+              </el-button>
+              <el-button link type="primary" :icon="Delete"
+                         class="fly-button fly-remove-button">删除
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+
+        <FlyPagination :total="200" @change="onCurrentChange"></FlyPagination>
+
+      </div>
+    </div>
+
   </div>
+
 </template>
 
 <script setup>
-import {ref, reactive} from "vue";
-import {ElMessage, ElMessageBox} from "element-plus";
-import {CirclePlus, Delete, EditPen, Download, Upload, View, Refresh} from "@element-plus/icons-vue";
-import ProTable from '/@/components/ProTable/index.vue';
+import {ref} from "vue";
+import {Delete, Edit, Refresh, Tickets} from "@element-plus/icons-vue";
+import FlyPagination from "/@/components/pagination/FlyPagination.vue";
+// import {FormInstance} from 'element-plus';
 
-// ProTable 实例
-const proTable = ref({});
 
-// 如果表格需要初始化请求参数，直接定义传给 ProTable (之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
-const initParam = reactive({type: 1});
-
-// dataCallback 是对于返回的表格数据做处理，如果你后台返回的数据不是 list && total 这些字段，可以在这里进行处理成这些字段
-// 或者直接去 hooks/useTable.ts 文件中把字段改为你后端对应的就行
-const dataCallback = (data) => {
-  console.log(data)
-  // return {
-  //   list: [],
-  //   total: 0
-  // };
+// 分页改变
+const onCurrentChange = (val) => {
+  console.log(`page: ${val.page} , limit: ${val.limit}`)
 };
 
-// 表格配置项
-const columns = [
-  {prop: "platTitle", label: "平台名称", align: "center"},
-  {prop: "appCode", label: "应用标识", align: "center"},
-  {prop: "appTitle", label: "应用名称", align: "center"},
-  {prop: "appAsTitle", label: "应用名称简称", align: "center"},
-  {prop: "appType", label: "应用类型", align: "center"},
-  {prop: "askUri", label: "访问地址", align: "center"},
-  {prop: "iconIco", label: "图标", align: "center"},
-  {prop: "funcTitle", label: "职能名称", align: "center"},
-  {prop: "validFlag", label: "有效标志", align: "center"},
-  {prop: "operation", label: "操作", fixed: "right", width: 330}
-];
+const tableData = [
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+]
 
-// 表格拖拽排序
-const sortTable = ({newIndex, oldIndex}) => {
-  console.log(newIndex, oldIndex);
-  console.log(proTable.value?.tableData);
-  ElMessage.success("修改列表排序成功");
-};
-
-// 导出用户列表
-const downloadFile = async () => {
-  ElMessageBox.confirm("确认导出用户数据?", "温馨提示", {type: "warning"}).then(() => {
-
-      }
-      // useDownload(exportUserInfo, "用户列表", proTable.value?.searchParam)
-  );
-};
-
-
-const getTableList = () => {
-  return [];
-}
+// const ruleFormRef = ref<FormInstance>();
+//
+// const resetForm = (formEl: FormInstance | undefined) => {
+//   if (!formEl) return
+//   formEl.resetFields()
+// }
 
 </script>
 

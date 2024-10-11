@@ -97,7 +97,7 @@
     </slot>
   </div>
   <!-- 列设置 -->
-  <ColSetting v-if="toolButton" ref="colRef" v-model:col-setting="colSetting"/>
+<!--  <ColSetting v-if="toolButton" ref="colRef" v-model:col-setting="colSetting"/>-->
 </template>
 
 <script setup lang="ts" name="ProTable">

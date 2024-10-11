@@ -9,6 +9,10 @@
 	</el-config-provider>
 </template>
 
+<style>
+@import "./fly/styles/style.css";
+</style>
+
 <script setup lang="ts" name="app">
 import { defineAsyncComponent, computed, ref, onBeforeMount, onMounted, onUnmounted, nextTick, watch } from 'vue';
 import { useRoute } from 'vue-router';

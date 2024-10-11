@@ -1,9 +1,30 @@
 
+.fly-container {
+    background-color: #f5f6f6;
+}
+
+.fly-main-container {
+    background-color: #FFFFFF;
+    border-radius: 3px;
+    padding: 10px 20px;
+}
+
+.fly-query-container {
+    /*border: 1px solid #eee;*/
+    margin-left: 30px;
+    margin-top: 10px;
+    /*margin-bottom: 30px;*/
+    border-radius: 5px;
+}
+
 .fly-button {
+    /*width: 70px;*/
+    padding: 3px 10px !important;
     height: 33px;
     line-height: 33px;
     width: auto;
     border-radius: 3px;
+    letter-spacing: 2px;
     /*margin-top: 5px; font-weight: 400; //color: #ffffff; padding: 0 12px 0 10px; font-size: 16px; text-align: center; //transition: transform 0.3s ease; !* 平滑变化 *!*/
 }
 
@@ -27,21 +48,25 @@
 .fly-toolbar-addition {
     background-color: #1E9FFF !important;
     border-color: #31BDEC !important;
+    color: #FFFFFF !important;
 }
 
 .fly-toolbar-addition:hover {
     background-color: #31BDEC !important;
+    color: #FFFFFF !important;
 }
 
 
 .fly-edit-button {
     background-color: #6572ff !important;
     border-color: #6c87ff !important;
+    color: #FFFFFF !important;
 }
 
 .fly-edit-button:hover {
     background-color: rgba(101, 114, 255, 0.64);
     border-color: rgba(101, 114, 255, 0.13);
+    color: #FFFFFF !important;
 }
 
 .fly-remove-button {
@@ -162,7 +187,7 @@
     border-left: none !important;
 }
 
-.layui-table  thead tr th {
+.layui-table thead tr th {
     font-size: 18px !important;
     font-weight: bold;
 }
@@ -189,10 +214,10 @@
     background-color: #fff;
 }
 
-.table-box {
+.fly-table-box {
     /*margin-top: 10px;*/
     padding: 10px;
-    height: 700px;
+    /*height: 700px;*/
     width: 100%;
     border-radius: 4px;
     box-sizing: border-box;
@@ -211,3 +236,16 @@
     color: red;
 }
 
+
+/*** element plus ui START *********************************************************/
+
+.el-button.is-link {
+    height: 30px !important;
+}
+
+.el-button [class*=el-icon] + span {
+    margin-left: 0 !important;
+    margin-top: 5px !important;
+}
+
+/*** element plus ui END *********************************************************/
