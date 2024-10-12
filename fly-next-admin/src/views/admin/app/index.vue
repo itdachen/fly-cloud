@@ -32,7 +32,7 @@
               </el-button>
               <el-button size="default" type="primary" class="ml10" @click="resetForm()">
                 <el-icon>
-                  <Refresh/>
+                  <ele-Refresh/>
                 </el-icon>
                 重置
               </el-button>
