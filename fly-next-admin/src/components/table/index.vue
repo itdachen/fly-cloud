@@ -5,13 +5,13 @@
       <div class="header-button-lf" style="width: 100%;">
         <slot name="tableHeader" :ids="selectedListIds" :isSelected="isSelected"></slot>
       </div>
-      <div class="header-button-ri" v-if="toolButton" style="width: 100px;">
+      <div class="header-button-ri" v-if="toolButton" style="width: 100px; line-height: 50px!important;">
         <el-button round size="mini" :icon="Refresh" circle @click="reloadDate"></el-button>
         <el-button round size="mini" :icon="Operation" circle @click="openColSetting"></el-button>
       </div>
     </div>
 
-    <el-table height="570"
+    <el-table height="600"
               fit="true"
               ref="tableRef"
               :data="data.rows"
@@ -193,7 +193,7 @@ const reloadDate = () => {
   searchFunction(currentPage.value, pageSize.value)
 }
 
-const emits = defineEmits(['reloadDate'])
+const emits = defineEmits(['reload'])
 
 /**
  * 重新加载数据
@@ -201,7 +201,7 @@ const emits = defineEmits(['reloadDate'])
  * @param limit  当前页展示多少条数据
  */
 const searchFunction = (page: number = 1, limit: number = 10) => {
-  emits('reloadDate', page, limit);
+  emits('reload', page, limit);
 }
 
 

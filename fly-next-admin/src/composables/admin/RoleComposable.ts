@@ -148,16 +148,18 @@ export default function useRoleComposable() {
      * @param params
      */
     const loadTableData = (params: RoleQuery) => {
+        console.log('loadTableData', params);
+
         tableDataVo.total = 15;
-
         tableDataVo.rows = [];
-
         let rows = [];
-        for (let i = 0; i < 15; i++) {
+        let a = (params.page - 1) * 10;
+        let b = a + params.limit;
+        for (let i = a; i < b; i++) {
             rows.push({
                 id: i + 1,
-                name: '角色' + i,
-                remark: '角色' + i
+                name: '角色' + (i + 1),
+                remark: '角色' + (i + 1)
             })
         }
 
@@ -180,6 +182,7 @@ export default function useRoleComposable() {
      * @param data
      */
     const handlerUpdate = (data: RoleVo) => {
+        console.log('handlerUpdate', data)
         refRole.value?.show(DialogTypeEnum.UPDATE, data);
     }
 

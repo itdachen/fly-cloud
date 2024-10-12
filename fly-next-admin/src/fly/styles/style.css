@@ -4,9 +4,11 @@
 }
 
 .fly-main-container {
+    padding-top: 20px;
+    margin: 5px 10px;
     background-color: #FFFFFF;
-    border-radius: 3px;
-    padding: 10px 20px;
+    border-radius: 5px;
+    /*padding: 10px 20px;*/
 }
 
 .fly-query-container {
@@ -17,7 +19,7 @@
     border-radius: 5px;
 }
 
-.fly-search-item{
+.fly-search-item {
     height: 32px;
 }
 
@@ -50,13 +52,15 @@
 }
 
 .fly-toolbar-addition {
-    background-color: #1E9FFF !important;
-    border-color: #31BDEC !important;
+    /*background-color: #1E9FFF !important;*/
+    /*border-color: #31BDEC !important;*/
+    background-color: #67c23a !important;
+    border-color: #80c75b !important;
     color: #FFFFFF !important;
 }
 
 .fly-toolbar-addition:hover {
-    background-color: #31BDEC !important;
+    background-color: #80c75b !important;
     color: #FFFFFF !important;
 }
 
@@ -140,17 +144,17 @@
 
 .fly-button-search {
     height: 32px !important;
-    background-color: #e8f7f6 !important;
-    border-color: #b9e8e3 !important;
-    color: #17B3A3 !important;
+    background-color: #1E9FFF !important;
+    border-color: #40a9f8 !important;
+    color: #FFFFFF !important;
     letter-spacing: 3px;
 }
 
 .fly-button-search:hover {
     height: 32px !important;
-    background-color: #e8f7f6 !important;
-    border-color: #b9e8e3 !important;
-    color: #17B3A3 !important;
+    background-color: #40a9f8 !important;
+    border-color: #40a9f8 !important;
+    color: #FFFFFF !important;
     letter-spacing: 4px;
 }
 
@@ -221,11 +225,9 @@
 }
 
 .fly-table-box {
-    /*margin-top: 10px;*/
     padding: 10px;
-    /*height: 700px;*/
     width: 100%;
-    border-radius: 4px;
+    border-radius: 5px;
     box-sizing: border-box;
     background-color: #fff;
 }
@@ -254,8 +256,12 @@
     margin-top: 3px !important;
 }
 
-.el-button+.el-button{
+.el-button + .el-button {
     margin-left: 10px !important;
 }
+
+/*.el-form.el-form--inline .el-form-item--large.el-form-item:last-of-type {*/
+/*    margin-bottom: 11px !important;*/
+/*}*/
 
 /*** element plus ui END *********************************************************/
