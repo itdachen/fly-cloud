@@ -1,11 +1,11 @@
 <template>
   <div class="table-box">
     <!-- 表格头部 操作按钮 -->
-    <div class="table-header">
-      <div class="header-button-lf">
+    <div class="table-header" style="display: flex;">
+      <div class="header-button-lf" style="width: 100%;">
         <slot name="tableHeader" :ids="selectedListIds" :isSelected="isSelected"></slot>
       </div>
-      <div class="header-button-ri" v-if="toolButton">
+      <div class="header-button-ri" v-if="toolButton" style="width: 100px;">
         <el-button round size="mini" :icon="Refresh" circle @click="reloadDate"></el-button>
         <el-button round size="mini" :icon="Operation" circle @click="openColSetting"></el-button>
       </div>
@@ -70,13 +70,13 @@
               <!-- tag 标签（自带格式化内容） -->
               <el-tag v-else-if="item.tag" :type="filterEnum(scope.row[item.prop!],item.enum,'tag')">
                 {{
-                  item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0, 0, scope.row[item.prop!])
+                  item.enum?.length ? filterEnum(scope.row[item.prop!], item.enum) : defaultFormat(0, 0, scope.row[item.prop!])
                 }}
               </el-tag>
               <!-- 文字（自带格式化内容） -->
               <span v-else>
 								{{
-                  item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0, 0, scope.row[item.prop!])
+                  item.enum?.length ? filterEnum(scope.row[item.prop!], item.enum) : defaultFormat(0, 0, scope.row[item.prop!])
                 }}
 							</span>
             </slot>
@@ -87,7 +87,8 @@
     </el-table>
 
     <!--  分页  -->
-    <pagination v-if="pagination"
+    <pagination style="margin-top: 15px;"
+                v-if="pagination"
                 :currentPage="currentPage"
                 :total="data.total"
                 :pageSize="pageSize"

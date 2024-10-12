@@ -5,19 +5,15 @@
   </template>
   <!-- 下拉选择框 -->
   <template v-if="item.searchType === 'select' || item.searchType === 'multipleSelect'">
-    <el-select
-        v-model="searchParam[item.prop!]"
+    <el-select v-model="searchParam[item.prop!]"
         :multiple="item.searchType === 'multipleSelect'"
         placeholder="请选择"
-        :clearable="clearable(item)"
-    >
-      <el-option
-          v-for="itemValue in item.enum"
+        :clearable="clearable(item)"  >
+      <el-option  v-for="itemValue in item.enum"
           :key="itemValue.value"
           :label="itemValue.label"
           :value="itemValue.value"
-          :disabled="itemValue.disabled"
-      />
+          :disabled="itemValue.disabled" />
     </el-select>
   </template>
   <!-- 下拉树形选择框 -->
@@ -27,54 +23,46 @@
   </template>
   <!-- 日期选择 -->
   <template v-if="item.searchType == 'date'">
-    <el-date-picker
-        v-model="searchParam[item.prop!]"
+    <el-date-picker v-model="searchParam[item.prop!]"
         value-format="YYYY-MM-DD"
         type="date"
         placeholder="请选择日期"
-        :clearable="clearable(item)"
-    />
+        :clearable="clearable(item)"   />
   </template>
   <!-- 时间范围选择 -->
   <template v-if="item.searchType == 'timerange'">
-    <el-time-picker
-        v-model="searchParam[item.prop!]"
+    <el-time-picker v-model="searchParam[item.prop!]"
         is-range
         value-format="HH:mm:ss"
         range-separator="至"
         start-placeholder="开始时间"
         end-placeholder="结束时间"
-        :clearable="clearable(item)"
-    />
+        :clearable="clearable(item)"  />
   </template>
   <!-- 日期范围选择 -->
   <template v-if="item.searchType == 'daterange'">
-    <el-date-picker
-        v-model="searchParam[item.prop!]"
+    <el-date-picker  v-model="searchParam[item.prop!]"
         type="daterange"
         value-format="YYYY-MM-DD"
         range-separator="至"
         start-placeholder="开始时间"
         end-placeholder="结束时间"
-        :clearable="clearable(item)"
-    />
+        :clearable="clearable(item)" />
   </template>
   <!-- 日期时间范围选择 -->
   <template v-if="item.searchType == 'datetimerange'">
-    <el-date-picker
-        v-model="searchParam[item.prop!]"
+    <el-date-picker v-model="searchParam[item.prop!]"
         type="datetimerange"
         value-format="YYYY-MM-DD HH:mm:ss"
         range-separator="至"
         start-placeholder="开始时间"
         end-placeholder="结束时间"
-        :clearable="clearable(item)"
-    />
+        :clearable="clearable(item)" />
   </template>
 </template>
 
 <script setup lang="ts" name="searchFormItem">
-import {ColumnProps} from "@/components/ProTable/interface";
+import {ColumnProps} from "/@/components/table/interface";
 
 interface SearchFormItem {
   item: Partial<ColumnProps>; // 具体每一个搜索项的配置

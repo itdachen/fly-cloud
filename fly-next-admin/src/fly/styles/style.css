@@ -17,10 +17,14 @@
     border-radius: 5px;
 }
 
+.fly-search-item{
+    height: 32px;
+}
+
 .fly-button {
     /*width: 70px;*/
     padding: 3px 10px !important;
-    height: 33px;
+    height: 33px !important;
     line-height: 33px;
     width: auto;
     border-radius: 3px;
@@ -135,6 +139,7 @@
 
 
 .fly-button-search {
+    height: 32px !important;
     background-color: #e8f7f6 !important;
     border-color: #b9e8e3 !important;
     color: #17B3A3 !important;
@@ -142,6 +147,7 @@
 }
 
 .fly-button-search:hover {
+    height: 32px !important;
     background-color: #e8f7f6 !important;
     border-color: #b9e8e3 !important;
     color: #17B3A3 !important;
@@ -245,7 +251,11 @@
 
 .el-button [class*=el-icon] + span {
     margin-left: 0 !important;
-    margin-top: 5px !important;
+    margin-top: 3px !important;
+}
+
+.el-button+.el-button{
+    margin-left: 10px !important;
 }
 
 /*** element plus ui END *********************************************************/
