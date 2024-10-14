@@ -5,7 +5,7 @@
       <div class="header-button-lf" style="width: 100%;">
         <slot name="tableHeader" :ids="selectedListIds" :isSelected="isSelected"></slot>
       </div>
-      <div class="header-button-ri" v-if="toolButton" style="width: 100px; line-height: 50px!important;">
+      <div class="header-button-ri" v-if="toolButton" style="width: 100px; line-height: 30px!important;">
         <el-button round size="mini" :icon="Refresh" circle @click="reloadDate"></el-button>
         <el-button round size="mini" :icon="Operation" circle @click="openColSetting"></el-button>
       </div>
