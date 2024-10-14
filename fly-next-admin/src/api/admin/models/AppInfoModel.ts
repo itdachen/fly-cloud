@@ -1,7 +1,7 @@
 import {BizQuery} from "/@/fly/biz/BizModel";
 import {reactive, ref} from "vue";
-import {ColumnProps} from '/@/fly/components/table/interface';
-import {DialogTypeEnum} from "/@/components/dialog/DialogTypeEnum";
+import {ColumnProps} from '/@/components/table/interface';
+import {DialogTypeEnum} from "/@/components/dialog/DialogModel";
 import {TableData} from "axios";
 
 /**
@@ -36,39 +36,39 @@ export interface AppInfoQuery extends BizQuery {
  */
 export interface AppInfo {
     /** appID */
-    id?: string , 
+    id?: string,
     /** 平台ID */
-    platId?: string , 
+    platId?: string,
     /** 平台名称 */
-    platTitle?: string , 
+    platTitle?: string,
     /** app秘钥 */
-    appSecret?: string , 
+    appSecret?: string,
     /** 应用标识 */
-    appCode?: string , 
+    appCode?: string,
     /** 应用名称 */
-    appTitle?: string , 
+    appTitle?: string,
     /** 应用名称简称 */
-    appAsTitle?: string , 
+    appAsTitle?: string,
     /** 应用类型: BACK-后端;VIEW-前端 */
-    appType?: string , 
+    appType?: string,
     /** 应用类型 */
-    typeCode?: string , 
+    typeCode?: string,
     /** 应用类型标题 */
-    typeTitle?: string , 
+    typeTitle?: string,
     /** 访问地址 */
-    askUri?: string , 
+    askUri?: string,
     /** 图标 */
-    iconIco?: string , 
+    iconIco?: string,
     /** 职能代码 */
-    funcCode?: string , 
+    funcCode?: string,
     /** 职能名称 */
-    funcTitle?: string , 
+    funcTitle?: string,
     /** 是否可删除: Y-是;N-否 */
-    validDel?: string , 
+    validDel?: string,
     /** 有效标志: Y-是;N-否 */
-    validFlag?: string , 
+    validFlag?: string,
     /** 备注 */
-    remarks?: string 
+    remarks?: string
 }
 
 
@@ -79,29 +79,29 @@ export default function useAppInfoBuilder() {
     /**
      * 实例化查询数据对象
      */
-    const queryAppInfoParams = reactive< AppInfoQuery >({
-       page: 1,
-       limit: 10,
-       /** 平台ID */
-       platId: '' , 
-       /** 应用标识 */
-       appCode: '' , 
-       /** 应用名称 */
-       appTitle: '' , 
-       /** 应用类型: BACK-后端;VIEW-前端 */
-       appType: '' , 
-       /** 应用类型 */
-       typeCode: '' , 
-       /** 职能代码 */
-       funcCode: '' , 
-       /** 有效标志: Y-是;N-否 */
-       validFlag: '' 
-   });
+    const queryAppInfoParams = reactive<AppInfoQuery>({
+        page: 1,
+        limit: 10,
+        /** 平台ID */
+        platId: '',
+        /** 应用标识 */
+        appCode: '',
+        /** 应用名称 */
+        appTitle: '',
+        /** 应用类型: BACK-后端;VIEW-前端 */
+        appType: '',
+        /** 应用类型 */
+        typeCode: '',
+        /** 职能代码 */
+        funcCode: '',
+        /** 有效标志: Y-是;N-否 */
+        validFlag: ''
+    });
 
     /**
      * 分页数据
      */
-    const tableData = reactive< TableData < AppInfo > > ({
+    const tableData = reactive<TableData<AppInfo>>({
         total: 0,
         rows: [],
     });
@@ -109,41 +109,41 @@ export default function useAppInfoBuilder() {
     /**
      * 实例化对象
      */
-    const appInfo = reactive< AppInfo >({
-       /** appID */
-       id: '' , 
-       /** 平台ID */
-       platId: '' , 
-       /** 平台名称 */
-       platTitle: '' , 
-       /** app秘钥 */
-       appSecret: '' , 
-       /** 应用标识 */
-       appCode: '' , 
-       /** 应用名称 */
-       appTitle: '' , 
-       /** 应用名称简称 */
-       appAsTitle: '' , 
-       /** 应用类型: BACK-后端;VIEW-前端 */
-       appType: '' , 
-       /** 应用类型 */
-       typeCode: '' , 
-       /** 应用类型标题 */
-       typeTitle: '' , 
-       /** 访问地址 */
-       askUri: '' , 
-       /** 图标 */
-       iconIco: '' , 
-       /** 职能代码 */
-       funcCode: '' , 
-       /** 职能名称 */
-       funcTitle: '' , 
-       /** 是否可删除: Y-是;N-否 */
-       validDel: '' , 
-       /** 有效标志: Y-是;N-否 */
-       validFlag: '' , 
-       /** 备注 */
-       remarks: '' , 
+    const appInfo = reactive<AppInfo>({
+        /** appID */
+        id: '',
+        /** 平台ID */
+        platId: '',
+        /** 平台名称 */
+        platTitle: '',
+        /** app秘钥 */
+        appSecret: '',
+        /** 应用标识 */
+        appCode: '',
+        /** 应用名称 */
+        appTitle: '',
+        /** 应用名称简称 */
+        appAsTitle: '',
+        /** 应用类型: BACK-后端;VIEW-前端 */
+        appType: '',
+        /** 应用类型 */
+        typeCode: '',
+        /** 应用类型标题 */
+        typeTitle: '',
+        /** 访问地址 */
+        askUri: '',
+        /** 图标 */
+        iconIco: '',
+        /** 职能代码 */
+        funcCode: '',
+        /** 职能名称 */
+        funcTitle: '',
+        /** 是否可删除: Y-是;N-否 */
+        validDel: '',
+        /** 有效标志: Y-是;N-否 */
+        validFlag: '',
+        /** 备注 */
+        remarks: '',
     });
 
     /**
@@ -151,34 +151,36 @@ export default function useAppInfoBuilder() {
      */
     const columns: Partial<ColumnProps>[] = [
         {
-           prop: "platTitle",
-           label: "平台名称",
-           align: "center"
+            prop: "platTitle",
+            label: "平台名称",
+            align: "center"
         },
         {
-           prop: "appCode",
-           label: "应用标识",
-           align: "center"
+            prop: "appCode",
+            label: "应用标识",
+            align: "center"
         },
         {
-           prop: "appTitle",
-           label: "应用名称",
-           align: "center"
+            prop: "appTitle",
+            label: "应用名称",
+            align: "center"
         },
         {
-           prop: "appAsTitle",
-           label: "应用名称简称",
-           align: "center"
+            prop: "appAsTitle",
+            label: "应用名称简称",
+            align: "center"
         },
         {
-           prop: "appType",
-           label: "应用类型: BACK-后端;VIEW-前端",
-           align: "center"
+            prop: "appType",
+            label: "应用类型",
+            width: 100,
+            align: "center"
         },
         {
-           prop: "validFlag",
-           label: "有效标志: Y-是;N-否",
-           align: "center"
+            prop: "validFlag",
+            label: "有效标志",
+            width: 100,
+            align: "center"
         },
         {
             prop: "operation",

@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <el-table height="600"
+    <el-table :height="height"
               fit="true"
               ref="tableRef"
               :data="data.rows"
@@ -92,8 +92,7 @@
                 :currentPage="currentPage"
                 :total="data.total"
                 :pageSize="pageSize"
-                @handleSizeChange="handleSizeChange"
-                @handleCurrentChange="handleCurrentChange"></pagination>
+                @change="paginationChangeHandler"></pagination>
 
     <!-- 列设置 -->
     <ColSetting v-if="toolButton" ref="colRef" :tableRef="tableRef" :colSetting="colSetting"></ColSetting>
@@ -141,6 +140,7 @@ interface ProTableProps {
   toolButton?: boolean; // 是否显示表格功能按钮 ==> 非必传（默认为true）
   rowKey?: string;
   expandAll?: boolean; // 树结构是否展开全部
+  height: string; // 表格高度
 }
 
 
@@ -165,30 +165,26 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   /* 是否显示表格功能按钮 ==> 非必传（默认为true） */
   toolButton: true,
   rowKey: 'id',
-  expandAll: false
+  expandAll: false,
+  height: '630'
 });
 
-/**
- * 修改每页展示多少条
- * @param val 需要展示的条数
- */
-const handleSizeChange = (val: number) => {
-  pageSize.value = val;
-  currentPage.value = 1;
-  searchFunction(currentPage.value, val);
-}
 
 /**
- * 上一页/下一页 按钮
- * @param val 第多少页
+ * 分页操作
+ * @param page   当前页数
+ * @param limit  当前页多少条数据
  */
-const handleCurrentChange = (val: number) => {
-  currentPage.value = val;
-  searchFunction(val, pageSize.value);
+const paginationChangeHandler = (page: number, limit: number) => {
+  console.log(`page change, page: ${page}, limit: ${limit}`);
+  currentPage.value = page;
+  pageSize.value = limit;
+  searchFunction(page, limit);
 }
 
 /* 重载数据 */
 const reloadDate = () => {
+  // console.log(`reloadDate searchFunction: page: ${currentPage.value}, limit: ${pageSize.value}`)
   currentPage.value = 1;
   searchFunction(currentPage.value, pageSize.value)
 }

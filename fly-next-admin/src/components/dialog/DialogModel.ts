@@ -4,7 +4,7 @@
 export type DialogModel = {
     title: string,
     visible: boolean,
-    height: number,
+/*    height: number,*/
     width: number,
     showSubmit?: boolean
 }

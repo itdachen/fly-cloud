@@ -86,6 +86,7 @@
 }
 
 .fly-view-button {
+    font-size: 15px !important;
     background-color: #1E9FFF !important;
     border-color: #31BDEC !important;
     color: #FFFFFF !important;
@@ -101,7 +102,7 @@
     color: #FFFFFF !important;
     margin-right: 2px;
     /*padding: 0 15px !important;*/
-    letter-spacing: 2px;
+    letter-spacing: 5px;
 }
 
 .fly-ok-button:hover {
@@ -125,7 +126,7 @@
     border: 1px solid #C9C9C9;
     background-color: #fff;
     color: #555;
-    letter-spacing: 2px;
+    letter-spacing: 5px;
 }
 
 .fly-close-button:hover {
