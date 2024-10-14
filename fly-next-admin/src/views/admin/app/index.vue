@@ -19,20 +19,14 @@
                           v-model='queryAppInfoParams.validFlag'></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button v-permission="['admin:app:info:query']"
+                <el-button v-permission="['admin:app:info:query']" :icon="Search"
                            class=" ml10 fly-button fly-button-search"
                            @click='tapSearchHandler(queryAppInfoParams)'>
-                  <el-icon>
-                    <ele-Search/>
-                  </el-icon>
                   搜索
                 </el-button>
-                <el-button v-permission="['admin:app:info:save']"
+                <el-button v-permission="['admin:app:info:save']" :icon="FolderAdd"
                            class="ml10 fly-button fly-toolbar-addition"
                            @click='tapSaveHandler()'>
-                  <el-icon>
-                    <ele-FolderAdd/>
-                  </el-icon>
                   新增
                 </el-button>
               </el-form-item>
@@ -66,7 +60,7 @@
 
 <script setup lang="ts" name="AppInfoComponent">
 import {defineAsyncComponent, onMounted} from 'vue';
-import {Search, Edit, View, Delete, Plus, Tickets} from '@element-plus/icons-vue';
+import {FolderAdd, Search, Edit, Delete, Tickets} from '@element-plus/icons-vue';
 import ProTable from '/@/components/table/index.vue';
 import useAppInfoComposable from "/@/composables/admin/useAppInfoComposable";
 
