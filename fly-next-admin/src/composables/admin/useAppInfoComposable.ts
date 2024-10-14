@@ -1,5 +1,5 @@
 import {StringUtils} from '/@/fly/utils/StringUtils';
-import useTable from '/@/hooks/table/TableComposables';
+import useTable from '/@/components/table/index';
 import {DialogTypeEnum} from "/@/components/dialog/DialogModel";
 import useAppInfoBuilder, {AppInfo, AppInfoQuery} from "/@/api/admin/models/AppInfoModel";
 import AppInfoApi from '/@/api/admin/AppInfoApi'
@@ -19,7 +19,7 @@ const {
  * 应用信息 处理
  *
  * @author 王大宸
- * @date 2024-09-13 15:21:08
+ * @date 2024-10-14 09:53:36
  */
 export default function useAppInfoComposable() {
 
@@ -30,7 +30,6 @@ export default function useAppInfoComposable() {
      */
     const loadTableData = (params: AppInfoQuery) => {
         appInfoApi.page(params).then(res => {
-            console.log('table res', res)
             tableData.total = res.data.total;
             tableData.rows = res.data.rows;
         });
