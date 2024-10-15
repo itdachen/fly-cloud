@@ -12,14 +12,14 @@
               </el-form-item>
               <el-form-item label="前端或后端" prop="appType" class="mb10">
                 <el-select v-model="queryAppInfoParams.appType" placeholder="请选择" style="width: 180px">
-                  <el-option :key="''" :label="'全部'" :value="''"/>
+                  <el-option label="全部" value=""/>
                   <el-option :key="'BACK'" :label="'后端'" :value="'BACK'"/>
                   <el-option :key="'VIEW'" :label="'前端'" :value="'VIEW'"/>
                 </el-select>
               </el-form-item>
               <el-form-item label="应用类型" class="fly-search-item">
                 <el-select v-model="queryAppInfoParams.appCode" placeholder="请选择" style="width: 180px">
-                  <el-option :key="''" :label="'全部'" :value="''"/>
+                  <el-option label="全部" value=""/>
                   <el-option v-for="item in appCodeOptions"
                              :key="item.value"
                              :label="item.label"
@@ -28,7 +28,7 @@
               </el-form-item>
               <el-form-item label="有效标志" class="fly-search-item">
                 <el-select v-model="queryAppInfoParams.validFlag" placeholder="请选择有效标志" style="width: 180px">
-                  <el-option :key="''" :label="'全部'" :value="''"/>
+                  <el-option label="全部" value=""/>
                   <el-option v-for="item in validFlag"
                              :key="item.value"
                              :label="item.label"
