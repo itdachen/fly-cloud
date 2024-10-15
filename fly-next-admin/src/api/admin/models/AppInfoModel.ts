@@ -151,35 +151,46 @@ export default function useAppInfoBuilder() {
      */
     const columns: Partial<ColumnProps>[] = [
         {
-            prop: "platTitle",
-            label: "平台名称",
+            prop: "id",
+            label: "appId",
+            width: 350,
             align: "center"
         },
+        // {
+        //     prop: "app秘钥",
+        //     label: "appSecret",
+        //     width: 350,
+        //     align: "center"
+        // },
         {
             prop: "appCode",
             label: "应用标识",
+            width: 240,
             align: "center"
         },
         {
             prop: "appTitle",
             label: "应用名称",
+            width: 300,
             align: "center"
         },
         {
-            prop: "appAsTitle",
-            label: "应用名称简称",
+            prop: "askUri",
+            label: "访问地址",
             align: "center"
         },
         {
             prop: "appType",
             label: "应用类型",
-            width: 100,
+            width: 150,
+            tag: true,
             align: "center"
         },
         {
             prop: "validFlag",
             label: "有效标志",
-            width: 100,
+            width: 150,
+            tag: true,
             align: "center"
         },
         {

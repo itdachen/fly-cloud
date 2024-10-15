@@ -99,6 +99,11 @@
         WHERE id = #{id}
     </select>
 
+    <select id="findAppInfoByAppCode"  parameterType="java.lang.String" resultMap="appInfoMap">
+        <include refid="selectAppInfoVO"/>
+        WHERE app_code = #{appCode}
+    </select>
+
     <!-- 批量添加 -->
     <insert id="batchSave" parameterType="java.util.List">
         INSERT INTO fly_next_app_info (id ,

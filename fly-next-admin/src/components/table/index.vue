@@ -166,7 +166,7 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   toolButton: true,
   rowKey: 'id',
   expandAll: false,
-  height: '630'
+  height: '599'
 });
 
 

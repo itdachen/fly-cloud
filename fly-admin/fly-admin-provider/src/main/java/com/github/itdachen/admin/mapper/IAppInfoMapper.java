@@ -37,6 +37,16 @@ public interface IAppInfoMapper extends Mapper<AppInfo> {
     AppInfoVO selectAppInfoVO(String id);
 
     /***
+    * 根据应用标识查询应用信息
+    *
+    * @author 王大宸
+    * @date 2024/10/15 11:30
+     * @param appCode appCode
+    * @return com.github.itdachen.admin.sdk.vo.AppInfoVO
+    */
+    AppInfoVO  findAppInfoByAppCode(String appCode);
+
+    /***
      * 查询导出数据
      *
      * @author 王大宸

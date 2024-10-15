@@ -28,7 +28,7 @@ export default function useStringComposable() {
      * @param char  符号
      */
     const split = (str: string | null, char: string): string[] => {
-        if (null == str) {
+        if (null == str || null == char) {
             return [];
         }
         return str.split(char);
