@@ -86,7 +86,7 @@ export default function useAppInfoComposable() {
      * @param title 标题
      */
     const tapRemoveHandler = (id: string, title: string) => {
-        confirmMsgBox('数据删除后将无法恢复，确定要删除 ' + title + ' 吗?').then(() => {
+        confirmMsgBox(title).then(() => {
             appInfoApi.remove(id).then(res => {
                 successMsg(res.msg);
                 loadTableData(queryAppInfoParams);

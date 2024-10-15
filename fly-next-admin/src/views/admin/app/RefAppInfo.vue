@@ -33,7 +33,7 @@
           <el-form-item label="应用名称简称" prop="appAsTitle" class="mb10">
             <el-input v-model="appInfo.appAsTitle"/>
           </el-form-item>
-          <el-form-item label="应用类型" prop="appType" class="mb10">
+          <el-form-item label="前端或后端" prop="appType" class="mb10">
             <el-radio-group v-model="appInfo.appType">
               <el-radio value="BACK">后端</el-radio>
               <el-radio value="VIEW">前端</el-radio>
@@ -41,7 +41,7 @@
           </el-form-item>
 
           <el-form-item label="应用类型" class="mb10">
-            <el-select v-model="appInfo.typeCode" placeholder="Select" style="width: 240px">
+            <el-select v-model="appInfo.typeCode" placeholder="请选择" style="width: 240px">
               <el-option v-for="item in appCodeOptions"
                          :key="item.value"
                          :label="item.label"
