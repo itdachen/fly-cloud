@@ -18,7 +18,7 @@
           <el-form-item label="简称" prop="titleAs" class="mb10">
             <el-input v-model="tenantInfo.titleAs"/>
           </el-form-item>
-          <el-form-item label="租户类型" prop="title" class="mb10">
+          <el-form-item label="租户类型" prop="typeId" class="mb10">
             <el-select v-model="tenantInfo.typeId" @change="typeChange"
                        placeholder="请选择" style="width: 360px">
               <el-option v-for="item in tenantTypeArr"
@@ -169,7 +169,8 @@ const typeChange = (value: string) => {
  * 表单验证
  */
 const rules = reactive({
-  title: [{required: true, message: '名称不能为空', trigger: 'blur'}]
+  title: [{required: true, message: '名称不能为空', trigger: 'blur'}],
+  typeId: [{required: true, message: '请选择租户类型', trigger: 'blur'}]
 });
 
 //定义事件
