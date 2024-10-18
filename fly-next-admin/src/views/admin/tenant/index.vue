@@ -42,13 +42,11 @@
               <el-form-item>
                 <el-button v-permission="['admin:tenant:info:query']"
                            class="ml10 fly-button fly-button-search"
-                           :icon="Search" @click='searchTenantInfo(tenantInfoParams)'>
-                  搜索
+                           :icon="Search" @click='searchTenantInfo(tenantInfoParams)'>搜索
                 </el-button>
                 <el-button v-permission="['admin:tenant:info:save']"
                            class="ml10 fly-button fly-toolbar-addition"
-                           :icon="FolderAdd" @click='onTapTenantInfoAdd()'>
-                  新增
+                           :icon="FolderAdd" @click='onTapTenantInfoAdd()'>新增
                 </el-button>
               </el-form-item>
             </el-form>

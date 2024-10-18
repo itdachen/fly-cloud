@@ -16,7 +16,7 @@ export default function useDictDataComposable() {
     const validFlag = reactive<DictData[]>([
         {
             label: '是',
-            value: Y,
+            value: Y.value,
             checked: Y.value
         },
         {
@@ -54,7 +54,6 @@ export default function useDictDataComposable() {
     ]);
 
     return {
-        // Y, N,
         validFlag,
         yesOrNo,
         sexDict

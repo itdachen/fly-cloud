@@ -3,6 +3,7 @@ import {reactive, ref} from "vue";
 import {ColumnProps} from '/@/components/table/interface';
 import {DialogTypeEnum} from "/@/components/dialog/DialogModel";
 import {TableData} from "axios";
+import {DictData} from "/@/hooks/biz/BizModel";
 
 /**
  * 租户/公司信息 查询参数
@@ -226,7 +227,30 @@ export default function useTenantInfoBuilder() {
         onClose: () => void
     }>();
 
+    /**
+     * 租户类型
+     */
+    const tenantTypeArr = reactive<DictData[]>([
+        {
+            label: '消费者',
+            value: 'USE'
+        }, {
+            label: '运营',
+            value: 'ADMIN'
+        }, {
+            label: '运维',
+            value: 'OPS'
+        }, {
+            label: '开发者',
+            value: 'DEV'
+        }, {
+            label: '超级管理员',
+            value: 'SUP_ADMIN'
+        },
+    ])
+
     return {
+        tenantTypeArr,
         tenantInfoParams,
         tableData,
         tenantInfo,

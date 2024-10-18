@@ -18,6 +18,14 @@
           <el-form-item label="简称" prop="titleAs" class="mb10">
             <el-input v-model="tenantInfo.titleAs"/>
           </el-form-item>
+          <el-form-item label="租户类型" prop="title" class="mb10">
+            <el-select v-model="tenantInfo.typeId" @change="typeChange"
+                       placeholder="请选择" style="width: 360px">
+              <el-option v-for="item in tenantTypeArr"
+                         :label="item.label"
+                         :value="item.value"/>
+            </el-select>
+          </el-form-item>
           <!--          <el-form-item label="所属省级ID" prop="provId" class="mb10">-->
           <!--            <el-input v-model="tenantInfo.provId" placeholder="请输入所属省级ID"/>-->
           <!--          </el-form-item>-->
@@ -101,7 +109,7 @@ const formRef = ref<InstanceType<typeof ElForm>>();
  */
 const {dialog, onShow, onClose} = useDialogPopup();
 
-const {tenantInfo} = useTenantInfoBuilder();
+const {tenantInfo, tenantTypeArr} = useTenantInfoBuilder();
 
 const isDisabled = ref<boolean>(false);
 
@@ -132,7 +140,7 @@ const show = (type: DialogTypeEnum, data?: TenantInfo) => {
     objCopy({}, tenantInfo);
     tenantInfo.validFlag = 'Y'
   }
-  if (DialogTypeEnum.SAVE === type || DialogTypeEnum.UPDATE === type) {
+  if (DialogTypeEnum.ADD === type || DialogTypeEnum.EDIT === type) {
     dialog.showSubmit = true
     isDisabled.value = false
   }
@@ -142,6 +150,19 @@ const show = (type: DialogTypeEnum, data?: TenantInfo) => {
   }
 
   onShow();
+}
+
+/**
+ * 类型修改
+ * @param value
+ */
+const typeChange = (value: string) => {
+  for (let i = 0; i < tenantTypeArr.length; i++) {
+    if (value !== tenantTypeArr[i].value) {
+      continue;
+    }
+    tenantInfo.typeTitle = tenantTypeArr[i].label;
+  }
 }
 
 /**

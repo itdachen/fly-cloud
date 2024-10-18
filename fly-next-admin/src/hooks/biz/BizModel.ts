@@ -15,5 +15,5 @@ export interface DictData {
     /* 值 */
     value: string,
     /* 是否选择 */
-    checked: string,
+    checked?: string,
 }

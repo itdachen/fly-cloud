@@ -76,10 +76,11 @@ const delayShow = () => {
 };
 // 页面加载时
 onMounted(() => {
-	delayShow();
-	setTimeout(() => {
-		state.btnTxt = t('message.upgrade.btnTwo');
-	}, 200);
+  // TODO 进入时加载弹窗
+	// delayShow();
+	// setTimeout(() => {
+	// 	state.btnTxt = t('message.upgrade.btnTwo');
+	// }, 200);
 });
 </script>
 
