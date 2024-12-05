@@ -103,7 +103,7 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
 
 
         Map<String, String> userDetailMap = TokenUserDetailsHandler.setUserDetailMap(currentUserDetails, TokenTicketConstant.ACCESS_TOKEN);
-        String access_token = jwtsTokenHelper.token(new JwtTokenInfo.Builder()
+        String access_token = jwtsTokenHelper.accessToken(new JwtTokenInfo.Builder()
                 .username(currentUserDetails.getUsername())
                 .nickName(currentUserDetails.getNickName())
                 .userId(currentUserDetails.getId())
@@ -112,7 +112,7 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         );
 
         Map<String, String> refreshTokenMap = TokenUserDetailsHandler.setUserDetailMap(currentUserDetails, TokenTicketConstant.REFRESH_TOKEN);
-        String refreshToken = jwtsTokenHelper.token(new JwtTokenInfo.Builder()
+        String refreshToken = jwtsTokenHelper.accessToken(new JwtTokenInfo.Builder()
                 .username(currentUserDetails.getUsername())
                 .nickName(currentUserDetails.getNickName())
                 .userId(currentUserDetails.getId())
