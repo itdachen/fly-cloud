@@ -1,0 +1,14 @@
+配置阿里云镜像源
+
+#查看当前使用的镜像地址命令
+npm config get registry
+
+#设置阿里镜像源
+npm config set registry http://registry.npmmirror.com
+
+这里要注意下，之前的源镜像地址 https://registry.npm.taobao.org/ 已经不能用了，这里要更改为新地址，新地址为 http://registry.npmmirror.com
+
+
+如果后续需要切回npm默认源，执行以下命令
+
+npm config set registry https://registry.npmjs.org
