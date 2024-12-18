@@ -23,6 +23,18 @@ export interface LayPage {
     pages: number
 }
 
+
+
+/**
+ * 表单标题
+ */
+export enum FormTypeEnum {
+    ADD = '新增',
+    EDIT = '编辑',
+    VIEW = '查看'
+}
+
+
 /**
  * 查询时间类型
  */
@@ -93,3 +105,4 @@ export enum QueryTimeType {
      */
     CUSTOM = "CUSTOM"
 }
+

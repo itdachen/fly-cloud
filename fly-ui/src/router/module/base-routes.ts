@@ -231,7 +231,8 @@ export default [
       },
 
     ]
-  },{
+  },
+  {
     path: '/admin',
     component: BasicLayout,
     meta: { title: '系统管理' },

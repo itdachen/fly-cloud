@@ -37,6 +37,7 @@ declare module 'vue' {
     LayMenu: typeof import('@layui/layui-vue')['LayMenu']
     LayMenuItem: typeof import('@layui/layui-vue')['LayMenuItem']
     LayNoticeBar: typeof import('@layui/layui-vue')['LayNoticeBar']
+    LayPage: typeof import('@layui/layui-vue')['LayPage']
     LayProgress: typeof import('@layui/layui-vue')['LayProgress']
     LayQrcode: typeof import('@layui/layui-vue')['LayQrcode']
     LayRadio: typeof import('@layui/layui-vue')['LayRadio']
