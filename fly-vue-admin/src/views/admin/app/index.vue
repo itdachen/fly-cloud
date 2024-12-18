@@ -7,7 +7,11 @@
           <lay-input v-model="queryAppInfoParams.appTitle"></lay-input>
         </lay-form-item>
         <lay-form-item label="有效标志" prop="validFlag" mode="inline">
-          <lay-input v-model="queryAppInfoParams.validFlag"></lay-input>
+          <lay-select v-model="queryAppInfoParams.validFlag">
+            <lay-select-option value="" label="全部"></lay-select-option>
+            <lay-select-option value="Y" label="有效"></lay-select-option>
+            <lay-select-option value="N" label="无效"></lay-select-option>
+          </lay-select>
         </lay-form-item>
 
         <lay-form-item mode="inline">

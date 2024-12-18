@@ -54,8 +54,7 @@
     </lay-card>
     <!-- table -->
     <div class="table-box">
-      <lay-table
-        :page="page"
+      <lay-table :page="page"
         :height="'100%'"
         :columns="columns"
         :loading="loading"
@@ -63,8 +62,7 @@
         :data-source="dataSource"
         v-model:selected-keys="selectedKeys"
         @change="change"
-        @sortChange="sortChange"
-      >
+        @sortChange="sortChange"   >
         <template v-slot:toolbar>
           <lay-button
             size="sm"
