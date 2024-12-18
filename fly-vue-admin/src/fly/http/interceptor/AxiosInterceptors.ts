@@ -1,8 +1,8 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse, ServerResponse} from "axios";
-import {BASIC, TOKEN_TYPE, TIME_OUT, OPEN_URL, CONTENT_TYPE} from "@/http/conf/config";
+import {BASIC, TOKEN_TYPE, TIME_OUT, OPEN_URL, CONTENT_TYPE} from "@/fly/http/conf/config";
 
 import {StringUtils} from '@/fly/utils/StringUtils';
-import {ResultStatusCode} from "@/http/enums/ResultStatusCode";
+import {ResultStatusCode} from "@/fly/http/enums/ResultStatusCode";
 import {useRouter} from 'vue-router';
 // import {useUserStore} from '@/store/user';
 

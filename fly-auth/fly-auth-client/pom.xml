@@ -22,15 +22,10 @@
 
         <dependency>
             <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-body-advice</artifactId>
+            <artifactId>body-advice-boot-starter</artifactId>
         </dependency>
 
         <!-- token 解析模块 -->
-<!--        <dependency>-->
-<!--            <groupId>com.github.itdachen.framework.cloud</groupId>-->
-<!--            <artifactId>fly-cloud-jwt-parse</artifactId>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>com.github.itdachen</groupId>
             <artifactId>spring-cloud-starter-jwt-parse</artifactId>

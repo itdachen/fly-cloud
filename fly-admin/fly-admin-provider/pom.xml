@@ -21,22 +21,9 @@
             <groupId>com.github.itdachen</groupId>
             <artifactId>runner-spring-boot-starter</artifactId>
         </dependency>
-
-
-        <!-- 項目启动容器 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
+            <groupId>com.github.itdachen</groupId>
+            <artifactId>body-advice-boot-starter</artifactId>
         </dependency>
 
         <dependency>
@@ -65,10 +52,6 @@
         <dependency>
             <groupId>com.github.itdachen</groupId>
             <artifactId>fly-tools</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-body-advice</artifactId>
         </dependency>
 
 
@@ -147,13 +130,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-openfeign-core</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-openfeign-core</artifactId>-->
+        <!--        </dependency>-->
 
     </dependencies>
-
 
 
 </project>

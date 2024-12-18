@@ -30,24 +30,6 @@
             <artifactId>fly-auth-interface</artifactId>
         </dependency>
 
-        <!-- 項目启动容器 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
-
-
         <!-- kaptcha 依赖包-->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -55,23 +37,13 @@
             <version>1.1.0</version>
         </dependency>
 
-
         <!-- token 加密 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.github.itdachen.framework.cloud</groupId>-->
-        <!--            <artifactId>fly-cloud-jwt-crypto</artifactId>-->
-        <!--        </dependency>-->
-        <!--  -->
         <dependency>
             <groupId>com.github.itdachen</groupId>
             <artifactId>spring-cloud-starter-jwt-crypto</artifactId>
         </dependency>
 
         <!-- token 解密 -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.github.itdachen.framework.cloud</groupId>-->
-        <!--            <artifactId>fly-cloud-jwt-parse</artifactId>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>com.github.itdachen</groupId>
             <artifactId>spring-cloud-starter-jwt-parse</artifactId>
@@ -91,8 +63,9 @@
         </dependency>
         <dependency>
             <groupId>com.github.itdachen</groupId>
-            <artifactId>fly-body-advice</artifactId>
+            <artifactId>body-advice-boot-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.github.itdachen</groupId>
             <artifactId>rbac-spring-boot-starter</artifactId>

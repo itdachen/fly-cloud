@@ -1,7 +1,7 @@
 import {ServerResponse, TableData} from "axios";
-import {BizQuery} from "@/hooks/biz/BizModel";
+import {BizQuery} from "@/fly/biz/BizModel";
 
-import httpAxios from "@/http/index";
+import httpAxios from "@/fly/http/index";
 import {StringUtils} from "@/fly/utils/StringUtils";
 
 /**
