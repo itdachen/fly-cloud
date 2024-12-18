@@ -3,7 +3,7 @@
 </template>
 <style>
 @import "./styles/index.css";
-@import "./fly/css/style.css";
+@import "./fly/styles/style.css";
 
 #app {
   height: 100%;
