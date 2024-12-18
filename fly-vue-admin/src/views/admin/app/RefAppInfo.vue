@@ -3,7 +3,7 @@
 
   <lay-layer v-model="open"
              :title="title"
-             :area="['70%', '72%']"
+             :area="['1100px', '600px']"
              :shade-close="false"
              :maxmin="true">
 
@@ -23,13 +23,13 @@
       </lay-form-item>
 
       <lay-form-item label="app秘钥" prop="appSecret">
-        <lay-input v-model="appInfo.appSecret" :disabled="disabledForm">
+        <lay-input v-model="appInfo.appSecret" placeholder="如果没有输入，系统会自动生成！" :disabled="disabledForm">
           <template v-if="appSecretSuffix" #suffix>
             <lay-button class="fly-button fly-ok-button"
                         style="height: 37px !important;margin-right: -10px !important;"
                         @click="onTapRefreshAppSecret">
               <lay-icon class="layui-icon-refresh"></lay-icon>
-              重置
+              {{ refreshAppSecretTitle }}
             </lay-button>
           </template>
         </lay-input>
@@ -72,9 +72,9 @@
         <lay-input v-model="appInfo.askUri" :disabled="disabledForm"></lay-input>
       </lay-form-item>
 
-      <lay-form-item label="图标" prop="iconIco">
-        <lay-input v-model="appInfo.iconIco" :disabled="disabledForm"></lay-input>
-      </lay-form-item>
+<!--      <lay-form-item label="图标" prop="iconIco">-->
+<!--        <lay-input v-model="appInfo.iconIco" :disabled="disabledForm"></lay-input>-->
+<!--      </lay-form-item>-->
 
       <lay-form-item label="备注" prop="remarks">
         <lay-textarea placeholder="请输入备注" v-model="appInfo.remarks" :disabled="disabledForm"></lay-textarea>
@@ -108,6 +108,10 @@ import {reactive, ref} from "vue";
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
 import {FormTypeEnum} from "@/fly/biz/BizModel";
 import {AppInfo} from "@/api/admin/model/AppInfoModel";
+import AppInfoApi from "@/api/admin/AppInfoApi";
+
+const appInfoApi = new AppInfoApi();
+
 
 let {
   appInfo,
@@ -122,6 +126,7 @@ const showSubmit = ref<boolean>(true);
 const appSecretSuffix = ref<boolean>(false);
 const disabledForm = ref<boolean>(false);
 const required = ref<boolean>(true);
+const refreshAppSecretTitle = ref<string>('获取秘钥')
 
 //显示弹框
 const openPopup = (type: FormTypeEnum, data?: AppInfo) => {
@@ -142,14 +147,19 @@ const openPopup = (type: FormTypeEnum, data?: AppInfo) => {
     };
   }
 
-  appSecretSuffix.value = false;
   showSubmit.value = true;
   disabledForm.value = false;
   required.value = true;
+  appSecretSuffix.value = true;
+  if (FormTypeEnum.ADD === type) {
+    onTapRefreshAppSecret();
+    refreshAppSecretTitle.value = '获取秘钥';
+  }
   if (FormTypeEnum.EDIT === type) {
-    appSecretSuffix.value = true;
+    refreshAppSecretTitle.value = '刷新秘钥';
   }
   if (FormTypeEnum.VIEW === type) {
+    appSecretSuffix.value = false;
     showSubmit.value = false;
     disabledForm.value = true;
     required.value = false;
@@ -191,10 +201,16 @@ function onTapSubmit() {
 
 
   refFormAppInfo.value.validate((isValidate: boolean, model: AppInfo, errors: any[]) => {
-    console.log('isValidate', isValidate);
-    console.log('model', model);
     if (!isValidate) {
       return;
+    }
+
+    let typeCode = model.typeCode;
+    for (let i = 0; i < APP_CODE_ARR.length; i++) {
+      if (typeCode === APP_CODE_ARR[i].value) {
+        model.typeTitle = APP_CODE_ARR[i].label;
+        break;
+      }
     }
 
     appInfoDataHandler(model);
@@ -207,7 +223,12 @@ function onTapSubmit() {
 const emit = defineEmits(['click']);
 
 const onTapRefreshAppSecret = () => {
-  console.log('onTapRefreshAppSecret')
+  appInfoApi.findAppSecret().then(res => {
+    console.log(res.data);
+    appInfo.value.appSecret = res.data;
+  })
+
+
 }
 
 /**

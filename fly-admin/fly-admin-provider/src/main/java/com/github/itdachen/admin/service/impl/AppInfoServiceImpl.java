@@ -131,6 +131,18 @@ public class AppInfoServiceImpl extends BizServiceImpl<IAppInfoMapper, AppInfo, 
     }
 
     /***
+     * 获取秘钥
+     *
+     * @author 王大宸
+     * @date 2024/12/18 20:58
+     * @return java.lang.String
+     */
+    @Override
+    public String createSecret() throws Exception {
+        return IdUtils.guid();
+    }
+
+    /***
      * 导出
      *
      * @author 王大宸

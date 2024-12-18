@@ -1,5 +1,7 @@
 import {AppInfo, AppInfoQuery} from "@/api/admin/model/AppInfoModel";
 import {HttpRequest} from "@/fly/http/rest/HttpRequest";
+import {ServerResponse} from "axios";
+import httpAxios from "@/fly/http";
 
 /**
  * 请求路径
@@ -16,6 +18,13 @@ class AppInfoApi extends HttpRequest<AppInfo, AppInfoQuery, string> {
 
     constructor() {
         super(APP_INFO_PATH)
+    }
+
+    /**
+     * 获取秘钥
+     */
+    findAppSecret(): Promise<ServerResponse<string>> {
+        return httpAxios.get(APP_INFO_PATH + `/secret`);
     }
 
 

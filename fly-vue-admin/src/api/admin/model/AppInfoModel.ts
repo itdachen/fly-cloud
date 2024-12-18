@@ -167,10 +167,12 @@ export default function useAppInfoBuilder() {
             align: 'center',
             width: 150,
             customSlot: function (obj: any) {
-                if ('Y' === obj.data.validFlag) {
-                    return '有效';
-                }
-                return '否';
+                // if ('Y' === obj.data.validFlag) {
+                //     return '有效';
+                // }
+                // return '无效';
+                return 'Y' === obj.data.validFlag ? '有效' : '无效';
+
             }
         },
         {

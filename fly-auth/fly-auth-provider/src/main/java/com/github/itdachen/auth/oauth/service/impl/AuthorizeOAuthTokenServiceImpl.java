@@ -67,6 +67,10 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
      */
     @Override
     public AccessTokenInfo oauthJwtToken(AuthorizeOAuthToken authToken) throws Exception {
+        // 腾讯服务器根据 CODE 获取用户信息(OPENID)
+
+
+
         if (null == authToken || StringUtils.isEmpty(authToken.getUsername()) || StringUtils.isEmpty(authToken.getPassword())) {
             throw new BizException("登录认证信息不全!!!");
         }

@@ -11,6 +11,15 @@ import com.github.itdachen.framework.webmvc.service.IBizService;
  * @author 王大宸
  * @date 2024-09-06 10:16:14
  */
-public interface IAppInfoService extends IBizService< AppInfoDTO, AppInfoVO, AppInfoQuery, String > {
+public interface IAppInfoService extends IBizService<AppInfoDTO, AppInfoVO, AppInfoQuery, String> {
+
+    /***
+     * 获取秘钥
+     *
+     * @author 王大宸
+     * @date 2024/12/18 20:58
+     * @return java.lang.String
+     */
+    String createSecret() throws Exception;
 
 }

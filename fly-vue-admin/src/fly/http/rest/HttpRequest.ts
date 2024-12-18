@@ -80,7 +80,9 @@ export class HttpRequest<T, Q extends BizQuery, PK> {
         }
         let item;
         for (item in params) {
+            // @ts-ignore
             if (params[item] && String(params[item])) {
+                // @ts-ignore
                 result += `&${item}=${params[item]}`;
             }
         }
