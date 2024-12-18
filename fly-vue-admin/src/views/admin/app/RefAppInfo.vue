@@ -163,10 +163,10 @@
 import {reactive, ref} from "vue";
 
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
-import flyPopupComposable from '@/components/flyer/FlyerPopup';
-import {FormTypeEnum} from "@/hooks/biz/BizModel";
+import flyPopupComposable from '@/fly/flyer/FlyerPopup';
+import {FormTypeEnum} from "@/fly/biz/BizModel";
 import {AppInfo} from "@/api/admin/model/AppInfoModel";
-import FlyerPopup from '@/components/flyer/index.vue';
+import FlyerPopup from '@/fly/flyer/index.vue';
 
 const {
   popupProps,
