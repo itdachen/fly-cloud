@@ -4,6 +4,7 @@ import com.github.itdachen.cloud.jwt.IVerifyTicketTokenHelper;
 import com.github.itdachen.cloud.jwt.parse.interceptor.UserAuthRestInterceptor;
 import com.github.itdachen.cloud.jwt.parse.matchers.IRequestPassMatchers;
 import com.github.itdachen.cloud.jwt.parse.resolver.UserAuthRestMethodArgumentResolver;
+import com.github.itdachen.cloud.jwt.parse.verified.IVerifiedTicketUrlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -25,11 +26,14 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
     private static final Logger logger = LoggerFactory.getLogger(AuthBootstrapWebMvcConfig.class);
     private final IVerifyTicketTokenHelper verifyTicketTokenService;
     private final IRequestPassMatchers requestPassMatchers;
+    private final IVerifiedTicketUrlService verifiedTicketUrlService;
 
     public AuthBootstrapWebMvcConfig(IVerifyTicketTokenHelper verifyTicketTokenService,
-                                     IRequestPassMatchers requestPassMatchers) {
+                                     IRequestPassMatchers requestPassMatchers,
+                                     IVerifiedTicketUrlService verifiedTicketUrlService) {
         this.verifyTicketTokenService = verifyTicketTokenService;
         this.requestPassMatchers = requestPassMatchers;
+        this.verifiedTicketUrlService = verifiedTicketUrlService;
     }
 
     @Override
@@ -65,7 +69,7 @@ public class AuthBootstrapWebMvcConfig implements WebMvcConfigurer {
 
     @Bean
     public UserAuthRestInterceptor authInterceptor() {
-        return new UserAuthRestInterceptor(verifyTicketTokenService);
+        return new UserAuthRestInterceptor(verifyTicketTokenService, verifiedTicketUrlService);
     }
 
 }

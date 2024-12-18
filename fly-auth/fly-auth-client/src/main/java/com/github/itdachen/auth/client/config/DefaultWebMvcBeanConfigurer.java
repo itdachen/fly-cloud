@@ -2,6 +2,7 @@ package com.github.itdachen.auth.client.config;
 
 import com.github.itdachen.cloud.jwt.IVerifyTicketTokenHelper;
 import com.github.itdachen.cloud.jwt.parse.matchers.IRequestPassMatchers;
+import com.github.itdachen.cloud.jwt.parse.verified.IVerifiedTicketUrlService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,10 +26,17 @@ public class DefaultWebMvcBeanConfigurer {
      */
     private final IRequestPassMatchers requestPassMatchers;
 
+    /**
+     * 内部权限拦截
+     */
+    private final IVerifiedTicketUrlService verifiedTicketUrlService;
+
     public DefaultWebMvcBeanConfigurer(IVerifyTicketTokenHelper verifyTicketTokenService,
-                                       IRequestPassMatchers requestPassMatchers) {
+                                       IRequestPassMatchers requestPassMatchers,
+                                       IVerifiedTicketUrlService verifiedTicketUrlService) {
         this.verifyTicketTokenService = verifyTicketTokenService;
         this.requestPassMatchers = requestPassMatchers;
+        this.verifiedTicketUrlService = verifiedTicketUrlService;
     }
 
     /***
@@ -41,7 +49,7 @@ public class DefaultWebMvcBeanConfigurer {
     @Bean
     @ConditionalOnMissingBean(WebMvcConfigurer.class)
     public WebMvcConfigurer defaultBootstrapWebMvcConfigurer() {
-        return new DefaultBootstrapWebMvcConfigurer(verifyTicketTokenService,requestPassMatchers );
+        return new DefaultBootstrapWebMvcConfigurer(verifyTicketTokenService, requestPassMatchers, verifiedTicketUrlService);
     }
 
 }
