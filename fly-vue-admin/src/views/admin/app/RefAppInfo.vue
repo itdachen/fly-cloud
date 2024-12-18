@@ -3,7 +3,7 @@
 
   <lay-layer v-model="open"
              :title="title"
-             :area="['1100px', '600px']"
+             :area="['1100px', '540px']"
              :shade-close="false"
              :maxmin="true">
 
@@ -68,9 +68,9 @@
         <lay-radio v-model="appInfo.validFlag" name="validFlag" value="N" :disabled="disabledForm">无效</lay-radio>
       </lay-form-item>
 
-      <lay-form-item label="访问地址" prop="askUri">
-        <lay-input v-model="appInfo.askUri" :disabled="disabledForm"></lay-input>
-      </lay-form-item>
+<!--      <lay-form-item label="访问地址" prop="askUri">-->
+<!--        <lay-input v-model="appInfo.askUri" :disabled="disabledForm"></lay-input>-->
+<!--      </lay-form-item>-->
 
 <!--      <lay-form-item label="图标" prop="iconIco">-->
 <!--        <lay-input v-model="appInfo.iconIco" :disabled="disabledForm"></lay-input>-->

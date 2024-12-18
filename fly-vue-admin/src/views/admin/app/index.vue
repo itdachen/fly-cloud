@@ -20,10 +20,10 @@
             <lay-icon class="layui-icon-search"></lay-icon>
             查询
           </lay-button>
-          <lay-button class="fly-button fly-button-reset" size="sm">
-            <lay-icon class="layui-icon-refresh"></lay-icon>
-            重置
-          </lay-button>
+<!--          <lay-button type="reset" class="fly-button fly-button-reset" size="sm">-->
+<!--            <lay-icon class="layui-icon-refresh"></lay-icon>-->
+<!--            重置-->
+<!--          </lay-button>-->
           <lay-button class="fly-button fly-button-exp" size="sm" @click="">
             <lay-icon class="layui-icon-export"></lay-icon>
             导出
