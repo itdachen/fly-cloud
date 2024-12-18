@@ -1,102 +1,108 @@
 <template>
 
-<!--  <lay-layer v-model="popupProps.open"-->
-<!--             :title="popupProps.title"-->
-<!--             :area="popupProps.area"-->
-<!--             :maxmin="popupProps.maxmin">-->
-<!--    <div style="padding: 20px; ">-->
+  <!--  <lay-layer v-model="popupProps.open"-->
+  <!--             :title="popupProps.title"-->
+  <!--             :area="popupProps.area"-->
+  <!--             :maxmin="popupProps.maxmin">-->
+  <!--    <div style="padding: 20px; ">-->
 
-<!--      <lay-form :model="appInfo"-->
-<!--                ref="refFormAppInfo"-->
-<!--                :label-position="'right'"-->
-<!--                labelWidth="130px">-->
+  <!--      <lay-form :model="appInfo"-->
+  <!--                ref="refFormAppInfo"-->
+  <!--                :label-position="'right'"-->
+  <!--                labelWidth="130px">-->
 
-<!--        <lay-form-item label="平台ID" prop="platId" required="true">-->
-<!--          <lay-input v-model="appInfo.platId"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="平台ID" prop="platId" required="true">-->
+  <!--          <lay-input v-model="appInfo.platId"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="平台名称" prop="platTitle" required="true">-->
-<!--          <lay-input v-model="appInfo.platTitle"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="平台名称" prop="platTitle" required="true">-->
+  <!--          <lay-input v-model="appInfo.platTitle"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="app秘钥" prop="appSecret">-->
-<!--          <lay-input v-model="appInfo.appSecret"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="app秘钥" prop="appSecret">-->
+  <!--          <lay-input v-model="appInfo.appSecret"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="应用标识" prop="appCode">-->
-<!--          <lay-input v-model="appInfo.appCode"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="应用标识" prop="appCode">-->
+  <!--          <lay-input v-model="appInfo.appCode"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="应用名称" prop="appTitle">-->
-<!--          <lay-input v-model="appInfo.appTitle"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="应用名称" prop="appTitle">-->
+  <!--          <lay-input v-model="appInfo.appTitle"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="应用名称简称" prop="appAsTitle">-->
-<!--          <lay-input v-model="appInfo.appAsTitle"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="应用名称简称" prop="appAsTitle">-->
+  <!--          <lay-input v-model="appInfo.appAsTitle"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="应用类型" prop="appType">-->
-<!--          <lay-select v-model="appInfo.appType" :items="items4" :options="items4"></lay-select>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="应用类型" prop="appType">-->
+  <!--          <lay-select v-model="appInfo.appType" :items="items4" :options="items4"></lay-select>-->
+  <!--        </lay-form-item>-->
 
-<!--        &lt;!&ndash;        <lay-form-item label="应用类型" prop="typeCode">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <lay-checkbox-group v-model="appInfo.typeCode">&ndash;&gt;-->
-<!--        &lt;!&ndash;            <lay-checkbox name="typeCode" skin="primary" value="1">写作</lay-checkbox>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <lay-checkbox name="typeCode" skin="primary" value="2">画画</lay-checkbox>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <lay-checkbox name="typeCode" skin="primary" value="3">运动</lay-checkbox>&ndash;&gt;-->
-<!--        &lt;!&ndash;          </lay-checkbox-group>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </lay-form-item>&ndash;&gt;-->
+  <!--        &lt;!&ndash;        <lay-form-item label="应用类型" prop="typeCode">&ndash;&gt;-->
+  <!--        &lt;!&ndash;          <lay-checkbox-group v-model="appInfo.typeCode">&ndash;&gt;-->
+  <!--        &lt;!&ndash;            <lay-checkbox name="typeCode" skin="primary" value="1">写作</lay-checkbox>&ndash;&gt;-->
+  <!--        &lt;!&ndash;            <lay-checkbox name="typeCode" skin="primary" value="2">画画</lay-checkbox>&ndash;&gt;-->
+  <!--        &lt;!&ndash;            <lay-checkbox name="typeCode" skin="primary" value="3">运动</lay-checkbox>&ndash;&gt;-->
+  <!--        &lt;!&ndash;          </lay-checkbox-group>&ndash;&gt;-->
+  <!--        &lt;!&ndash;        </lay-form-item>&ndash;&gt;-->
 
-<!--        <lay-form-item label="应用类型标题" prop="typeTitle">-->
-<!--          <lay-input v-model="appInfo.typeTitle"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="应用类型标题" prop="typeTitle">-->
+  <!--          <lay-input v-model="appInfo.typeTitle"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="访问地址" prop="askUri">-->
-<!--          <lay-input v-model="appInfo.askUri"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="访问地址" prop="askUri">-->
+  <!--          <lay-input v-model="appInfo.askUri"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="图标" prop="iconIco">-->
-<!--          <lay-input v-model="appInfo.iconIco"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="图标" prop="iconIco">-->
+  <!--          <lay-input v-model="appInfo.iconIco"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="有效标志" prop="validFlag">-->
-<!--          <lay-input v-model="appInfo.validFlag"></lay-input>-->
-<!--        </lay-form-item>-->
+  <!--        <lay-form-item label="有效标志" prop="validFlag">-->
+  <!--          <lay-input v-model="appInfo.validFlag"></lay-input>-->
+  <!--        </lay-form-item>-->
 
-<!--        <lay-form-item label="备注" prop="remarks">-->
-<!--          <lay-textarea placeholder="请输入备注" v-model="appInfo.remarks"></lay-textarea>-->
-<!--        </lay-form-item>-->
-<!--      </lay-form>-->
+  <!--        <lay-form-item label="备注" prop="remarks">-->
+  <!--          <lay-textarea placeholder="请输入备注" v-model="appInfo.remarks"></lay-textarea>-->
+  <!--        </lay-form-item>-->
+  <!--      </lay-form>-->
 
-<!--    </div>-->
-
-
-<!--    <template v-slot:footer>-->
-<!--      <div class="fly-form-footer">-->
-<!--        <lay-button v-if="showToSubmit" class="fly-button fly-ok-button " @click="onTapSubmit">-->
-<!--          <lay-icon class="layui-icon-ok"></lay-icon>-->
-<!--          保存-->
-<!--        </lay-button>-->
-<!--        <lay-button class="fly-button fly-close-button" @click="onTapClose">-->
-<!--          <lay-icon class="layui-icon-close"></lay-icon>-->
-<!--          取消-->
-<!--        </lay-button>-->
-<!--      </div>-->
-<!--    </template>-->
-
-<!--  </lay-layer>-->
+  <!--    </div>-->
 
 
+  <!--    <template v-slot:footer>-->
+  <!--      <div class="fly-form-footer">-->
+  <!--        <lay-button v-if="showToSubmit" class="fly-button fly-ok-button " @click="onTapSubmit">-->
+  <!--          <lay-icon class="layui-icon-ok"></lay-icon>-->
+  <!--          保存-->
+  <!--        </lay-button>-->
+  <!--        <lay-button class="fly-button fly-close-button" @click="onTapClose">-->
+  <!--          <lay-icon class="layui-icon-close"></lay-icon>-->
+  <!--          取消-->
+  <!--        </lay-button>-->
+  <!--      </div>-->
+  <!--    </template>-->
 
-  <flyer-popup :open="popupProps.open"
-               :title="popupProps.title"
-               :area="popupProps.area"
-               :showSubmit="popupProps.showSubmit"
-               :showClose="popupProps.showClose">
+  <!--  </lay-layer>-->
+
+
+  <!--    <flyer-popup :open="popupProps.open"-->
+  <!--                 :title="popupProps.title"-->
+  <!--                 :area="popupProps.area"-->
+  <!--                 :showSubmit="popupProps.showSubmit"-->
+  <!--                 :showClose="popupProps.showClose">-->
+
+  <lay-layer v-model="open"
+             :title="title"
+             :area="['90%', '60%']"
+             :maxmin="true">
+
+
     <lay-form :model="appInfo"
               ref="refFormAppInfo"
               :label-position="'right'"
-              labelWidth="130px">
+              labelWidth="130px" style="margin: 20px">
 
       <lay-form-item label="平台ID" prop="platId" required="true">
         <lay-input v-model="appInfo.platId"></lay-input>
@@ -154,7 +160,28 @@
         <lay-textarea placeholder="请输入备注" v-model="appInfo.remarks"></lay-textarea>
       </lay-form-item>
     </lay-form>
-  </flyer-popup>
+
+
+    <!--  v-if="!showSubmit && !showClose" -->
+    <template v-slot:footer>
+      <div class="fly-form-footer">
+        <!--   v-if="showSubmit"     -->
+        <lay-button class="fly-button fly-ok-button " @click="onTapSubmit">
+          <lay-icon class="layui-icon-ok"></lay-icon>
+          保存
+        </lay-button>
+        <!--    v-if="showClose"      -->
+        <lay-button class="fly-button fly-close-button" @click="onTapClose">
+          <lay-icon class="layui-icon-close"></lay-icon>
+          取消
+        </lay-button>
+      </div>
+    </template>
+
+  </lay-layer>
+
+
+  <!--    </flyer-popup>-->
 
 </template>
 
@@ -180,8 +207,13 @@ let {
 } = useAppInfoComposable();
 
 
+const title = ref<string>('应用');
+const open = ref<boolean>(false);
+
+
 //显示弹框
-const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
+const openPopup = (type: FormTypeEnum, data?: AppInfo) => {
+  debugger;
   refFormAppInfo.value?.resetFields();
 
   // refFormAppInfo.value.reset();
@@ -197,14 +229,12 @@ const openPopup = (type: FormTypeEnum, title: string, data?: AppInfo) => {
     popupProps.showSubmit = false;
   }
 
-  popupProps.title = type + title;
+  title.value = type + '应用信息';
+  open.value = true;
 
-  // popupProps.open = true;
+  popupProps.title = type + '应用信息';
+  popupProps.open = true;
 
-  console.log('popupProps.open', popupProps.open)
-
- onOpenPopup();
-  console.log('popupProps', popupProps)
 
 };
 

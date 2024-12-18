@@ -158,14 +158,34 @@ export default function useAppInfoBuilder() {
      * 分页列表展示项
      */
     const appInfoColumns = [
-        {title: '平台名称', key: 'platTitle', ellipsisTooltip: true, align: 'center'},
+        // {title: '平台名称', key: 'platTitle', ellipsisTooltip: true, align: 'center'},
         {title: '应用标识', key: 'appCode', ellipsisTooltip: true, align: 'center'},
         {title: '应用名称', key: 'appTitle', ellipsisTooltip: true, align: 'center'},
-        {title: '应用类型标题', key: 'typeTitle', ellipsisTooltip: true, align: 'center'},
+        {title: '应用类型', key: 'typeTitle', ellipsisTooltip: true, align: 'center'},
         {title: '访问地址', key: 'askUri', ellipsisTooltip: true, align: 'center'},
-        {title: '图标', key: 'iconIco', ellipsisTooltip: true, align: 'center'},
-        {title: '有效标志', key: 'validFlag', ellipsisTooltip: true, align: 'center'},
-        {title: '操作', width: '280px', customSlot: 'operator', key: 'operator', align: 'center', fixed: 'right', ignoreExport: true}
+        //  {title: '图标', key: 'iconIco', ellipsisTooltip: true, align: 'center'},
+        {
+            title: '有效标志',
+            key: 'validFlag',
+            ellipsisTooltip: true,
+            align: 'center',
+            width: 150,
+            customSlot: function (obj: any) {
+                if ('Y' === obj.data.validFlag) {
+                    return '有效';
+                }
+                return '否';
+            }
+        },
+        {
+            title: '操作',
+            width: '280px',
+            customSlot: 'operator',
+            key: 'operator',
+            align: 'center',
+            fixed: 'right',
+            ignoreExport: true
+        }
     ];
 
     /**
