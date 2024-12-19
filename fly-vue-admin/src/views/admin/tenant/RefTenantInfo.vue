@@ -156,7 +156,8 @@ const open = (type: FormTypeEnum, data?: TenantInfo) => {
       remarks: ''  // 备注
     }
   }
-
+  layerRef.disabled = false;
+  showToSubmit.value = true;
   if (FormTypeEnum.VIEW === type) {
     layerRef.disabled = true;
     showToSubmit.value = false;
