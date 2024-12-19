@@ -106,7 +106,7 @@ public class AdmAreaOpenController {
      * @param level level
      * @return com.github.itdachen.framework.core.response.ServerResponse<java.util.List < com.github.itdachen.admin.sdk.vo.AdmAreaModel>>
      */
-    @GetMapping("list")
+    @GetMapping("/list")
     public ServerResponse<List<AdmAreaModel>> findAdmAreaList(String parentId, String level) throws Exception {
         return ServerResponse.ok(admAreaService.findAdmAreaList(parentId, level));
     }
