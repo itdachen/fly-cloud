@@ -41,7 +41,7 @@
 
       <lay-form-item label="前端后端" prop="appType" mode="inline">
         <lay-select v-model="appInfo.appType" :disabled="disabledForm">
-          <lay-select-option value="BACK" label="后端"></lay-select-option>
+          <lay-select-option value="BACK_JAVA" label="后端(JAVA)"></lay-select-option>
           <lay-select-option value="LAY_VUE" label="前端(LAY_VUE)"></lay-select-option>
           <lay-select-option value="WE_CHAT_APPLET" label="微信小程序"></lay-select-option>
         </lay-select>
@@ -54,12 +54,6 @@
           </lay-select-option>
 
           <!--          <lay-select-option value="BS" label="业务系统"></lay-select-option>-->
-          <!--          <lay-select-option value="OSS" label="文件上传"></lay-select-option>-->
-          <!--          <lay-select-option value="UMS" label="统一系统管理"></lay-select-option>-->
-          <!--          <lay-select-option value="ACTUATOR" label="监控"></lay-select-option>-->
-          <!--          <lay-select-option value="GATEWAY" label="网关"></lay-select-option>-->
-          <!--          <lay-select-option value="APPLET" label="小程序"></lay-select-option>-->
-          <!--          <lay-select-option value="OTHER" label="其他"></lay-select-option>-->
         </lay-select>
       </lay-form-item>
 
@@ -68,13 +62,13 @@
         <lay-radio v-model="appInfo.validFlag" name="validFlag" value="N" :disabled="disabledForm">无效</lay-radio>
       </lay-form-item>
 
-<!--      <lay-form-item label="访问地址" prop="askUri">-->
-<!--        <lay-input v-model="appInfo.askUri" :disabled="disabledForm"></lay-input>-->
-<!--      </lay-form-item>-->
+      <!--      <lay-form-item label="访问地址" prop="askUri">-->
+      <!--        <lay-input v-model="appInfo.askUri" :disabled="disabledForm"></lay-input>-->
+      <!--      </lay-form-item>-->
 
-<!--      <lay-form-item label="图标" prop="iconIco">-->
-<!--        <lay-input v-model="appInfo.iconIco" :disabled="disabledForm"></lay-input>-->
-<!--      </lay-form-item>-->
+      <!--      <lay-form-item label="图标" prop="iconIco">-->
+      <!--        <lay-input v-model="appInfo.iconIco" :disabled="disabledForm"></lay-input>-->
+      <!--      </lay-form-item>-->
 
       <lay-form-item label="备注" prop="remarks">
         <lay-textarea placeholder="请输入备注" v-model="appInfo.remarks" :disabled="disabledForm"></lay-textarea>

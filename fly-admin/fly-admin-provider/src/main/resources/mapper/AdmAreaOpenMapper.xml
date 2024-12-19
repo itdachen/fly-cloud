@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.github.itdachen.admin.mapper.IAdmAreaOpenMapper">
+
+    <!-- 获取省级集合 -->
+    <select id="findProvList" resultType="com.github.itdachen.admin.sdk.vo.AdmAreaModel">
+        SELECT prov_code   AS id,
+               street_name AS title,
+               '00'        AS parentId,
+               level_type  AS level
+        FROM fly_next_adm_area
+        WHERE level_type = '1'
+    </select>
+
+    <!-- 获取市州集合 -->
+    <select id="findCityList" parameterType="java.lang.String"
+            resultType="com.github.itdachen.admin.sdk.vo.AdmAreaModel">
+        SELECT city_code   AS id,
+               street_name AS title,
+               prov_code   AS parentId,
+               level_type  AS level
+        FROM fly_next_adm_area
+        WHERE level_type = '2'
+          AND prov_code = #{provId}
+    </select>
+
+
+    <!-- 获取区县集合 -->
+    <select id="findCountyList" parameterType="java.lang.String"
+            resultType="com.github.itdachen.admin.sdk.vo.AdmAreaModel">
+        SELECT county_code AS id,
+               street_name AS title,
+               city_code   AS parentId,
+               level_type  AS level
+        FROM fly_next_adm_area
+        WHERE level_type = '3'
+          AND city_code = #{cityId}
+    </select>
+
+
+    <!-- 获取乡镇集合 -->
+    <select id="findTownList" parameterType="java.lang.String"
+            resultType="com.github.itdachen.admin.sdk.vo.AdmAreaModel">
+        SELECT town_code   AS id,
+               street_name AS title,
+               county_code AS parentId,
+               level_type  AS level
+        FROM fly_next_adm_area
+        WHERE level_type = '4'
+          AND county_code = #{countyId}
+    </select>
+
+    <!-- 获取街道集合 -->
+    <select id="findStreetList" parameterType="java.lang.String"
+            resultType="com.github.itdachen.admin.sdk.vo.AdmAreaModel">
+        SELECT street_code AS id,
+               street_name AS title,
+               town_code   AS parentId,
+               level_type  AS level
+        FROM fly_next_adm_area
+        WHERE level_type = '5'
+          AND town_code = #{townId}
+    </select>
+
+
+</mapper>

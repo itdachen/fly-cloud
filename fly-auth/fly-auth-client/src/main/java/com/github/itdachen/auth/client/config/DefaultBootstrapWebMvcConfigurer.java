@@ -49,9 +49,10 @@ public class DefaultBootstrapWebMvcConfigurer implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        String[] excludePaths = requestPassMatchers.passMatchers();
         registry.addInterceptor(authInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns(requestPassMatchers.passMatchers());
+                .excludePathPatterns(excludePaths);
     }
 
     @Override

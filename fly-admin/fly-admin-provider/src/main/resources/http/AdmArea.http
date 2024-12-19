@@ -1,0 +1,19 @@
+### 获取省集合
+GET http://127.0.0.1:8002/admin/open/adm/area/prov/list
+Content-Type: application/json
+
+### 获取贵州省市州
+GET http://127.0.0.1:8002/admin/open/adm/area/city/52
+Content-Type: application/json
+
+### 获取贵阳市区县
+GET http://127.0.0.1:8002/admin/open/adm/area/county/5201
+Content-Type: application/json
+
+### 获取贵阳市观山湖区乡村
+GET http://127.0.0.1:8002/admin/open/adm/area/town/520115
+Content-Type: application/json
+
+### 获取贵阳市金华镇街道
+GET http://127.0.0.1:8002/admin/open/adm/area/street/520115100
+Content-Type: application/json

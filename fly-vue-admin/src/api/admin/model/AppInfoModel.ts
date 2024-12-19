@@ -158,7 +158,7 @@ export default function useAppInfoBuilder() {
         {title: '应用名称', key: 'appTitle', ellipsisTooltip: true, align: 'center'},
         {title: '应用标识', key: 'appCode', ellipsisTooltip: true, align: 'center'},
         {title: '应用类型', key: 'typeTitle', ellipsisTooltip: true, align: 'center'},
-        {title: '访问地址', key: 'askUri', ellipsisTooltip: true, align: 'center'},
+        //  {title: '访问地址', key: 'askUri', ellipsisTooltip: true, align: 'center'},
         //  {title: '图标', key: 'iconIco', ellipsisTooltip: true, align: 'center'},
         {
             title: '有效标志',
