@@ -247,7 +247,11 @@ export default [
         component: () => import('../../views/admin/user/index.vue'),
         meta: { title: '用户管理', requireAuth: true },
       },
-
+      {
+        path: '/admin/tenant',
+        component: () => import('../../views/admin/tenant/index.vue'),
+        meta: { title: '租户管理', requireAuth: true },
+      },
     ]
   },
 

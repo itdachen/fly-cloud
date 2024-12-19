@@ -271,6 +271,11 @@ const menus = [
         icon: "layui-icon-user",
         title: '用户管理',
       },
+      {
+        id: '/admin/tenant',
+        icon: "layui-icon-user",
+        title: '租户管理',
+      },
     ]
   },
 ]
