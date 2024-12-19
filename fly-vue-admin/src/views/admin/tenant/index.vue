@@ -3,25 +3,22 @@
   <lay-container fluid="true" class="fly-container">
     <lay-card class="fly-search-card">
       <lay-form>
-        <lay-form-item label="租户类型代码, 例如:100" prop="typeId" mode="inline">
-          <lay-input v-model="queryTenantInfoParams.typeId"></lay-input>
+        <lay-form-item label="租户类型" prop="typeId" mode="inline">
+          <lay-select v-model="queryTenantInfoParams.typeId" placeholder="- 全部 -">
+            <lay-select-option value="" label="全部"></lay-select-option>
+            <lay-select-option v-for="item in TENANT_TYPE_ARR" :key="item.value" :value="item.value">
+              {{ item.label }}
+            </lay-select-option>
+          </lay-select>
         </lay-form-item>
+
         <lay-form-item label="名称" prop="title" mode="inline">
           <lay-input v-model="queryTenantInfoParams.title"></lay-input>
-        </lay-form-item>
-        <lay-form-item label="所属省级ID" prop="provId" mode="inline">
-          <lay-input v-model="queryTenantInfoParams.provId"></lay-input>
-        </lay-form-item>
-        <lay-form-item label="所属市州" prop="cityId" mode="inline">
-          <lay-input v-model="queryTenantInfoParams.cityId"></lay-input>
-        </lay-form-item>
-        <lay-form-item label="所属区县" prop="countyId" mode="inline">
-          <lay-input v-model="queryTenantInfoParams.countyId"></lay-input>
         </lay-form-item>
 
         <lay-form-item mode="inline">
           <lay-button class="fly-button fly-button-search" style="margin-left: 20px" type="primary" size="sm"
-                      @click=" reloadTenantInfoDate ">
+                      @click=" reloadTenantInfoDate(1) ">
             <lay-icon class="layui-icon-search"></lay-icon>
             查询
           </lay-button>
@@ -75,11 +72,11 @@
       </lay-table>
 
 
-      <lay-page v-model="flyLayPage.page"
+      <lay-page v-model:limit="flyLayPage.limit"
+                v-model="flyLayPage.page"
                 :layout="flyLayPage.layout"
                 :pages="flyLayPage.pages"
                 :limits="flyLayPage.limits"
-                v-model:limit="flyLayPage.limit"
                 theme="blue"
                 :total="tableTenantInfoData.total"
                 @change="previousNextPage" style="margin-top: 15px"></lay-page>
@@ -94,18 +91,14 @@
 
 <script setup lang="ts" name="tenantInfoComponent">
 import {ref, reactive, onMounted} from 'vue';
-import {layer} from '@layui/layui-vue';
 import RefTenantInfo from './RefTenantInfo.vue';
 
 import useTenantInfoComposable from '@/composables/admin/TenantInfoComposable';
-import useLayTableComposable from "@/fly/table";
-
-const {flyLayPage} = useLayTableComposable();
-
 
 const {
   refTenantInfoComponent,
   tenantInfo,
+  flyLayPage,
   tableTenantInfoData,
   tenantInfoColumns,
   queryTenantInfoParams,
@@ -121,16 +114,16 @@ const {
 
   /* 接口 */
   removeTenantInfoHandler,
-  tenantInfoDataHandler
+  tenantInfoDataHandler,
+  TENANT_TYPE_ARR
 } = useTenantInfoComposable();
-
 
 
 /**
  * 页面初始化, 加载数据
  */
 onMounted(() => {
-  reloadTenantInfoDate(1, 10);
+  reloadTenantInfoDate(1);
 })
 
 

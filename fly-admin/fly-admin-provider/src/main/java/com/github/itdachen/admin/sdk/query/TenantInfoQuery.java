@@ -23,6 +23,11 @@ public class TenantInfoQuery extends BizQuery implements Serializable {
     private String title;
 
     /**
+     * 类型
+     */
+    private String typeId;
+
+    /**
      * 所属省级ID
      */
     private String provId;
@@ -221,12 +226,21 @@ public class TenantInfoQuery extends BizQuery implements Serializable {
         return validFlag;
     }
 
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("page", getPage())
                 .append("limit", getLimit())
                 .append("title", getTitle())
+                .append("typeId", getTypeId())
                 .append("provId", getProvId())
                 .append("cityId", getCityId())
                 .append("countyId", getCountyId())

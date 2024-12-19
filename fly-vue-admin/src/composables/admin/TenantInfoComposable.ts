@@ -35,6 +35,7 @@ export default function useTenantInfoComposable() {
      */
     const loadTableTenantInfoData = (params: TenantInfoQuery) => {
         tableTenantInfoData.loading = true;
+        params.limit = flyLayPage.limit;
         tenantInfoApi.page(params).then(res => {
             tableTenantInfoData.total = res.data.total;
             tableTenantInfoData.rows = res.data.rows;
@@ -48,9 +49,8 @@ export default function useTenantInfoComposable() {
      * @param page
      * @param limit
      */
-    const reloadTenantInfoDate = (page: number = 1, limit: number = 10) => {
-        queryTenantInfoParams.page = page;
-        queryTenantInfoParams.limit = limit;
+    const reloadTenantInfoDate = (page: number = 1) => {
+        queryTenantInfoParams.page = 1;
         loadTableTenantInfoData(queryTenantInfoParams);
     };
 
@@ -84,12 +84,16 @@ export default function useTenantInfoComposable() {
     const tenantInfoDataHandler = (data: TenantInfo) => {
         if (StringUtils.isEmpty(data.id)) {
             tenantInfoApi.saveInfo(data).then((res: { msg: string; }) => {
-                reloadTenantInfoDate(1, 10);
+                queryTenantInfoParams.page = 1;
+                queryTenantInfoParams.limit = 10;
+                loadTableTenantInfoData(queryTenantInfoParams)
                 layer.msg(res.msg, {time: 1500, icon: 1})
             })
         } else {
             tenantInfoApi.updateInfo(data, data.id).then((res: { msg: string; }) => {
-                reloadTenantInfoDate(1, 10);
+                queryTenantInfoParams.page = 1;
+                queryTenantInfoParams.limit = 10;
+                loadTableTenantInfoData(queryTenantInfoParams)
                 layer.msg(res.msg, {time: 1500, icon: 1})
             })
         }
@@ -105,12 +109,40 @@ export default function useTenantInfoComposable() {
             title: title,
             callback: () => {
                 tenantInfoApi.remove(id).then((res: { msg: string; }) => {
-                    reloadTenantInfoDate(1, 10);
+                    reloadTenantInfoDate(1);
                     layer.msg(res.msg, {time: 1500, icon: 1});
                 })
             }
         })
     }
+
+
+    const TENANT_TYPE_ARR = [
+        {
+            value: '100',
+            label: '超级管理员'
+        },
+        {
+            value: '200',
+            label: '开发者'
+        },
+        {
+            value: '300',
+            label: '运营'
+        },
+        {
+            value: '400',
+            label: '商铺'
+        },
+        {
+            value: '500',
+            label: '消费者'
+        },
+        {
+            value: '999',
+            label: '其他'
+        }
+    ]
 
 
     return {
@@ -131,8 +163,8 @@ export default function useTenantInfoComposable() {
 
         /* 接口 */
         removeTenantInfoHandler,
-        tenantInfoDataHandler
-
+        tenantInfoDataHandler,
+        TENANT_TYPE_ARR
 
     };
 }

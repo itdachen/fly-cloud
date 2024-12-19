@@ -45,6 +45,16 @@
         </lay-select>
       </lay-form-item>
 
+
+      <lay-form-item label="租户类型" prop="typeId" mode="inline">
+        <lay-select v-model="tenantInfo.typeId" :disabled="layerRef.disabled">
+          <lay-select-option v-for="item in TENANT_TYPE_ARR" :key="item.value" :value="item.value">
+            {{ item.label }}
+          </lay-select-option>
+        </lay-select>
+      </lay-form-item>
+
+
       <lay-form-item label="官网/访问地址" prop="homeUri" mode="inline">
         <lay-input placeholder="请输入官网/访问地址" v-model="tenantInfo.homeUri"
                    :disabled="layerRef.disabled"></lay-input>
@@ -63,6 +73,7 @@
       <lay-form-item label="传真" prop="facsimile" mode="inline">
         <lay-input placeholder="请输入传真" v-model="tenantInfo.facsimile" :disabled="layerRef.disabled"></lay-input>
       </lay-form-item>
+
 
       <lay-form-item label="有效标志" prop="validFlag" mode="inline">
         <lay-radio v-model="tenantInfo.validFlag" name="validFlag" value="Y" :disabled="layerRef.disabled">有效
@@ -101,10 +112,10 @@ import useTenantInfoComposable from "@/composables/admin/TenantInfoComposable";
 import {TenantInfo} from "@/api/admin/model/TenantInfoModel";
 import OpenAdmAreaApi from "@/api/open/OpenAdmAreaApi";
 
-OpenAdmAreaApi
 const {
   tenantInfo,
-  tenantInfoDataHandler
+  tenantInfoDataHandler,
+  TENANT_TYPE_ARR
 } = useTenantInfoComposable();
 
 const admAreaApi = new OpenAdmAreaApi();
@@ -139,6 +150,43 @@ function onTapSubmit() {
     if (!isValidate) {
       return;
     }
+
+    let provId = model.provId;
+    if (null !== provId && '' !== provId && 0 < provList.value.length) {
+      for (let i = 0; i < provList.value.length; i++) {
+        if (provId === provList.value[i].id) {
+          model.provTitle = provList.value[i].title;
+        }
+      }
+    }
+
+    let cityId = model.cityId;
+    if (null !== cityId && '' !== cityId && 0 < cityList.value.length) {
+      for (let i = 0; i < cityList.value.length; i++) {
+        if (cityId === cityList.value[i].id) {
+          model.cityTitle = cityList.value[i].title;
+        }
+      }
+    }
+
+    let countyId = model.countyId;
+    if (null !== countyId && '' !== countyId && 0 < countyList.value.length) {
+      for (let i = 0; i < countyList.value.length; i++) {
+        if (countyId === countyList.value[i].id) {
+          model.countyTitle = countyList.value[i].title;
+        }
+      }
+    }
+
+    let typeId = model.typeId;
+    if (null !== typeId && '' !== typeId && 0 < TENANT_TYPE_ARR.length) {
+      for (let i = 0; i < TENANT_TYPE_ARR.length; i++) {
+        if (typeId === TENANT_TYPE_ARR[i].value) {
+          model.typeTitle = TENANT_TYPE_ARR[i].label;
+        }
+      }
+    }
+
     tenantInfoDataHandler(model);
     onTapClose();
   });
@@ -162,15 +210,15 @@ const open = (type: FormTypeEnum, data?: TenantInfo) => {
       id: '',  // 主键唯一标识
       parentId: '',  // 上级ID
       parentTitle: '',  // 上级名称
-      typeId: 'Y',  // 租户类型代码, 例如:100
+      typeId: '999',  // 租户类型代码, 例如:100
       typeTitle: '',  // 租户类型名称, 例如: 系统管理员
       title: '',  // 名称
       titleAs: '',  // 简称
-      provId: 'Y',  // 所属省级ID
+      provId: '',  // 所属省级ID
       provTitle: '',  // 所属省级名称
-      cityId: 'Y',  // 所属市州
+      cityId: '',  // 所属市州
       cityTitle: '',  // 所属市州名称
-      countyId: 'Y',  // 所属区县
+      countyId: '',  // 所属区县
       countyTitle: '',  // 所属区县名称
       homeIcon: '',  // 图标
       homeUri: '',  // 官网/访问地址
@@ -184,10 +232,12 @@ const open = (type: FormTypeEnum, data?: TenantInfo) => {
     }
   }
   layerRef.disabled = false;
+  layerRef.required = true;
   showToSubmit.value = true;
   if (FormTypeEnum.VIEW === type) {
     layerRef.disabled = true;
     showToSubmit.value = false;
+    layerRef.required = false;
   }
 
   layerRef.title = type + '租户信息';
@@ -238,7 +288,7 @@ const provChangeFilter = (id: string | undefined, t?: string) => {
 const cityChangeFilter = (id: string | undefined, t?: string) => {
   admAreaApi.findCountyList(id).then(res => {
     countyList.value = res.data;
-    if ('1' !== t) {
+    if ('1' === t) {
       return;
     }
     if (0 < res.data.length) {
@@ -247,6 +297,7 @@ const cityChangeFilter = (id: string | undefined, t?: string) => {
     }
   })
 }
+
 
 
 </script>

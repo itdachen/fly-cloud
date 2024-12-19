@@ -81,6 +81,9 @@
             <if test="null != title  and '' != title ">
                 AND title LIKE CONCAT(CONCAT('%',#{title}),'%')
             </if>
+            <if test="null != typeId  and '' != typeId ">
+                AND type_id = #{typeId}
+            </if>
             <if test="null != provId  and '' != provId ">
                 AND prov_id = #{provId}
             </if>

@@ -22,17 +22,7 @@ export interface TenantInfoQuery extends BizQuery {
     /** 租户类型代码, 例如:100 */
     typeId?: string,
     /** 名称 */
-    title?: string,
-    /** 所属省级ID */
-    provId?: string,
-    /** 所属市州 */
-    cityId?: string,
-    /** 所属区县 */
-    countyId?: string,
-    /** 图标 */
-    homeIcon?: string,
-    /** 拥有者ID */
-    ownerId?: string,
+    title?: string
 }
 
 
@@ -106,17 +96,7 @@ export default function useTenantInfoBuilder() {
         /** 租户类型代码, 例如:100 */
         typeId: '',
         /** 名称 */
-        title: '',
-        /** 所属省级ID */
-        provId: '',
-        /** 所属市州 */
-        cityId: '',
-        /** 所属区县 */
-        countyId: '',
-        /** 图标 */
-        homeIcon: '',
-        /** 拥有者ID */
-        ownerId: ''
+        title: ''
     });
 
     /**
@@ -186,6 +166,7 @@ export default function useTenantInfoBuilder() {
         {title: '简称', key: 'titleAs', ellipsisTooltip: true, align: 'center'},
         {title: '拥有者昵称', key: 'ownerNickName', ellipsisTooltip: true, align: 'center'},
         {title: '电子邮箱', key: 'eMailBox', ellipsisTooltip: true, align: 'center'},
+        {title: '租户类型', key: 'typeTitle', ellipsisTooltip: true, width: 150, align: 'center'},
         {
             title: '有效标志',
             key: 'validFlag',
