@@ -6,7 +6,7 @@ import {ServerResponse} from "axios";
 /**
  * 请求路径
  */
-const ADM_AREA_PATH = '/open/adm/area';
+const ADM_AREA_PATH = '/admin/open/adm/area';
 
 /**
  * 区域接口
@@ -35,7 +35,10 @@ class OpenAdmAreaApi {
      * 获取市州集合
      * @param provId 省级ID
      */
-    findCityList(provId: string): Promise<ServerResponse<AdmArea[]>> {
+    findCityList(provId: string | undefined): Promise<ServerResponse<AdmArea[]>> {
+        if (null === provId || undefined === provId){
+            provId = '1';
+        }
         return httpAxios.get(ADM_AREA_PATH + `/city/${provId}`);
     }
 
@@ -44,7 +47,10 @@ class OpenAdmAreaApi {
      * 获取区县集合
      * @param cityId 市州级ID
      */
-    findCountyList(cityId: string): Promise<ServerResponse<AdmArea[]>> {
+    findCountyList(cityId: string | undefined): Promise<ServerResponse<AdmArea[]>> {
+        if (null === cityId || undefined === cityId){
+            cityId = '1';
+        }
         return httpAxios.get(ADM_AREA_PATH + `/county/${cityId}`);
     }
 
@@ -54,6 +60,9 @@ class OpenAdmAreaApi {
      * @param countyId 区县级ID
      */
     findTownList(countyId: string): Promise<ServerResponse<AdmArea[]>> {
+        if (null === countyId || undefined === countyId){
+            countyId = '1';
+        }
         return httpAxios.get(ADM_AREA_PATH + `/town/${countyId}`);
     }
 
@@ -62,6 +71,9 @@ class OpenAdmAreaApi {
      * @param townId 街道级ID
      */
     findStreetList(townId: string): Promise<ServerResponse<AdmArea[]>> {
+        if (null === townId || undefined === townId){
+            townId = '1';
+        }
         return httpAxios.get(ADM_AREA_PATH + `/street/${townId}`);
     }
 

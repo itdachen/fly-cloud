@@ -93,7 +93,6 @@
 
 <script setup lang="ts">
 import {onMounted} from "vue";
-import {layer} from "@layui/layui-vue"
 import RefAppInfo from './RefAppInfo.vue';
 
 import useAppInfoComposable from '@/composables/admin/AppInfoComposable';
@@ -145,19 +144,6 @@ const refreshData = () => {
   queryAppInfoParams.page = 1;
   loadTableAppInfoData(queryAppInfoParams);
 }
-
-
-const openIframe = function () {
-  layer.open({
-    type: 1,
-    title: "标题",
-    resize: true,
-    area: ['90%', '90%'],
-    isHtmlFragment: true,
-    content: import('./RefAppInfo.vue')
-  })
-}
-
 
 </script>
 

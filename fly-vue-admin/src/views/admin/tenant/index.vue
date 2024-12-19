@@ -93,7 +93,7 @@
 
 
 <script setup lang="ts" name="tenantInfoComponent">
-import {ref, reactive} from 'vue';
+import {ref, reactive, onMounted} from 'vue';
 import {layer} from '@layui/layui-vue';
 import RefTenantInfo from './RefTenantInfo.vue';
 
@@ -123,6 +123,15 @@ const {
   removeTenantInfoHandler,
   tenantInfoDataHandler
 } = useTenantInfoComposable();
+
+
+
+/**
+ * 页面初始化, 加载数据
+ */
+onMounted(() => {
+  reloadTenantInfoDate(1, 10);
+})
 
 
 /**

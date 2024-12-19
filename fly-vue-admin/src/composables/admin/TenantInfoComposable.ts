@@ -58,7 +58,7 @@ export default function useTenantInfoComposable() {
      * 新增按钮
      */
     const onTapTenantInfoAdd = () => {
-        refTenantInfoComponent.value?.open(FormTypeEnum.ADD, '租户/公司信息', null);
+        refTenantInfoComponent.value?.open(FormTypeEnum.ADD, null);
     }
 
     /**
@@ -66,7 +66,7 @@ export default function useTenantInfoComposable() {
      * @param data 编辑时的数据信息
      */
     const onTapTenantInfoEdit = (data: TenantInfo) => {
-        refTenantInfoComponent.value?.open(FormTypeEnum.EDIT, '租户/公司信息', data);
+        refTenantInfoComponent.value?.open(FormTypeEnum.EDIT, data);
     }
 
     /**
@@ -74,7 +74,7 @@ export default function useTenantInfoComposable() {
      * @param data 查看时的数据信息
      */
     const onTapTenantInfoView = (data: TenantInfo) => {
-        refTenantInfoComponent.value?.open(FormTypeEnum.VIEW, '租户/公司信息', data);
+        refTenantInfoComponent.value?.open(FormTypeEnum.VIEW, data);
     }
 
     /**
