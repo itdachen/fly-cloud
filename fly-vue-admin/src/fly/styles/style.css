@@ -212,3 +212,16 @@
     color: red;
 }
 
+
+/*=====================================================================================*/
+.layui-form-item.layui-form-item-inline {
+    display: inline-flex;
+    width: 365px !important;
+}
+
+.layui-input-inline {
+    width: 220px !important;
+}
+
+/*=====================================================================================*/
+

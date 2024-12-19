@@ -3,9 +3,6 @@
   <lay-container fluid="true" class="fly-container">
     <lay-card class="fly-search-card">
       <lay-form>
-        <lay-form-item label="上级ID" prop="parentId" mode="inline">
-          <lay-input v-model="queryTenantInfoParams.parentId"></lay-input>
-        </lay-form-item>
         <lay-form-item label="租户类型代码, 例如:100" prop="typeId" mode="inline">
           <lay-input v-model="queryTenantInfoParams.typeId"></lay-input>
         </lay-form-item>
@@ -21,12 +18,6 @@
         <lay-form-item label="所属区县" prop="countyId" mode="inline">
           <lay-input v-model="queryTenantInfoParams.countyId"></lay-input>
         </lay-form-item>
-        <lay-form-item label="图标" prop="homeIcon" mode="inline">
-          <lay-input v-model="queryTenantInfoParams.homeIcon"></lay-input>
-        </lay-form-item>
-        <lay-form-item label="拥有者ID" prop="ownerId" mode="inline">
-          <lay-input v-model="queryTenantInfoParams.ownerId"></lay-input>
-        </lay-form-item>
 
         <lay-form-item mode="inline">
           <lay-button class="fly-button fly-button-search" style="margin-left: 20px" type="primary" size="sm"
@@ -34,14 +25,14 @@
             <lay-icon class="layui-icon-search"></lay-icon>
             查询
           </lay-button>
-          <lay-button class="fly-button fly-button-reset" size="sm" @click=" resetQueryFormValue ">
-            <lay-icon class="layui-icon-refresh"></lay-icon>
-            重置
-          </lay-button>
-          <lay-button class="fly-button fly-button-exp" size="sm" @click="">
-            <lay-icon class="layui-icon-export"></lay-icon>
-            导出
-          </lay-button>
+          <!--          <lay-button class="fly-button fly-button-reset" size="sm" @click=" resetQueryFormValue ">-->
+          <!--            <lay-icon class="layui-icon-refresh"></lay-icon>-->
+          <!--            重置-->
+          <!--          </lay-button>-->
+          <!--          <lay-button class="fly-button fly-button-exp" size="sm" @click="">-->
+          <!--            <lay-icon class="layui-icon-export"></lay-icon>-->
+          <!--            导出-->
+          <!--          </lay-button>-->
         </lay-form-item>
       </lay-form>
 

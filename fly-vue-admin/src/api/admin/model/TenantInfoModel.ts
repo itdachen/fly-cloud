@@ -131,7 +131,7 @@ export default function useTenantInfoBuilder() {
     /**
      * 实例化对象
      */
-    const tenantInfo = reactive<TenantInfo>({
+    const tenantInfo = ref<TenantInfo>({
         /** 主键唯一标识 */
         id: '',
         /** 上级ID */
@@ -186,7 +186,17 @@ export default function useTenantInfoBuilder() {
         {title: '简称', key: 'titleAs', ellipsisTooltip: true, align: 'center'},
         {title: '拥有者昵称', key: 'ownerNickName', ellipsisTooltip: true, align: 'center'},
         {title: '电子邮箱', key: 'eMailBox', ellipsisTooltip: true, align: 'center'},
-        {title: '有效标志: Y-是;N-否', key: 'validFlag', ellipsisTooltip: true, align: 'center'},
+        {
+            title: '有效标志',
+            key: 'validFlag',
+            ellipsisTooltip: true,
+            align: 'center',
+            width: 150,
+            customSlot: function (obj: any) {
+                return 'Y' === obj.data.validFlag ? '有效' : '无效';
+
+            }
+        },
         {title: '操作', width: '280px', customSlot: 'operator', key: 'operator', align: 'center', fixed: 'right'}
     ];
 
