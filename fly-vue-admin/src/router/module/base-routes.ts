@@ -252,6 +252,11 @@ export default [
         component: () => import('../../views/admin/tenant/index.vue'),
         meta: { title: '租户管理', requireAuth: true },
       },
+      {
+        path: '/admin/dept/func',
+        component: () => import('../../views/admin/dept/func/index.vue'),
+        meta: { title: '部门职能', requireAuth: true },
+      },
     ]
   },
 
