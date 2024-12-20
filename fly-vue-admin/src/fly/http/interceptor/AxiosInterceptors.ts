@@ -1,5 +1,6 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse, ServerResponse} from "axios";
 import {BASIC, TOKEN_TYPE, TIME_OUT, OPEN_URL, CONTENT_TYPE} from "@/fly/http/conf/config";
+import {layer} from "@layui/layui-vue";
 
 import {StringUtils} from '@/fly/utils/StringUtils';
 import {ResultStatusCode} from "@/fly/http/enums/ResultStatusCode";
@@ -26,7 +27,7 @@ class ApiRequest {
          */
         this.instance.interceptors.request.use((config) => {
                 removePending(config)
-            //    addPending(config)
+                //    addPending(config)
                 let url: string | undefined = config.url;
                 if (undefined == url) {
                     console.warn('请求路径不能为空');
@@ -75,13 +76,17 @@ class ApiRequest {
                 if (ResultStatusCode.SUCCESS === res.status) {
                     return res
                 }
+                if (ResultStatusCode.ERROR === res.status) {
+                    layer.msg(res.msg, {time: 1500, icon: 2});
+                    return Promise.reject(res);
+                }
                 //  ElMessage.error(res.msg)
                 /* 登录 token 异常, 这里加入路由前置守卫, 跳转到登录页面 */
                 if (res.status == ResultStatusCode.CLIENT_TOKEN_EXCEPTION) {
                     // 清空本地缓存
                     localStorage.clear();
                     // 路由跳转
-                    router.push('/Login')
+                    router.push('/login')
                 }
                 return Promise.reject(res)
             }, (error) => {

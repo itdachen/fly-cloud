@@ -86,11 +86,15 @@ export default function useDeptFuncComposable() {
             deptFuncApi.saveInfo(data).then((res: { msg: string; }) => {
                 reloadDeptFuncDate(1, flyLayPage.limit);
                 layer.msg(res.msg, {time: 1500, icon: 1})
+            }, err => {
+
             })
         } else {
             deptFuncApi.updateInfo(data, data.id).then((res: { msg: string; }) => {
                 reloadDeptFuncDate(1, flyLayPage.limit);
                 layer.msg(res.msg, {time: 1500, icon: 1})
+            }, err => {
+
             })
         }
     }
