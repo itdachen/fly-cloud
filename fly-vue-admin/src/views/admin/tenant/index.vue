@@ -38,8 +38,9 @@
 
     <!-- table   :default-toolbar="true"  :height="'100%'" line row nob -->
     <div class="table-box">
-      <lay-table :page="false" :skin="'nob'"
+      <lay-table :page="false"
                  :height="'90%'"
+                 :skin="'line'"
                  :columns=" tenantInfoColumns "
                  :loading=" tableTenantInfoData.loading "
                  :data-source=" tableTenantInfoData.rows "
