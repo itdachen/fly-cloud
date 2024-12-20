@@ -70,6 +70,9 @@ public class DeptFuncServiceImpl extends BizServiceImpl<IDeptFuncMapper, DeptFun
      */
     @Override
     public DeptFuncVO saveInfo(DeptFuncDTO deptFuncDTO) throws Exception {
+        int i = Integer.parseInt(deptFuncDTO.getFuncCode());
+        String funcCod = String.format("%02d", i);
+        deptFuncDTO.setFuncCode(funcCod);
         DeptFunc deptFunc = new DeptFunc();
         deptFunc.setTenantId(BizContextHandler.getTenantId());
         deptFunc.setFuncCode(deptFuncDTO.getFuncCode());
@@ -94,6 +97,9 @@ public class DeptFuncServiceImpl extends BizServiceImpl<IDeptFuncMapper, DeptFun
      */
     @Override
     public DeptFuncVO updateInfo(DeptFuncDTO deptFuncDTO) throws Exception {
+        int i = Integer.parseInt(deptFuncDTO.getFuncCode());
+        String funcCod = String.format("%02d", i);
+        deptFuncDTO.setFuncCode(funcCod);
         DeptFunc deptFunc = new DeptFunc();
         deptFunc.setTenantId(BizContextHandler.getTenantId());
         deptFunc.setFuncCode(deptFuncDTO.getFuncCode());

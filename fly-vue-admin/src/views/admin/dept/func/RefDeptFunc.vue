@@ -87,9 +87,8 @@ function toSubmit() {
       return;
     }
     deptFuncDataHandler(model);
-    onTapClose();
-    emit('click', deptFunc)
-
+    // onTapClose();
+    // emit('click', deptFunc)
   });
 }
 
@@ -135,6 +134,7 @@ const onTapClose = () => {
 //外部需要使用的时候，需要使用 defineExpose 暴露出去给父组件
 defineExpose({
   open,
+  onTapClose
 });
 
 //注册事件

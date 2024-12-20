@@ -83,18 +83,16 @@ export default function useDeptFuncComposable() {
      */
     const deptFuncDataHandler = (data: DeptFunc) => {
         if (StringUtils.isEmpty(data.id)) {
-            deptFuncApi.saveInfo(data).then((res: { msg: string; }) => {
+            deptFuncApi.saveInfo(data).then((res) => {
                 reloadDeptFuncDate(1, flyLayPage.limit);
                 layer.msg(res.msg, {time: 1500, icon: 1})
-            }, err => {
-
+                refDeptFuncComponent.value?.onTapClose();
             })
         } else {
-            deptFuncApi.updateInfo(data, data.id).then((res: { msg: string; }) => {
+            deptFuncApi.updateInfo(data, data.id).then((res) => {
                 reloadDeptFuncDate(1, flyLayPage.limit);
-                layer.msg(res.msg, {time: 1500, icon: 1})
-            }, err => {
-
+                layer.msg(res.msg, {time: 1500, icon: 1});
+                refDeptFuncComponent.value?.onTapClose();
             })
         }
     }
