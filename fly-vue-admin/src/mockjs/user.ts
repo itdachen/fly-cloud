@@ -281,6 +281,11 @@ const menus = [
         icon: "layui-icon-user",
         title: '部门职能',
       },
+      {
+        id: '/admin/dept/level',
+        icon: "layui-icon-user",
+        title: '部门层级',
+      },
     ]
   },
 ]

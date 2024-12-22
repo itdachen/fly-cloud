@@ -257,6 +257,11 @@ export default [
         component: () => import('../../views/admin/dept/func/index.vue'),
         meta: { title: '部门职能', requireAuth: true },
       },
+      {
+        path: '/admin/dept/level',
+        component: () => import('../../views/admin/dept/level/index.vue'),
+        meta: { title: '部门层级', requireAuth: true },
+      },
     ]
   },
 
