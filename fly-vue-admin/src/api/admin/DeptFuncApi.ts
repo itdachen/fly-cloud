@@ -1,5 +1,7 @@
 import {HttpRequest} from '@/fly/http/rest/HttpRequest';
 import {DeptFunc, DeptFuncQuery} from '@/api/admin/model/DeptFuncModel';
+import http from "@/fly/http";
+import {ServerResponse} from "axios";
 
 
 /**
@@ -17,6 +19,10 @@ class DeptFuncApi extends HttpRequest<DeptFunc, DeptFuncQuery, string> {
 
     constructor() {
         super(DEPT_FUNC_PATH)
+    }
+
+    findList(): Promise<ServerResponse<DeptFunc>> {
+        return http.get(DEPT_FUNC_PATH + '/list');
     }
 
 

@@ -26,6 +26,8 @@ public interface IDeptFuncMapper extends Mapper<DeptFunc> {
      */
     List<DeptFuncVO> list(DeptFuncQuery params);
 
+    List<DeptFuncVO> findDeptFuncList(String tenantId);
+
     /***
      * 根据id查询
      *

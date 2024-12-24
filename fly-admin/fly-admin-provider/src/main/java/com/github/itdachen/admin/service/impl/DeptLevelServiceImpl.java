@@ -134,4 +134,10 @@ public class DeptLevelServiceImpl extends BizServiceImpl<IDeptLevelMapper, DeptL
         //  ExcelExportUtils.exportExcel( request, response, EXP_FIELDS, list, "部门等级管理", true);
     }
 
+
+    @Override
+    public List<DeptLevelVO> findDeptLevelList() throws Exception {
+        return bizMapper.findDeptLevelList(BizContextHandler.getTenantId());
+    }
+
 }

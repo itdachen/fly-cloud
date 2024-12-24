@@ -211,7 +211,7 @@ const open = (type: FormTypeEnum, data?: TenantInfo) => {
       parentId: '',  // 上级ID
       parentTitle: '',  // 上级名称
       typeId: '999',  // 租户类型代码, 例如:100
-      typeTitle: '',  // 租户类型名称, 例如: 系统管理员
+      typeTitle: 'other',  // 租户类型名称, 例如: 系统管理员
       title: '',  // 名称
       titleAs: '',  // 简称
       provId: '',  // 所属省级ID

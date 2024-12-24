@@ -26,6 +26,8 @@ public interface IDeptLevelMapper extends Mapper<DeptLevel> {
      */
     List<DeptLevelVO> list(DeptLevelQuery params);
 
+    List<DeptLevelVO> findDeptLevelList(String tenantId);
+
     /***
      * 根据id查询
      *

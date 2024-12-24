@@ -1,5 +1,7 @@
 import {HttpRequest} from '@/fly/http/rest/HttpRequest';
 import {DeptLevel, DeptLevelQuery} from '@/api/admin/model/DeptLevelModel';
+import http from "@/fly/http";
+import {ServerResponse} from "axios";
 
 
 /**
@@ -13,10 +15,14 @@ const DEPT_LEVEL_PATH = '/admin/dept/level';
  * @author 王大宸
  * @date 2024-12-22 20:30:44
  */
-class DeptLevelApi extends HttpRequest< DeptLevel, DeptLevelQuery, string > {
+class DeptLevelApi extends HttpRequest<DeptLevel, DeptLevelQuery, string> {
 
     constructor() {
         super(DEPT_LEVEL_PATH)
+    }
+
+    findList(): Promise<ServerResponse<DeptLevel>> {
+        return http.get(DEPT_LEVEL_PATH + '/list');
     }
 
 

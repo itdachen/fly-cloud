@@ -276,6 +276,16 @@
             WHERE id = #{item.id}
         </foreach>
     </update>
+    
+    <select id="findDeptChildren" parameterType="java.lang.String"
+            resultType="com.github.itdachen.framework.context.tree.lay.TreeNode">
+        SELECT id, title
+        FROM fly_next_dept_info
+        WHERE tenant_id = #{tenantId}
+          AND parent_id = #{parentId}
+          AND valid_flag = 'Y'
+          AND delete_flag = 'N'
+    </select>
 
 
 </mapper>

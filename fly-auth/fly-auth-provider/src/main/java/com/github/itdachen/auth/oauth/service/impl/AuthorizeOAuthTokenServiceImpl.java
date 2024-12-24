@@ -70,7 +70,6 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         // 腾讯服务器根据 CODE 获取用户信息(OPENID)
 
 
-
         if (null == authToken || StringUtils.isEmpty(authToken.getUsername()) || StringUtils.isEmpty(authToken.getPassword())) {
             throw new BizException("登录认证信息不全!!!");
         }
@@ -88,7 +87,7 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         currentUserDetails.setUsername("admin");
         currentUserDetails.setNickName("王大宸");
         currentUserDetails.setId("1541230113952239617");
-        currentUserDetails.setUserType(UserTypeConstant.MEMBER);
+        currentUserDetails.setUserType(UserTypeConstant.SUPER_ADMINISTRATOR);
         currentUserDetails.setTenantId("520115100000001");
         currentUserDetails.setTenantTitle("太虚十境");
         currentUserDetails.setExpTime(LocalDateTime.now());
@@ -105,6 +104,10 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         currentUserDetails.setAppVersion(appInfoProperties.getVersion());
         currentUserDetails.setAppContextPath(appInfoProperties.getContextPath());
 
+        currentUserDetails.setDeptId("1871467053303599104");
+        currentUserDetails.setDeptLevel("00");
+        currentUserDetails.setDeptParentId("520115100000001");
+        currentUserDetails.setDeptTitle("领导办公室");
 
         Map<String, String> userDetailMap = TokenUserDetailsHandler.setUserDetailMap(currentUserDetails, TokenTicketConstant.ACCESS_TOKEN);
         String access_token = jwtsTokenHelper.accessToken(new JwtTokenInfo.Builder()

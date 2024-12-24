@@ -5,6 +5,7 @@ import com.github.itdachen.framework.context.constants.YesOrNotConstant;
 import com.github.itdachen.framework.context.exception.BizException;
 import com.github.itdachen.framework.core.response.TableData;
 import com.github.itdachen.framework.webmvc.entity.EntityUtils;
+import com.github.itdachen.framework.webmvc.poi.WorkBookUtils;
 import com.github.itdachen.framework.webmvc.service.impl.BizServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -142,8 +143,19 @@ public class DeptFuncServiceImpl extends BizServiceImpl<IDeptFuncMapper, DeptFun
     public void dataExpToExcel(HttpServletRequest request,
                                HttpServletResponse response,
                                DeptFuncQuery params) throws Exception {
-        //  List<LinkedHashMap<String, String>> list = bizMapper.selectDeptFuncExpData(params);
-        //  ExcelExportUtils.exportExcel( request, response, EXP_FIELDS, list, "部门职能", true);
+        List<LinkedHashMap<String, String>> list = bizMapper.selectDeptFuncExpData(params);
+        WorkBookUtils.export(request, response)
+                .params(params)
+                .title("部门职能")
+                .rowNum(true)
+                .fields(EXP_FIELDS)
+                .data(list)
+                .execute();
+    }
+
+    @Override
+    public List<DeptFuncVO> findDeptFuncList() throws Exception {
+        return bizMapper.findDeptFuncList(BizContextHandler.getTenantId());
     }
 
 }

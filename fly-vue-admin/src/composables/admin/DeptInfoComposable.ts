@@ -1,4 +1,3 @@
-
 import {layer} from "@layui/layui-vue";
 
 import {StringUtils} from '@/fly/utils/StringUtils';
@@ -7,6 +6,7 @@ import DeptInfoApi from '@/api/admin/DeptInfoApi';
 import {FormTypeEnum} from "@/fly/biz/BizModel";
 import {LayTableUtils} from "@/fly/utils/LayTableUtils";
 import useLayTableComposable from "@/fly/table";
+import {reactive, ref} from "vue";
 
 const {
     deptInfo,
@@ -42,6 +42,20 @@ export default function useDeptInfoComposable() {
         });
     };
 
+    const parentDeptId = ref<string>('0');
+    const deptTreeData = ref();
+    const deptTreeChecked = ref();
+
+    const loadDeptTree = () => {
+        deptInfoApi.findDeptTree().then(res => {
+            deptTreeChecked.value = res.data.checked;
+            deptTreeData.value = res.data.data;
+            // if (0 < res.data.checked.length) {
+            //     parentDeptId.value = res.data.checked[0];
+            // }
+        })
+    }
+
     /**
      * 重新加载数据
      * @author 王大宸
@@ -58,7 +72,10 @@ export default function useDeptInfoComposable() {
      * 新增按钮
      */
     const onTapDeptInfoAdd = () => {
-        refDeptInfoComponent.value?.open(FormTypeEnum.ADD, null);
+        if ('0' === parentDeptId.value) {
+            return;
+        }
+        refDeptInfoComponent.value?.open(FormTypeEnum.ADD, null, parentDeptId);
     }
 
     /**
@@ -66,7 +83,7 @@ export default function useDeptInfoComposable() {
      * @param data 编辑时的数据信息
      */
     const onTapDeptInfoEdit = (data: DeptInfo) => {
-        refDeptInfoComponent.value?.open(FormTypeEnum.EDIT, data);
+        refDeptInfoComponent.value?.open(FormTypeEnum.EDIT, data, data.parentId);
     }
 
     /**
@@ -74,7 +91,7 @@ export default function useDeptInfoComposable() {
      * @param data 查看时的数据信息
      */
     const onTapDeptInfoView = (data: DeptInfo) => {
-        refDeptInfoComponent.value?.open(FormTypeEnum.VIEW, data);
+        refDeptInfoComponent.value?.open(FormTypeEnum.VIEW, data, data.parentId);
     }
 
     /**
@@ -82,21 +99,21 @@ export default function useDeptInfoComposable() {
      * @param data 保存的数据
      */
     const deptInfoDataHandler = (data: DeptInfo) => {
-      if (StringUtils.isEmpty(data.id)){
-         deptInfoApi.saveInfo(data).then((res) => {
-              reloadDeptInfoDate(1, flyLayPage.limit); // 表格重新加载数据
-              layer.msg(res.msg, {time: 1500, icon: 1}); // 操作成功提示
-              refDeptInfoComponent.value?.onTapClose();  // 关闭弹窗
-          })
-      } else {
-          deptInfoApi.updateInfo(data, data.id).then((res) => {
-              reloadDeptInfoDate(1, flyLayPage.limit);  // 表格重新加载数据
-              layer.msg(res.msg, {time: 1500, icon: 1}); // 操作成功提示
-              refDeptInfoComponent.value?.onTapClose();  // 关闭弹窗
-          })
-      }
+        if (StringUtils.isEmpty(data.id)) {
+            deptInfoApi.saveInfo(data).then((res) => {
+                reloadDeptInfoDate(1, flyLayPage.limit); // 表格重新加载数据
+                layer.msg(res.msg, {time: 1500, icon: 1}); // 操作成功提示
+                refDeptInfoComponent.value?.onTapClose();  // 关闭弹窗
+            })
+        } else {
+            deptInfoApi.updateInfo(data, data.id).then((res) => {
+                reloadDeptInfoDate(1, flyLayPage.limit);  // 表格重新加载数据
+                layer.msg(res.msg, {time: 1500, icon: 1}); // 操作成功提示
+                refDeptInfoComponent.value?.onTapClose();  // 关闭弹窗
+            })
+        }
     }
-    
+
 
     /**
      * 删除按钮
@@ -133,7 +150,12 @@ export default function useDeptInfoComposable() {
         /* 接口 */
         removeDeptInfoHandler,
         deptInfoDataHandler,
-        flyLayPage
+        flyLayPage,
+
+        loadDeptTree,
+        deptTreeData,
+        deptTreeChecked,
+        parentDeptId
 
     };
 }

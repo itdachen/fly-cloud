@@ -1,6 +1,12 @@
 package com.github.itdachen.admin.service.impl;
 
+import com.github.itdachen.framework.context.BizContextHandler;
+import com.github.itdachen.framework.context.constants.UserTypeConstant;
+import com.github.itdachen.framework.context.tree.lay.LayTree;
+import com.github.itdachen.framework.context.tree.lay.LayTreeNode;
+import com.github.itdachen.framework.context.tree.lay.TreeNode;
 import com.github.itdachen.framework.core.response.TableData;
+import com.github.itdachen.framework.webmvc.poi.WorkBookUtils;
 import com.github.itdachen.framework.webmvc.service.impl.BizServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -78,8 +84,71 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
     public void dataExpToExcel(HttpServletRequest request,
                                HttpServletResponse response,
                                DeptInfoQuery params) throws Exception {
-        // List<LinkedHashMap<String, String>> list = bizMapper.selectDeptInfoExpData(params);
-        // ExcelExportUtils.exportExcel( request, response, EXP_FIELDS, list, "部门信息", true);
+        List<LinkedHashMap<String, String>> list = bizMapper.selectDeptInfoExpData(params);
+        WorkBookUtils.export(request, response)
+                .params(params)
+                .title("部门信息")
+                .rowNum(true)
+                .fields(EXP_FIELDS)
+                .data(list)
+                .execute();
     }
+
+    @Override
+    public LayTree findDeptTree() throws Exception {
+        TreeNode treeNode = null;
+        String userType = BizContextHandler.getUserType();
+        if (UserTypeConstant.SUPER_ADMINISTRATOR.equals(BizContextHandler.getUserType())) {
+            treeNode = new TreeNode(BizContextHandler.getTenantId(), BizContextHandler.getTenantTitle(), true);
+        } else {
+            treeNode = new TreeNode(BizContextHandler.getDeptId(), BizContextHandler.getDeptTitle(), true);
+        }
+
+
+        List<TreeNode> list = new ArrayList<>();
+        List<TreeNode> deptChildren = new ArrayList<>();
+
+        if (UserTypeConstant.SUPER_ADMINISTRATOR.equals(BizContextHandler.getUserType())) {
+            deptChildren = findDeptChildren(BizContextHandler.getTenantId(), BizContextHandler.getTenantId());
+        } else {
+            deptChildren = findDeptChildren(BizContextHandler.getTenantId(), BizContextHandler.getDeptId());
+        }
+
+        treeNode.setChildren(deptChildren);
+        list.add(treeNode);
+
+        List<String> checked = new ArrayList<>();
+        checked.add(BizContextHandler.getTenantId());
+      //  checked.add(BizContextHandler.getDeptId());
+        return new LayTree(checked, list);
+    }
+
+
+    /***
+     * 递归, 查询部门树
+     *
+     * @author 王大宸
+     * @date 2024/12/24 15:26
+
+     * @return void
+     */
+    private List<TreeNode> findDeptChildren(String tenantId, String parentId) {
+        List<TreeNode> list = bizMapper.findDeptChildren(tenantId, parentId);
+        if (null == list || list.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<TreeNode> children = new ArrayList<>();
+        for (TreeNode treeNode : list) {
+            children = bizMapper.findDeptChildren(tenantId, treeNode.getId());
+            if (null == children || children.isEmpty()) {
+                continue;
+            }
+            treeNode.setChildren(children);
+            findDeptChildren(tenantId, treeNode.getId());
+        }
+        return list;
+    }
+
 
 }

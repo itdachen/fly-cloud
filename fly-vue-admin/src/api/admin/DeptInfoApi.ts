@@ -1,5 +1,6 @@
 import {HttpRequest} from '@/fly/http/rest/HttpRequest';
 import {DeptInfo, DeptInfoQuery} from '@/api/admin/model/DeptInfoModel';
+import http from "@/fly/http";
 
 
 /**
@@ -13,10 +14,17 @@ const DEPT_INFO_PATH = '/admin/dept/info';
  * @author 王大宸
  * @date 2024-12-22 22:30:09
  */
-class DeptInfoApi extends HttpRequest< DeptInfo, DeptInfoQuery, string > {
+class DeptInfoApi extends HttpRequest<DeptInfo, DeptInfoQuery, string> {
 
     constructor() {
         super(DEPT_INFO_PATH)
+    }
+
+    /**
+     * 获取部门树
+     */
+    findDeptTree() {
+        return http.get(DEPT_INFO_PATH + '/tree');
     }
 
 

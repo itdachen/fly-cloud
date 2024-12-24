@@ -5,8 +5,8 @@
     <div style="display: flex; flex-direction: row; margin-top: 20px;background-color: #FFF; ">
 
       <div style="width: 500px; padding: 20px">
-        <lay-tree :data="treeData"
-                  v-model:selectedKey="selectedKey"
+        <lay-tree :data="deptTreeData"
+                  v-model:selectedKey="deptTreeChecked"
                   :showLine="false"
                   @node-click="deptNodeClick"
                   style="width: 500px; ">
@@ -46,7 +46,8 @@
                      @change=" reloadDeptInfoDate ">
 
             <template v-slot:toolbar>
-              <lay-button size="sm" type="primary" class="fly-button fly-toolbar-addition" @click=" onTapDeptInfoAdd ">
+              <lay-button v-if="'0' != parentDeptId" size="sm" type="primary" class="fly-button fly-toolbar-addition"
+                          @click=" onTapDeptInfoAdd ">
                 <lay-icon class="layui-icon-addition"></lay-icon>
                 新增
               </lay-button>
@@ -120,7 +121,11 @@ const {
 
   /* 接口 */
   removeDeptInfoHandler,
-  deptInfoDataHandler
+  deptInfoDataHandler,
+  loadDeptTree,
+  deptTreeData,
+  deptTreeChecked,
+  parentDeptId
 } = useDeptInfoComposable();
 
 
@@ -141,6 +146,7 @@ const previousNextPage = ({current = 1, limit = 10}) => {
  */
 onMounted(() => {
   reloadDeptInfoDate(1, flyLayPage.limit);
+  loadDeptTree();
 })
 
 
@@ -184,11 +190,13 @@ const treeData = [
   },
 
 
-
 ]
 
 const deptNodeClick = (obj: any) => {
   console.log('deptNodeClick', obj)
+  queryDeptInfoParams.parentId = obj.id;
+  parentDeptId.value = obj.id;
+  reloadDeptInfoDate(1, flyLayPage.limit);
 }
 
 

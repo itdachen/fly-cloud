@@ -54,6 +54,15 @@
         <include refid="selectParamsWhere"></include>
     </select>
 
+    <select id="findDeptFuncList"  parameterType="java.lang.String" resultMap="deptFuncMap">
+        SELECT func_code, func_title
+        FROM fly_next_dept_func
+        WHERE tenant_id = #{tenantId}
+          AND valid_flag = 'Y'
+          AND delete_flag = 'N'
+        ORDER BY func_code ASC
+    </select>
+
     <!-- 查询导出数据 -->
     <select id="selectDeptFuncExpData" parameterType="java.lang.String" resultMap="deptFuncMap">
         <include refid="selectDeptFuncExpVO"/>

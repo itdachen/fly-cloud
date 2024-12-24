@@ -54,6 +54,15 @@
         <include refid="selectParamsWhere"></include>
     </select>
 
+    <select id="findDeptLevelList" parameterType="java.lang.String" resultMap="deptLevelMap">
+        SELECT level_code, level_title
+        FROM fly_next_dept_level
+        WHERE tenant_id = #{tenantId}
+          AND valid_flag = 'Y'
+          AND delete_flag = 'N'
+        ORDER BY level_code ASC
+    </select>
+
     <!-- 查询导出数据 -->
     <select id="selectDeptLevelExpData" parameterType="java.lang.String" resultMap="deptLevelMap">
         <include refid="selectDeptLevelExpVO"/>
