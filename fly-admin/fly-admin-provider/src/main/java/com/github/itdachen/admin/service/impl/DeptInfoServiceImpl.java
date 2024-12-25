@@ -2,10 +2,13 @@ package com.github.itdachen.admin.service.impl;
 
 import com.github.itdachen.framework.context.BizContextHandler;
 import com.github.itdachen.framework.context.constants.UserTypeConstant;
+import com.github.itdachen.framework.context.constants.YesOrNotConstant;
+import com.github.itdachen.framework.context.exception.BizException;
 import com.github.itdachen.framework.context.tree.lay.LayTree;
 import com.github.itdachen.framework.context.tree.lay.LayTreeNode;
 import com.github.itdachen.framework.context.tree.lay.TreeNode;
 import com.github.itdachen.framework.core.response.TableData;
+import com.github.itdachen.framework.webmvc.entity.EntityUtils;
 import com.github.itdachen.framework.webmvc.poi.WorkBookUtils;
 import com.github.itdachen.framework.webmvc.service.impl.BizServiceImpl;
 import com.github.pagehelper.Page;
@@ -71,6 +74,93 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         return new TableData<DeptInfoVO>(page.getTotal(), list);
     }
 
+    /***
+     * 新增
+     *
+     * @author 王大宸
+     * @date 2024/12/25 16:17
+     * @param deptInfoDTO deptInfoDTO
+     * @return com.github.itdachen.admin.sdk.vo.DeptInfoVO
+     */
+    @Override
+    public DeptInfoVO saveInfo(DeptInfoDTO deptInfoDTO) throws Exception {
+        DeptInfo deptInfo = new DeptInfo();
+        deptInfo.setTenantId(BizContextHandler.getTenantId());
+        deptInfo.setParentId(deptInfoDTO.getParentId());
+        deptInfo.setProvId(deptInfoDTO.getProvId());
+        deptInfo.setCityId(deptInfoDTO.getCityId());
+        deptInfo.setCountyId(deptInfoDTO.getCountyId());
+
+        List<DeptInfo> select = bizMapper.select(deptInfo);
+
+        if (null != select && !select.isEmpty()) {
+            String msg = "该部门职能已经存在！";
+            if (YesOrNotConstant.Y.equals(deptInfo.getDeptFlag())) {
+                msg += "处于删除状态！";
+            }
+            throw new BizException(msg);
+        }
+        deptInfo = bizConvert.toJavaObject(deptInfoDTO);
+        EntityUtils.setCreatAndUpdateInfo(deptInfo);
+        deptInfo.setDeleteFlag(YesOrNotConstant.N);
+        bizMapper.insertSelective(deptInfo);
+        return bizConvert.toJavaObjectVO(deptInfo);
+    }
+
+    /***
+     * 编辑
+     *
+     * @author 王大宸
+     * @date 2024/12/25 16:18
+     * @param deptInfoDTO deptInfoDTO
+     * @return com.github.itdachen.admin.sdk.vo.DeptInfoVO
+     */
+    @Override
+    public DeptInfoVO updateInfo(DeptInfoDTO deptInfoDTO) throws Exception {
+
+        DeptInfo deptInfo = new DeptInfo();
+        deptInfo.setTenantId(BizContextHandler.getTenantId());
+        deptInfo.setParentId(deptInfoDTO.getParentId());
+        deptInfo.setProvId(deptInfoDTO.getProvId());
+        deptInfo.setCityId(deptInfoDTO.getCityId());
+        deptInfo.setCountyId(deptInfoDTO.getCountyId());
+
+        List<DeptInfo> select = bizMapper.select(deptInfo);
+
+        if (null != select && !select.isEmpty()) {
+            deptInfo = select.get(0);
+            if (null != deptInfo && !deptInfoDTO.getId().equals(deptInfo.getId())) {
+                String msg = "该部门职能已经存在！";
+                if (YesOrNotConstant.Y.equals(deptInfo.getDeptFlag())) {
+                    msg += "处于删除状态！";
+                }
+                throw new BizException(msg);
+            }
+        }
+
+        deptInfo = bizConvert.toJavaObject(deptInfoDTO);
+        EntityUtils.setUpdatedInfo(deptInfo);
+        deptInfo.setDeleteFlag(YesOrNotConstant.N);
+        bizMapper.updateByPrimaryKeySelective(deptInfo);
+        return bizConvert.toJavaObjectVO(deptInfo);
+    }
+
+    /***
+     * 删除, 逻辑删除
+     *
+     * @author 王大宸
+     * @date 2024/12/25 16:15
+     * @param id id
+     * @return int
+     */
+    @Override
+    public int deleteByPrimaryKey(String id) throws Exception {
+        DeptInfo deptInfo = new DeptInfo();
+        deptInfo.setId(id);
+        deptInfo.setDeleteFlag(YesOrNotConstant.Y);
+        EntityUtils.setUpdatedInfo(deptInfo);
+        return bizMapper.updateByPrimaryKeySelective(deptInfo);
+    }
 
     /***
      * 导出
@@ -119,7 +209,7 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
 
         List<String> checked = new ArrayList<>();
         checked.add(BizContextHandler.getTenantId());
-      //  checked.add(BizContextHandler.getDeptId());
+        //  checked.add(BizContextHandler.getDeptId());
         return new LayTree(checked, list);
     }
 

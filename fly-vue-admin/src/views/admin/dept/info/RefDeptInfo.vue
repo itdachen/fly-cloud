@@ -176,6 +176,21 @@ function saveDeptInfoHandler() {
     /* 市州区县回显处理 */
     areaTitleHandler(model);
 
+    /* 部门层级 deptLevelList */
+    for (let i = 0; i < deptLevelList.value.length; i++) {
+      if (deptLevelList.value[i].levelCode === model.levelCode){
+        model.levelTitle = deptLevelList.value[i].levelTitle;
+      }
+    }
+
+    /* 部门职能 deptFuncList */
+    for (let i = 0; i < deptFuncList.value.length; i++) {
+      if (deptFuncList.value[i].funcCode === model.funcCode){
+        model.funcTitle = deptFuncList.value[i].funcTitle;
+      }
+    }
+
+
 
     /* 数据入库处理 */
     deptInfoDataHandler(model);
@@ -307,10 +322,6 @@ const cityChangeFilter = (id: string | undefined, t?: string) => {
 
 const funcCodeChangeFilter = (funcCode: string) => {
   console.log('funcCode', funcCode);
-  let provId = deptInfo.value.provId;
-  let cityId = deptInfo.value.cityId;
-  let countyId = deptInfo.value.countyId;
-  let levelCode = deptInfo.value.levelCode;
 
   areaTitleHandler(deptInfo.value);
 
@@ -330,12 +341,14 @@ const funcCodeChangeFilter = (funcCode: string) => {
     title = title + countyTitle;
   }
 
-  deptInfo.value.title = title;
-
-
   for (let i = 0; i < deptFuncList.value.length; i++) {
-
+    if (funcCode === deptFuncList.value[i].funcCode) {
+      title = title + deptFuncList.value[i].funcTitle;
+    }
   }
+
+  deptInfo.value.title = title;
+ // deptInfo.value.titleAs = title;
 
 }
 

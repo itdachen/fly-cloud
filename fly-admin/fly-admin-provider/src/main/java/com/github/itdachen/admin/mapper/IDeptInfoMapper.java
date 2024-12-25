@@ -28,6 +28,17 @@ public interface IDeptInfoMapper extends Mapper<DeptInfo> {
     List<DeptInfoVO> list(DeptInfoQuery params);
 
     /***
+     * 根据部门职能编码查询部门次那次
+     *
+     * @author 王大宸
+     * @date 2024/12/25 16:19
+     * @param tenantId tenantId
+     * @param funcCode funcCode
+     * @return com.github.itdachen.admin.sdk.vo.DeptInfoVO
+     */
+    DeptInfoVO findDeptInfoByFuncCode(String tenantId, String parentId, String funcCode);
+
+    /***
      * 根据id查询
      *
      * @author 王大宸

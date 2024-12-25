@@ -128,6 +128,7 @@ public class DeptFuncServiceImpl extends BizServiceImpl<IDeptFuncMapper, DeptFun
         DeptFunc deptFunc = new DeptFunc();
         deptFunc.setId(id);
         deptFunc.setDeleteFlag(YesOrNotConstant.Y);
+        EntityUtils.setUpdatedInfo(deptFunc);
         return bizMapper.updateByPrimaryKeySelective(deptFunc);
     }
 

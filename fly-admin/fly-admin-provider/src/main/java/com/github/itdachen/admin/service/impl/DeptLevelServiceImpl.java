@@ -115,6 +115,7 @@ public class DeptLevelServiceImpl extends BizServiceImpl<IDeptLevelMapper, DeptL
         DeptLevel deptLevel = new DeptLevel();
         deptLevel.setId(id);
         deptLevel.setDeleteFlag(YesOrNotConstant.Y);
+        EntityUtils.setUpdatedInfo(deptLevel);
         return bizMapper.updateByPrimaryKeySelective(deptLevel);
     }
 

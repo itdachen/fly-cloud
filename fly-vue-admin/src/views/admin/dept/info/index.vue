@@ -25,14 +25,14 @@
                 <lay-icon class="layui-icon-search"></lay-icon>
                 查询
               </lay-button>
-              <lay-button class="fly-button fly-button-reset" size="sm" @click=" resetQueryFormValue ">
-                <lay-icon class="layui-icon-refresh"></lay-icon>
-                重置
-              </lay-button>
-              <lay-button class="fly-button fly-button-exp" size="sm" @click="">
-                <lay-icon class="layui-icon-export"></lay-icon>
-                导出
-              </lay-button>
+<!--              <lay-button class="fly-button fly-button-reset" size="sm" @click=" resetQueryFormValue ">-->
+<!--                <lay-icon class="layui-icon-refresh"></lay-icon>-->
+<!--                重置-->
+<!--              </lay-button>-->
+<!--              <lay-button class="fly-button fly-button-exp" size="sm" @click="">-->
+<!--                <lay-icon class="layui-icon-export"></lay-icon>-->
+<!--                导出-->
+<!--              </lay-button>-->
             </lay-form-item>
           </lay-form>
 

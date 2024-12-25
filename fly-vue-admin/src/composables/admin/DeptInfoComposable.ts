@@ -125,6 +125,7 @@ export default function useDeptInfoComposable() {
             callback: () => {
                 deptInfoApi.remove(id).then((res) => {
                     reloadDeptInfoDate(1, flyLayPage.limit);
+                    loadDeptTree(); // 重新加载树信息
                     layer.msg(res.msg, {time: 1500, icon: 1});
                 })
             }

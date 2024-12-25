@@ -109,6 +109,14 @@
         <include refid="selectParamsWhere"></include>
     </select>
 
+    <select id="findDeptInfoByFuncCode" parameterType="java.lang.String"  resultMap="deptInfoMap">
+        <include refid="selectDeptInfoVO"/>
+        WHERE tenant_id = #{tenantId}
+        AND parent_id = #{parentId}
+        AND func_code = #{funcCode}
+        LIMIT 1
+    </select>
+
     <!-- 根据主键查询 -->
     <select id="selectDeptInfoVO" parameterType="java.lang.String" resultMap="deptInfoMap">
         <include refid="selectDeptInfoVO"/>
