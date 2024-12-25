@@ -90,6 +90,7 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         deptInfo.setProvId(deptInfoDTO.getProvId());
         deptInfo.setCityId(deptInfoDTO.getCityId());
         deptInfo.setCountyId(deptInfoDTO.getCountyId());
+        deptInfo.setFuncCode(deptInfoDTO.getFuncCode());
 
         List<DeptInfo> select = bizMapper.select(deptInfo);
 
@@ -120,6 +121,7 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
 
         DeptInfo deptInfo = new DeptInfo();
         deptInfo.setTenantId(BizContextHandler.getTenantId());
+        deptInfo.setFuncCode(deptInfoDTO.getFuncCode());
         deptInfo.setParentId(deptInfoDTO.getParentId());
         deptInfo.setProvId(deptInfoDTO.getProvId());
         deptInfo.setCityId(deptInfoDTO.getCityId());
