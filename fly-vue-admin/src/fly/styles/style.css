@@ -1,9 +1,9 @@
 
 .fly-button {
-    height: 33px !important;
-    line-height: 33px !important;
+    height: 30px !important;
+    line-height: 30px !important;
     width: auto;
-    border-radius: 3px;
+    border-radius: 3px !important;
     font-size: 15px !important;
     /*margin-top: 5px; font-weight: 400; //color: #ffffff; padding: 0 12px 0 10px; font-size: 16px; text-align: center; //transition: transform 0.3s ease; !* 平滑变化 *!*/
 }
@@ -26,6 +26,7 @@
 }
 
 .fly-toolbar-addition {
+    width: 80px !important;
     background-color: #1E9FFF !important;
     border-color: #31BDEC !important;
 }
@@ -103,10 +104,13 @@
 }
 
 .fly-container {
-    height: calc(100vh - 110px);
-    margin-top: 10px;
+    height: calc(100vh - 120px);
+    margin: 10px !important;
+    padding: 5px 10px !important;
     box-sizing: border-box;
     overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 5px !important;
 }
 
 
