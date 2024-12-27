@@ -17,7 +17,7 @@ import java.util.List;
 public interface IDeptInfoService extends IBizService<DeptInfoDTO, DeptInfoVO, DeptInfoQuery, String> {
 
 
-    LayTree findDeptTree() throws Exception;
+    LayTree findDeptTree(String deptFlag) throws Exception;
 
 
 }

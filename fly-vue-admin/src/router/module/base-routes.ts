@@ -263,6 +263,11 @@ export default [
         meta: { title: '部门层级', requireAuth: true },
       },
       {
+        path: '/admin/org',
+        component: () => import('../../views/admin/org/index.vue'),
+        meta: { title: '机构管理', requireAuth: true },
+      },
+      {
         path: '/admin/dept/info',
         component: () => import('../../views/admin/dept/info/index.vue'),
         meta: { title: '部门管理', requireAuth: true },

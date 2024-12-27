@@ -35,7 +35,7 @@ export default function useDeptInfoComposable() {
      */
     const loadTableDeptInfoData = (params: DeptInfoQuery) => {
         tableDeptInfoData.loading = true;
-        params.deptFlag = 'Y';
+        params.deptFlag = 'N'
         deptInfoApi.page(params).then(res => {
             tableDeptInfoData.total = res.data.total;
             tableDeptInfoData.rows = res.data.rows;
@@ -48,7 +48,7 @@ export default function useDeptInfoComposable() {
     const deptTreeChecked = ref();
 
     const loadDeptTree = () => {
-        deptInfoApi.findDeptTree('').then(res => {
+        deptInfoApi.findDeptTree('N').then(res => {
             deptTreeChecked.value = res.data.checked;
             deptTreeData.value = res.data.data;
             // if (0 < res.data.checked.length) {
@@ -66,7 +66,7 @@ export default function useDeptInfoComposable() {
     const reloadDeptInfoDate = (page: number = 1, limit: number = 10) => {
         queryDeptInfoParams.page = page;
         queryDeptInfoParams.limit = limit;
-        queryDeptInfoParams.deptFlag = 'Y';
+        queryDeptInfoParams.deptFlag = 'N';
         loadTableDeptInfoData(queryDeptInfoParams);
     };
 
@@ -101,7 +101,9 @@ export default function useDeptInfoComposable() {
      * @param data 保存的数据
      */
     const deptInfoDataHandler = (data: DeptInfo) => {
-        data.deptFlag = 'Y';
+        data.deptFlag = 'N';
+        data.funcCode = '00';
+        data.funcTitle = '机构';
         if (StringUtils.isEmpty(data.id)) {
             deptInfoApi.saveInfo(data).then((res) => {
                 reloadDeptInfoDate(1, flyLayPage.limit); // 表格重新加载数据

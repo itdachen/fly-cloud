@@ -287,6 +287,11 @@ const menus = [
         title: '部门层级',
       },
       {
+        id: '/admin/org',
+        icon: "layui-icon-user",
+        title: '机构管理',
+      },
+      {
         id: '/admin/dept/info',
         icon: "layui-icon-user",
         title: '部门管理',

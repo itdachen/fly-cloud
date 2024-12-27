@@ -21,6 +21,8 @@ export interface DeptInfoQuery extends BizQuery {
     parentId?: string,
     /** 部门名称 */
     title?: string,
+    /** 部门标志 */
+    deptFlag?: string,
 }
 
 
@@ -90,7 +92,8 @@ export default function useDeptInfoBuilder() {
         /** 上级ID */
         parentId: '',
         /** 部门名称 */
-        title: ''
+        title: '',
+        deptFlag: 'Y'
     });
 
     /**
@@ -155,7 +158,7 @@ export default function useDeptInfoBuilder() {
      */
     const deptInfoColumns = [
         {title: '部门名称', key: 'title', ellipsisTooltip: true, align: 'left'},
-       // {title: '部门简称', key: 'titleAs', ellipsisTooltip: true, align: 'center'},
+        // {title: '部门简称', key: 'titleAs', ellipsisTooltip: true, align: 'center'},
         // {title: '联系电话', key: 'telephone', ellipsisTooltip: true, align: 'center'},
         // {title: '电子邮箱', key: 'mailBox', ellipsisTooltip: true, align: 'center'},
         // {title: '传真', key: 'facsimile', ellipsisTooltip: true, align: 'center'},

@@ -197,7 +197,7 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
     }
 
     @Override
-    public LayTree findDeptTree() throws Exception {
+    public LayTree findDeptTree(String deptFlag) throws Exception {
         TreeNode treeNode = null;
         String userType = BizContextHandler.getUserType();
         if (UserTypeConstant.SUPER_ADMINISTRATOR.equals(BizContextHandler.getUserType())) {
@@ -211,9 +211,9 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         List<TreeNode> deptChildren = new ArrayList<>();
 
         if (UserTypeConstant.SUPER_ADMINISTRATOR.equals(BizContextHandler.getUserType())) {
-            deptChildren = findDeptChildren(BizContextHandler.getTenantId(), BizContextHandler.getTenantId());
+            deptChildren = findDeptChildren(BizContextHandler.getTenantId(), BizContextHandler.getTenantId(), deptFlag);
         } else {
-            deptChildren = findDeptChildren(BizContextHandler.getTenantId(), BizContextHandler.getDeptId());
+            deptChildren = findDeptChildren(BizContextHandler.getTenantId(), BizContextHandler.getDeptId(), deptFlag);
         }
 
         treeNode.setChildren(deptChildren);
@@ -234,65 +234,24 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
 
      * @return void
      */
-    private List<TreeNode> findDeptChildren(String tenantId, String parentId) {
-        List<TreeNode> list = bizMapper.findDeptChildren(tenantId, parentId);
+    private List<TreeNode> findDeptChildren(String tenantId, String parentId, String deptFlag) {
+        List<TreeNode> list = bizMapper.findDeptChildren(tenantId, parentId, deptFlag);
         if (null == list || list.isEmpty()) {
             return new ArrayList<>();
         }
 
         List<TreeNode> children = new ArrayList<>();
         for (TreeNode treeNode : list) {
-            children = bizMapper.findDeptChildren(tenantId, treeNode.getId());
+            children = bizMapper.findDeptChildren(tenantId, treeNode.getId(), deptFlag);
             if (null == children || children.isEmpty()) {
                 continue;
             }
             treeNode.setChildren(children);
-            findDeptChildren(tenantId, treeNode.getId());
+            findDeptChildren(tenantId, treeNode.getId(), deptFlag);
         }
         return list;
     }
 
 
-    /***
-     * 获取部门代码/部门ID
-     *
-     * @author 王大宸
-     * @date 2024/6/18 16:06
-     * @param deptInfoDTO deptInfoDTO
-     * @return java.lang.String
-     */
-    private String getDeptId(DeptInfoDTO deptInfoDTO) {
-        String deptId = "00";
-        // 部门ID组成
-        // 52 00 00 00 00 101 00
-        // 省级编码(两位) 市州编码(两位) 区县编码(两位) 乡镇编码(两位) 村级/街道编码(两位) 部门职能编码(三位) 备用(两位)
-        switch (deptInfoDTO.getLevelCode()) {
-            // 00000000 101 00
-            case DeptLevelConstants.ROOT_LEVEL:  // 总部
-                deptId = "0000000000" + deptInfoDTO.getFuncCode() + "00";
-                break;
-            case DeptLevelConstants.PROV_LEVEL: // 省级
-                // 5200000000 101 00
-                deptId = deptInfoDTO.getProvId() + "00000000" + deptInfoDTO.getFuncCode() + "00";
-                break;
-            case DeptLevelConstants.CITY_LEVEL: // 市/州级
-                // 5202 000000 101 0000
-                deptId = deptInfoDTO.getCityId() + "000000" + deptInfoDTO.getFuncCode() + " 00";
-                break;
-            case DeptLevelConstants.COUNT_LEVEL:  // 区/县级
-                // 520202000010100
-                deptId = deptInfoDTO.getCountyId() + "0000" + deptInfoDTO.getFuncCode() + "00";
-                break;
-            case DeptLevelConstants.STREET_LEVEL:  // 街道/乡镇级(暂时不用)
-                deptId = "00" + deptInfoDTO.getFuncCode() + "00";
-                break;
-            case DeptLevelConstants.VILLAGE_LEVEL:  // 社区/村(暂时不用)
-                deptId = deptInfoDTO.getFuncCode() + "00";
-                break;
-            default:
-                deptId = "1000000000" + deptInfoDTO.getFuncCode() + "00";
-        }
-        return deptId + BizContextHandler.getTenantId();
-    }
 
 }

@@ -85,6 +85,6 @@ public interface IDeptInfoMapper extends Mapper<DeptInfo> {
      * @param parentId parentId
      * @return java.util.List<com.github.itdachen.framework.context.tree.LayTreeNode.TreeNode>
      */
-    List<TreeNode> findDeptChildren(String tenantId, String parentId);
+    List<TreeNode> findDeptChildren(String tenantId, String parentId, String deptFlag);
 
 }

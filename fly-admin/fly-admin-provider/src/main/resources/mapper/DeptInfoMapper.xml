@@ -90,6 +90,30 @@
             <if test="null != title  and '' != title ">
                 AND title LIKE CONCAT(CONCAT('%',#{title}),'%')
             </if>
+            <if test="null != deptFlag  and '' != deptFlag ">
+                AND dept_flag = #{deptFlag}
+            </if>
+            <if test="null != thatLevel  and '' != thatLevel ">
+                AND that_level = #{thatLevel}
+            </if>
+            <if test="null != levelCode  and '' != levelCode ">
+                AND level_code = #{levelCode}
+            </if>
+            <if test="null != funcCode  and '' != funcCode ">
+                AND func_code = #{funcCode}
+            </if>
+            <if test="null != provId  and '' != provId ">
+                AND prov_id = #{provId}
+            </if>
+            <if test="null != cityId  and '' != cityId ">
+                AND city_id = #{cityId}
+            </if>
+            <if test="null != countyId  and '' != countyId ">
+                AND county_id = #{countyId}
+            </if>
+            <if test="null != validFlag  and '' != validFlag ">
+                AND valid_flag = #{validFlag}
+            </if>
             <if test="null != deleteFlag  and '' != deleteFlag ">
                 AND delete_flag = #{deleteFlag}
             </if>
@@ -289,10 +313,15 @@
             resultType="com.github.itdachen.framework.context.tree.lay.TreeNode">
         SELECT id, title
         FROM fly_next_dept_info
-        WHERE tenant_id = #{tenantId}
-          AND parent_id = #{parentId}
-          AND valid_flag = 'Y'
-          AND delete_flag = 'N'
+        <where>
+            tenant_id = #{tenantId}
+            AND parent_id = #{parentId}
+            AND valid_flag = 'Y'
+            AND delete_flag = 'N'
+            <if test="null != deptFlag  and '' != deptFlag ">
+                AND dept_flag = #{deptFlag}
+            </if>
+        </where>
         ORDER BY id ASC
     </select>
 

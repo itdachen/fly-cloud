@@ -39,8 +39,8 @@ public class DeptInfoController extends BizController<IDeptInfoService, DeptInfo
      */
     @GetMapping("/tree")
     @ResponseBody
-    public ServerResponse<LayTree> findDeptTree() throws Exception {
-        return ServerResponse.ok(bizService.findDeptTree());
+    public ServerResponse<LayTree> findDeptTree(String deptFlag) throws Exception {
+        return ServerResponse.ok(bizService.findDeptTree(deptFlag));
     }
 
 

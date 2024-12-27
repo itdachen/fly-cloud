@@ -16,7 +16,7 @@
       <div style="margin-left: 50px;border-left: #eee 1px solid;">
         <lay-card class="fly-search-card">
           <lay-form>
-            <lay-form-item label="部门名称" prop="title" mode="inline">
+            <lay-form-item label="机构名称" prop="title" mode="inline">
               <lay-input v-model="queryDeptInfoParams.title"></lay-input>
             </lay-form-item>
             <lay-form-item mode="inline">
@@ -98,9 +98,9 @@
 
 <script setup lang="ts" name="deptInfoComponent">
 import {ref, reactive, onMounted} from 'vue';
-import RefDeptInfo from './RefDeptInfo.vue';
+import RefDeptInfo from './RefDeptOrg.vue';
 
-import useDeptInfoComposable from '@/composables/admin/DeptInfoComposable';
+import useDeptInfoComposable from '@/composables/admin/DeptOrgComposable';
 
 const {
   refDeptInfoComponent,
