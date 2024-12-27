@@ -94,7 +94,7 @@
                 AND delete_flag = #{deleteFlag}
             </if>
         </where>
-        ORDER BY id DESC
+        ORDER BY id ASC
     </sql>
 
     <!-- 集合查询 -->
@@ -293,6 +293,7 @@
           AND parent_id = #{parentId}
           AND valid_flag = 'Y'
           AND delete_flag = 'N'
+        ORDER BY id ASC
     </select>
 
 

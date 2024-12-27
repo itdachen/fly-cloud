@@ -1,6 +1,8 @@
 package com.github.itdachen.admin.service.impl;
 
 import com.github.itdachen.framework.context.BizContextHandler;
+import com.github.itdachen.framework.context.constants.DeptLevelConstants;
+import com.github.itdachen.framework.context.constants.DeptLevelFormatConstants;
 import com.github.itdachen.framework.context.constants.UserTypeConstant;
 import com.github.itdachen.framework.context.constants.YesOrNotConstant;
 import com.github.itdachen.framework.context.exception.BizException;
@@ -8,6 +10,7 @@ import com.github.itdachen.framework.context.tree.lay.LayTree;
 import com.github.itdachen.framework.context.tree.lay.LayTreeNode;
 import com.github.itdachen.framework.context.tree.lay.TreeNode;
 import com.github.itdachen.framework.core.response.TableData;
+import com.github.itdachen.framework.core.utils.StringUtils;
 import com.github.itdachen.framework.webmvc.entity.EntityUtils;
 import com.github.itdachen.framework.webmvc.poi.WorkBookUtils;
 import com.github.itdachen.framework.webmvc.service.impl.BizServiceImpl;
@@ -70,6 +73,7 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
     @Override
     public TableData<DeptInfoVO> page(DeptInfoQuery params) throws Exception {
         Page<DeptInfoVO> page = PageHelper.startPage(params.getPage(), params.getLimit());
+        params.setDeleteFlag(YesOrNotConstant.N);
         List<DeptInfoVO> list = bizMapper.list(params);
         return new TableData<DeptInfoVO>(page.getTotal(), list);
     }
@@ -84,26 +88,38 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
      */
     @Override
     public DeptInfoVO saveInfo(DeptInfoDTO deptInfoDTO) throws Exception {
-        DeptInfo deptInfo = new DeptInfo();
-        deptInfo.setTenantId(BizContextHandler.getTenantId());
-        deptInfo.setParentId(deptInfoDTO.getParentId());
-        deptInfo.setProvId(deptInfoDTO.getProvId());
-        deptInfo.setCityId(deptInfoDTO.getCityId());
-        deptInfo.setCountyId(deptInfoDTO.getCountyId());
-        deptInfo.setFuncCode(deptInfoDTO.getFuncCode());
+        String areaCode = "";
+        if (DeptLevelConstants.PROV_LEVEL.equals(deptInfoDTO.getLevelCode())) {
+            areaCode = deptInfoDTO.getProvId();
+        }
+        if (DeptLevelConstants.CITY_LEVEL.equals(deptInfoDTO.getLevelCode())) {
+            areaCode = deptInfoDTO.getCityId();
+        }
+        if (DeptLevelConstants.COUNT_LEVEL.equals(deptInfoDTO.getLevelCode())) {
+            areaCode = deptInfoDTO.getCountyId();
+        }
+        String deptId = DeptLevelFormatConstants.obtainDeptId(areaCode, deptInfoDTO.getLevelCode(), deptInfoDTO.getFuncCode());
 
-        List<DeptInfo> select = bizMapper.select(deptInfo);
-
-        if (null != select && !select.isEmpty()) {
+        DeptInfoVO deptInfoVO = bizMapper.selectDeptInfoVO(deptId);
+        if (null != deptInfoVO) {
             String msg = "该部门职能已经存在！";
-            if (YesOrNotConstant.Y.equals(deptInfo.getDeptFlag())) {
+            if (YesOrNotConstant.Y.equals(deptInfoVO.getDeptFlag())) {
                 msg += "处于删除状态！";
+            }
+            if (YesOrNotConstant.N.equals(deptInfoVO.getValidFlag())) {
+                msg += "处于无效状态！";
             }
             throw new BizException(msg);
         }
-        deptInfo = bizConvert.toJavaObject(deptInfoDTO);
-        EntityUtils.setCreatAndUpdateInfo(deptInfo);
+
+        DeptInfo deptInfo = bizConvert.toJavaObject(deptInfoDTO);
         deptInfo.setDeleteFlag(YesOrNotConstant.N);
+        EntityUtils.setCreatAndUpdateInfo(deptInfo);
+        deptInfo.setId(deptId);
+        if (StringUtils.isEmpty(deptInfo.getTitleAs())) {
+            deptInfo.setTitleAs(deptInfo.getTitle());
+        }
+
         bizMapper.insertSelective(deptInfo);
         return bizConvert.toJavaObjectVO(deptInfo);
     }
@@ -118,31 +134,24 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
      */
     @Override
     public DeptInfoVO updateInfo(DeptInfoDTO deptInfoDTO) throws Exception {
-
-        DeptInfo deptInfo = new DeptInfo();
-        deptInfo.setTenantId(BizContextHandler.getTenantId());
-        deptInfo.setFuncCode(deptInfoDTO.getFuncCode());
-        deptInfo.setParentId(deptInfoDTO.getParentId());
-        deptInfo.setProvId(deptInfoDTO.getProvId());
-        deptInfo.setCityId(deptInfoDTO.getCityId());
-        deptInfo.setCountyId(deptInfoDTO.getCountyId());
-
-        List<DeptInfo> select = bizMapper.select(deptInfo);
-
-        if (null != select && !select.isEmpty()) {
-            deptInfo = select.get(0);
-            if (null != deptInfo && !deptInfoDTO.getId().equals(deptInfo.getId())) {
-                String msg = "该部门职能已经存在！";
-                if (YesOrNotConstant.Y.equals(deptInfo.getDeptFlag())) {
-                    msg += "处于删除状态！";
-                }
-                throw new BizException(msg);
+        DeptInfoVO deptInfoVO = bizMapper.selectDeptInfoVO(deptInfoDTO.getId());
+        if (null != deptInfoVO && !deptInfoVO.getId().equals(deptInfoDTO.getId())) {
+            String msg = "该部门职能已经存在！";
+            if (YesOrNotConstant.Y.equals(deptInfoVO.getDeptFlag())) {
+                msg += "处于删除状态！";
             }
+            if (YesOrNotConstant.N.equals(deptInfoVO.getValidFlag())) {
+                msg += "处于无效状态！";
+            }
+            throw new BizException(msg);
         }
 
-        deptInfo = bizConvert.toJavaObject(deptInfoDTO);
-        EntityUtils.setUpdatedInfo(deptInfo);
+        DeptInfo deptInfo = bizConvert.toJavaObject(deptInfoDTO);
         deptInfo.setDeleteFlag(YesOrNotConstant.N);
+        EntityUtils.setUpdatedInfo(deptInfo);
+        if (StringUtils.isEmpty(deptInfo.getTitleAs())) {
+            deptInfo.setTitleAs(deptInfo.getTitle());
+        }
         bizMapper.updateByPrimaryKeySelective(deptInfo);
         return bizConvert.toJavaObjectVO(deptInfo);
     }
@@ -160,6 +169,7 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         DeptInfo deptInfo = new DeptInfo();
         deptInfo.setId(id);
         deptInfo.setDeleteFlag(YesOrNotConstant.Y);
+        deptInfo.setValidFlag(YesOrNotConstant.N);
         EntityUtils.setUpdatedInfo(deptInfo);
         return bizMapper.updateByPrimaryKeySelective(deptInfo);
     }
@@ -242,5 +252,47 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         return list;
     }
 
+
+    /***
+     * 获取部门代码/部门ID
+     *
+     * @author 王大宸
+     * @date 2024/6/18 16:06
+     * @param deptInfoDTO deptInfoDTO
+     * @return java.lang.String
+     */
+    private String getDeptId(DeptInfoDTO deptInfoDTO) {
+        String deptId = "00";
+        // 部门ID组成
+        // 52 00 00 00 00 101 00
+        // 省级编码(两位) 市州编码(两位) 区县编码(两位) 乡镇编码(两位) 村级/街道编码(两位) 部门职能编码(三位) 备用(两位)
+        switch (deptInfoDTO.getLevelCode()) {
+            // 00000000 101 00
+            case DeptLevelConstants.ROOT_LEVEL:  // 总部
+                deptId = "0000000000" + deptInfoDTO.getFuncCode() + "00";
+                break;
+            case DeptLevelConstants.PROV_LEVEL: // 省级
+                // 5200000000 101 00
+                deptId = deptInfoDTO.getProvId() + "00000000" + deptInfoDTO.getFuncCode() + "00";
+                break;
+            case DeptLevelConstants.CITY_LEVEL: // 市/州级
+                // 5202 000000 101 0000
+                deptId = deptInfoDTO.getCityId() + "000000" + deptInfoDTO.getFuncCode() + " 00";
+                break;
+            case DeptLevelConstants.COUNT_LEVEL:  // 区/县级
+                // 520202000010100
+                deptId = deptInfoDTO.getCountyId() + "0000" + deptInfoDTO.getFuncCode() + "00";
+                break;
+            case DeptLevelConstants.STREET_LEVEL:  // 街道/乡镇级(暂时不用)
+                deptId = "00" + deptInfoDTO.getFuncCode() + "00";
+                break;
+            case DeptLevelConstants.VILLAGE_LEVEL:  // 社区/村(暂时不用)
+                deptId = deptInfoDTO.getFuncCode() + "00";
+                break;
+            default:
+                deptId = "1000000000" + deptInfoDTO.getFuncCode() + "00";
+        }
+        return deptId + BizContextHandler.getTenantId();
+    }
 
 }

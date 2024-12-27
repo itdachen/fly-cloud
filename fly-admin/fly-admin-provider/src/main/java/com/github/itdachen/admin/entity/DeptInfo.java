@@ -23,7 +23,7 @@ public class DeptInfo implements Serializable {
 
 
     /**
-     * 主键唯一标识
+     * 主键唯一标识/部门ID
      */
     @Id
     @Column(name = "id")
