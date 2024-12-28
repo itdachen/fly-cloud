@@ -272,6 +272,16 @@ export default [
         component: () => import('../../views/admin/dept/info/index.vue'),
         meta: { title: '部门管理', requireAuth: true },
       },
+      {
+        path: '/admin/clazz/func',
+        component: () => import('../../views/admin/clazz/func/index.vue'),
+        meta: { title: '岗位职能', requireAuth: true },
+      },
+      {
+        path: '/admin/clazz/info',
+        component: () => import('../../views/admin/clazz/info/index.vue'),
+        meta: { title: '岗位管理', requireAuth: true },
+      },
     ]
   },
 

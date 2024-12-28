@@ -21,7 +21,7 @@ class DeptLevelApi extends HttpRequest<DeptLevel, DeptLevelQuery, string> {
         super(DEPT_LEVEL_PATH)
     }
 
-    findList(): Promise<ServerResponse<DeptLevel>> {
+    findList(): Promise<ServerResponse<DeptLevel[]>> {
         return http.get(DEPT_LEVEL_PATH + '/list');
     }
 

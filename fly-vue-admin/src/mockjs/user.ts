@@ -296,6 +296,16 @@ const menus = [
         icon: "layui-icon-user",
         title: '部门管理',
       },
+      {
+        id: '/admin/clazz/func',
+        icon: "layui-icon-user",
+        title: '岗位职能',
+      },
+      {
+        id: '/admin/clazz/info',
+        icon: "layui-icon-user",
+        title: '岗位管理',
+      },
     ]
   },
 ]
