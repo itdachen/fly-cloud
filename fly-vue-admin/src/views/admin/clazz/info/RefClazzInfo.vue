@@ -7,23 +7,38 @@
 
     <div style="padding: 20px">
       <lay-form :model="clazzInfo" ref="layClazzInfoForm">
-        <lay-form-item label="岗位层级" prop="levelCode" :required="layerRef.required">
-          <lay-radio v-model="clazzInfo.levelCode"
+
+        <!--        <lay-form-item label="部门等级代码" prop="deptLevelCode"  :required="layerRef.required" mode="inline">-->
+        <!--          <lay-radio v-model="clazzInfo.deptLevelCode" name="action" value="Y" label="有效" :disabled="layerRef.disabled"></lay-radio>-->
+        <!--          <lay-radio v-model="clazzInfo.deptLevelCode" name="action" value="N" label="无效" :disabled="layerRef.disabled"></lay-radio>-->
+        <!--        </lay-form-item>-->
+
+        <!--        <lay-form-item label="部门职能代码" prop="deptFuncCode"  :required="layerRef.required" mode="inline">-->
+        <!--          <lay-select v-model="clazzInfo.deptFuncCode">-->
+        <!--            <lay-select-option value="Y" label="有效" :disabled="layerRef.disabled"></lay-select-option>-->
+        <!--            <lay-select-option value="N" label="无效" :disabled="layerRef.disabled"></lay-select-option>-->
+        <!--          </lay-select>-->
+        <!--        </lay-form-item>-->
+
+
+        <lay-form-item label="岗位层级" prop="deptLevelCode" :required="layerRef.required">
+          <lay-radio v-model="clazzInfo.deptLevelCode"
                      v-for="item in deptLevelList"
                      :value="item.levelCode" :label="item.levelTitle"
-                     name="levelCode" :disabled="layerRef.disabled"></lay-radio>
+                     name="deptLevelCode" :disabled="layerRef.disabled"></lay-radio>
         </lay-form-item>
 
-        <lay-form-item label="部门职能" prop="deptCode" mode="inline" :required="layerRef.required">
-          <lay-select v-model="clazzInfo.deptCode" :disabled="layerRef.disabled">
+        <lay-form-item label="部门职能" prop="deptFuncCode" mode="inline" :required="layerRef.required">
+          <lay-select v-model="clazzInfo.deptFuncCode" :disabled="layerRef.disabled">
             <lay-select-option v-for="item in deptFuncList" :key="item.funcCode" :value="item.funcCode">
               {{ item.funcTitle }}
             </lay-select-option>
           </lay-select>
         </lay-form-item>
 
-        <lay-form-item label="岗位职能" prop="funcCode" mode="inline" :required="layerRef.required">
-          <lay-select v-model="clazzInfo.funcCode" @change="clazzTitleHandler(clazzInfo)" :disabled="layerRef.disabled">
+        <lay-form-item label="岗位职能" prop="clazzFuncCode" mode="inline" :required="layerRef.required">
+          <lay-select v-model="clazzInfo.clazzFuncCode" @change="clazzTitleHandler(clazzInfo)"
+                      :disabled="layerRef.disabled">
             <lay-select-option v-for="item in clazzFuncList" :key="item.funcCode" :value="item.funcCode">
               {{ item.funcTitle }}
             </lay-select-option>
@@ -130,9 +145,7 @@ function saveClazzInfoHandler() {
 const clazzTitleHandler = (model: ClazzInfo) => {
   selectDeptHandler(model);
   console.log('clazzTitleHandler', model)
-  let clazzTitle = model.deptTitle + '-' + model.levelTitle + '-' + model.funcTitle;
-
-  model.clazzTitle = clazzTitle;
+  model.clazzTitle = model.deptFuncTitle + '-' + model.deptLevelTitle + '-' + model.clazzFuncTitle;
 
 
 }
@@ -143,26 +156,31 @@ const clazzTitleHandler = (model: ClazzInfo) => {
  * @param model
  */
 const selectDeptHandler = (model: ClazzInfo) => {
-  for (let i = 0; i < deptLevelList.value.length; i++) {
-    if (model.levelCode === deptLevelList.value[i].levelCode) {
-      model.levelTitle = deptLevelList.value[i].levelTitle;
-      break;
-    }
-  }
+  console.log('selectDeptHandler', model)
 
-  for (let i = 0; i < clazzFuncList.value.length; i++) {
-    if (model.funcCode === clazzFuncList.value[i].funcCode) {
-      model.funcTitle = clazzFuncList.value[i].funcTitle;
-      break;
-    }
-  }
-
+  /* 部门职能 */
   for (let i = 0; i < deptFuncList.value.length; i++) {
-    if (model.deptCode === deptFuncList.value[i].deptCode) {
-      model.deptTitle = deptFuncList.value[i].deptTitle;
-      break;
+    if (model.deptFuncCode === deptFuncList.value[i].funcCode) {
+      model.deptFuncTitle = deptFuncList.value[i].funcTitle;
     }
   }
+
+  /* 部门层级 */
+  let levelList = deptLevelList.value
+  for (let i = 0; i < levelList.length; i++) {
+    if (model.deptLevelCode === levelList[i].levelCode) {
+      model.deptLevelTitle = levelList[i].levelTitle;
+    }
+  }
+
+  /* 岗位职能 */
+  for (let i = 0; i < clazzFuncList.value.length; i++) {
+    if (model.clazzFuncCode === clazzFuncList.value[i].funcCode) {
+      console.log(clazzFuncList.value[i])
+      model.clazzFuncTitle = clazzFuncList.value[i].funcTitle;
+    }
+  }
+
 }
 
 //显示弹框
@@ -172,13 +190,17 @@ const open = (type: FormTypeEnum, row?: ClazzInfo) => {
     clazzInfo.value = JSON.parse(JSON.stringify(row))
   } else {
     clazzInfo.value = {
-      id: '',  // 主键唯一标识
       clazzCode: '',  // 岗位代码
       clazzTitle: '',  // 岗位名称, 例如: 信息中心-总部-主管领导岗
-      levelCode: '00',  // 岗位等级代码
-      levelTitle: '',  // 岗位等级名称
-      funcCode: '',  // 岗位职能: 主管领导岗, 业务岗等
-      funcTitle: '',  // 岗位职能名称: 主管领导岗, 业务岗等
+      deptLevelCode: '00',  // 部门等级代码
+      deptLevelTitle: '总部',  // 部门等级名称
+      deptFuncCode: '',  // 部门职能代码
+      deptFuncTitle: '',  // 部门职能名称
+      clazzFuncCode: '',  // 岗位职能: 主管领导岗, 业务岗等
+      clazzFuncTitle: '',  // 岗位职能名称: 主管领导岗, 业务岗等
+      deptFlag: '',  // 部门专属岗: Y-是;N-否(暂时不用,备用)
+      deptCode: '',  // 部门代码(暂时不用,备用)
+      deptTitle: '',  // 部门名称(暂时不用,备用)
       validFlag: 'Y',  // 有效标志: Y-是;N-否
       remarks: ''  // 备注
     }

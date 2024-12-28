@@ -79,13 +79,12 @@ public class ClazzInfoServiceImpl extends BizServiceImpl<IClazzInfoMapper, Clazz
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ClazzInfoVO saveInfo(ClazzInfoDTO clazzInfoDTO) throws Exception {
-        ClazzInfoVO clazzInfoVO = bizMapper.findClazzInfoVO(BizContextHandler.getTenantId(), clazzInfoDTO.getClazzCode());
+        // 岗位代码生成方式: 1 + 部门职能代码 + 部门层级代码 + 岗位职能代码
+        String clazzCode = "1" + clazzInfoDTO.getDeptFuncCode() + clazzInfoDTO.getDeptLevelCode() + clazzInfoDTO.getClazzFuncCode();
+        ClazzInfoVO clazzInfoVO = bizMapper.findClazzInfoVO(BizContextHandler.getTenantId(), clazzCode);
         if (null != clazzInfoVO) {
             throw new BizException("该岗位已经存在！");
         }
-
-        String clazzCode = clazzInfoDTO.getDeptCode() + clazzInfoDTO.getLevelCode() + clazzInfoDTO.getFuncCode();
-
         ClazzInfo clazzInfo = bizConvert.toJavaObject(clazzInfoDTO);
         clazzInfo.setClazzCode(clazzCode);
         clazzInfo.setDeleteFlag(YesOrNotConstant.N);
@@ -105,7 +104,8 @@ public class ClazzInfoServiceImpl extends BizServiceImpl<IClazzInfoMapper, Clazz
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ClazzInfoVO updateInfo(ClazzInfoDTO clazzInfoDTO) throws Exception {
-        ClazzInfoVO clazzInfoVO = bizMapper.findClazzInfoVO(BizContextHandler.getTenantId(), clazzInfoDTO.getClazzCode());
+        String clazzCode = "1" + clazzInfoDTO.getDeptFuncCode() + clazzInfoDTO.getDeptLevelCode() + clazzInfoDTO.getClazzFuncCode();
+        ClazzInfoVO clazzInfoVO = bizMapper.findClazzInfoVO(BizContextHandler.getTenantId(), clazzCode);
         if (null != clazzInfoVO && !clazzInfoVO.getId().equals(clazzInfoDTO.getId())) {
             throw new BizException("该岗位已经存在！");
         }

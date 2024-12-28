@@ -56,6 +56,7 @@ public class ClazzFuncServiceImpl extends BizServiceImpl<IClazzFuncMapper, Clazz
     @Override
     public TableData<ClazzFuncVO> page(ClazzFuncQuery params) throws Exception {
         params.setDeleteFlag(YesOrNotConstant.N);
+        params.setTenantId(BizContextHandler.getTenantId());
         Page<ClazzFuncVO> page = PageHelper.startPage(params.getPage(), params.getLimit());
         List<ClazzFuncVO> list = bizMapper.list(params);
         return new TableData<ClazzFuncVO>(page.getTotal(), list);

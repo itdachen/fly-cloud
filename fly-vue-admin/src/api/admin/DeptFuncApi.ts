@@ -21,7 +21,7 @@ class DeptFuncApi extends HttpRequest<DeptFunc, DeptFuncQuery, string> {
         super(DEPT_FUNC_PATH)
     }
 
-    findList(): Promise<ServerResponse<DeptFunc>> {
+    findList(): Promise<ServerResponse<DeptFunc[]>> {
         return http.get(DEPT_FUNC_PATH + '/list');
     }
 

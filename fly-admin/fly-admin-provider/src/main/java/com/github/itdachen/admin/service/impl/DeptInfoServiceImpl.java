@@ -72,8 +72,9 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
      */
     @Override
     public TableData<DeptInfoVO> page(DeptInfoQuery params) throws Exception {
-        Page<DeptInfoVO> page = PageHelper.startPage(params.getPage(), params.getLimit());
         params.setDeleteFlag(YesOrNotConstant.N);
+        params.setTenantId(BizContextHandler.getTenantId());
+        Page<DeptInfoVO> page = PageHelper.startPage(params.getPage(), params.getLimit());
         List<DeptInfoVO> list = bizMapper.list(params);
         return new TableData<DeptInfoVO>(page.getTotal(), list);
     }

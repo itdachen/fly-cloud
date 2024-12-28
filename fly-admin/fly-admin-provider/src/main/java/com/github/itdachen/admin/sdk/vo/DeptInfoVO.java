@@ -3,17 +3,15 @@ package com.github.itdachen.admin.sdk.vo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-
 import java.io.Serializable;
 
-
 /**
- * 部门信息 VO
+ * DeptInfoVO
  *
  * @author 王大宸
- * @date 2024-12-22 22:30:09
+ * @date 2024/12/28 20:55
  */
-public class DeptInfoVO implements Serializable {
+public class DeptInfoVO  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -321,6 +319,7 @@ public class DeptInfoVO implements Serializable {
         return validFlag;
     }
 
+
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
@@ -328,7 +327,6 @@ public class DeptInfoVO implements Serializable {
     public String getRemarks() {
         return remarks;
     }
-
 
     @Override
     public String toString() {

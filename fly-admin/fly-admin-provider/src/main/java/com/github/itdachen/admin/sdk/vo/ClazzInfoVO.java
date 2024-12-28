@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 岗位信息 VO
  *
  * @author 王大宸
- * @date 2024-12-28 18:40:48
+ * @date 2024-12-28 20:42:52
  */
 public class ClazzInfoVO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -37,6 +37,36 @@ public class ClazzInfoVO implements Serializable {
     private String clazzTitle;
 
     /**
+     * 部门等级代码
+     */
+    private String deptLevelCode;
+
+    /**
+     * 部门等级名称
+     */
+    private String deptLevelTitle;
+
+    /**
+     * 部门职能代码
+     */
+    private String deptFuncCode;
+
+    /**
+     * 部门职能名称
+     */
+    private String deptFuncTitle;
+
+    /**
+     * 岗位职能: 主管领导岗, 业务岗等
+     */
+    private String clazzFuncCode;
+
+    /**
+     * 岗位职能名称: 主管领导岗, 业务岗等
+     */
+    private String clazzFuncTitle;
+
+    /**
      * 部门专属岗: Y-是;N-否(暂时不用,备用)
      */
     private String deptFlag;
@@ -50,26 +80,6 @@ public class ClazzInfoVO implements Serializable {
      * 部门名称(暂时不用,备用)
      */
     private String deptTitle;
-
-    /**
-     * 岗位等级代码
-     */
-    private String levelCode;
-
-    /**
-     * 岗位等级名称
-     */
-    private String levelTitle;
-
-    /**
-     * 岗位职能: 主管领导岗, 业务岗等
-     */
-    private String funcCode;
-
-    /**
-     * 岗位职能名称: 主管领导岗, 业务岗等
-     */
-    private String funcTitle;
 
     /**
      * 有效标志: Y-是;N-否
@@ -114,6 +124,54 @@ public class ClazzInfoVO implements Serializable {
         return clazzTitle;
     }
 
+    public void setDeptLevelCode(String deptLevelCode) {
+        this.deptLevelCode = deptLevelCode;
+    }
+
+    public String getDeptLevelCode() {
+        return deptLevelCode;
+    }
+
+    public void setDeptLevelTitle(String deptLevelTitle) {
+        this.deptLevelTitle = deptLevelTitle;
+    }
+
+    public String getDeptLevelTitle() {
+        return deptLevelTitle;
+    }
+
+    public void setDeptFuncCode(String deptFuncCode) {
+        this.deptFuncCode = deptFuncCode;
+    }
+
+    public String getDeptFuncCode() {
+        return deptFuncCode;
+    }
+
+    public void setDeptFuncTitle(String deptFuncTitle) {
+        this.deptFuncTitle = deptFuncTitle;
+    }
+
+    public String getDeptFuncTitle() {
+        return deptFuncTitle;
+    }
+
+    public void setClazzFuncCode(String clazzFuncCode) {
+        this.clazzFuncCode = clazzFuncCode;
+    }
+
+    public String getClazzFuncCode() {
+        return clazzFuncCode;
+    }
+
+    public void setClazzFuncTitle(String clazzFuncTitle) {
+        this.clazzFuncTitle = clazzFuncTitle;
+    }
+
+    public String getClazzFuncTitle() {
+        return clazzFuncTitle;
+    }
+
     public void setDeptFlag(String deptFlag) {
         this.deptFlag = deptFlag;
     }
@@ -136,38 +194,6 @@ public class ClazzInfoVO implements Serializable {
 
     public String getDeptTitle() {
         return deptTitle;
-    }
-
-    public void setLevelCode(String levelCode) {
-        this.levelCode = levelCode;
-    }
-
-    public String getLevelCode() {
-        return levelCode;
-    }
-
-    public void setLevelTitle(String levelTitle) {
-        this.levelTitle = levelTitle;
-    }
-
-    public String getLevelTitle() {
-        return levelTitle;
-    }
-
-    public void setFuncCode(String funcCode) {
-        this.funcCode = funcCode;
-    }
-
-    public String getFuncCode() {
-        return funcCode;
-    }
-
-    public void setFuncTitle(String funcTitle) {
-        this.funcTitle = funcTitle;
-    }
-
-    public String getFuncTitle() {
-        return funcTitle;
     }
 
     public void setValidFlag(String validFlag) {
@@ -194,13 +220,15 @@ public class ClazzInfoVO implements Serializable {
                 .append("tenantId", getTenantId())
                 .append("clazzCode", getClazzCode())
                 .append("clazzTitle", getClazzTitle())
+                .append("deptLevelCode", getDeptLevelCode())
+                .append("deptLevelTitle", getDeptLevelTitle())
+                .append("deptFuncCode", getDeptFuncCode())
+                .append("deptFuncTitle", getDeptFuncTitle())
+                .append("clazzFuncCode", getClazzFuncCode())
+                .append("clazzFuncTitle", getClazzFuncTitle())
                 .append("deptFlag", getDeptFlag())
                 .append("deptCode", getDeptCode())
                 .append("deptTitle", getDeptTitle())
-                .append("levelCode", getLevelCode())
-                .append("levelTitle", getLevelTitle())
-                .append("funcCode", getFuncCode())
-                .append("funcTitle", getFuncTitle())
                 .append("validFlag", getValidFlag())
                 .append("remarks", getRemarks())
                 .toString();

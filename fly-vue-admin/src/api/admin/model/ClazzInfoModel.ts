@@ -17,18 +17,14 @@ import {TableData} from "axios";
  * @date 2024-12-28 18:40:48
  */
 export interface ClazzInfoQuery extends BizQuery {
-    /** 岗位代码 */
-    clazzCode?: string,
     /** 岗位名称, 例如: 信息中心-总部-主管领导岗 */
     clazzTitle?: string,
-    /** 部门专属岗: Y-是;N-否(暂时不用,备用) */
-    deptFlag?: string,
-    /** 部门代码(暂时不用,备用) */
-    deptCode?: string,
-    /** 岗位等级代码 */
-    levelCode?: string,
+    /** 部门等级代码 */
+    deptLevelCode?: string,
+    /** 部门职能代码 */
+    deptFuncCode?: string,
     /** 岗位职能: 主管领导岗, 业务岗等 */
-    funcCode?: string,
+    clazzFuncCode?: string,
     /** 有效标志: Y-是;N-否 */
     validFlag?: string,
 }
@@ -47,20 +43,24 @@ export interface ClazzInfo {
     clazzCode?: string,
     /** 岗位名称, 例如: 信息中心-总部-主管领导岗 */
     clazzTitle?: string,
+    /** 部门等级代码 */
+    deptLevelCode?: string,
+    /** 部门等级名称 */
+    deptLevelTitle?: string,
+    /** 部门职能代码 */
+    deptFuncCode?: string,
+    /** 部门职能名称 */
+    deptFuncTitle?: string,
+    /** 岗位职能: 主管领导岗, 业务岗等 */
+    clazzFuncCode?: string,
+    /** 岗位职能名称: 主管领导岗, 业务岗等 */
+    clazzFuncTitle?: string,
     /** 部门专属岗: Y-是;N-否(暂时不用,备用) */
     deptFlag?: string,
     /** 部门代码(暂时不用,备用) */
     deptCode?: string,
     /** 部门名称(暂时不用,备用) */
     deptTitle?: string,
-    /** 岗位等级代码 */
-    levelCode?: string,
-    /** 岗位等级名称 */
-    levelTitle?: string,
-    /** 岗位职能: 主管领导岗, 业务岗等 */
-    funcCode?: string,
-    /** 岗位职能名称: 主管领导岗, 业务岗等 */
-    funcTitle?: string,
     /** 有效标志: Y-是;N-否 */
     validFlag?: string,
     /** 备注 */
@@ -79,18 +79,14 @@ export default function useClazzInfoBuilder() {
     const queryClazzInfoParams = reactive<ClazzInfoQuery>({
         page: 1,
         limit: 10,
-        /** 岗位代码 */
-        clazzCode: '',
         /** 岗位名称, 例如: 信息中心-总部-主管领导岗 */
         clazzTitle: '',
-        /** 部门专属岗: Y-是;N-否(暂时不用,备用) */
-        deptFlag: '',
-        /** 部门代码(暂时不用,备用) */
-        deptCode: '',
-        /** 岗位等级代码 */
-        levelCode: '',
+        /** 部门等级代码 */
+        deptLevelCode: '',
+        /** 部门职能代码 */
+        deptFuncCode: '',
         /** 岗位职能: 主管领导岗, 业务岗等 */
-        funcCode: '',
+        clazzFuncCode: '',
         /** 有效标志: Y-是;N-否 */
         validFlag: '',
     });
@@ -114,20 +110,24 @@ export default function useClazzInfoBuilder() {
         clazzCode: '',
         /** 岗位名称, 例如: 信息中心-总部-主管领导岗 */
         clazzTitle: '',
+        /** 部门等级代码 */
+        deptLevelCode: '',
+        /** 部门等级名称 */
+        deptLevelTitle: '',
+        /** 部门职能代码 */
+        deptFuncCode: '',
+        /** 部门职能名称 */
+        deptFuncTitle: '',
+        /** 岗位职能: 主管领导岗, 业务岗等 */
+        clazzFuncCode: '',
+        /** 岗位职能名称: 主管领导岗, 业务岗等 */
+        clazzFuncTitle: '',
         /** 部门专属岗: Y-是;N-否(暂时不用,备用) */
         deptFlag: '',
         /** 部门代码(暂时不用,备用) */
         deptCode: '',
         /** 部门名称(暂时不用,备用) */
         deptTitle: '',
-        /** 岗位等级代码 */
-        levelCode: '',
-        /** 岗位等级名称 */
-        levelTitle: '',
-        /** 岗位职能: 主管领导岗, 业务岗等 */
-        funcCode: '',
-        /** 岗位职能名称: 主管领导岗, 业务岗等 */
-        funcTitle: '',
         /** 有效标志: Y-是;N-否 */
         validFlag: '',
         /** 备注 */
@@ -140,8 +140,6 @@ export default function useClazzInfoBuilder() {
     const clazzInfoColumns = [
         {title: '岗位代码', key: 'clazzCode', ellipsisTooltip: true, align: 'center'},
         {title: '岗位名称', key: 'clazzTitle', ellipsisTooltip: true, align: 'center'},
-        {title: '岗位等级名称', key: 'levelTitle', ellipsisTooltip: true, align: 'center'},
-        {title: '岗位职能名称', key: 'funcTitle', ellipsisTooltip: true, align: 'center'},
         {
             title: '有效标志', key: 'validFlag', ellipsisTooltip: true, align: 'center',
             width: 180,

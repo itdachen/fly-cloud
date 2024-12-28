@@ -9,7 +9,7 @@ import com.github.itdachen.framework.webmvc.convert.IBizConvertMapper;
  * 岗位信息 类型转换
  *
  * @author 王大宸
- * @date 2024-12-28 18:40:48
+ * @date 2024-12-28 20:42:52
  */
 public class ClazzInfoConvert implements IBizConvertMapper<ClazzInfo, ClazzInfoDTO, ClazzInfoVO> {
 
@@ -23,13 +23,15 @@ public class ClazzInfoConvert implements IBizConvertMapper<ClazzInfo, ClazzInfoD
         clazzInfo.setTenantId(clazzInfoDTO.getTenantId());
         clazzInfo.setClazzCode(clazzInfoDTO.getClazzCode());
         clazzInfo.setClazzTitle(clazzInfoDTO.getClazzTitle());
+        clazzInfo.setDeptLevelCode(clazzInfoDTO.getDeptLevelCode());
+        clazzInfo.setDeptLevelTitle(clazzInfoDTO.getDeptLevelTitle());
+        clazzInfo.setDeptFuncCode(clazzInfoDTO.getDeptFuncCode());
+        clazzInfo.setDeptFuncTitle(clazzInfoDTO.getDeptFuncTitle());
+        clazzInfo.setClazzFuncCode(clazzInfoDTO.getClazzFuncCode());
+        clazzInfo.setClazzFuncTitle(clazzInfoDTO.getClazzFuncTitle());
         clazzInfo.setDeptFlag(clazzInfoDTO.getDeptFlag());
         clazzInfo.setDeptCode(clazzInfoDTO.getDeptCode());
         clazzInfo.setDeptTitle(clazzInfoDTO.getDeptTitle());
-        clazzInfo.setLevelCode(clazzInfoDTO.getLevelCode());
-        clazzInfo.setLevelTitle(clazzInfoDTO.getLevelTitle());
-        clazzInfo.setFuncCode(clazzInfoDTO.getFuncCode());
-        clazzInfo.setFuncTitle(clazzInfoDTO.getFuncTitle());
         clazzInfo.setValidFlag(clazzInfoDTO.getValidFlag());
         clazzInfo.setRemarks(clazzInfoDTO.getRemarks());
         return clazzInfo;
@@ -46,13 +48,15 @@ public class ClazzInfoConvert implements IBizConvertMapper<ClazzInfo, ClazzInfoD
         clazzInfoVO.setTenantId(clazzInfo.getTenantId());
         clazzInfoVO.setClazzCode(clazzInfo.getClazzCode());
         clazzInfoVO.setClazzTitle(clazzInfo.getClazzTitle());
+        clazzInfoVO.setDeptLevelCode(clazzInfo.getDeptLevelCode());
+        clazzInfoVO.setDeptLevelTitle(clazzInfo.getDeptLevelTitle());
+        clazzInfoVO.setDeptFuncCode(clazzInfo.getDeptFuncCode());
+        clazzInfoVO.setDeptFuncTitle(clazzInfo.getDeptFuncTitle());
+        clazzInfoVO.setClazzFuncCode(clazzInfo.getClazzFuncCode());
+        clazzInfoVO.setClazzFuncTitle(clazzInfo.getClazzFuncTitle());
         clazzInfoVO.setDeptFlag(clazzInfo.getDeptFlag());
         clazzInfoVO.setDeptCode(clazzInfo.getDeptCode());
         clazzInfoVO.setDeptTitle(clazzInfo.getDeptTitle());
-        clazzInfoVO.setLevelCode(clazzInfo.getLevelCode());
-        clazzInfoVO.setLevelTitle(clazzInfo.getLevelTitle());
-        clazzInfoVO.setFuncCode(clazzInfo.getFuncCode());
-        clazzInfoVO.setFuncTitle(clazzInfo.getFuncTitle());
         clazzInfoVO.setValidFlag(clazzInfo.getValidFlag());
         clazzInfoVO.setRemarks(clazzInfo.getRemarks());
         return clazzInfoVO;
@@ -67,13 +71,15 @@ public class ClazzInfoConvert implements IBizConvertMapper<ClazzInfo, ClazzInfoD
         clazzInfo.setTenantId(clazzInfoVO.getTenantId());
         clazzInfo.setClazzCode(clazzInfoVO.getClazzCode());
         clazzInfo.setClazzTitle(clazzInfoVO.getClazzTitle());
+        clazzInfo.setDeptLevelCode(clazzInfoVO.getDeptLevelCode());
+        clazzInfo.setDeptLevelTitle(clazzInfoVO.getDeptLevelTitle());
+        clazzInfo.setDeptFuncCode(clazzInfoVO.getDeptFuncCode());
+        clazzInfo.setDeptFuncTitle(clazzInfoVO.getDeptFuncTitle());
+        clazzInfo.setClazzFuncCode(clazzInfoVO.getClazzFuncCode());
+        clazzInfo.setClazzFuncTitle(clazzInfoVO.getClazzFuncTitle());
         clazzInfo.setDeptFlag(clazzInfoVO.getDeptFlag());
         clazzInfo.setDeptCode(clazzInfoVO.getDeptCode());
         clazzInfo.setDeptTitle(clazzInfoVO.getDeptTitle());
-        clazzInfo.setLevelCode(clazzInfoVO.getLevelCode());
-        clazzInfo.setLevelTitle(clazzInfoVO.getLevelTitle());
-        clazzInfo.setFuncCode(clazzInfoVO.getFuncCode());
-        clazzInfo.setFuncTitle(clazzInfoVO.getFuncTitle());
         clazzInfo.setValidFlag(clazzInfoVO.getValidFlag());
         clazzInfo.setRemarks(clazzInfoVO.getRemarks());
         return clazzInfo;
@@ -88,13 +94,15 @@ public class ClazzInfoConvert implements IBizConvertMapper<ClazzInfo, ClazzInfoD
         clazzInfoVO.setTenantId(clazzInfoDTO.getTenantId());
         clazzInfoVO.setClazzCode(clazzInfoDTO.getClazzCode());
         clazzInfoVO.setClazzTitle(clazzInfoDTO.getClazzTitle());
+        clazzInfoVO.setDeptLevelCode(clazzInfoDTO.getDeptLevelCode());
+        clazzInfoVO.setDeptLevelTitle(clazzInfoDTO.getDeptLevelTitle());
+        clazzInfoVO.setDeptFuncCode(clazzInfoDTO.getDeptFuncCode());
+        clazzInfoVO.setDeptFuncTitle(clazzInfoDTO.getDeptFuncTitle());
+        clazzInfoVO.setClazzFuncCode(clazzInfoDTO.getClazzFuncCode());
+        clazzInfoVO.setClazzFuncTitle(clazzInfoDTO.getClazzFuncTitle());
         clazzInfoVO.setDeptFlag(clazzInfoDTO.getDeptFlag());
         clazzInfoVO.setDeptCode(clazzInfoDTO.getDeptCode());
         clazzInfoVO.setDeptTitle(clazzInfoDTO.getDeptTitle());
-        clazzInfoVO.setLevelCode(clazzInfoDTO.getLevelCode());
-        clazzInfoVO.setLevelTitle(clazzInfoDTO.getLevelTitle());
-        clazzInfoVO.setFuncCode(clazzInfoDTO.getFuncCode());
-        clazzInfoVO.setFuncTitle(clazzInfoDTO.getFuncTitle());
         clazzInfoVO.setValidFlag(clazzInfoDTO.getValidFlag());
         clazzInfoVO.setRemarks(clazzInfoDTO.getRemarks());
         return clazzInfoVO;

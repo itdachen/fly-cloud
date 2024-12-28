@@ -54,8 +54,9 @@ public class DeptLevelServiceImpl extends BizServiceImpl<IDeptLevelMapper, DeptL
      */
     @Override
     public TableData<DeptLevelVO> page(DeptLevelQuery params) throws Exception {
-        Page<DeptLevelVO> page = PageHelper.startPage(params.getPage(), params.getLimit());
         params.setDeleteFlag(YesOrNotConstant.N);
+        params.setTenantId(BizContextHandler.getTenantId());
+        Page<DeptLevelVO> page = PageHelper.startPage(params.getPage(), params.getLimit());
         List<DeptLevelVO> list = bizMapper.list(params);
         return new TableData<DeptLevelVO>(page.getTotal(), list);
     }

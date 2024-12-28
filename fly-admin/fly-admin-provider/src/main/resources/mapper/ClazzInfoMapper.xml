@@ -10,13 +10,15 @@
         <result property="tenantId" column="tenant_id"/>
         <result property="clazzCode" column="clazz_code"/>
         <result property="clazzTitle" column="clazz_title"/>
+        <result property="deptLevelCode" column="dept_level_code"/>
+        <result property="deptLevelTitle" column="dept_level_title"/>
+        <result property="deptFuncCode" column="dept_func_code"/>
+        <result property="deptFuncTitle" column="dept_func_title"/>
+        <result property="clazzFuncCode" column="clazz_func_code"/>
+        <result property="clazzFuncTitle" column="clazz_func_title"/>
         <result property="deptFlag" column="dept_flag"/>
         <result property="deptCode" column="dept_code"/>
         <result property="deptTitle" column="dept_title"/>
-        <result property="levelCode" column="level_code"/>
-        <result property="levelTitle" column="level_title"/>
-        <result property="funcCode" column="func_code"/>
-        <result property="funcTitle" column="func_title"/>
         <result property="validFlag" column="valid_flag"/>
         <result property="remarks" column="remarks"/>
     </resultMap>
@@ -27,13 +29,15 @@
                tenant_id,
                clazz_code,
                clazz_title,
+               dept_level_code,
+               dept_level_title,
+               dept_func_code,
+               dept_func_title,
+               clazz_func_code,
+               clazz_func_title,
                dept_flag,
                dept_code,
                dept_title,
-               level_code,
-               level_title,
-               func_code,
-               func_title,
                valid_flag,
                remarks
         FROM fly_next_clazz_info
@@ -43,14 +47,17 @@
     <sql id="selectClazzInfoExpVO">
         SELECT clazz_code,
                clazz_title,
+               dept_level_code,
+               dept_level_title,
+               dept_func_code,
+               dept_func_title,
+               clazz_func_code,
+               clazz_func_title,
                dept_flag,
                dept_code,
                dept_title,
-               level_code,
-               level_title,
-               func_code,
-               func_title,
-               valid_flag
+               valid_flag,
+               delete_flag
         FROM fly_next_clazz_info
     </sql>
 
@@ -66,17 +73,23 @@
             <if test="null != clazzTitle  and '' != clazzTitle ">
                 AND clazz_title LIKE CONCAT(CONCAT('%',#{clazzTitle}),'%')
             </if>
+            <if test="null != deptLevelCode  and '' != deptLevelCode ">
+                AND dept_level_code = #{deptLevelCode}
+            </if>
+            <if test="null != deptFuncCode  and '' != deptFuncCode ">
+                AND dept_func_code = #{deptFuncCode}
+            </if>
+            <if test="null != clazzFuncCode  and '' != clazzFuncCode ">
+                AND clazz_func_code = #{clazzFuncCode}
+            </if>
             <if test="null != deptFlag  and '' != deptFlag ">
                 AND dept_flag = #{deptFlag}
             </if>
             <if test="null != deptCode  and '' != deptCode ">
                 AND dept_code = #{deptCode}
             </if>
-            <if test="null != levelCode  and '' != levelCode ">
-                AND level_code = #{levelCode}
-            </if>
-            <if test="null != funcCode  and '' != funcCode ">
-                AND func_code = #{funcCode}
+            <if test="null != deptTitle  and '' != deptTitle ">
+                AND dept_title LIKE CONCAT(CONCAT('%',#{deptTitle}),'%')
             </if>
             <if test="null != validFlag  and '' != validFlag ">
                 AND valid_flag = #{validFlag}
@@ -105,8 +118,8 @@
         <include refid="selectClazzInfoVO"/>
         WHERE id = #{id}
     </select>
-    
-    <select id="findClazzInfoVO"  parameterType="java.lang.String" resultMap="clazzInfoMap">
+
+    <select id="findClazzInfoVO" parameterType="java.lang.String" resultMap="clazzInfoMap">
         <include refid="selectClazzInfoVO"/>
         WHERE tenant_id = #{tenantId} AND clazz_code = #{clazzCode}
         LIMIT 1

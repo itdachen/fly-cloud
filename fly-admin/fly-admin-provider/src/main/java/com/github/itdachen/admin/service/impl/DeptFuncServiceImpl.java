@@ -55,8 +55,9 @@ public class DeptFuncServiceImpl extends BizServiceImpl<IDeptFuncMapper, DeptFun
      */
     @Override
     public TableData<DeptFuncVO> page(DeptFuncQuery params) throws Exception {
-        Page<DeptFuncVO> page = PageHelper.startPage(params.getPage(), params.getLimit());
         params.setDeleteFlag(YesOrNotConstant.N);
+        params.setTenantId(BizContextHandler.getTenantId());
+        Page<DeptFuncVO> page = PageHelper.startPage(params.getPage(), params.getLimit());
         List<DeptFuncVO> list = bizMapper.list(params);
         return new TableData<DeptFuncVO>(page.getTotal(), list);
     }

@@ -6,290 +6,357 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
 
 
 /**
  * 岗位信息
  *
  * @author 王大宸
- * @date 2024-12-28 18:40:48
+ * @date 2024-12-28 20:42:52
  */
 @Table(name = "fly_next_clazz_info")
-public class ClazzInfo implements Serializable{
-private static final long serialVersionUID=1L;
+public class ClazzInfo implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    /** 主键唯一标识 */
+    /**
+     * 主键唯一标识
+     */
     @Id
     @Column(name = "id")
     private String id;
 
-    /** 租户ID */
+    /**
+     * 租户ID
+     */
     @Column(name = "tenant_id")
     private String tenantId;
 
-    /** 岗位代码 */
+    /**
+     * 岗位代码
+     */
     @Column(name = "clazz_code")
     private String clazzCode;
 
-    /** 岗位名称, 例如: 信息中心-总部-主管领导岗 */
+    /**
+     * 岗位名称, 例如: 信息中心-总部-主管领导岗
+     */
     @Column(name = "clazz_title")
     private String clazzTitle;
 
-    /** 部门专属岗: Y-是;N-否(暂时不用,备用) */
+    /**
+     * 部门等级代码
+     */
+    @Column(name = "dept_level_code")
+    private String deptLevelCode;
+
+    /**
+     * 部门等级名称
+     */
+    @Column(name = "dept_level_title")
+    private String deptLevelTitle;
+
+    /**
+     * 部门职能代码
+     */
+    @Column(name = "dept_func_code")
+    private String deptFuncCode;
+
+    /**
+     * 部门职能名称
+     */
+    @Column(name = "dept_func_title")
+    private String deptFuncTitle;
+
+    /**
+     * 岗位职能: 主管领导岗, 业务岗等
+     */
+    @Column(name = "clazz_func_code")
+    private String clazzFuncCode;
+
+    /**
+     * 岗位职能名称: 主管领导岗, 业务岗等
+     */
+    @Column(name = "clazz_func_title")
+    private String clazzFuncTitle;
+
+    /**
+     * 部门专属岗: Y-是;N-否(暂时不用,备用)
+     */
     @Column(name = "dept_flag")
     private String deptFlag;
 
-    /** 部门代码(暂时不用,备用) */
+    /**
+     * 部门代码(暂时不用,备用)
+     */
     @Column(name = "dept_code")
     private String deptCode;
 
-    /** 部门名称(暂时不用,备用) */
+    /**
+     * 部门名称(暂时不用,备用)
+     */
     @Column(name = "dept_title")
     private String deptTitle;
 
-    /** 岗位等级代码 */
-    @Column(name = "level_code")
-    private String levelCode;
-
-    /** 岗位等级名称 */
-    @Column(name = "level_title")
-    private String levelTitle;
-
-    /** 岗位职能: 主管领导岗, 业务岗等 */
-    @Column(name = "func_code")
-    private String funcCode;
-
-    /** 岗位职能名称: 主管领导岗, 业务岗等 */
-    @Column(name = "func_title")
-    private String funcTitle;
-
-    /** 有效标志: Y-是;N-否 */
+    /**
+     * 有效标志: Y-是;N-否
+     */
     @Column(name = "valid_flag")
     private String validFlag;
 
-    /** 备注 */
+    /**
+     * 备注
+     */
     @Column(name = "remarks")
     private String remarks;
 
-    /** 删除标志: N-未删除;Y-已删除 */
+    /**
+     * 删除标志: N-未删除;Y-已删除
+     */
     @Column(name = "delete_flag")
     private String deleteFlag;
 
-    /** 创建时间 */
+    /**
+     * 创建时间
+     */
     @Column(name = "create_time")
     private LocalDateTime createTime;
 
-    /** 创建人 */
+    /**
+     * 创建人
+     */
     @Column(name = "create_user")
     private String createUser;
 
-    /** 创建人id */
+    /**
+     * 创建人id
+     */
     @Column(name = "create_user_id")
     private String createUserId;
 
-    /** 更新时间 */
+    /**
+     * 更新时间
+     */
     @Column(name = "update_time")
     private LocalDateTime updateTime;
 
-    /** 更新人 */
+    /**
+     * 更新人
+     */
     @Column(name = "update_user")
     private String updateUser;
 
-    /** 更新人id */
+    /**
+     * 更新人id
+     */
     @Column(name = "update_user_id")
     private String updateUserId;
 
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
 
-            public void setId(String id) {
-                this.id = id;
-            }
+    public String getTenantId() {
+        return tenantId;
+    }
 
-            public String getId() {
-                return id;
-            }
+    public void setClazzCode(String clazzCode) {
+        this.clazzCode = clazzCode;
+    }
 
-            public void setTenantId(String tenantId) {
-                this.tenantId = tenantId;
-            }
+    public String getClazzCode() {
+        return clazzCode;
+    }
 
-            public String getTenantId() {
-                return tenantId;
-            }
+    public void setClazzTitle(String clazzTitle) {
+        this.clazzTitle = clazzTitle;
+    }
 
-            public void setClazzCode(String clazzCode) {
-                this.clazzCode = clazzCode;
-            }
+    public String getClazzTitle() {
+        return clazzTitle;
+    }
 
-            public String getClazzCode() {
-                return clazzCode;
-            }
+    public void setDeptLevelCode(String deptLevelCode) {
+        this.deptLevelCode = deptLevelCode;
+    }
 
-            public void setClazzTitle(String clazzTitle) {
-                this.clazzTitle = clazzTitle;
-            }
+    public String getDeptLevelCode() {
+        return deptLevelCode;
+    }
 
-            public String getClazzTitle() {
-                return clazzTitle;
-            }
+    public void setDeptLevelTitle(String deptLevelTitle) {
+        this.deptLevelTitle = deptLevelTitle;
+    }
 
-            public void setDeptFlag(String deptFlag) {
-                this.deptFlag = deptFlag;
-            }
+    public String getDeptLevelTitle() {
+        return deptLevelTitle;
+    }
 
-            public String getDeptFlag() {
-                return deptFlag;
-            }
+    public void setDeptFuncCode(String deptFuncCode) {
+        this.deptFuncCode = deptFuncCode;
+    }
 
-            public void setDeptCode(String deptCode) {
-                this.deptCode = deptCode;
-            }
+    public String getDeptFuncCode() {
+        return deptFuncCode;
+    }
 
-            public String getDeptCode() {
-                return deptCode;
-            }
+    public void setDeptFuncTitle(String deptFuncTitle) {
+        this.deptFuncTitle = deptFuncTitle;
+    }
 
-            public void setDeptTitle(String deptTitle) {
-                this.deptTitle = deptTitle;
-            }
+    public String getDeptFuncTitle() {
+        return deptFuncTitle;
+    }
 
-            public String getDeptTitle() {
-                return deptTitle;
-            }
+    public void setClazzFuncCode(String clazzFuncCode) {
+        this.clazzFuncCode = clazzFuncCode;
+    }
 
-            public void setLevelCode(String levelCode) {
-                this.levelCode = levelCode;
-            }
+    public String getClazzFuncCode() {
+        return clazzFuncCode;
+    }
 
-            public String getLevelCode() {
-                return levelCode;
-            }
+    public void setClazzFuncTitle(String clazzFuncTitle) {
+        this.clazzFuncTitle = clazzFuncTitle;
+    }
 
-            public void setLevelTitle(String levelTitle) {
-                this.levelTitle = levelTitle;
-            }
+    public String getClazzFuncTitle() {
+        return clazzFuncTitle;
+    }
 
-            public String getLevelTitle() {
-                return levelTitle;
-            }
+    public void setDeptFlag(String deptFlag) {
+        this.deptFlag = deptFlag;
+    }
 
-            public void setFuncCode(String funcCode) {
-                this.funcCode = funcCode;
-            }
+    public String getDeptFlag() {
+        return deptFlag;
+    }
 
-            public String getFuncCode() {
-                return funcCode;
-            }
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
+    }
 
-            public void setFuncTitle(String funcTitle) {
-                this.funcTitle = funcTitle;
-            }
+    public String getDeptCode() {
+        return deptCode;
+    }
 
-            public String getFuncTitle() {
-                return funcTitle;
-            }
+    public void setDeptTitle(String deptTitle) {
+        this.deptTitle = deptTitle;
+    }
 
-            public void setValidFlag(String validFlag) {
-                this.validFlag = validFlag;
-            }
+    public String getDeptTitle() {
+        return deptTitle;
+    }
 
-            public String getValidFlag() {
-                return validFlag;
-            }
+    public void setValidFlag(String validFlag) {
+        this.validFlag = validFlag;
+    }
 
-            public void setRemarks(String remarks) {
-                this.remarks = remarks;
-            }
+    public String getValidFlag() {
+        return validFlag;
+    }
 
-            public String getRemarks() {
-                return remarks;
-            }
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
-            public void setDeleteFlag(String deleteFlag) {
-                this.deleteFlag = deleteFlag;
-            }
+    public String getRemarks() {
+        return remarks;
+    }
 
-            public String getDeleteFlag() {
-                return deleteFlag;
-            }
+    public void setDeleteFlag(String deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
 
-            public void setCreateTime(LocalDateTime createTime) {
-                this.createTime = createTime;
-            }
+    public String getDeleteFlag() {
+        return deleteFlag;
+    }
 
-            public LocalDateTime getCreateTime() {
-                return createTime;
-            }
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
 
-            public void setCreateUser(String createUser) {
-                this.createUser = createUser;
-            }
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
 
-            public String getCreateUser() {
-                return createUser;
-            }
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
 
-            public void setCreateUserId(String createUserId) {
-                this.createUserId = createUserId;
-            }
+    public String getCreateUser() {
+        return createUser;
+    }
 
-            public String getCreateUserId() {
-                return createUserId;
-            }
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
+    }
 
-            public void setUpdateTime(LocalDateTime updateTime) {
-                this.updateTime = updateTime;
-            }
+    public String getCreateUserId() {
+        return createUserId;
+    }
 
-            public LocalDateTime getUpdateTime() {
-                return updateTime;
-            }
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
 
-            public void setUpdateUser(String updateUser) {
-                this.updateUser = updateUser;
-            }
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
 
-            public String getUpdateUser() {
-                return updateUser;
-            }
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
 
-            public void setUpdateUserId(String updateUserId) {
-                this.updateUserId = updateUserId;
-            }
+    public String getUpdateUser() {
+        return updateUser;
+    }
 
-            public String getUpdateUserId() {
-                return updateUserId;
-            }
+    public void setUpdateUserId(String updateUserId) {
+        this.updateUserId = updateUserId;
+    }
+
+    public String getUpdateUserId() {
+        return updateUserId;
+    }
 
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                    .append("id", getId())
-                    .append("tenantId", getTenantId())
-                    .append("clazzCode", getClazzCode())
-                    .append("clazzTitle", getClazzTitle())
-                    .append("deptFlag", getDeptFlag())
-                    .append("deptCode", getDeptCode())
-                    .append("deptTitle", getDeptTitle())
-                    .append("levelCode", getLevelCode())
-                    .append("levelTitle", getLevelTitle())
-                    .append("funcCode", getFuncCode())
-                    .append("funcTitle", getFuncTitle())
-                    .append("validFlag", getValidFlag())
-                    .append("remarks", getRemarks())
-                    .append("deleteFlag", getDeleteFlag())
-                    .append("createTime", getCreateTime())
-                    .append("createUser", getCreateUser())
-                    .append("createUserId", getCreateUserId())
-                    .append("updateTime", getUpdateTime())
-                    .append("updateUser", getUpdateUser())
-                    .append("updateUserId", getUpdateUserId())
+                .append("id", getId())
+                .append("tenantId", getTenantId())
+                .append("clazzCode", getClazzCode())
+                .append("clazzTitle", getClazzTitle())
+                .append("deptLevelCode", getDeptLevelCode())
+                .append("deptLevelTitle", getDeptLevelTitle())
+                .append("deptFuncCode", getDeptFuncCode())
+                .append("deptFuncTitle", getDeptFuncTitle())
+                .append("clazzFuncCode", getClazzFuncCode())
+                .append("clazzFuncTitle", getClazzFuncTitle())
+                .append("deptFlag", getDeptFlag())
+                .append("deptCode", getDeptCode())
+                .append("deptTitle", getDeptTitle())
+                .append("validFlag", getValidFlag())
+                .append("remarks", getRemarks())
+                .append("deleteFlag", getDeleteFlag())
+                .append("createTime", getCreateTime())
+                .append("createUser", getCreateUser())
+                .append("createUserId", getCreateUserId())
+                .append("updateTime", getUpdateTime())
+                .append("updateUser", getUpdateUser())
+                .append("updateUserId", getUpdateUserId())
                 .toString();
     }
 
