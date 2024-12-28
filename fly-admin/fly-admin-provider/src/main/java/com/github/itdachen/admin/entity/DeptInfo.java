@@ -22,186 +22,133 @@ public class DeptInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    /**
-     * 主键唯一标识/部门ID
-     */
+    /** 主键唯一标识 */
     @Id
     @Column(name = "id")
     private String id;
 
-    /**
-     * 租户标识/公司标识
-     */
+    /** 租户标识/公司标识 */
     @Column(name = "tenant_id")
     private String tenantId;
 
-    /**
-     * 上级ID
-     */
-    @Column(name = "parent_id")
-    private String parentId;
+    /** 部门编码 */
+    @Column(name = "dept_code")
+    private String deptCode;
 
-    /**
-     * 部门名称
-     */
+    /** 上级部门编码 */
+    @Column(name = "parent_code")
+    private String parentCode;
+
+    /** 部门名称 */
     @Column(name = "title")
     private String title;
 
-    /**
-     * 部门简称
-     */
+    /** 部门简称 */
     @Column(name = "title_as")
     private String titleAs;
 
-    /**
-     * 部门标志: Y-是;N-否
-     */
+    /** 部门标志: Y-是;N-否(否的时候为行政区域, 例如: 贵州省贵阳市) */
     @Column(name = "dept_flag")
     private String deptFlag;
 
-    /**
-     * 是否管理本级: Y-是;N-否
-     */
+    /** 是否管理本级: Y-是;N-否 */
     @Column(name = "that_level")
     private String thatLevel;
 
-    /**
-     * 部门级次代码: 00-总部/10-省级/20-市州级/30-区县级/40-乡村级
-     */
+    /** 部门级次代码: 00-总部/10-省级/20-市州级/30-区县级/40-乡村级 */
     @Column(name = "level_code")
     private String levelCode;
 
-    /**
-     * 部门级次名称
-     */
+    /** 部门级次名称 */
     @Column(name = "level_title")
     private String levelTitle;
 
-    /**
-     * 联系电话
-     */
-    @Column(name = "telephone")
-    private String telephone;
-
-    /**
-     * 电子邮箱
-     */
-    @Column(name = "mail_box")
-    private String mailBox;
-
-    /**
-     * 传真
-     */
-    @Column(name = "facsimile")
-    private String facsimile;
-
-    /**
-     * 职能代码(dept_func表中 code)
-     */
+    /** 职能代码(dept_func表中 code) */
     @Column(name = "func_code")
     private String funcCode;
 
-    /**
-     * 职能名称(dept_func表中title)
-     */
+    /** 职能名称(dept_func表中title) */
     @Column(name = "func_title")
     private String funcTitle;
 
-    /**
-     * 所属省级ID
-     */
+    /** 联系电话 */
+    @Column(name = "telephone")
+    private String telephone;
+
+    /** 电子邮箱 */
+    @Column(name = "mail_box")
+    private String mailBox;
+
+    /** 传真 */
+    @Column(name = "facsimile")
+    private String facsimile;
+
+    /** 所属省级ID */
     @Column(name = "prov_id")
     private String provId;
 
-    /**
-     * 所属省级名称
-     */
+    /** 所属省级名称 */
     @Column(name = "prov_title")
     private String provTitle;
 
-    /**
-     * 所属市州
-     */
+    /** 所属市州 */
     @Column(name = "city_id")
     private String cityId;
 
-    /**
-     * 所属市州名称
-     */
+    /** 所属市州名称 */
     @Column(name = "city_title")
     private String cityTitle;
 
-    /**
-     * 所属区县
-     */
+    /** 所属区县 */
     @Column(name = "county_id")
     private String countyId;
 
-    /**
-     * 所属区县名称
-     */
+    /** 所属区县名称 */
     @Column(name = "county_title")
     private String countyTitle;
 
-    /**
-     * 详细地址
-     */
+    /** 详细地址 */
     @Column(name = "address")
     private String address;
 
-    /**
-     * 有效标志: Y-是;N-否
-     */
+    /** 有效标志: Y-是;N-否 */
     @Column(name = "valid_flag")
     private String validFlag;
 
-    /**
-     * 删除标志:  Y-已删除;N-未删除
-     */
+    /** 删除标志:  Y-已删除;N-未删除 */
     @Column(name = "delete_flag")
     private String deleteFlag;
 
-    /**
-     * 备注
-     */
+    /** 备注 */
     @Column(name = "remarks")
     private String remarks;
 
-    /**
-     * 创建时间
-     */
+    /** 创建时间 */
     @Column(name = "create_time")
     private LocalDateTime createTime;
 
-    /**
-     * 创建人
-     */
+    /** 创建人 */
     @Column(name = "create_user")
     private String createUser;
 
-    /**
-     * 创建人id
-     */
+    /** 创建人id */
     @Column(name = "create_user_id")
     private String createUserId;
 
-    /**
-     * 更新时间
-     */
+    /** 更新时间 */
     @Column(name = "update_time")
     private LocalDateTime updateTime;
 
-    /**
-     * 更新人
-     */
+    /** 更新人 */
     @Column(name = "update_user")
     private String updateUser;
 
-    /**
-     * 更新人id
-     */
+    /** 更新人id */
     @Column(name = "update_user_id")
     private String updateUserId;
+
+
+
 
 
     public void setId(String id) {
@@ -220,12 +167,20 @@ public class DeptInfo implements Serializable {
         return tenantId;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
     }
 
-    public String getParentId() {
-        return parentId;
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
+    }
+
+    public String getParentCode() {
+        return parentCode;
     }
 
     public void setTitle(String title) {
@@ -276,6 +231,22 @@ public class DeptInfo implements Serializable {
         return levelTitle;
     }
 
+    public void setFuncCode(String funcCode) {
+        this.funcCode = funcCode;
+    }
+
+    public String getFuncCode() {
+        return funcCode;
+    }
+
+    public void setFuncTitle(String funcTitle) {
+        this.funcTitle = funcTitle;
+    }
+
+    public String getFuncTitle() {
+        return funcTitle;
+    }
+
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
@@ -298,22 +269,6 @@ public class DeptInfo implements Serializable {
 
     public String getFacsimile() {
         return facsimile;
-    }
-
-    public void setFuncCode(String funcCode) {
-        this.funcCode = funcCode;
-    }
-
-    public String getFuncCode() {
-        return funcCode;
-    }
-
-    public void setFuncTitle(String funcTitle) {
-        this.funcTitle = funcTitle;
-    }
-
-    public String getFuncTitle() {
-        return funcTitle;
     }
 
     public void setProvId(String provId) {
@@ -450,18 +405,19 @@ public class DeptInfo implements Serializable {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
                 .append("tenantId", getTenantId())
-                .append("parentId", getParentId())
+                .append("deptCode", getDeptCode())
+                .append("parentCode", getParentCode())
                 .append("title", getTitle())
                 .append("titleAs", getTitleAs())
                 .append("deptFlag", getDeptFlag())
                 .append("thatLevel", getThatLevel())
                 .append("levelCode", getLevelCode())
                 .append("levelTitle", getLevelTitle())
+                .append("funcCode", getFuncCode())
+                .append("funcTitle", getFuncTitle())
                 .append("telephone", getTelephone())
                 .append("mailBox", getMailBox())
                 .append("facsimile", getFacsimile())
-                .append("funcCode", getFuncCode())
-                .append("funcTitle", getFuncTitle())
                 .append("provId", getProvId())
                 .append("provTitle", getProvTitle())
                 .append("cityId", getCityId())
@@ -480,6 +436,5 @@ public class DeptInfo implements Serializable {
                 .append("updateUserId", getUpdateUserId())
                 .toString();
     }
-
 
 }

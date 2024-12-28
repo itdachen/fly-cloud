@@ -43,7 +43,7 @@ export default function useDeptInfoComposable() {
         });
     };
 
-    const parentDeptId = ref<string>('0');
+    const parentDeptCode = ref<string>('0');
     const deptTreeData = ref();
     const deptTreeChecked = ref();
 
@@ -74,10 +74,10 @@ export default function useDeptInfoComposable() {
      * 新增按钮
      */
     const onTapDeptInfoAdd = () => {
-        if ('0' === parentDeptId.value) {
+        if ('0' === parentDeptCode.value) {
             return;
         }
-        refDeptInfoComponent.value?.open(FormTypeEnum.ADD, null, parentDeptId);
+        refDeptInfoComponent.value?.open(FormTypeEnum.ADD, null, parentDeptCode);
     }
 
     /**
@@ -85,7 +85,7 @@ export default function useDeptInfoComposable() {
      * @param data 编辑时的数据信息
      */
     const onTapDeptInfoEdit = (data: DeptInfo) => {
-        refDeptInfoComponent.value?.open(FormTypeEnum.EDIT, data, data.parentId);
+        refDeptInfoComponent.value?.open(FormTypeEnum.EDIT, data, data.parentCode);
     }
 
     /**
@@ -93,7 +93,7 @@ export default function useDeptInfoComposable() {
      * @param data 查看时的数据信息
      */
     const onTapDeptInfoView = (data: DeptInfo) => {
-        refDeptInfoComponent.value?.open(FormTypeEnum.VIEW, data, data.parentId);
+        refDeptInfoComponent.value?.open(FormTypeEnum.VIEW, data, data.parentCode);
     }
 
     /**
@@ -161,7 +161,7 @@ export default function useDeptInfoComposable() {
         loadDeptTree,
         deptTreeData,
         deptTreeChecked,
-        parentDeptId
+        parentDeptCode
 
     };
 }

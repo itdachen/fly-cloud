@@ -17,12 +17,14 @@ import {TableData} from "axios";
  * @date 2024-12-22 22:30:09
  */
 export interface DeptInfoQuery extends BizQuery {
-    /** 上级ID */
-    parentId?: string,
+    /** 上级部门编码 */
+    parentCode?: string,
     /** 部门名称 */
     title?: string,
     /** 部门标志 */
     deptFlag?: string,
+    /** 有效标志: Y-是;N-否 */
+    validFlag?: string,
 }
 
 
@@ -34,45 +36,51 @@ export interface DeptInfoQuery extends BizQuery {
  */
 export interface DeptInfo {
     /** 主键唯一标识 */
-    id?: string,
-    /** 上级ID */
-    parentId?: string,
+    id?: string ,
+    /** 租户标识/公司标识 */
+    tenantId?: string ,
+    /** 部门编码 */
+    deptCode?: string ,
+    /** 上级部门编码 */
+    parentCode?: string ,
     /** 部门名称 */
-    title?: string,
+    title?: string ,
     /** 部门简称 */
-    titleAs?: string,
-    /** 部门标志: Y-是;N-否 */
-    deptFlag?: string,
+    titleAs?: string ,
+    /** 部门标志: Y-是;N-否(否的时候为行政区域, 例如: 贵州省贵阳市) */
+    deptFlag?: string ,
     /** 是否管理本级: Y-是;N-否 */
-    thatLevel?: string,
+    thatLevel?: string ,
     /** 部门级次代码: 00-总部/10-省级/20-市州级/30-区县级/40-乡村级 */
-    levelCode?: string,
+    levelCode?: string ,
     /** 部门级次名称 */
-    levelTitle?: string,
-    /** 联系电话 */
-    telephone?: string,
-    /** 电子邮箱 */
-    mailBox?: string,
-    /** 传真 */
-    facsimile?: string,
+    levelTitle?: string ,
     /** 职能代码(dept_func表中 code) */
-    funcCode?: string,
+    funcCode?: string ,
     /** 职能名称(dept_func表中title) */
-    funcTitle?: string,
+    funcTitle?: string ,
+    /** 联系电话 */
+    telephone?: string ,
+    /** 电子邮箱 */
+    mailBox?: string ,
+    /** 传真 */
+    facsimile?: string ,
     /** 所属省级ID */
-    provId?: string,
+    provId?: string ,
     /** 所属省级名称 */
-    provTitle?: string,
+    provTitle?: string ,
     /** 所属市州 */
-    cityId?: string,
+    cityId?: string ,
     /** 所属市州名称 */
-    cityTitle?: string,
+    cityTitle?: string ,
     /** 所属区县 */
-    countyId?: string,
+    countyId?: string ,
     /** 所属区县名称 */
-    countyTitle?: string,
+    countyTitle?: string ,
+    /** 详细地址 */
+    address?: string ,
     /** 有效标志: Y-是;N-否 */
-    validFlag?: string,
+    validFlag?: string ,
     /** 备注 */
     remarks?: string
 }
@@ -90,7 +98,7 @@ export default function useDeptInfoBuilder() {
         page: 1,
         limit: 10,
         /** 上级ID */
-        parentId: '',
+        parentCode: '',
         /** 部门名称 */
         title: '',
         deptFlag: 'Y'
@@ -110,45 +118,51 @@ export default function useDeptInfoBuilder() {
      */
     const deptInfo = ref<DeptInfo>({
         /** 主键唯一标识 */
-        id: '',
-        /** 上级ID */
-        parentId: '',
+        id: '' ,
+        /** 租户标识/公司标识 */
+        tenantId: '' ,
+        /** 部门编码 */
+        deptCode: '' ,
+        /** 上级部门编码 */
+        parentCode: '' ,
         /** 部门名称 */
-        title: '',
+        title: '' ,
         /** 部门简称 */
-        titleAs: '',
-        /** 部门标志: Y-是;N-否 */
-        deptFlag: '',
+        titleAs: '' ,
+        /** 部门标志: Y-是;N-否(否的时候为行政区域, 例如: 贵州省贵阳市) */
+        deptFlag: '' ,
         /** 是否管理本级: Y-是;N-否 */
-        thatLevel: '',
+        thatLevel: '' ,
         /** 部门级次代码: 00-总部/10-省级/20-市州级/30-区县级/40-乡村级 */
-        levelCode: '',
+        levelCode: '' ,
         /** 部门级次名称 */
-        levelTitle: '',
-        /** 联系电话 */
-        telephone: '',
-        /** 电子邮箱 */
-        mailBox: '',
-        /** 传真 */
-        facsimile: '',
+        levelTitle: '' ,
         /** 职能代码(dept_func表中 code) */
-        funcCode: '',
+        funcCode: '' ,
         /** 职能名称(dept_func表中title) */
-        funcTitle: '',
+        funcTitle: '' ,
+        /** 联系电话 */
+        telephone: '' ,
+        /** 电子邮箱 */
+        mailBox: '' ,
+        /** 传真 */
+        facsimile: '' ,
         /** 所属省级ID */
-        provId: '',
+        provId: '' ,
         /** 所属省级名称 */
-        provTitle: '',
+        provTitle: '' ,
         /** 所属市州 */
-        cityId: '',
+        cityId: '' ,
         /** 所属市州名称 */
-        cityTitle: '',
+        cityTitle: '' ,
         /** 所属区县 */
-        countyId: '',
+        countyId: '' ,
         /** 所属区县名称 */
-        countyTitle: '',
+        countyTitle: '' ,
+        /** 详细地址 */
+        address: '' ,
         /** 有效标志: Y-是;N-否 */
-        validFlag: '',
+        validFlag: '' ,
         /** 备注 */
         remarks: ''
     });

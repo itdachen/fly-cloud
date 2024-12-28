@@ -9,18 +9,19 @@
     <resultMap type="com.github.itdachen.admin.sdk.vo.DeptInfoVO" id="deptInfoMap">
         <result property="id" column="id"/>
         <result property="tenantId" column="tenant_id"/>
-        <result property="parentId" column="parent_id"/>
+        <result property="deptCode" column="dept_code"/>
+        <result property="parentCode" column="parent_code"/>
         <result property="title" column="title"/>
         <result property="titleAs" column="title_as"/>
         <result property="deptFlag" column="dept_flag"/>
         <result property="thatLevel" column="that_level"/>
         <result property="levelCode" column="level_code"/>
         <result property="levelTitle" column="level_title"/>
+        <result property="funcCode" column="func_code"/>
+        <result property="funcTitle" column="func_title"/>
         <result property="telephone" column="telephone"/>
         <result property="mailBox" column="mail_box"/>
         <result property="facsimile" column="facsimile"/>
-        <result property="funcCode" column="func_code"/>
-        <result property="funcTitle" column="func_title"/>
         <result property="provId" column="prov_id"/>
         <result property="provTitle" column="prov_title"/>
         <result property="cityId" column="city_id"/>
@@ -36,18 +37,19 @@
     <sql id="selectDeptInfoVO">
         SELECT id,
                tenant_id,
-               parent_id,
+               dept_code,
+               parent_code,
                title,
                title_as,
                dept_flag,
                that_level,
                level_code,
                level_title,
+               func_code,
+               func_title,
                telephone,
                mail_box,
                facsimile,
-               func_code,
-               func_title,
                prov_id,
                prov_title,
                city_id,
@@ -62,16 +64,24 @@
 
     <!-- 导出数据字段查询 -->
     <sql id="selectDeptInfoExpVO">
-        SELECT title,
+        SELECT dept_code,
+               parent_code,
+               title,
                title_as,
+               dept_flag,
                that_level,
+               level_code,
                level_title,
+               func_code,
+               func_title,
                telephone,
                mail_box,
                facsimile,
-               func_title,
+               prov_id,
                prov_title,
+               city_id,
                city_title,
+               county_id,
                county_title,
                address,
                valid_flag
@@ -84,8 +94,11 @@
             <if test="null != tenantId  and '' != tenantId ">
                 AND tenant_id = #{tenantId}
             </if>
-            <if test="null != parentId  and '' != parentId ">
-                AND parent_id = #{parentId}
+            <if test="null != deptCode  and '' != deptCode ">
+                AND dept_code = #{deptCode}
+            </if>
+            <if test="null != parentCode  and '' != parentCode ">
+                AND parent_code = #{parentCode}
             </if>
             <if test="null != title  and '' != title ">
                 AND title LIKE CONCAT(CONCAT('%',#{title}),'%')
@@ -118,7 +131,7 @@
                 AND delete_flag = #{deleteFlag}
             </if>
         </where>
-        ORDER BY id ASC
+        ORDER BY dept_code ASC
     </sql>
 
     <!-- 集合查询 -->
@@ -133,10 +146,10 @@
         <include refid="selectParamsWhere"></include>
     </select>
 
-    <select id="findDeptInfoByFuncCode" parameterType="java.lang.String"  resultMap="deptInfoMap">
+    <select id="findDeptInfoByFuncCode" parameterType="java.lang.String" resultMap="deptInfoMap">
         <include refid="selectDeptInfoVO"/>
         WHERE tenant_id = #{tenantId}
-        AND parent_id = #{parentId}
+        AND parent_code = #{parentCode}
         AND func_code = #{funcCode}
         LIMIT 1
     </select>
@@ -145,6 +158,13 @@
     <select id="selectDeptInfoVO" parameterType="java.lang.String" resultMap="deptInfoMap">
         <include refid="selectDeptInfoVO"/>
         WHERE id = #{id}
+    </select>
+
+    <select id="findDeptInfoVO" parameterType="java.lang.String" resultMap="deptInfoMap">
+        <include refid="selectDeptInfoVO"/>
+        WHERE tenant_id = #{tenantId}
+        AND dept_code = #{deptCode}
+        LIMIT 1
     </select>
 
     <!-- 批量添加 -->
@@ -308,21 +328,21 @@
             WHERE id = #{item.id}
         </foreach>
     </update>
-    
+
     <select id="findDeptChildren" parameterType="java.lang.String"
             resultType="com.github.itdachen.framework.context.tree.lay.TreeNode">
-        SELECT id, title
+        SELECT dept_code AS id, title
         FROM fly_next_dept_info
         <where>
             tenant_id = #{tenantId}
-            AND parent_id = #{parentId}
+            AND parent_code = #{parentCode}
             AND valid_flag = 'Y'
             AND delete_flag = 'N'
             <if test="null != deptFlag  and '' != deptFlag ">
                 AND dept_flag = #{deptFlag}
             </if>
         </where>
-        ORDER BY id ASC
+        ORDER BY dept_code ASC
     </select>
 
 

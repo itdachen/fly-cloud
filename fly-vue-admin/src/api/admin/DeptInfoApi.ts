@@ -21,7 +21,7 @@ class DeptInfoApi extends HttpRequest<DeptInfo, DeptInfoQuery, string> {
     }
 
     /**
-     * 获取部门树
+     * 获取机构/部门树
      */
     findDeptTree(deptFlag: string) {
         return http.get(DEPT_INFO_PATH + '/tree?deptFlag=' + deptFlag);

@@ -163,7 +163,7 @@ function saveDeptInfoHandler() {
 
 
 //显示弹框
-const open = (type: FormTypeEnum, row?: DeptInfo, parentDeptId?: string) => {
+const open = (type: FormTypeEnum, row?: DeptInfo, parentDeptCode?: string) => {
   layerRef.title = type + '部门信息';
   if (null !== row) {
     deptInfo.value = JSON.parse(JSON.stringify(row));
@@ -175,26 +175,29 @@ const open = (type: FormTypeEnum, row?: DeptInfo, parentDeptId?: string) => {
     /* 区县集合 */
     countyList.value = [];
     deptInfo.value = {
-      id: '',  // 主键唯一标识
-      parentId: parentDeptId,  // 上级ID
-      title: '',  // 部门名称
-      titleAs: '',  // 部门简称
-      deptFlag: 'N',  // 部门标志: Y-是;N-否
-      thatLevel: 'N',  // 是否管理本级: Y-是;N-否
-      levelCode: '',  // 部门级次代码: 00-总部/10-省级/20-市州级/30-区县级/40-乡村级
-      levelTitle: '',  // 部门级次名称
-      telephone: '',  // 联系电话
-      mailBox: '',  // 电子邮箱
-      facsimile: '',  // 传真
-      funcCode: '',  // 职能代码(dept_func表中 code)
-      funcTitle: '',  // 职能名称(dept_func表中title)
-      provId: '',  // 所属省级ID
-      provTitle: '',  // 所属省级名称
-      cityId: '',  // 所属市州
-      cityTitle: '',  // 所属市州名称
-      countyId: '',  // 所属区县
-      countyTitle: '',  // 所属区县名称
-      validFlag: 'Y',  // 有效标志: Y-是;N-否
+      id: '' ,  // 主键唯一标识
+      tenantId:  '',  // 租户标识/公司标识
+      deptCode: '' ,  // 部门编码
+      parentCode: parentDeptCode ,  // 上级部门编码
+      title: '' ,  // 部门名称
+      titleAs: '' ,  // 部门简称
+      deptFlag: 'N' ,  // 部门标志: Y-是;N-否(否的时候为行政区域, 例如: 贵州省贵阳市)
+      thatLevel: 'N' ,  // 是否管理本级: Y-是;N-否
+      levelCode: '' ,  // 部门级次代码: 00-总部/10-省级/20-市州级/30-区县级/40-乡村级
+      levelTitle: '' ,  // 部门级次名称
+      funcCode: '00' ,  // 职能代码(dept_func表中 code)
+      funcTitle: '机构' ,  // 职能名称(dept_func表中title)
+      telephone: '' ,  // 联系电话
+      mailBox: '' ,  // 电子邮箱
+      facsimile: '' ,  // 传真
+      provId: '' ,  // 所属省级ID
+      provTitle: '' ,  // 所属省级名称
+      cityId: '' ,  // 所属市州
+      cityTitle: '' ,  // 所属市州名称
+      countyId: '' ,  // 所属区县
+      countyTitle: '' ,  // 所属区县名称
+      address: '' ,  // 详细地址
+      validFlag: 'Y' ,  // 有效标志: Y-是;N-否
       remarks: ''  // 备注
     }
   }

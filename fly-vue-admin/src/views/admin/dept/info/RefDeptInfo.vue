@@ -60,12 +60,12 @@
         </lay-form-item>
 
 
-        <lay-form-item label="部门标志" prop="deptFlag" mode="inline">
-          <lay-radio v-model="deptInfo.deptFlag" name="action" value="Y" label="是"
-                     :disabled="layerRef.disabled"></lay-radio>
-          <lay-radio v-model="deptInfo.deptFlag" name="action" value="N" label="否"
-                     :disabled="layerRef.disabled"></lay-radio>
-        </lay-form-item>
+        <!--        <lay-form-item label="部门标志" prop="deptFlag" mode="inline">-->
+        <!--          <lay-radio v-model="deptInfo.deptFlag" name="action" value="Y" label="是"-->
+        <!--                     :disabled="layerRef.disabled"></lay-radio>-->
+        <!--          <lay-radio v-model="deptInfo.deptFlag" name="action" value="N" label="否"-->
+        <!--                     :disabled="layerRef.disabled"></lay-radio>-->
+        <!--        </lay-form-item>-->
 
 
         <lay-form-item label="联系电话" prop="telephone" mode="inline">
@@ -178,18 +178,17 @@ function saveDeptInfoHandler() {
 
     /* 部门层级 deptLevelList */
     for (let i = 0; i < deptLevelList.value.length; i++) {
-      if (deptLevelList.value[i].levelCode === model.levelCode){
+      if (deptLevelList.value[i].levelCode === model.levelCode) {
         model.levelTitle = deptLevelList.value[i].levelTitle;
       }
     }
 
     /* 部门职能 deptFuncList */
     for (let i = 0; i < deptFuncList.value.length; i++) {
-      if (deptFuncList.value[i].funcCode === model.funcCode){
+      if (deptFuncList.value[i].funcCode === model.funcCode) {
         model.funcTitle = deptFuncList.value[i].funcTitle;
       }
     }
-
 
 
     /* 数据入库处理 */
@@ -202,7 +201,7 @@ function saveDeptInfoHandler() {
 
 
 //显示弹框
-const open = (type: FormTypeEnum, row?: DeptInfo, parentDeptId?: string) => {
+const open = (type: FormTypeEnum, row?: DeptInfo, parentDeptCode?: string) => {
   layerRef.title = type + '部门信息';
   if (null !== row) {
     deptInfo.value = JSON.parse(JSON.stringify(row));
@@ -215,24 +214,27 @@ const open = (type: FormTypeEnum, row?: DeptInfo, parentDeptId?: string) => {
     countyList.value = [];
     deptInfo.value = {
       id: '',  // 主键唯一标识
-      parentId: parentDeptId,  // 上级ID
+      tenantId: '',  // 租户标识/公司标识
+      deptCode: '',  // 部门编码
+      parentCode: parentDeptCode,  // 上级部门编码
       title: '',  // 部门名称
       titleAs: '',  // 部门简称
-      deptFlag: 'N',  // 部门标志: Y-是;N-否
+      deptFlag: 'Y',  // 部门标志: Y-是;N-否(否的时候为行政区域, 例如: 贵州省贵阳市)
       thatLevel: 'N',  // 是否管理本级: Y-是;N-否
       levelCode: '',  // 部门级次代码: 00-总部/10-省级/20-市州级/30-区县级/40-乡村级
       levelTitle: '',  // 部门级次名称
+      funcCode: '',  // 职能代码(dept_func表中 code)
+      funcTitle: '',  // 职能名称(dept_func表中title)
       telephone: '',  // 联系电话
       mailBox: '',  // 电子邮箱
       facsimile: '',  // 传真
-      funcCode: '',  // 职能代码(dept_func表中 code)
-      funcTitle: '',  // 职能名称(dept_func表中title)
       provId: '',  // 所属省级ID
       provTitle: '',  // 所属省级名称
       cityId: '',  // 所属市州
       cityTitle: '',  // 所属市州名称
       countyId: '',  // 所属区县
       countyTitle: '',  // 所属区县名称
+      address: '',  // 详细地址
       validFlag: 'Y',  // 有效标志: Y-是;N-否
       remarks: ''  // 备注
     }
@@ -332,13 +334,13 @@ const funcCodeChangeFilter = (funcCode: string) => {
   let title = '';
 
   if (null !== provTitle && '' !== provTitle && undefined !== provTitle) {
-    title = title + provTitle;
+    title = title + provTitle + '省';
   }
   if (null !== cityTitle && '' !== cityTitle && undefined !== cityTitle && '市辖区' !== cityTitle) {
-    title = title + cityTitle;
+    title = title + cityTitle + '市/州';
   }
   if (null !== countyTitle && '' !== countyTitle && undefined !== countyTitle) {
-    title = title + countyTitle;
+    title = title + countyTitle + '区/县';
   }
 
   for (let i = 0; i < deptFuncList.value.length; i++) {
@@ -348,7 +350,7 @@ const funcCodeChangeFilter = (funcCode: string) => {
   }
 
   deptInfo.value.title = title;
- // deptInfo.value.titleAs = title;
+  deptInfo.value.titleAs = title;
 
 }
 

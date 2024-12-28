@@ -29,10 +29,15 @@ public class DeptInfoDTO implements Serializable {
     private String tenantId;
 
     /**
-     * 上级ID
+     * 部门编码
      */
-    @NotBlank(message = "上级ID不能为空")
-    private String parentId;
+    private String deptCode;
+
+    /**
+     * 上级部门编码
+     */
+    @NotBlank(message = "上级部门编码不能为空")
+    private String parentCode;
 
     /**
      * 部门名称
@@ -43,109 +48,91 @@ public class DeptInfoDTO implements Serializable {
     /**
      * 部门简称
      */
-    //  @NotBlank(message = "部门简称不能为空")
     private String titleAs;
 
     /**
-     * 部门标志: Y-是;N-否
+     * 部门标志: Y-是;N-否(否的时候为行政区域, 例如: 贵州省贵阳市)
      */
-    //  @NotBlank(message = "部门标志: Y-是;N-否不能为空")
     private String deptFlag;
 
     /**
      * 是否管理本级: Y-是;N-否
      */
-    //  @NotBlank(message = "是否管理本级: Y-是;N-否不能为空")
     private String thatLevel;
 
     /**
      * 部门级次代码: 00-总部/10-省级/20-市州级/30-区县级/40-乡村级
      */
-    @NotBlank(message = "部门级次不能为空")
     private String levelCode;
 
     /**
      * 部门级次名称
      */
-    //  @NotBlank(message = "部门级次名称不能为空")
     private String levelTitle;
-
-    /**
-     * 联系电话
-     */
-    // @NotBlank(message = "联系电话不能为空")
-    private String telephone;
-
-    /**
-     * 电子邮箱
-     */
-    //  @NotBlank(message = "电子邮箱不能为空")
-    private String mailBox;
-
-    /**
-     * 传真
-     */
-    // @NotBlank(message = "传真不能为空")
-    private String facsimile;
 
     /**
      * 职能代码(dept_func表中 code)
      */
-    // @NotBlank(message = "职能代码(dept_func表中 code)不能为空")
     private String funcCode;
 
     /**
      * 职能名称(dept_func表中title)
      */
-    // @NotBlank(message = "职能名称(dept_func表中title)不能为空")
     private String funcTitle;
+
+    /**
+     * 联系电话
+     */
+    private String telephone;
+
+    /**
+     * 电子邮箱
+     */
+    private String mailBox;
+
+    /**
+     * 传真
+     */
+    private String facsimile;
 
     /**
      * 所属省级ID
      */
-    //  @NotBlank(message = "所属省级ID不能为空")
     private String provId;
 
     /**
      * 所属省级名称
      */
-    // @NotBlank(message = "所属省级名称不能为空")
     private String provTitle;
 
     /**
      * 所属市州
      */
-    // @NotBlank(message = "所属市州不能为空")
     private String cityId;
 
     /**
      * 所属市州名称
      */
-    // @NotBlank(message = "所属市州名称不能为空")
     private String cityTitle;
 
     /**
      * 所属区县
      */
-    //  @NotBlank(message = "所属区县不能为空")
     private String countyId;
 
     /**
      * 所属区县名称
      */
-    // @NotBlank(message = "所属区县名称不能为空")
     private String countyTitle;
 
     /**
      * 详细地址
      */
-    // @NotBlank(message = "详细地址不能为空")
     private String address;
 
     /**
      * 有效标志: Y-是;N-否
      */
-    // @NotBlank(message = "有效标志: Y-是;N-否不能为空")
     private String validFlag;
 
     /**
@@ -170,12 +157,20 @@ public class DeptInfoDTO implements Serializable {
         return tenantId;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
     }
 
-    public String getParentId() {
-        return parentId;
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
+    }
+
+    public String getParentCode() {
+        return parentCode;
     }
 
     public void setTitle(String title) {
@@ -226,6 +221,22 @@ public class DeptInfoDTO implements Serializable {
         return levelTitle;
     }
 
+    public void setFuncCode(String funcCode) {
+        this.funcCode = funcCode;
+    }
+
+    public String getFuncCode() {
+        return funcCode;
+    }
+
+    public void setFuncTitle(String funcTitle) {
+        this.funcTitle = funcTitle;
+    }
+
+    public String getFuncTitle() {
+        return funcTitle;
+    }
+
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
@@ -248,22 +259,6 @@ public class DeptInfoDTO implements Serializable {
 
     public String getFacsimile() {
         return facsimile;
-    }
-
-    public void setFuncCode(String funcCode) {
-        this.funcCode = funcCode;
-    }
-
-    public String getFuncCode() {
-        return funcCode;
-    }
-
-    public void setFuncTitle(String funcTitle) {
-        this.funcTitle = funcTitle;
-    }
-
-    public String getFuncTitle() {
-        return funcTitle;
     }
 
     public void setProvId(String provId) {
@@ -330,6 +325,7 @@ public class DeptInfoDTO implements Serializable {
         return validFlag;
     }
 
+
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
@@ -343,18 +339,19 @@ public class DeptInfoDTO implements Serializable {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
                 .append("tenantId", getTenantId())
-                .append("parentId", getParentId())
+                .append("deptCode", getDeptCode())
+                .append("parentCode", getParentCode())
                 .append("title", getTitle())
                 .append("titleAs", getTitleAs())
                 .append("deptFlag", getDeptFlag())
                 .append("thatLevel", getThatLevel())
                 .append("levelCode", getLevelCode())
                 .append("levelTitle", getLevelTitle())
+                .append("funcCode", getFuncCode())
+                .append("funcTitle", getFuncTitle())
                 .append("telephone", getTelephone())
                 .append("mailBox", getMailBox())
                 .append("facsimile", getFacsimile())
-                .append("funcCode", getFuncCode())
-                .append("funcTitle", getFuncTitle())
                 .append("provId", getProvId())
                 .append("provTitle", getProvTitle())
                 .append("cityId", getCityId())

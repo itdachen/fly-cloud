@@ -163,6 +163,19 @@
     border-top: 1px solid #E0E0E0 !important;
 }
 
+.fly-tree-container {
+    width: 500px;
+}
+
+.fly-tree-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-bottom: beige 1px solid;
+    padding-bottom: 10px;
+}
+
 .layui-table-fixed-right {
     border-left: none !important;
 }

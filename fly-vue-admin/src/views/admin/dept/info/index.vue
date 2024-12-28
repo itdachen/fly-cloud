@@ -4,7 +4,8 @@
 
     <div style="display: flex; flex-direction: row; margin-top: 20px;background-color: #FFF; ">
 
-      <div style="width: 500px; padding: 20px">
+      <div class="fly-tree-container">
+        <div class="fly-tree-title">机构树</div>
         <lay-tree :data="deptTreeData"
                   v-model:selectedKey="deptTreeChecked"
                   :showLine="false"
@@ -125,7 +126,7 @@ const {
   loadDeptTree,
   deptTreeData,
   deptTreeChecked,
-  parentDeptId
+  parentDeptCode
 } = useDeptInfoComposable();
 
 
@@ -193,8 +194,8 @@ const treeData = [
 ]
 
 const deptNodeClick = (obj: any) => {
-  queryDeptInfoParams.parentId = obj.id;
-  parentDeptId.value = obj.id;
+  queryDeptInfoParams.parentCode = obj.id;
+  parentDeptCode.value = obj.id;
   reloadDeptInfoDate(1, flyLayPage.limit);
 }
 

@@ -36,7 +36,7 @@ public interface IDeptInfoMapper extends Mapper<DeptInfo> {
      * @param funcCode funcCode
      * @return com.github.itdachen.admin.sdk.vo.DeptInfoVO
      */
-    DeptInfoVO findDeptInfoByFuncCode(String tenantId, String parentId, String funcCode);
+    DeptInfoVO findDeptInfoByFuncCode(String tenantId, String parentCode, String funcCode);
 
     /***
      * 根据id查询
@@ -47,6 +47,17 @@ public interface IDeptInfoMapper extends Mapper<DeptInfo> {
      * @return com.github.itdachen.admin.sdk.vo.deptInfoVo
      */
     DeptInfoVO selectDeptInfoVO(String id);
+
+    /***
+     * 根据租户ID跟部门编码查询
+     *
+     * @author 王大宸
+     * @date 2024/12/28 15:26
+     * @param tenantId tenantId
+     * @param deptCode deptCode
+     * @return com.github.itdachen.admin.sdk.vo.DeptInfoVO
+     */
+    DeptInfoVO findDeptInfoVO(String tenantId, String deptCode);
 
     /***
      * 查询导出数据
@@ -82,9 +93,9 @@ public interface IDeptInfoMapper extends Mapper<DeptInfo> {
      * @author 王大宸
      * @date 2024/12/24 11:10
      * @param tenantId tenantId
-     * @param parentId parentId
+     * @param parentCode parentCode
      * @return java.util.List<com.github.itdachen.framework.context.tree.LayTreeNode.TreeNode>
      */
-    List<TreeNode> findDeptChildren(String tenantId, String parentId, String deptFlag);
+    List<TreeNode> findDeptChildren(String tenantId, String parentCode, String deptFlag);
 
 }

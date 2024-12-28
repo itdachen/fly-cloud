@@ -16,7 +16,6 @@ import java.io.Serializable;
 public class DeptInfoVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
     /**
      * 主键唯一标识
      */
@@ -28,9 +27,14 @@ public class DeptInfoVO implements Serializable {
     private String tenantId;
 
     /**
-     * 上级ID
+     * 部门编码
      */
-    private String parentId;
+    private String deptCode;
+
+    /**
+     * 上级部门编码
+     */
+    private String parentCode;
 
     /**
      * 部门名称
@@ -43,7 +47,7 @@ public class DeptInfoVO implements Serializable {
     private String titleAs;
 
     /**
-     * 部门标志: Y-是;N-否
+     * 部门标志: Y-是;N-否(否的时候为行政区域, 例如: 贵州省贵阳市)
      */
     private String deptFlag;
 
@@ -63,6 +67,16 @@ public class DeptInfoVO implements Serializable {
     private String levelTitle;
 
     /**
+     * 职能代码(dept_func表中 code)
+     */
+    private String funcCode;
+
+    /**
+     * 职能名称(dept_func表中title)
+     */
+    private String funcTitle;
+
+    /**
      * 联系电话
      */
     private String telephone;
@@ -76,16 +90,6 @@ public class DeptInfoVO implements Serializable {
      * 传真
      */
     private String facsimile;
-
-    /**
-     * 职能代码(dept_func表中 code)
-     */
-    private String funcCode;
-
-    /**
-     * 职能名称(dept_func表中title)
-     */
-    private String funcTitle;
 
     /**
      * 所属省级ID
@@ -149,12 +153,20 @@ public class DeptInfoVO implements Serializable {
         return tenantId;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
     }
 
-    public String getParentId() {
-        return parentId;
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
+    }
+
+    public String getParentCode() {
+        return parentCode;
     }
 
     public void setTitle(String title) {
@@ -205,6 +217,22 @@ public class DeptInfoVO implements Serializable {
         return levelTitle;
     }
 
+    public void setFuncCode(String funcCode) {
+        this.funcCode = funcCode;
+    }
+
+    public String getFuncCode() {
+        return funcCode;
+    }
+
+    public void setFuncTitle(String funcTitle) {
+        this.funcTitle = funcTitle;
+    }
+
+    public String getFuncTitle() {
+        return funcTitle;
+    }
+
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
@@ -227,22 +255,6 @@ public class DeptInfoVO implements Serializable {
 
     public String getFacsimile() {
         return facsimile;
-    }
-
-    public void setFuncCode(String funcCode) {
-        this.funcCode = funcCode;
-    }
-
-    public String getFuncCode() {
-        return funcCode;
-    }
-
-    public void setFuncTitle(String funcTitle) {
-        this.funcTitle = funcTitle;
-    }
-
-    public String getFuncTitle() {
-        return funcTitle;
     }
 
     public void setProvId(String provId) {
@@ -323,18 +335,19 @@ public class DeptInfoVO implements Serializable {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
                 .append("tenantId", getTenantId())
-                .append("parentId", getParentId())
+                .append("deptCode", getDeptCode())
+                .append("parentCode", getParentCode())
                 .append("title", getTitle())
                 .append("titleAs", getTitleAs())
                 .append("deptFlag", getDeptFlag())
                 .append("thatLevel", getThatLevel())
                 .append("levelCode", getLevelCode())
                 .append("levelTitle", getLevelTitle())
+                .append("funcCode", getFuncCode())
+                .append("funcTitle", getFuncTitle())
                 .append("telephone", getTelephone())
                 .append("mailBox", getMailBox())
                 .append("facsimile", getFacsimile())
-                .append("funcCode", getFuncCode())
-                .append("funcTitle", getFuncTitle())
                 .append("provId", getProvId())
                 .append("provTitle", getProvTitle())
                 .append("cityId", getCityId())

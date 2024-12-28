@@ -98,9 +98,9 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         if (DeptLevelConstants.COUNT_LEVEL.equals(deptInfoDTO.getLevelCode())) {
             areaCode = deptInfoDTO.getCountyId();
         }
-        String deptId = DeptLevelFormatConstants.obtainDeptId(areaCode, deptInfoDTO.getLevelCode(), deptInfoDTO.getFuncCode());
+        String deptCode = DeptLevelFormatConstants.obtainDeptId(areaCode, deptInfoDTO.getLevelCode(), deptInfoDTO.getFuncCode());
 
-        DeptInfoVO deptInfoVO = bizMapper.selectDeptInfoVO(deptId);
+        DeptInfoVO deptInfoVO = bizMapper.findDeptInfoVO(BizContextHandler.getTenantId(), deptCode);
         if (null != deptInfoVO) {
             String msg = "该部门职能已经存在！";
             if (YesOrNotConstant.Y.equals(deptInfoVO.getDeptFlag())) {
@@ -115,7 +115,7 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         DeptInfo deptInfo = bizConvert.toJavaObject(deptInfoDTO);
         deptInfo.setDeleteFlag(YesOrNotConstant.N);
         EntityUtils.setCreatAndUpdateInfo(deptInfo);
-        deptInfo.setId(deptId);
+        deptInfo.setDeptCode(deptCode);
         if (StringUtils.isEmpty(deptInfo.getTitleAs())) {
             deptInfo.setTitleAs(deptInfo.getTitle());
         }
@@ -134,8 +134,9 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
      */
     @Override
     public DeptInfoVO updateInfo(DeptInfoDTO deptInfoDTO) throws Exception {
-        DeptInfoVO deptInfoVO = bizMapper.selectDeptInfoVO(deptInfoDTO.getId());
-        if (null != deptInfoVO && !deptInfoVO.getId().equals(deptInfoDTO.getId())) {
+        DeptInfoVO deptInfoDbVO = selectByPrimaryKey(deptInfoDTO.getId());
+        DeptInfoVO deptInfoVO = bizMapper.findDeptInfoVO(BizContextHandler.getTenantId(), deptInfoDbVO.getDeptCode());
+        if (null != deptInfoVO && !deptInfoVO.getDeptCode().equals(deptInfoDTO.getDeptCode())) {
             String msg = "该部门职能已经存在！";
             if (YesOrNotConstant.Y.equals(deptInfoVO.getDeptFlag())) {
                 msg += "处于删除状态！";
@@ -152,6 +153,7 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         if (StringUtils.isEmpty(deptInfo.getTitleAs())) {
             deptInfo.setTitleAs(deptInfo.getTitle());
         }
+        deptInfo.setDeptCode(deptInfoDbVO.getDeptCode());
         bizMapper.updateByPrimaryKeySelective(deptInfo);
         return bizConvert.toJavaObjectVO(deptInfo);
     }
@@ -230,12 +232,14 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
      * 递归, 查询部门树
      *
      * @author 王大宸
-     * @date 2024/12/24 15:26
-
-     * @return void
+     * @date 2024/12/28 15:47
+     * @param tenantId tenantId
+     * @param parentCode parentCode
+     * @param deptFlag deptFlag
+     * @return java.util.List<com.github.itdachen.framework.context.tree.lay.TreeNode>
      */
-    private List<TreeNode> findDeptChildren(String tenantId, String parentId, String deptFlag) {
-        List<TreeNode> list = bizMapper.findDeptChildren(tenantId, parentId, deptFlag);
+    private List<TreeNode> findDeptChildren(String tenantId, String parentCode, String deptFlag) {
+        List<TreeNode> list = bizMapper.findDeptChildren(tenantId, parentCode, deptFlag);
         if (null == list || list.isEmpty()) {
             return new ArrayList<>();
         }
@@ -251,7 +255,6 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         }
         return list;
     }
-
 
 
 }
