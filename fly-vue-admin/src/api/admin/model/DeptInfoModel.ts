@@ -184,7 +184,7 @@ export default function useDeptInfoBuilder() {
 
             }
         },
-        {title: '操作', width: '280px', customSlot: 'operator', key: 'operator', align: 'center', fixed: 'right'}
+        {title: '操作', width: '450px', customSlot: 'operator', key: 'operator', align: 'center', fixed: 'right'}
     ];
 
     /**

@@ -104,10 +104,16 @@ public class AuthorizeOAuthTokenServiceImpl implements IAuthorizeOAuthTokenServi
         currentUserDetails.setAppVersion(appInfoProperties.getVersion());
         currentUserDetails.setAppContextPath(appInfoProperties.getContextPath());
 
+        /* 部门信息 */
         currentUserDetails.setDeptId("1871467053303599104");
         currentUserDetails.setDeptLevel("00");
         currentUserDetails.setDeptParentId("520115100000001");
         currentUserDetails.setDeptTitle("领导办公室");
+
+        /* 身份信息 */
+        currentUserDetails.setRoleName("研发中心-王大宸");
+        currentUserDetails.setRoleId("1");
+        currentUserDetails.setRoleFlag("Y");
 
         Map<String, String> userDetailMap = TokenUserDetailsHandler.setUserDetailMap(currentUserDetails, TokenTicketConstant.ACCESS_TOKEN);
         String access_token = jwtsTokenHelper.accessToken(new JwtTokenInfo.Builder()

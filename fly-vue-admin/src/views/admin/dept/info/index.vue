@@ -47,7 +47,7 @@
                      @change=" reloadDeptInfoDate ">
 
             <template v-slot:toolbar>
-              <lay-button v-if="'0' != parentDeptId" size="sm" type="primary" class="fly-button fly-toolbar-addition"
+              <lay-button v-if="'0' != parentDeptCode" size="sm" type="primary" class="fly-button fly-toolbar-addition"
                           @click=" onTapDeptInfoAdd ">
                 <lay-icon class="layui-icon-addition"></lay-icon>
                 新增
@@ -58,6 +58,10 @@
               <lay-button size="sm" type="primary" class="fly-button fly-view-button" @click=" onTapDeptInfoView(row) ">
                 <lay-icon class="layui-icon-list"></lay-icon>
                 查看
+              </lay-button>
+              <lay-button size="sm" type="primary" class="fly-button fly-edit-button" @click=" onTapDeptInfoEdit(row) ">
+                <lay-icon class="layui-icon-auz"></lay-icon>
+                岗位设置
               </lay-button>
               <lay-button size="sm" type="primary" class="fly-button fly-edit-button" @click=" onTapDeptInfoEdit(row) ">
                 <lay-icon class="layui-icon-edit"></lay-icon>

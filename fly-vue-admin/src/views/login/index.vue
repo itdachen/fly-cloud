@@ -131,7 +131,8 @@ export default defineComponent({
             layer.msg(res.msg, {icon: 1}, async () => {
               // 将 token 存入本地缓存
               localStorage.setItem('token', res.data.access_token)
-              userStore.token = res.data.access_token
+              userStore.token = res.data.access_token;
+              userStore.userInfo = res.data.info
               await userStore.loadMenus()
               await userStore.loadPermissions()
               router.push('/')

@@ -145,7 +145,7 @@ function saveClazzInfoHandler() {
 const clazzTitleHandler = (model: ClazzInfo) => {
   selectDeptHandler(model);
   console.log('clazzTitleHandler', model)
-  model.clazzTitle = model.deptFuncTitle + '-' + model.deptLevelTitle + '-' + model.clazzFuncTitle;
+  model.clazzTitle = model.deptFuncTitle + ' — ' + model.deptLevelTitle + ' — ' + model.clazzFuncTitle;
 
 
 }

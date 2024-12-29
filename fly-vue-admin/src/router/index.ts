@@ -26,6 +26,11 @@ router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, n
 
   const userStore = useUserStore();
 
+  // let token = userStore.token;
+  // if (null === token || undefined === token || '' === token){
+  //   next({path: '/login'})
+  // }
+
   if(to.meta.requireAuth) {
     next();
   } else if(to.matched.length == 0) {

@@ -13,6 +13,7 @@ fly:
     auth:
       token:
         type: rsa
+        expires: 18000 # 五小时
       app:
         service-id: auth
         app-id: ${spring.application.name}
