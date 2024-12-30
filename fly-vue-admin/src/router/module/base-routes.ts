@@ -282,6 +282,11 @@ export default [
         component: () => import('../../views/admin/clazz/info/index.vue'),
         meta: { title: '岗位管理', requireAuth: true },
       },
+      {
+        path: '/admin/menu/info',
+        component: () => import('../../views/admin/menu/index.vue'),
+        meta: { title: '菜单管理', requireAuth: true },
+      },
     ]
   },
 

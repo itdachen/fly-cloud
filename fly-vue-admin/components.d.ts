@@ -7,12 +7,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    LayAvatar: typeof import('@layui/layui-vue')['LayAvatar']
     LayBody: typeof import('@layui/layui-vue')['LayBody']
     LayBreadcrumb: typeof import('@layui/layui-vue')['LayBreadcrumb']
     LayBreadcrumbItem: typeof import('@layui/layui-vue')['LayBreadcrumbItem']
     LayButton: typeof import('@layui/layui-vue')['LayButton']
-    LayButtonContainer: typeof import('@layui/layui-vue')['LayButtonContainer']
     LayCard: typeof import('@layui/layui-vue')['LayCard']
     LayCheckbox: typeof import('@layui/layui-vue')['LayCheckbox']
     LayCol: typeof import('@layui/layui-vue')['LayCol']
@@ -21,13 +19,16 @@ declare module 'vue' {
     LayDropdown: typeof import('@layui/layui-vue')['LayDropdown']
     LayDropdownMenu: typeof import('@layui/layui-vue')['LayDropdownMenu']
     LayDropdownMenuItem: typeof import('@layui/layui-vue')['LayDropdownMenuItem']
+    LayException: typeof import('@layui/layui-vue')['LayException']
     LayFooter: typeof import('@layui/layui-vue')['LayFooter']
     LayForm: typeof import('@layui/layui-vue')['LayForm']
     LayFormItem: typeof import('@layui/layui-vue')['LayFormItem']
     LayFullscreen: typeof import('@layui/layui-vue')['LayFullscreen']
     LayHeader: typeof import('@layui/layui-vue')['LayHeader']
     LayIcon: typeof import('@layui/icons-vue')['LayIcon']
+    LayIconPicker: typeof import('@layui/layui-vue')['LayIconPicker']
     LayInput: typeof import('@layui/layui-vue')['LayInput']
+    LayInputNumber: typeof import('@layui/layui-vue')['LayInputNumber']
     LayLayer: typeof import('@layui/layer-vue')['LayLayer']
     LayLayout: typeof import('@layui/layui-vue')['LayLayout']
     LayLine: typeof import('@layui/layui-vue')['LayLine']
@@ -49,7 +50,6 @@ declare module 'vue' {
     LayTag: typeof import('@layui/layui-vue')['LayTag']
     LayTextarea: typeof import('@layui/layui-vue')['LayTextarea']
     LayTree: typeof import('@layui/layui-vue')['LayTree']
-    LayUpload: typeof import('@layui/layui-vue')['LayUpload']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

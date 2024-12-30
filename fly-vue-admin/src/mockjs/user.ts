@@ -8,6 +8,65 @@ let user: User = {
 
 const menus = [
   {
+    id: '/admin',
+    icon: "layui-icon-set",
+    title: '系统管理_ADMIN',
+    children: [
+      {
+        id: '/admin/app',
+        icon: "layui-icon-user",
+        title: '应用管理',
+      },
+      {
+        id: '/admin/user',
+        icon: "layui-icon-user",
+        title: '用户管理',
+      },
+      {
+        id: '/admin/tenant',
+        icon: "layui-icon-user",
+        title: '租户管理',
+      },
+      {
+        id: '/admin/dept/func',
+        icon: "layui-icon-user",
+        title: '部门职能',
+      },
+      {
+        id: '/admin/dept/level',
+        icon: "layui-icon-user",
+        title: '部门层级',
+      },
+      {
+        id: '/admin/org',
+        icon: "layui-icon-user",
+        title: '机构管理',
+      },
+      {
+        id: '/admin/dept/info',
+        icon: "layui-icon-user",
+        title: '部门管理',
+      },
+      {
+        id: '/admin/clazz/func',
+        icon: "layui-icon-user",
+        title: '岗位职能',
+      },
+      {
+        id: '/admin/clazz/info',
+        icon: "layui-icon-user",
+        title: '岗位管理',
+      },
+      {
+        id: '/admin/menu/info',
+        icon: "layui-icon-user",
+        title: '菜单管理',
+      },
+
+    ]
+  },
+
+  {
     id: "/workspace",
     icon: "layui-icon-home",
     title: "工作空间",
@@ -256,58 +315,7 @@ const menus = [
 
     ]
   },
-  {
-    id: '/admin',
-    icon: "layui-icon-set",
-    title: '系统管理_ADMIN',
-    children: [
-      {
-        id: '/admin/app',
-        icon: "layui-icon-user",
-        title: '应用管理',
-      },
-      {
-        id: '/admin/user',
-        icon: "layui-icon-user",
-        title: '用户管理',
-      },
-      {
-        id: '/admin/tenant',
-        icon: "layui-icon-user",
-        title: '租户管理',
-      },
-      {
-        id: '/admin/dept/func',
-        icon: "layui-icon-user",
-        title: '部门职能',
-      },
-      {
-        id: '/admin/dept/level',
-        icon: "layui-icon-user",
-        title: '部门层级',
-      },
-      {
-        id: '/admin/org',
-        icon: "layui-icon-user",
-        title: '机构管理',
-      },
-      {
-        id: '/admin/dept/info',
-        icon: "layui-icon-user",
-        title: '部门管理',
-      },
-      {
-        id: '/admin/clazz/func',
-        icon: "layui-icon-user",
-        title: '岗位职能',
-      },
-      {
-        id: '/admin/clazz/info',
-        icon: "layui-icon-user",
-        title: '岗位管理',
-      },
-    ]
-  },
+
 ]
 
 const getInfo = (req: any, res: any) => {
