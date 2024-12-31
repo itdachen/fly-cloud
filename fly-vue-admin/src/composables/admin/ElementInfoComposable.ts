@@ -1,4 +1,3 @@
-
 import {layer} from "@layui/layui-vue";
 
 import {StringUtils} from '@/fly/utils/StringUtils';
@@ -57,8 +56,11 @@ export default function useElementInfoComposable() {
     /**
      * 新增按钮
      */
-    const onTapElementInfoAdd = () => {
-        refElementInfoComponent.value?.open(FormTypeEnum.ADD, null);
+    const onTapElementInfoAdd = (appId?: string, menuId?: string, menuTitle?: string) => {
+        console.log('appId: ', appId);
+        console.log('menuId: ', menuId);
+        console.log('menuTitle: ', menuTitle);
+        refElementInfoComponent.value?.open(FormTypeEnum.ADD, null, appId, menuId, menuTitle);
     }
 
     /**
@@ -82,21 +84,21 @@ export default function useElementInfoComposable() {
      * @param data 保存的数据
      */
     const elementInfoDataHandler = (data: ElementInfo) => {
-      if (StringUtils.isEmpty(data.id)){
-         elementInfoApi.saveInfo(data).then((res) => {
-              reloadElementInfoDate(1, flyLayPage.limit); // 表格重新加载数据
-              layer.msg(res.msg, {time: 1500, icon: 1}); // 操作成功提示
-              refElementInfoComponent.value?.onTapClose();  // 关闭弹窗
-          })
-      } else {
-          elementInfoApi.updateInfo(data, data.id).then((res) => {
-              reloadElementInfoDate(1, flyLayPage.limit);  // 表格重新加载数据
-              layer.msg(res.msg, {time: 1500, icon: 1}); // 操作成功提示
-              refElementInfoComponent.value?.onTapClose();  // 关闭弹窗
-          })
-      }
+        if (StringUtils.isEmpty(data.id)) {
+            elementInfoApi.saveInfo(data).then((res) => {
+                reloadElementInfoDate(1, flyLayPage.limit); // 表格重新加载数据
+                layer.msg(res.msg, {time: 1500, icon: 1}); // 操作成功提示
+                refElementInfoComponent.value?.onTapClose();  // 关闭弹窗
+            })
+        } else {
+            elementInfoApi.updateInfo(data, data.id).then((res) => {
+                reloadElementInfoDate(1, flyLayPage.limit);  // 表格重新加载数据
+                layer.msg(res.msg, {time: 1500, icon: 1}); // 操作成功提示
+                refElementInfoComponent.value?.onTapClose();  // 关闭弹窗
+            })
+        }
     }
-    
+
 
     /**
      * 删除按钮

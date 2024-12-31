@@ -139,14 +139,14 @@ function saveMenuInfoHandler() {
 
 
 //显示弹框
-const open = (type: FormTypeEnum, row?: MenuInfo, parentId?: string, parentTitle?: string) => {
+const open = (type: FormTypeEnum, row?: MenuInfo, appId?: string, parentId?: string, parentTitle?: string) => {
   layerRef.title = type + '菜单信息';
   if (null !== row) {
     menuInfo.value = JSON.parse(JSON.stringify(row))
   } else {
     menuInfo.value = {
       id: '',  // 菜单ID
-      appId: '',  // 应用ID/appId
+      appId: appId,  // 应用ID/appId
       parentId: parentId,  // 上级ID
       parentTitle: parentTitle,  // 上级菜单
       authCode: '',  // 认证编码

@@ -111,6 +111,9 @@ public class MenuInfoServiceImpl extends BizServiceImpl<IMenuInfoMapper, MenuInf
         }
         List<TreeNode> list = new ArrayList<>();
         TreeNode treeNode = new TreeNode(appId, "太虚十境", true);
+        treeNode.setType("dirt");
+        treeNode.setIcon("layui-icon-home");
+        treeNode.setAttr1(appId);
         List<TreeNode> deptChildren = findMenuChildren(appId);
 
         treeNode.setChildren(deptChildren);

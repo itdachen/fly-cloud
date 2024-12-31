@@ -29,7 +29,8 @@ const menuInfoApi = new MenuInfoApi();
 export default function useMenuInfoComposable() {
 
     /* 上级菜单ID/上级菜单名称 */
-    const parentId = ref<string>('');
+    const appId = ref<string>('');
+    const parentId = ref<string>('0');
     const parentTitle = ref<string>('');
     const menuTreeData = ref();
     const menuTreeChecked = ref();
@@ -71,7 +72,7 @@ export default function useMenuInfoComposable() {
      * 新增按钮
      */
     const onTapMenuInfoAdd = () => {
-        refMenuInfoComponent.value?.open(FormTypeEnum.ADD, null, parentId.value, parentTitle.value);
+        refMenuInfoComponent.value?.open(FormTypeEnum.ADD, null, appId.value, parentId.value, parentTitle.value);
     }
 
     /**
@@ -148,6 +149,7 @@ export default function useMenuInfoComposable() {
         menuInfoDataHandler,
         flyLayPage,
 
+        appId,
         parentId,
         parentTitle,
         loadMenuTree,

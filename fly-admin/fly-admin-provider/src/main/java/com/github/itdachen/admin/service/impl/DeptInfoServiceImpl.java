@@ -244,15 +244,14 @@ public class DeptInfoServiceImpl extends BizServiceImpl<IDeptInfoMapper, DeptInf
         if (null == list || list.isEmpty()) {
             return new ArrayList<>();
         }
-
-        List<TreeNode> children = new ArrayList<>();
         for (TreeNode treeNode : list) {
-            children = bizMapper.findDeptChildren(tenantId, treeNode.getId(), deptFlag);
-            if (null == children || children.isEmpty()) {
-                continue;
-            }
-            treeNode.setChildren(children);
-            findDeptChildren(tenantId, treeNode.getId(), deptFlag);
+            treeNode.setChildren(findDeptChildren(tenantId, treeNode.getId(), deptFlag));
+//            children = bizMapper.findDeptChildren(tenantId, treeNode.getId(), deptFlag);
+//            if (null == children || children.isEmpty()) {
+//                continue;
+//            }
+//            treeNode.setChildren(children);
+//            findDeptChildren(tenantId, treeNode.getId(), deptFlag);
         }
         return list;
     }

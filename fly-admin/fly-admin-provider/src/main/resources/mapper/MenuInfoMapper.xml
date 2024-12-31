@@ -117,7 +117,7 @@
 
     <select id="findMenuChildren" parameterType="java.lang.String"
             resultType="com.github.itdachen.framework.context.tree.lay.TreeNode">
-        SELECT id, title
+        SELECT id, title, type, lay_icon AS icon, app_id AS attr1
         FROM fly_next_resource_menu_info
         WHERE type != 'uri' AND type != 'third'
          AND parent_id = #{parentId}

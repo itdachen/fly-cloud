@@ -158,10 +158,20 @@ export default function useElementInfoBuilder() {
      * 分页列表展示项
      */
     const elementInfoColumns = [
-        {title: '认证编码', key: 'authCode', ellipsisTooltip: true, align: 'center'},
-        {title: '标题', key: 'title', ellipsisTooltip: true, align: 'center'},
-        {title: '类型: button,uri', key: 'type', ellipsisTooltip: true, align: 'center'},
-        {title: '是否展示/有效标志: Y-有效;N-无效', key: 'validFlag', ellipsisTooltip: true, align: 'center'},
+        {title: '标题', key: 'title', ellipsisTooltip: true, align: 'left'},
+        {title: '接口地址', key: 'apiUri', ellipsisTooltip: true, align: 'left'},
+        {title: '认证编码', key: 'authCode', ellipsisTooltip: true, align: 'left'},
+        {
+            title: '有效标志',
+            key: 'validFlag',
+            ellipsisTooltip: true,
+            align: 'center',
+            width: 120,
+            customSlot: function (obj: any) {
+                return 'Y' === obj.data.validFlag ? '有效' : '无效';
+
+            }
+        },
         {title: '操作', width: '280px', customSlot: 'operator', key: 'operator', align: 'center', fixed: 'right'}
     ];
 
