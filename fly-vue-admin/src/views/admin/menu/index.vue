@@ -105,7 +105,7 @@
 
       <!--  按钮表格 -->
       <div v-if="!showMenuTable" style="margin-left: 50px;border-left: #eee 1px solid;">
-        <lay-card class="fly-search-card">
+        <lay-card class="fly-search-card" style="padding-top: 0px !important;">
           <lay-form>
             <lay-form-item label="标题" prop="title" mode="inline">
               <lay-input v-model="queryElementInfoParams.title"></lay-input>
