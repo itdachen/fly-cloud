@@ -106,13 +106,22 @@
                 AND has_ip = #{hasIp}
             </if>
         </where>
-        ORDER BY id DESC
+        ORDER BY order_num ASC
     </sql>
 
     <!-- 集合查询 -->
     <select id="list" parameterType="com.github.itdachen.admin.sdk.query.MenuInfoQuery" resultMap="menuInfoMap">
         <include refid="selectMenuInfoVO"/>
         <include refid="selectParamsWhere"></include>
+    </select>
+
+    <select id="findMenuChildren" parameterType="java.lang.String"
+            resultType="com.github.itdachen.framework.context.tree.lay.TreeNode">
+        SELECT id, title
+        FROM fly_next_resource_menu_info
+        WHERE type != 'uri' AND type != 'third'
+         AND parent_id = #{parentId}
+        ORDER BY order_num ASC
     </select>
 
     <!-- 查询导出数据 -->

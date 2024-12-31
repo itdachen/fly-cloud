@@ -1,5 +1,6 @@
 import {HttpRequest} from '@/fly/http/rest/HttpRequest';
 import {MenuInfo, MenuInfoQuery} from '@/api/admin/model/MenuInfoModel';
+import http from "@/fly/http";
 
 
 /**
@@ -13,10 +14,18 @@ const MENU_INFO_PATH = '/admin/menu/info';
  * @author 王大宸
  * @date 2024-12-30 10:26:52
  */
-class MenuInfoApi extends HttpRequest< MenuInfo, MenuInfoQuery, string > {
+class MenuInfoApi extends HttpRequest<MenuInfo, MenuInfoQuery, string> {
 
     constructor() {
         super(MENU_INFO_PATH)
+    }
+
+
+    /**
+     * 获取机构/部门树
+     */
+    findMenuTree(appId?: string) {
+        return http.get(MENU_INFO_PATH + '/tree?appId=' + appId);
     }
 
 

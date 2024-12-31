@@ -31,6 +31,15 @@ export default function useMenuInfoComposable() {
     /* 上级菜单ID/上级菜单名称 */
     const parentId = ref<string>('');
     const parentTitle = ref<string>('');
+    const menuTreeData = ref();
+    const menuTreeChecked = ref();
+
+    const loadMenuTree = () => {
+        menuInfoApi.findMenuTree('').then(res => {
+            menuTreeChecked.value = res.data.checked;
+            menuTreeData.value = res.data.data;
+        })
+    }
 
     /**
      * 加载分页数据
@@ -137,7 +146,13 @@ export default function useMenuInfoComposable() {
         /* 接口 */
         removeMenuInfoHandler,
         menuInfoDataHandler,
-        flyLayPage
+        flyLayPage,
+
+        parentId,
+        parentTitle,
+        loadMenuTree,
+        menuTreeData,
+        menuTreeChecked
 
     };
 }

@@ -3,6 +3,7 @@ package com.github.itdachen.admin.service;
 import com.github.itdachen.admin.sdk.dto.MenuInfoDTO;
 import com.github.itdachen.admin.sdk.query.MenuInfoQuery;
 import com.github.itdachen.admin.sdk.vo.MenuInfoVO;
+import com.github.itdachen.framework.context.tree.lay.LayTree;
 import com.github.itdachen.framework.webmvc.service.IBizService;
 
 /**
@@ -12,5 +13,8 @@ import com.github.itdachen.framework.webmvc.service.IBizService;
  * @date 2024-12-30 10:26:52
  */
 public interface IMenuInfoService extends IBizService< MenuInfoDTO, MenuInfoVO, MenuInfoQuery, String > {
+
+
+    LayTree findMenuTree(String appId) throws Exception;
 
 }

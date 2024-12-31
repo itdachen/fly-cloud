@@ -186,35 +186,21 @@ export default function useMenuInfoBuilder() {
      * 分页列表展示项
      */
     const menuInfoColumns = [
+        {title: '菜单标题', key: 'title', ellipsisTooltip: true, align: 'left', customSlot: 'title'},
         {title: '认证编码', key: 'authCode', ellipsisTooltip: true, align: 'center'},
-        {title: '菜单标题', key: 'title', ellipsisTooltip: true, align: 'center'},
+        {title: '路由地址', key: 'path', ellipsisTooltip: true, align: 'center'},
         {
             title: '类型',
             key: 'type',
             ellipsisTooltip: true,
             align: 'center',
-            width: 150,
-            customSlot: 'type',
-            // customSlot: function (obj: any) {
-            //     if ('dirt' === obj.data.type){
-            //         return '目录';
-            //     }
-            //     if ('menu' === obj.data.type){
-            //         return '菜单';
-            //     }
-            //     if ('uri' === obj.data.type){
-            //         return '外链';
-            //     }
-            //     if ('third' === obj.data.type){
-            //         return '第三方平台';
-            //     }
-            //     return '';
-            // }
+            width: 100,
+            customSlot: 'type'
         },
-        {title: '排序', key: 'orderNum', ellipsisTooltip: true, width: 150, align: 'center'},
+        {title: '排序', key: 'orderNum', ellipsisTooltip: true, width: 100, align: 'center'},
         {
             title: '有效标志', key: 'validFlag', ellipsisTooltip: true, align: 'center',
-            width: 150,
+            width: 120,
             customSlot: function (obj: any) {
                 return 'Y' === obj.data.validFlag ? '有效' : '无效';
 

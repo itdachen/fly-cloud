@@ -23,11 +23,11 @@
           <lay-input v-model="menuInfo.title" :disabled="layerRef.disabled"></lay-input>
         </lay-form-item>
 
-        <lay-form-item label="访问地址" prop="path" :required="layerRef.required">
+        <lay-form-item label="路由地址" prop="path" :required="layerRef.required">
           <lay-input v-model="menuInfo.path" :disabled="layerRef.disabled"></lay-input>
         </lay-form-item>
 
-        <lay-form-item label="组件名称地址" prop="componentName" :required="layerRef.required">
+        <lay-form-item label="组件地址" prop="componentName" :required="layerRef.required">
           <lay-input v-model="menuInfo.componentName" :disabled="layerRef.disabled"></lay-input>
         </lay-form-item>
 

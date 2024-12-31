@@ -35,7 +35,6 @@
     <!-- table   :default-toolbar="true"  :height="'100%'" line row nob -->
     <div class="table-box">
       <lay-table :page="false" :skin="'line'"
-                 :height="'90%'"
                  :columns=" deptLevelColumns "
                  :loading=" tableDeptLevelData.loading "
                  :data-source=" tableDeptLevelData.rows "
