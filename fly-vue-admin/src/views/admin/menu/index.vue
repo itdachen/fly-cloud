@@ -252,8 +252,11 @@ const previousNextPage = ({current = 1, limit = 10}) => {
   loadTableMenuInfoData(queryMenuInfoParams);
 }
 
+/**
+ * 点击菜单树
+ * @param obj
+ */
 const menuNodeClick = (obj: any) => {
-  console.log('menuNodeClick', obj)
   parentId.value = obj.id;
   parentTitle.value = obj.title;
   appId.value = obj.attr1;
@@ -263,6 +266,10 @@ const menuNodeClick = (obj: any) => {
   if ('menu' === menuType) {
     showMenuTable.value = false;
     queryElementInfoParams.menuId = obj.id;
+    loadTableElementInfoData(queryElementInfoParams);
+    return;
+  }
+  if ('uri' === menuType || 'third' === menuType) {
     return;
   }
   showMenuTable.value = true;

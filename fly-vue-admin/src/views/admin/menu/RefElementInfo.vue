@@ -6,8 +6,19 @@
              :maxmin="layerRef.maxmin">
 
     <div style="padding: 20px">
-
       <lay-form :model="elementInfo" ref="layElementInfoForm">
+        <lay-form-item label="API请求类型" prop="httpMethod">
+          <lay-radio v-model="elementInfo.httpMethod" name="httpMethod"
+                     value="GET" label="GET" :disabled="layerRef.disabled"></lay-radio>
+          <lay-radio v-model="elementInfo.httpMethod" name="httpMethod"
+                     value="POST" label="POST" :disabled="layerRef.disabled"></lay-radio>
+          <lay-radio v-model="elementInfo.httpMethod" name="httpMethod"
+                     value="PUT" label="PUT" :disabled="layerRef.disabled"></lay-radio>
+          <lay-radio v-model="elementInfo.httpMethod" name="httpMethod"
+                     value="DELETE" label="DELETE" :disabled="layerRef.disabled"></lay-radio>
+        </lay-form-item>
+
+
         <lay-form-item label="标题" prop="title" :required="layerRef.required">
           <lay-input v-model="elementInfo.title" :disabled="layerRef.disabled"></lay-input>
         </lay-form-item>
@@ -29,16 +40,6 @@
                      :disabled="layerRef.disabled"></lay-input>
         </lay-form-item>
 
-        <lay-form-item label="API请求类型" prop="httpMethod">
-          <lay-radio v-model="elementInfo.httpMethod" name="httpMethod" value="POST" label="POST"
-                     :disabled="layerRef.disabled"></lay-radio>
-          <lay-radio v-model="elementInfo.httpMethod" name="httpMethod" value="GET" label="GET"
-                     :disabled="layerRef.disabled"></lay-radio>
-          <lay-radio v-model="elementInfo.httpMethod" name="httpMethod" value="PUT" label="PUT"
-                     :disabled="layerRef.disabled"></lay-radio>
-          <lay-radio v-model="elementInfo.httpMethod" name="httpMethod" value="DELETE" label="DELETE"
-                     :disabled="layerRef.disabled"></lay-radio>
-        </lay-form-item>
 
         <lay-form-item label="是否需要授权" prop="hasAuth" mode="inline">
           <lay-radio v-model="elementInfo.hasAuth" name="hasAuth" value="Y" label="需要"
@@ -112,7 +113,7 @@ const layElementInfoForm = ref<any>();
 const layerRef = reactive<any>({
   open: false,
   title: '按钮资源信息',
-  area: ['1200px', '670px'], // 宽度,  高度
+  area: ['1200px', '570px'], // 宽度,  高度
   disabled: false,
   shadeClose: false,
   maxmin: false,
@@ -145,11 +146,11 @@ const open = (type: FormTypeEnum, row?: ElementInfo, appId?: string, menuId?: st
       menuId: menuId,  // 菜单ID
       menuTitle: menuTitle,  // 菜单名称
       authCode: '',  // 认证编码
-      title: '',  // 标题
+      title: '查询',  // 标题
       type: 'button',  // 类型: button,uri
       pageUri: '/',  // 页面访问地址
       apiUri: '/',  // 接口请求地址
-      httpMethod: 'POST',  // API请求类型: POST/GET/PUT/DELETE
+      httpMethod: 'GET',  // API请求类型: POST/GET/PUT/DELETE
       orderNum: '99',  // 排序
       thirdParty: '',  // 第三方平台标识
       thirdTitle: '',  // 第三方平台名称
