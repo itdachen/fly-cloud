@@ -215,10 +215,7 @@ const onTapClose = () => {
 }
 
 const onTapEditParent = () => {
-  console.log('onTapEditParent');
-
   refEditParentComponent.value?.open();
-
 }
 
 const editParentMenu = (menuId: string, menuTitle: string) => {
