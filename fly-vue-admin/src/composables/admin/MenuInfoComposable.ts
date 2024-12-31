@@ -13,7 +13,8 @@ const {
     menuInfoColumns,
     queryMenuInfoParams,
     tableMenuInfoData,
-    refMenuInfoComponent
+    refMenuInfoComponent,
+    refEditParentComponent
 } = useMenuInfoBuilder();
 const {flyLayPage} = useLayTableComposable();
 
@@ -131,6 +132,7 @@ export default function useMenuInfoComposable() {
 
     return {
         refMenuInfoComponent,
+        refEditParentComponent,
         menuInfo,
         tableMenuInfoData,
         menuInfoColumns,

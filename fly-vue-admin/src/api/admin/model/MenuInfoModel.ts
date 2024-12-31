@@ -214,12 +214,18 @@ export default function useMenuInfoBuilder() {
      */
     const refMenuInfoComponent = ref();
 
+    /**
+     * 修改上级菜单弹窗
+     */
+    const refEditParentComponent = ref();
+
     return {
         queryMenuInfoParams,
         tableMenuInfoData,
         menuInfo,
         menuInfoColumns,
-        refMenuInfoComponent
+        refMenuInfoComponent,
+        refEditParentComponent
     }
 
 }

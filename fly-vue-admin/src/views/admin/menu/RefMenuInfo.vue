@@ -7,6 +7,20 @@
 
     <div style="padding: 20px">
       <lay-form :model="menuInfo" ref="layMenuInfoForm">
+
+        <lay-form-item v-if="menuSuffix" label="所属目录" prop="parentTitle">
+          <lay-input v-model="menuInfo.parentTitle" :disabled="layerRef.disabled">
+            <template #suffix>
+              <lay-button class="fly-button fly-ok-button"
+                          style="height: 37px !important;margin-right: -10px !important;"
+                          @click="onTapEditParent">
+                <lay-icon class="layui-icon-edit"></lay-icon>
+                修改上级目录
+              </lay-button>
+            </template>
+          </lay-input>
+        </lay-form-item>
+
         <lay-form-item label="类型" prop="type" :required="layerRef.required">
           <lay-radio v-model="menuInfo.type" name="type" value="dirt" :disabled="layerRef.disabled">目录</lay-radio>
           <lay-radio v-model="menuInfo.type" name="type" value="menu" :disabled="layerRef.disabled">菜单</lay-radio>
@@ -91,9 +105,11 @@
         </lay-button>
       </div>
     </template>
-
-
   </lay-layer>
+
+
+  <RefEditParent ref="refEditParentComponent" @click="editParentMenu"/>
+
 </template>
 
 
@@ -102,13 +118,17 @@ import {reactive, ref} from "vue";
 import {FormTypeEnum} from "@/fly/biz/BizModel";
 import {MenuInfo} from "@/api/admin/model/MenuInfoModel";
 import useTenantInfoComposable from "@/composables/admin/MenuInfoComposable";
+import RefEditParent from './RefEditParent.vue';
 
 const {
   menuInfo,
-  menuInfoDataHandler
+  menuInfoDataHandler,
+  refEditParentComponent
 } = useTenantInfoComposable();
 
 const layMenuInfoForm = ref<any>();
+const menuSuffix = ref(false);
+
 
 /* 弹窗 */
 const layerRef = reactive<any>({
@@ -141,6 +161,10 @@ function saveMenuInfoHandler() {
 //显示弹框
 const open = (type: FormTypeEnum, row?: MenuInfo, appId?: string, parentId?: string, parentTitle?: string) => {
   layerRef.title = type + '菜单信息';
+  menuSuffix.value = false;
+  if (FormTypeEnum.EDIT === type) {
+    menuSuffix.value = true;
+  }
   if (null !== row) {
     menuInfo.value = JSON.parse(JSON.stringify(row))
   } else {
@@ -188,6 +212,18 @@ const open = (type: FormTypeEnum, row?: MenuInfo, appId?: string, parentId?: str
  */
 const onTapClose = () => {
   layerRef.open = false;
+}
+
+const onTapEditParent = () => {
+  console.log('onTapEditParent');
+
+  refEditParentComponent.value?.open();
+
+}
+
+const editParentMenu = (menuId: string, menuTitle: string) => {
+  menuInfo.value.parentId = menuId;
+  menuInfo.value.parentTitle = menuTitle;
 }
 
 
