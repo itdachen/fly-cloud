@@ -1,4 +1,4 @@
-package com.github.itdachen.admin.config;
+package com.github.itdachen.config;
 
 /**
  * 分布式锁

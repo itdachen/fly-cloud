@@ -39,7 +39,7 @@ public class MenuInfoController extends BizController<IMenuInfoService, MenuInfo
      * 获取目录菜单树
      *
      * @author 王大宸
-     * @date 2025/1/1 15:28
+     * @date 2025/1/1 16:40
      * @param appId appId
      * @return com.github.itdachen.framework.core.response.ServerResponse<com.github.itdachen.framework.context.tree.lay.LayTree>
      */

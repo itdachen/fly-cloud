@@ -106,6 +106,16 @@
         <include refid="selectClazzInfoVO"/>
         <include refid="selectParamsWhere"></include>
     </select>
+    
+    <select id="findClazzInfoById"  parameterType="java.util.Arrays" resultMap="clazzInfoMap">
+        <include refid="selectClazzInfoVO"/>
+        WHERE valid_flag = 'Y'
+        AND delete_flag = 'N'
+        AND id IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 
     <!-- 查询导出数据 -->
     <select id="selectClazzInfoExpData" parameterType="java.lang.String" resultMap="clazzInfoMap">

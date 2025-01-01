@@ -1,4 +1,4 @@
-package com.github.itdachen.admin;
+package com.github.itdachen;
 
 import com.github.itdachen.auth.client.EnableAuthClient;
 import org.springframework.boot.SpringApplication;
@@ -19,8 +19,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableAuthClient
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackages = {"com.github.itdachen"})
-@MapperScan(basePackages = "com.github.itdachen.admin.**.mapper")
+@MapperScan(basePackages = "com.github.itdachen.**.mapper")
 public class AdminBootstrap {
 
     public static void main(String[] args) {

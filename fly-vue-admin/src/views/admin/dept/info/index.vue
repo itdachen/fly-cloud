@@ -26,14 +26,14 @@
                 <lay-icon class="layui-icon-search"></lay-icon>
                 查询
               </lay-button>
-<!--              <lay-button class="fly-button fly-button-reset" size="sm" @click=" resetQueryFormValue ">-->
-<!--                <lay-icon class="layui-icon-refresh"></lay-icon>-->
-<!--                重置-->
-<!--              </lay-button>-->
-<!--              <lay-button class="fly-button fly-button-exp" size="sm" @click="">-->
-<!--                <lay-icon class="layui-icon-export"></lay-icon>-->
-<!--                导出-->
-<!--              </lay-button>-->
+              <!--              <lay-button class="fly-button fly-button-reset" size="sm" @click=" resetQueryFormValue ">-->
+              <!--                <lay-icon class="layui-icon-refresh"></lay-icon>-->
+              <!--                重置-->
+              <!--              </lay-button>-->
+              <!--              <lay-button class="fly-button fly-button-exp" size="sm" @click="">-->
+              <!--                <lay-icon class="layui-icon-export"></lay-icon>-->
+              <!--                导出-->
+              <!--              </lay-button>-->
             </lay-form-item>
           </lay-form>
 
@@ -59,7 +59,7 @@
                 <lay-icon class="layui-icon-list"></lay-icon>
                 查看
               </lay-button>
-              <lay-button size="sm" type="primary" class="fly-button fly-edit-button" @click=" onTapDeptInfoEdit(row) ">
+              <lay-button size="sm" type="primary" class="fly-button fly-edit-button" @click=" onTapDeptClazz(row) ">
                 <lay-icon class="layui-icon-auz"></lay-icon>
                 岗位设置
               </lay-button>
@@ -98,14 +98,18 @@
 
   <RefDeptInfo ref="refDeptInfoComponent"/>
 
+  <RefDeptClazz  ref="refDeptClazzComponent"/>
+
 </template>
 
 
 <script setup lang="ts" name="deptInfoComponent">
 import {ref, reactive, onMounted} from 'vue';
 import RefDeptInfo from './RefDeptInfo.vue';
+import RefDeptClazz from './RefDeptClazz.vue';
 
 import useDeptInfoComposable from '@/composables/admin/DeptInfoComposable';
+import {DeptInfo} from "@/api/admin/model/DeptInfoModel";
 
 const {
   refDeptInfoComponent,
@@ -133,6 +137,9 @@ const {
   parentDeptCode
 } = useDeptInfoComposable();
 
+/* 部门岗位弹窗 */
+const refDeptClazzComponent = ref();
+
 
 /**
  * 上一页, 下一页
@@ -154,53 +161,19 @@ onMounted(() => {
   loadDeptTree();
 })
 
-
-const selectedKey = ref('1')
-
-const treeData = [
-  {
-    id: '0',
-    title: '太虚十境--',
-    spread: true,
-    children: [
-      {
-        id: '1',
-        title: '太虚十境贵州省十境--',
-        children: [
-          {
-            id: '1-1',
-            title: '太虚十境贵州省贵阳市十境',
-            children: [
-              {
-                id: '1-1-1',
-                title: '太虚十境贵州省观山湖区第二太虚十境',
-                children: []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        id: '2',
-        title: '太虚十境云南省十境--',
-        children: [
-          {
-            id: '2-1',
-            title: '2-1-',
-            children: []
-          }
-        ]
-      }
-    ]
-  },
-
-
-]
-
 const deptNodeClick = (obj: any) => {
   queryDeptInfoParams.parentCode = obj.id;
   parentDeptCode.value = obj.id;
   reloadDeptInfoDate(1, flyLayPage.limit);
+}
+
+
+/**
+ * 岗位设置
+ * @param row
+ */
+const onTapDeptClazz = (row: DeptInfo) => {
+  refDeptClazzComponent.value?.open(row);
 }
 
 

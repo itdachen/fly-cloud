@@ -50,7 +50,7 @@ export default function useClazzInfoComposable() {
      */
     const reloadClazzInfoDate = (page: number = 1, limit: number = 10) => {
         queryClazzInfoParams.page = page;
-        queryClazzInfoParams.limit = limit;
+        queryClazzInfoParams.limit = flyLayPage.limit;
         loadTableClazzInfoData(queryClazzInfoParams);
     };
 

@@ -88,9 +88,9 @@
         </lay-form-item>
 
         <lay-form-item label="有效标志" prop="validFlag" mode="inline">
-          <lay-radio v-model="deptInfo.validFlag" name="action" value="Y" label="有效"
+          <lay-radio v-model="deptInfo.validFlag" name="validFlag" value="Y" label="有效"
                      :disabled="layerRef.disabled"></lay-radio>
-          <lay-radio v-model="deptInfo.validFlag" name="action" value="N" label="无效"
+          <lay-radio v-model="deptInfo.validFlag" name="validFlag" value="N" label="无效"
                      :disabled="layerRef.disabled"></lay-radio>
         </lay-form-item>
 

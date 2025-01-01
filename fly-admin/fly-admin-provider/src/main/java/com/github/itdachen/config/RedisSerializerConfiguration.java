@@ -1,4 +1,4 @@
-package com.github.itdachen.admin.config;
+package com.github.itdachen.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

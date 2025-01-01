@@ -20,18 +20,10 @@
 
         <lay-form-item mode="inline">
           <lay-button class="fly-button fly-button-search" style="margin-left: 20px" type="primary" size="sm"
-                      @click=" reloadClazzInfoDate(1, flyLayPage.limit) ">
+                      @click=" reloadClazzInfoDate(1, 10) ">
             <lay-icon class="layui-icon-search"></lay-icon>
             查询
           </lay-button>
-<!--          <lay-button class="fly-button fly-button-reset" size="sm" @click=" resetQueryFormValue ">-->
-<!--            <lay-icon class="layui-icon-refresh"></lay-icon>-->
-<!--            重置-->
-<!--          </lay-button>-->
-<!--          <lay-button class="fly-button fly-button-exp" size="sm" @click="">-->
-<!--            <lay-icon class="layui-icon-export"></lay-icon>-->
-<!--            导出-->
-<!--          </lay-button>-->
         </lay-form-item>
       </lay-form>
 

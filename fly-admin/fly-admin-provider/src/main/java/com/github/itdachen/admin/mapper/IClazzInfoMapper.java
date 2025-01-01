@@ -26,6 +26,8 @@ public interface IClazzInfoMapper extends Mapper<ClazzInfo> {
      */
     List<ClazzInfoVO> list(ClazzInfoQuery params);
 
+    List<ClazzInfoVO> findClazzInfoById(List<String> list);
+
     /***
      * 根据id查询
      *

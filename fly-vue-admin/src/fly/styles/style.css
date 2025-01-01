@@ -159,6 +159,14 @@
     padding-top: 30px;
 }
 
+.fly-search-card .layui-form-item {
+    margin-bottom: 0 !important;
+}
+
+.fly-search-card .layui-card .layui-card-body {
+    padding-bottom: 0 !important;
+}
+
 .layui-layer-btn .layui-layer-btn-r {
     border-top: 1px solid #E0E0E0 !important;
 }
@@ -210,7 +218,7 @@
 .table-box {
     /*margin-top: 10px;*/
     padding: 10px;
-    height: 700px;
+    /*height: 700px;*/
     width: 100%;
     border-radius: 4px;
     box-sizing: border-box;

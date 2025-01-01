@@ -70,6 +70,7 @@ public class UserInfoServiceImpl extends BizServiceImpl<IUserInfoMapper, UserInf
      */
     @Override
     public TableData<UserInfoVO> page(UserInfoQuery params) throws Exception {
+        params.setTenantId(BizContextHandler.getTenantId());
         Page<UserInfoVO> page = PageHelper.startPage(params.getPage(), params.getLimit());
         List<UserInfoVO> list = bizMapper.list(params);
         return new TableData<UserInfoVO>(page.getTotal(), list);
