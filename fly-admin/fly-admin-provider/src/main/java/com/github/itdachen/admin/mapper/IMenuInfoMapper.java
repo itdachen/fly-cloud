@@ -37,6 +37,8 @@ public interface IMenuInfoMapper extends Mapper<MenuInfo> {
      */
     List<TreeNode> findMenuChildren(String parentId);
 
+    List<TreeNode> findDirtMenuTreeChildren(String parentId);
+
     /***
      * 根据id查询
      *

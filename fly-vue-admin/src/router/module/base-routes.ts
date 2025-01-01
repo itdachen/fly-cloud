@@ -243,15 +243,29 @@ export default [
         meta: { title: '应用管理', requireAuth: true },
       },
       {
-        path: '/admin/user',
-        component: () => import('../../views/admin/user/index.vue'),
-        meta: { title: '用户管理', requireAuth: true },
-      },
-      {
         path: '/admin/tenant',
         component: () => import('../../views/admin/tenant/index.vue'),
         meta: { title: '租户管理', requireAuth: true },
       },
+      {
+        path: '/admin/menu/info',
+        component: () => import('../../views/admin/menu/index.vue'),
+        meta: { title: '菜单管理', requireAuth: true },
+      },
+      {
+        path: '/admin/dict/info',
+        component: () => import('../../views/admin/tenant/index.vue'),
+        meta: { title: '数据字典', requireAuth: true },
+      },
+    ]
+  },
+
+  {
+    path: '/admin',
+    component: BasicLayout,
+    meta: { title: '组织结构' },
+    children: [
+
       {
         path: '/admin/dept/func',
         component: () => import('../../views/admin/dept/func/index.vue'),
@@ -261,16 +275,6 @@ export default [
         path: '/admin/dept/level',
         component: () => import('../../views/admin/dept/level/index.vue'),
         meta: { title: '部门层级', requireAuth: true },
-      },
-      {
-        path: '/admin/org',
-        component: () => import('../../views/admin/org/index.vue'),
-        meta: { title: '机构管理', requireAuth: true },
-      },
-      {
-        path: '/admin/dept/info',
-        component: () => import('../../views/admin/dept/info/index.vue'),
-        meta: { title: '部门管理', requireAuth: true },
       },
       {
         path: '/admin/clazz/func',
@@ -283,12 +287,36 @@ export default [
         meta: { title: '岗位管理', requireAuth: true },
       },
       {
-        path: '/admin/menu/info',
-        component: () => import('../../views/admin/menu/index.vue'),
-        meta: { title: '菜单管理', requireAuth: true },
+        path: '/admin/org',
+        component: () => import('../../views/admin/org/index.vue'),
+        meta: { title: '机构管理', requireAuth: true },
+      },
+      {
+        path: '/admin/dept/info',
+        component: () => import('../../views/admin/dept/info/index.vue'),
+        meta: { title: '部门管理', requireAuth: true },
       },
     ]
   },
+
+  {
+    path: '/admin',
+    component: BasicLayout,
+    meta: { title: '人事信息' },
+    children: [
+      {
+        path: '/admin/app',
+        component: () => import('../../views/admin/app/index.vue'),
+        meta: { title: '人员信息', requireAuth: true },
+      },
+      {
+        path: '/admin/user',
+        component: () => import('../../views/admin/user/index.vue'),
+        meta: { title: '人员身份信息', requireAuth: true },
+      },
+    ]
+  },
+
 
 
 ]

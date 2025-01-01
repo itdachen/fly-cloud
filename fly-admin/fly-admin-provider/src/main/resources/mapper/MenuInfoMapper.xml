@@ -123,6 +123,15 @@
          AND parent_id = #{parentId}
         ORDER BY order_num ASC
     </select>
+    
+    <select id="findDirtMenuTreeChildren"  parameterType="java.lang.String"
+            resultType="com.github.itdachen.framework.context.tree.lay.TreeNode">
+        SELECT id, title, type, lay_icon AS icon, app_id AS attr1
+        FROM fly_next_resource_menu_info
+        WHERE type = 'dirt'
+          AND parent_id = #{parentId}
+        ORDER BY order_num ASC
+    </select>
 
     <!-- 查询导出数据 -->
     <select id="selectMenuInfoExpData" parameterType="java.lang.String" resultMap="menuInfoMap">

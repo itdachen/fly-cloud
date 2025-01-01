@@ -124,6 +124,59 @@ public class MenuInfoServiceImpl extends BizServiceImpl<IMenuInfoMapper, MenuInf
         return new LayTree(checked, list);
     }
 
+
+    /***
+     * 获取目录菜单树
+     *
+     * @author 王大宸
+     * @date 2025/1/1 15:28
+     * @param appId appId
+     * @return com.github.itdachen.framework.context.tree.lay.LayTree
+     */
+    @Override
+    public LayTree findDirtMenuTree(String appId) throws Exception {
+        if (StringUtils.isEmpty(appId)) {
+            appId = ROOT_ID;
+        }
+        List<TreeNode> list = new ArrayList<>();
+        TreeNode treeNode = new TreeNode(appId, "太虚十境", true);
+        treeNode.setType("dirt");
+        treeNode.setIcon("layui-icon-home");
+        treeNode.setAttr1(appId);
+        List<TreeNode> deptChildren = findDirtMenuTreeChildren(appId);
+
+        treeNode.setChildren(deptChildren);
+
+        list.add(treeNode);
+        List<String> checked = new ArrayList<>();
+        checked.add(appId);
+        return new LayTree(checked, list);
+    }
+
+    /***
+     * 获取目录菜单树
+     *
+     * @author 王大宸
+     * @date 2025/1/1 15:28
+     * @param parentId parentId
+     * @return java.util.List<com.github.itdachen.framework.context.tree.lay.TreeNode>
+     */
+    private List<TreeNode> findDirtMenuTreeChildren(String parentId) {
+        List<TreeNode> list = bizMapper.findDirtMenuTreeChildren(parentId);
+        for (TreeNode treeNode : list) {
+            treeNode.setChildren(findDirtMenuTreeChildren(treeNode.getId()));
+        }
+        return list;
+    }
+
+    /***
+     * 获取菜单树
+     *
+     * @author 王大宸
+     * @date 2025/1/1 15:28
+     * @param parentId parentId
+     * @return java.util.List<com.github.itdachen.framework.context.tree.lay.TreeNode>
+     */
     private List<TreeNode> findMenuChildren(String parentId) {
         List<TreeNode> list = bizMapper.findMenuChildren(parentId);
         for (TreeNode treeNode : list) {
@@ -131,6 +184,5 @@ public class MenuInfoServiceImpl extends BizServiceImpl<IMenuInfoMapper, MenuInf
         }
         return list;
     }
-
 
 }

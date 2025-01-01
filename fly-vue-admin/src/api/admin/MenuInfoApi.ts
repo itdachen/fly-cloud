@@ -22,10 +22,18 @@ class MenuInfoApi extends HttpRequest<MenuInfo, MenuInfoQuery, string> {
 
 
     /**
-     * 获取机构/部门树
+     * 获取菜单树
      */
     findMenuTree(appId?: string) {
         return http.get(MENU_INFO_PATH + '/tree?appId=' + appId);
+    }
+
+
+    /**
+     * 获取目录菜单树
+     */
+    findDirtMenuTree(appId?: string) {
+        return http.get(MENU_INFO_PATH + '/dirt/tree?appId=' + appId);
     }
 
 

@@ -18,18 +18,18 @@
     </div>
 
 
-<!--    <template v-slot:footer>-->
-<!--      <div class="fly-form-footer">-->
-<!--        <lay-button v-if="layerRef.submit" class="fly-button fly-ok-button " @click="saveParentMenuHandler">-->
-<!--          <lay-icon class="layui-icon-ok"></lay-icon>-->
-<!--          保存-->
-<!--        </lay-button>-->
-<!--        <lay-button class="fly-button fly-close-button" @click="onTapClose">-->
-<!--          <lay-icon class="layui-icon-close"></lay-icon>-->
-<!--          关闭-->
-<!--        </lay-button>-->
-<!--      </div>-->
-<!--    </template>-->
+    <!--    <template v-slot:footer>-->
+    <!--      <div class="fly-form-footer">-->
+    <!--        <lay-button v-if="layerRef.submit" class="fly-button fly-ok-button " @click="saveParentMenuHandler">-->
+    <!--          <lay-icon class="layui-icon-ok"></lay-icon>-->
+    <!--          保存-->
+    <!--        </lay-button>-->
+    <!--        <lay-button class="fly-button fly-close-button" @click="onTapClose">-->
+    <!--          <lay-icon class="layui-icon-close"></lay-icon>-->
+    <!--          关闭-->
+    <!--        </lay-button>-->
+    <!--      </div>-->
+    <!--    </template>-->
 
 
   </lay-layer>
@@ -39,12 +39,12 @@
 <script setup lang="ts" name="refEditParentComponent">
 import {onMounted, reactive, ref} from "vue";
 import useMenuInfoComposable from "@/composables/admin/MenuInfoComposable";
+import MenuInfoApi from "@/api/admin/MenuInfoApi";
+
+const menuInfoApi = new MenuInfoApi();
 
 
-const {
-  menuTreeData,
-  loadMenuTree
-} = useMenuInfoComposable();
+const menuTreeData = ref([]);
 
 /* 弹窗 */
 const layerRef = reactive<any>({
@@ -65,13 +65,14 @@ const menuTitle = ref('');
  * 提交
  */
 function saveParentMenuHandler() {
-  // onTapClose(); // 关闭弹窗
-  // console.log('数据保存', elementInfo.value);
   emit('click', menuId.value, menuTitle.value)
 }
 
 onMounted(() => {
-  loadMenuTree();
+  menuInfoApi.findDirtMenuTree('').then(res => {
+    debugger
+    menuTreeData.value = res.data.data;
+  })
 })
 
 
@@ -94,6 +95,7 @@ const onTapClose = () => {
  */
 const menuNodeClick = (obj: any) => {
   onTapClose();
+  // 组件想父组件冒泡
   emit('click', obj.id, obj.title);
 }
 

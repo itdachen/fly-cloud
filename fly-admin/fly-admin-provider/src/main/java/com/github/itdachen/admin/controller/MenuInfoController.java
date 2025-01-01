@@ -35,5 +35,20 @@ public class MenuInfoController extends BizController<IMenuInfoService, MenuInfo
         return ServerResponse.ok(bizService.findMenuTree(appId));
     }
 
+    /***
+     * 获取目录菜单树
+     *
+     * @author 王大宸
+     * @date 2025/1/1 15:28
+     * @param appId appId
+     * @return com.github.itdachen.framework.core.response.ServerResponse<com.github.itdachen.framework.context.tree.lay.LayTree>
+     */
+    @GetMapping("/dirt/tree")
+    @ResponseBody
+    public ServerResponse<LayTree> findDirtMenuTree(String appId) throws Exception {
+        return ServerResponse.ok(bizService.findDirtMenuTree(appId));
+    }
+
+
 
 }

@@ -8,9 +8,14 @@ let user: User = {
 
 const menus = [
   {
+    id: '/workspace/console',
+    icon: "layui-icon-home",
+    title: '首页',
+  },
+  {
     id: '/admin',
     icon: "layui-icon-set",
-    title: '系统管理_ADMIN',
+    title: '系统管理',
     children: [
       {
         id: '/admin/app',
@@ -18,15 +23,28 @@ const menus = [
         title: '应用管理',
       },
       {
-        id: '/admin/user',
-        icon: "layui-icon-user",
-        title: '用户管理',
-      },
-      {
         id: '/admin/tenant',
         icon: "layui-icon-user",
         title: '租户管理',
       },
+      {
+        id: '/admin/menu/info',
+        icon: "layui-icon-user",
+        title: '菜单管理',
+      },
+      {
+        id: '/admin/dict/info',
+        icon: "layui-icon-user",
+        title: '数据字典',
+      },
+    ]
+  },
+  {
+    id: '/dept',
+    icon: "layui-icon-template",
+    title: '组织结构',
+    children: [
+
       {
         id: '/admin/dept/func',
         icon: "layui-icon-user",
@@ -36,16 +54,6 @@ const menus = [
         id: '/admin/dept/level',
         icon: "layui-icon-user",
         title: '部门层级',
-      },
-      {
-        id: '/admin/org',
-        icon: "layui-icon-user",
-        title: '机构管理',
-      },
-      {
-        id: '/admin/dept/info',
-        icon: "layui-icon-user",
-        title: '部门管理',
       },
       {
         id: '/admin/clazz/func',
@@ -58,14 +66,35 @@ const menus = [
         title: '岗位管理',
       },
       {
-        id: '/admin/menu/info',
+        id: '/admin/org',
         icon: "layui-icon-user",
-        title: '菜单管理',
+        title: '机构管理',
       },
-
+      {
+        id: '/admin/dept/info',
+        icon: "layui-icon-user",
+        title: '部门管理',
+      },
     ]
   },
+  {
+    id: '/oa',
+    icon: "layui-icon-user",
+    title: '人事信息',
+    children: [
 
+      {
+        id: '/oa/dept/func',
+        icon: "layui-icon-user",
+        title: '人员信息',
+      },
+      {
+        id: '/oa/dept/level',
+        icon: "layui-icon-user",
+        title: '人员身份信息',
+      },
+    ]
+  },
   {
     id: "/workspace",
     icon: "layui-icon-home",

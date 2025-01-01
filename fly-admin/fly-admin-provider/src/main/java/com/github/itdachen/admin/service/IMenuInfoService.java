@@ -17,4 +17,14 @@ public interface IMenuInfoService extends IBizService< MenuInfoDTO, MenuInfoVO, 
 
     LayTree findMenuTree(String appId) throws Exception;
 
+    /***
+     * 获取目录菜单树
+     *
+     * @author 王大宸
+     * @date 2025/1/1 16:15
+     * @param appId appId
+     * @return com.github.itdachen.framework.context.tree.lay.LayTree
+     */
+    LayTree findDirtMenuTree(String appId)  throws Exception;
+
 }

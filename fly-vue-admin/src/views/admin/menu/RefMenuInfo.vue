@@ -29,12 +29,12 @@
           </lay-radio>
         </lay-form-item>
 
-        <lay-form-item label="认证编码" prop="authCode" :required="layerRef.required">
-          <lay-input v-model="menuInfo.authCode" :disabled="layerRef.disabled"></lay-input>
-        </lay-form-item>
-
         <lay-form-item label="菜单标题" prop="title" :required="layerRef.required">
           <lay-input v-model="menuInfo.title" :disabled="layerRef.disabled"></lay-input>
+        </lay-form-item>
+
+        <lay-form-item label="认证编码" prop="authCode" :required="layerRef.required">
+          <lay-input v-model="menuInfo.authCode" :disabled="layerRef.disabled"></lay-input>
         </lay-form-item>
 
         <lay-form-item label="路由地址" prop="path" :required="layerRef.required">
